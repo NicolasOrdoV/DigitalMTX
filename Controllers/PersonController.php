@@ -36,4 +36,14 @@ class PersonController
 			require 'Views/Persons/login.php';
 		}
 	}
+
+	public function logout()
+    {
+        if($_SESSION['user']) {
+            session_destroy();
+            header('Location: ?controller=home');
+        } else {
+            header('Location: ?controller=home');              
+        }
+    }
 }
