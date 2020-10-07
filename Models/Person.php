@@ -13,7 +13,8 @@ class Person {
         }
     }
     
-    public function validateUser($data){
+    public function validateUser($data)
+    {
         try {
              $strSql = "SELECT p.*,r.rol as rol from personal p INNER JOIN rol r on r.id = p.id_rol WHERE p.Correo = '{$data['Correo']}' AND p.Contrasena = '{$data['Contrasena']}'";
              $query = $this->pdo->select($strSql);
