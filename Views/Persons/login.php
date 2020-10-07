@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
@@ -9,49 +10,51 @@
     <link rel="icon" href="Assets/img/logo-rojo.png">
     <link rel="stylesheet" type="text/css" href="Assets/css/styleLogin.css">
 </head>
+
 <body>
-<div class="login-reg-panel">					
-		<div class="register-info-box">
-			<h2><img src="Assets/img/logo.png" width="200"> </h2>
-		</div>				
-		<div class="white-panel">
-			<div class="login-show">
-				<h2>LOGIN</h2>
-				<input type="text" placeholder="Email">
-				<input type="password" placeholder="Password">
-				<input type="button" value="Login">
-				<a href="">Forgot password?</a>
-			</div>
-		</div>
-	</div>
+    <div class="login-reg-panel">
+        <div class="register-info-box">
+            <h2><img src="Assets/img/logo.png" width="200"> </h2>
+        </div>
+        <div class="white-panel">
+            <div class="login-show">
+                <h2>Iniciar Sesión </h2>
+                <form action="?controller=person&method=loginIn" method="POST">
+                    <input type="text" name="Correo" placeholder="Correo">
+                    <input type="password" name="Contrasena" placeholder="Contraseña">
+                    <button type="submit" class="btn btn-danger float-right">Ingresar</button>
+                </form>
+                <a href="">Recuperar contraseña?</a>
+            </div>
+        </div>
+    </div>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.login-info-box').fadeOut();
+            $('.login-show').addClass('show-log-panel');
+        });
+        $('.login-reg-panel input[type="radio"]').on('change', function() {
+            if ($('#log-login-show').is(':checked')) {
+                $('.register-info-box').fadeOut();
+                $('.login-info-box').fadeIn();
 
-    $(document).ready(function(){
-    $('.login-info-box').fadeOut();
-    $('.login-show').addClass('show-log-panel');
-});
-$('.login-reg-panel input[type="radio"]').on('change', function() {
-    if($('#log-login-show').is(':checked')) {
-        $('.register-info-box').fadeOut(); 
-        $('.login-info-box').fadeIn();
-        
-        $('.white-panel').addClass('right-log');
-        $('.register-show').addClass('show-log-panel');
-        $('.login-show').removeClass('show-log-panel');
-        
-    }
-    else if($('#log-reg-show').is(':checked')) {
-        $('.register-info-box').fadeIn();
-        $('.login-info-box').fadeOut();
-        
-        $('.white-panel').removeClass('right-log');
-        
-        $('.login-show').addClass('show-log-panel');
-        $('.register-show').removeClass('show-log-panel');
-    }
-});
-</script>
+                $('.white-panel').addClass('right-log');
+                $('.register-show').addClass('show-log-panel');
+                $('.login-show').removeClass('show-log-panel');
+
+            } else if ($('#log-reg-show').is(':checked')) {
+                $('.register-info-box').fadeIn();
+                $('.login-info-box').fadeOut();
+
+                $('.white-panel').removeClass('right-log');
+
+                $('.login-show').addClass('show-log-panel');
+                $('.register-show').removeClass('show-log-panel');
+            }
+        });
+    </script>
 </body>
+
 </html>
