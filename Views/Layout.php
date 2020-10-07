@@ -12,7 +12,7 @@
     <title>Digital MTX</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="Assets/img/core-img/favicon.ico">
+    <link rel="icon" href="Assets/img/logo-rojo.png">
 
     <!-- Core Stylesheet -->
     <link href="Assets/css/style.css" rel="stylesheet">
