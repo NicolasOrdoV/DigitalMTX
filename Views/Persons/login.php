@@ -5,25 +5,22 @@
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>Digital MTX</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="Assets/img/logo-rojo.png">
     <link rel="stylesheet" type="text/css" href="Assets/css/styleLogin.css">
 </head>
 <body>
 <div class="login-reg-panel">					
 		<div class="register-info-box">
-			<h2>Don't have an account?</h2>
-			<p>Lorem ipsum dolor sit amet</p>
-			<label id="label-login" for="log-login-show">Register</label>
-			<input type="radio" name="active-log-panel" id="log-login-show">
+			<h2><img src="Assets/img/logo.png" width="200"> </h2>
 		</div>				
 		<div class="white-panel">
 			<div class="login-show">
-				<h2>Iniciar sesion</h2>
+				<h2>LOGIN</h2>
 				<input type="text" placeholder="Email">
 				<input type="password" placeholder="Password">
-				<a href="">¿Se te olvido tu contraseña?</a>
-                <button type="submit" class="btn btn-danger float-right">Ingresar</button>
+				<input type="button" value="Login">
+				<a href="">Forgot password?</a>
 			</div>
 		</div>
 	</div>
