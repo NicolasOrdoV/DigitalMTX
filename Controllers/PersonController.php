@@ -33,7 +33,7 @@ class PersonController
 			header('Location: ?controller=person&method=template');
 		} else {
 			$error = ['errorMessage' => $validateUser, 'email' => $_POST['Correo']];
-			require 'Views/Person/login.php';
+			require 'Views/Persons/login.php';
 		}
 	}
 }
