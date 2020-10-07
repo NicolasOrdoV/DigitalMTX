@@ -44,17 +44,15 @@
                             <!-- Menu Area -->
                             <div class="collapse navbar-collapse" id="ca-navbar">
                                 <ul class="navbar-nav ml-auto" id="nav">
-                                    <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#screenshot">Screenshot</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="#home">Inicio</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#about">Sobre Nosotros</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#features">Caracteristicas</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#screenshot">Interfaces</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#contact">Contactenos</a></li>
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
-                                    <a href="#">Sign Up Free</a>
+                                    <a href="#">Iniciar Sesión</a>
                                 </div>
                             </div>
                         </nav>
@@ -63,7 +61,7 @@
                 <!-- Signup btn -->
                 <div class="col-12 col-lg-2">
                     <div class="sing-up-button d-none d-lg-block">
-                        <a href="#">Sign Up Free</a>
+                        <a href="#">Inciar Sesión</a>
                     </div>
                 </div>
             </div>

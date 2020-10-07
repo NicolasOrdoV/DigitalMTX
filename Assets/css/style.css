@@ -234,7 +234,7 @@ p {
 
 .section-heading>h2 {
     font-weight: 300;
-    color: #5b32b4;
+    color: #F5342E;
     font-size: 48px;
     margin: 0;
 }
@@ -553,7 +553,7 @@ p {
 
 .single-special>h4 {
     font-size: 22px;
-    color: #5b32b4;
+    color: #FA5858;
 }
 
 .single-icon {
@@ -562,7 +562,7 @@ p {
 
 .single-special>h4 {
     font-size: 22px;
-    color: #5b32b4;
+    color: #FA5858;
     margin-bottom: 15px;
 }
 
@@ -577,7 +577,7 @@ p {
 }
 
 .special_description_content>h2 {
-    color: #5b32b4;
+    color: #F5342E;
     font-size: 48px;
     margin-bottom: 30px;
 }
@@ -682,7 +682,7 @@ p {
 
 .single-feature>h5 {
     font-size: 22px;
-    color: #5b32b4;
+    color: #F5342E;
 }
 
 .single-feature>p {
@@ -752,11 +752,11 @@ p {
     position: relative;
     z-index: auto;
     background: #a865e1;
-    background: -webkit-linear-gradient(to left, #7873ed, #a865e1);
-    background: -webkit-linear-gradient(right, #7873ed, #a865e1);
-    background: -webkit-gradient(linear, right top, left top, from(#7873ed), to(#a865e1));
-    background: -o-linear-gradient(right, #7873ed, #a865e1);
-    background: linear-gradient(to left, #7873ed, #a865e1);
+    background: -webkit-linear-gradient(to left, #FA5858, #F5342E);
+    background: -webkit-linear-gradient(right, #FA5858, #F5342E);
+    background: -webkit-gradient(linear, right top, left top, from(#FA5858), to(#F5342E));
+    background: -o-linear-gradient(right, #FA5858, #F5342E);
+    background: linear-gradient(to left, #FA5858, #F5342E);
     padding: 180px 0 80px 0;
     top: -100px;
 }
@@ -1217,7 +1217,7 @@ p {
 }
 
 .btn.submit-btn:hover {
-    background: #5b32b4;
+    background: #F5342E;
     color: #fff;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
