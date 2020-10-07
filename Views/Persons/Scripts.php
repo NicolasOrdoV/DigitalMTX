@@ -38,4 +38,4 @@
     <script src="Assets/js/pages/index.js"></script>
 
     <!-- Demo Js -->
-    <script src="Assets/sjs/demo.js"></script>
+    <script src="Assets/js/demo.js"></script>
