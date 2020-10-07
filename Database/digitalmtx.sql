@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2020 a las 21:21:40
+-- Tiempo de generación: 07-10-2020 a las 23:05:01
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -36,6 +36,7 @@ CREATE TABLE `garantias` (
   `Observacion_Cliente` text NOT NULL,
   `Observacion_Empleado` text NOT NULL,
   `Aprobacion_Garantia` varchar(5) NOT NULL,
+  `Estado` varchar(20) NOT NULL,
   `id_Personal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -63,8 +64,17 @@ CREATE TABLE `personal` (
 
 CREATE TABLE `rol` (
   `id` int(11) NOT NULL,
-  `rol` int(11) NOT NULL
+  `rol` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`id`, `rol`) VALUES
+(1, 'Recepcion'),
+(2, 'Tecnico'),
+(3, 'Administrador');
 
 --
 -- Índices para tablas volcadas
@@ -110,7 +120,7 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
