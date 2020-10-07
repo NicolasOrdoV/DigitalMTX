@@ -52,7 +52,7 @@
                                     <li class="nav-item"><a class="nav-link" href="#contact">Contactenos</a></li>
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
-                                    <a href="#">Iniciar Sesión</a>
+                                    <a href="?controller=person&method=login">Iniciar Sesión</a>
                                 </div>
                             </div>
                         </nav>
@@ -61,7 +61,7 @@
                 <!-- Signup btn -->
                 <div class="col-12 col-lg-2">
                     <div class="sing-up-button d-none d-lg-block">
-                        <a href="#">Inciar Sesión</a>
+                        <a href="?controller=person&method=login">Iniciar Sesión</a>
                     </div>
                 </div>
             </div>
