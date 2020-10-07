@@ -28,7 +28,7 @@ session_start();
     <link href="Assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="Assets/css/style.css" rel="stylesheet">
+    <link href="Assets/css/styleAdmin.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="Assets/css/themes/all-themes.css" rel="stylesheet" />
