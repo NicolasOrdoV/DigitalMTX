@@ -31,7 +31,24 @@ class Person {
         }
     }
 
+    public function getAll()
+    {
+        try {
+            $strSql = "SELECT p.*,r.rol as rol from personal p 
+            INNER JOIN rol r on r.id = p.id_rol WHERE p.id_rol = 1 OR p.id_rol = 2 ";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
-
-
+    public function newPerson($data)
+    {
+        try {
+            $this->pdo->insert('personal' , $data);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

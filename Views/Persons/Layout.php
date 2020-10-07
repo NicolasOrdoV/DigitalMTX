@@ -27,6 +27,9 @@ var_dump($_SESSION['user']);
     <!-- Morris Chart Css-->
     <link href="Assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
+    <!-- JQuery DataTable Css -->
+    <link href="Assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- Custom Css -->
     <link href="Assets/css/styleAdmin.css" rel="stylesheet">
 
@@ -307,15 +310,15 @@ var_dump($_SESSION['user']);
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href="index.html">
+                        <a href="index.php">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/typography.html">
+                        <a href="?controller=person&method=list">
                             <i class="material-icons">text_fields</i>
-                            <span>Typography</span>
+                            <span>Registro personal</span>
                         </a>
                     </li>
                     <li>
@@ -647,10 +650,7 @@ var_dump($_SESSION['user']);
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0.5
+                    &copy; 2016 - 2017 <a href="javascript:void(0);">Digital MTX</a>.
                 </div>
             </div>
             <!-- #Footer -->
