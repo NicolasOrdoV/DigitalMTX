@@ -5,7 +5,7 @@
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>Digital MTX</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="Assets/img/logo-rojo.png">
     <link rel="stylesheet" type="text/css" href="Assets/css/styleLogin.css">
 </head>
@@ -19,11 +19,11 @@
 		</div>				
 		<div class="white-panel">
 			<div class="login-show">
-				<h2>LOGIN</h2>
+				<h2>Iniciar sesion</h2>
 				<input type="text" placeholder="Email">
 				<input type="password" placeholder="Password">
-				<input type="button" value="Login">
-				<a href="">Forgot password?</a>
+				<a href="">¿Se te olvido tu contraseña?</a>
+                <button type="submit" class="btn btn-danger float-right">Ingresar</button>
 			</div>
 		</div>
 	</div>
