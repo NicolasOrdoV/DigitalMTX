@@ -20,7 +20,10 @@
             <div class="login-show">
                 <h2>Iniciar Sesión </h2>
                 <form action="?controller=person&method=loginIn" method="POST">
-                    <input type="text" name="Correo" placeholder="Correo">
+                    <?php if(isset($error['errorMessage'])){ ?>
+                        <div class="alert alert-danger"><?php echo $error['errorMessage']; ?></div>
+                    <?php } ?>
+                    <input type="text" name="Correo" placeholder="Correo" value="<?php echo isset($error['email']) ? $error['email'] : '' ?>">
                     <input type="password" name="Contrasena" placeholder="Contraseña">
                     <button type="submit" class="btn btn-danger float-right">Ingresar</button>
                 </form>

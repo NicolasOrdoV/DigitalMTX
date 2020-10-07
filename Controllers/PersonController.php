@@ -19,20 +19,22 @@ class PersonController
 
 	public function template()
 	{
-
 		require 'Views/Persons/Layout.php';
 		require 'Views/Persons/Home.php';
 		require 'Views/Persons/Scripts.php';
 		require 'Views/Persons/Footer.php';
 	}
 
-	public function LoginIn()
+	public function loginIn()
 	{
 		$validateUser = $this->model->validateUser($_POST);
 		if ($validateUser === true) {
 			header('Location: ?controller=person&method=template');
 		} else {
-			$error = ['errorMessage' => $validateUser, 'email' => $_POST['Correo']];
+			$error = [
+				'errorMessage' => $validateUser, 
+				'email' => $_POST['Correo']
+			];
 			require 'Views/Persons/login.php';
 		}
 	}
