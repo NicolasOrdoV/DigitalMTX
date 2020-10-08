@@ -17,42 +17,42 @@ require 'vendor/autoload.php';
  */
 class GarantyController
 {
-    private $model;
-    private $client;
-    private $product;
+  private $model;
+  private $client;
+  private $product;
 
-    public function __construct()
-    {
-        $this->model = new Garanty;
-        $this->client = new Client;
-        $this->product = new Product;
-    }
+  public function __construct()
+  {
+    $this->model = new Garanty;
+    $this->client = new Client;
+    $this->product = new Product;
+  }
 
 
-    public function save()
-    {
-        $this->model->newGaranty($_REQUEST);
-        $mail = new PHPMailer(true);
+  public function save()
+  {
+    $this->model->newGaranty($_REQUEST);
+    $mail = new PHPMailer(true);
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = 0;                      // Enable verbose debug output
-            $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-            $mail->Password   = '1000464327bat';                               // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+    try {
+      //Server settings
+      $mail->SMTPDebug = 0;                      // Enable verbose debug output
+      $mail->isSMTP();                                            // Send using SMTP
+      $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+      $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+      $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+      $mail->Password   = '1000464327bat';                               // SMTP password
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+      $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-            //Recipients
-            $mail->setFrom('nikomegathet666@gmail.com');
-            $mail->addAddress($_POST['Correo_Cliente']);     // Add a recipient
+      //Recipients
+      $mail->setFrom('nikomegathet666@gmail.com');
+      $mail->addAddress($_POST['Correo_Cliente']);     // Add a recipient
 
-            // Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Solicitud de garantia';
-            $mail->Body    = '<!DOCTYPE html>
+      // Content
+      $mail->isHTML(true);                                  // Set email format to HTML
+      $mail->Subject = 'Solicitud de garantia';
+      $mail->Body    = '<!DOCTYPE html>
             <html lang="en" >
             <head>
               <meta charset="UTF-8">
@@ -124,89 +124,119 @@ class GarantyController
             </html>
             ';
 
-            $mail->send();
-            $succesfull = "Garantia exitosa, correo enviado al cliente";
-            require 'Views/Persons/Layout.php';
-            require 'Views/Garanty/garantia_empleado.php';
-            require 'Views/Persons/Footer.php';
-            require 'Views/Persons/Scripts.php';
-            return $succesfull;
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
+      $mail->send();
+      $succesfull = "Garantia exitosa, correo enviado al cliente";
+      require 'Views/Persons/Layout.php';
+      require 'Views/Garanty/garantia_empleado.php';
+      require 'Views/Persons/Footer.php';
+      require 'Views/Persons/Scripts.php';
+      return $succesfull;
+    } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+  }
 
 
-    public function listGaranty()
-    {
-        require 'Views/Persons/Layout.php';
-        $garanties = $this->model->getAll();
-        require 'Views/Garanty/listGaranty.php';
-        require 'Views/Persons/Footer.php';
-        require 'Views/Persons/Scripts.php';
-    }
-    public function new()
-    {
-        require 'Views/Persons/Layout.php';
-        $data = $this->model->getAll();
-        $clients = $this->client->getAll();
-        $products = $this->product->getAll();
-        require 'Views/Garanty/garantia_empleado.php';
-        require 'Views/Persons/Footer.php';
-        require 'Views/Persons/Scripts.php';
-    }
-    
+  public function listGaranty()
+  {
+    require 'Views/Persons/Layout.php';
+    $garanties = $this->model->getAll();
+    require 'Views/Garanty/listGaranty.php';
+    require 'Views/Persons/Footer.php';
+    require 'Views/Persons/Scripts.php';
+  }
+  public function new()
+  {
+    require 'Views/Persons/Layout.php';
+    $data = $this->model->getAll();
+    $clients = $this->client->getAll();
+    $products = $this->product->getAll();
+    require 'Views/Garanty/garantia_empleado.php';
+    require 'Views/Persons/Footer.php';
+    require 'Views/Persons/Scripts.php';
+  }
 
-    public function consecutive(){
-      if (isset($_REQUEST['id'])) {
-         $id = $_REQUEST['id'];
-         $data = $this->model->getById($id);
-        if (isset($data[0]->id)) {
-           $mpdf = new \Mpdf\Mpdf();
-           $html='<h1>'.$data[0]->id.'</h1><br>
-           <h1>'.$data[0]->No_Garantia.'</h1><br>
-           <h1>'.$data[0]->Fecha.'</h1><br>
-           <h1>'.$data[0]->Hora.'</h1><br>
-           <h1>'.$data[0]->Numero_Factura.'</h1><br>
-           <h1>'.$data[0]->Punto_Venta.'</h1><br>
-           <h1>'.$data[0]->Fecha_Compra.'</h1><br>
-           <h1>'.$data[0]->Nombre_Cliente.'</h1><br>
-           <h1>'.$data[0]->Identificacion_Cliente.'</h1><br>
-           <h1>'.$data[0]->Correo_Cliente.'</h1><br>
-           <h1>'.$data[0]->Codigo_Producto.'</h1><br>
-           <h1>'.$data[0]->Descripcion_Producto.'</h1><br>
-           <h1>'.$data[0]->Serial.'</h1><br>
-           <h1>'.$data[0]->Proveedor.'</h1><br>
-           <h1>'.$data[0]->Flete.'</h1><br>
-           <h1>'.$data[0]->Ciudad.'</h1><br>
-           <h1>'.$data[0]->Municipio.'</h1><br>
-           <h1>'.$data[0]->Valor_Producto.'</h1><br>
-           <h1>'.$data[0]->Observacion_Cliente.'</h1><br>
-           <h1>'.$data[0]->Observacion_Empleado.'</h1><br>
-           <h1>'.$data[0]->Aprobacion_Garantia.'</h1><br>
-           <h1>'.$data[0]->Estado.'</h1><br>
-           <h1>'.$data[0]->id_Personal.'</h1><br>';
-           $mpdf -> WriteHTML($html);
-           $mpdf -> Output();
-        }         
 
+  public function consecutive()
+  {
+    if (isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $data = $this->model->getById($id);
+      if (isset($data[0]->id)) {
+        $mpdf = new \Mpdf\Mpdf();
+        $html = '<h1>' . $data[0]->id . '</h1><br>
+           <h1>' . $data[0]->No_Garantia . '</h1><br>
+           <h1>' . $data[0]->Fecha . '</h1><br>
+           <h1>' . $data[0]->Hora . '</h1><br>
+           <h1>' . $data[0]->Numero_Factura . '</h1><br>
+           <h1>' . $data[0]->Punto_Venta . '</h1><br>
+           <h1>' . $data[0]->Fecha_Compra . '</h1><br>
+           <h1>' . $data[0]->Nombre_Cliente . '</h1><br>
+           <h1>' . $data[0]->Identificacion_Cliente . '</h1><br>
+           <h1>' . $data[0]->Correo_Cliente . '</h1><br>
+           <h1>' . $data[0]->Codigo_Producto . '</h1><br>
+           <h1>' . $data[0]->Descripcion_Producto . '</h1><br>
+           <h1>' . $data[0]->Serial . '</h1><br>
+           <h1>' . $data[0]->Proveedor . '</h1><br>
+           <h1>' . $data[0]->Flete . '</h1><br>
+           <h1>' . $data[0]->Ciudad . '</h1><br>
+           <h1>' . $data[0]->Municipio . '</h1><br>
+           <h1>' . $data[0]->Valor_Producto . '</h1><br>
+           <h1>' . $data[0]->Observacion_Cliente . '</h1><br>
+           <h1>' . $data[0]->Observacion_Empleado . '</h1><br>
+           <h1>' . $data[0]->Aprobacion_Garantia . '</h1><br>
+           <h1>' . $data[0]->Estado . '</h1><br>
+           <h1>' . $data[0]->id_Personal . '</h1><br>';
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
       }
     }
+  }
 
-    public function ticket(){
-      if (isset($_REQUEST['id'])) {
-         $id = $_REQUEST['id'];
-         $data = $this->model->getById($id);
-        if (isset($data[0]->id)) {
-           $mpdf = new \Mpdf\Mpdf();
-           $html='<h1>'.$data[0]->No_Garantia.'</h1>
-           <h1>'.$data[0]->Nombre_Cliente.'</h1>
-           <h1>'.$data[0]->Descripcion_Producto.'</h1>
-           <h1>'.$data[0]->Fecha.'</h1>';
-           $mpdf -> WriteHTML($html);
-           $mpdf -> Output();
-        }         
-
+  public function ticket()
+  {
+    if (isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $data = $this->model->getById($id);
+      if (isset($data[0]->id)) {
+        $mpdf = new \Mpdf\Mpdf();
+        $html = '<h1>' . $data[0]->No_Garantia . '</h1>
+           <h1>' . $data[0]->Nombre_Cliente . '</h1>
+           <h1>' . $data[0]->Descripcion_Producto . '</h1>
+           <h1>' . $data[0]->Fecha . '</h1>';
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
       }
     }
+  }
+
+
+
+  public function Inputs()
+  {
+    if (isset($_GET['id'])) {
+      # conectare la base de datos
+      include('Models/Garanty.php');
+      $db_handle = new DBController();
+
+      $return_arr = array();
+
+      $sqlc = 'SELECT  * FROM clientes WHERE Identificacion_Cliente = "'.$_GET['id'].'"';
+
+      $faq = $db_handle->runQuery($sqlc);
+
+      foreach ($faq as $k => $v) {
+        /* Recuperar y almacenar en conjunto los resultados de la consulta.*/
+        $row_array['value'] = $faq[$k]['Identificacion_Cliente'];
+        $row_array['Identificacion_Cliente'] = $faq[$k]['Identificacion_Cliente'];
+
+        $row_array['Correo'] = $faq[$k]['Correo'];
+        $row_array['Nombre_Cliente'] = $faq[$k]['Nombre_Cliente'];
+
+        array_push($return_arr, $row_array);
+      }
+      /* Codifica el resultado del array en JSON. */
+      echo json_encode($return_arr);
+    }
+  }
 }

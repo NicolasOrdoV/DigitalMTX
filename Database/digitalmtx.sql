@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2020 a las 21:18:17
+-- Tiempo de generación: 09-10-2020 a las 01:33:33
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -19149,7 +19149,7 @@ CREATE TABLE `garantias` (
   `Descripcion_Producto` text NOT NULL,
   `Serial` varchar(20) NOT NULL,
   `Proveedor` varchar(20) DEFAULT NULL,
-  `Flete(S/N)` varchar(5) NOT NULL,
+  `Flete` varchar(5) NOT NULL,
   `Ciudad` varchar(20) NOT NULL,
   `Municipio` varchar(20) NOT NULL,
   `Valor_Producto` varchar(20) NOT NULL,
@@ -19159,6 +19159,14 @@ CREATE TABLE `garantias` (
   `Estado` varchar(20) NOT NULL,
   `id_Personal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `garantias`
+--
+
+INSERT INTO `garantias` (`id`, `No_Garantia`, `Fecha`, `Hora`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Codigo_Producto`, `Descripcion_Producto`, `Serial`, `Proveedor`, `Flete`, `Ciudad`, `Municipio`, `Valor_Producto`, `Observacion_Cliente`, `Observacion_Empleado`, `Aprobacion_Garantia`, `Estado`, `id_Personal`) VALUES
+(1, 1, '2020-10-07', '17:20', '21321', 'CENTRO', '2020-10-26', 'PEDRO               ', '38491', 'lgmolina39@misena.edu.co', '1007.0', 'PANTALLA 12.5  SLIM                               ', '2312', 'sdasdsa', 'SI', 'Bogota', 'Cundinamarca', '199999', 'asdasd', 'asdas', 'SI', 'Pendiente', 1),
+(2, 2, '0000-00-00', '', '', '', '0000-00-00', '', '123', '', '', '', '', '', '', '', '', '', '', '', '', 'Pendiente', 1);
 
 -- --------------------------------------------------------
 
@@ -23389,7 +23397,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `garantias`
 --
 ALTER TABLE `garantias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `personal`

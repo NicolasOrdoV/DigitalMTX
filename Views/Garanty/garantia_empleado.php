@@ -84,7 +84,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input list="Names" class="form-control" name="Nombre_Cliente">
+                                            <input list="Names" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente">
                                             <datalist id="Names">
                                                 <?php foreach ($clients as $client) { ?>
                                                     <option value="<?php echo $client->Nombres ?>"><?php echo $client->Nombres ?></option>
@@ -97,7 +97,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input list="Id" class="form-control" name="Identificacion_Cliente">
+                                            <input list="Id" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente">
                                             <datalist id="Id">
                                                 <?php foreach ($clients as $client) { ?>
                                                     <option value="<?php echo $client->Identificacion ?>"><?php echo $client->Identificacion ?></option>
@@ -112,7 +112,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input list="Emails" class="form-control" name="Correo_Cliente">
+                                            <input list="Emails" class="form-control" name="Correo_Cliente" id="Correo_Cliente">
                                             <datalist id="Emails">
                                                 <?php foreach ($clients as $client) { ?>
                                                     <option value="<?php echo $client->Correo ?>"><?php echo $client->Correo ?></option>
@@ -286,3 +286,23 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+$(function() {
+            $("#Identificacion_Cliente").autocomplete({
+                source: "GarantyController.php",
+                minLength: 2,
+                select: function(event, ui) {
+					event.preventDefault();
+					$('#Correo_Cliente').val(ui.item.Correo_Cliente);
+					$('#Nombre_Cliente').val(ui.item.Nombre_Cliente);
+					$("#Identificacion_Cliente").focus();
+			     }
+            });
+		});
+</script>
+
+<link href="assets/sticky-footer-navbar.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"/>
