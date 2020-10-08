@@ -39,3 +39,19 @@
 
     <!-- Demo Js -->
     <script src="Assets/js/demo.js"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="Assets/plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="Assets/plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="Assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="Assets/js/admin.js"></script>
+    <script src="Assets/js/pages/forms/basic-form-elements.js"></script>
