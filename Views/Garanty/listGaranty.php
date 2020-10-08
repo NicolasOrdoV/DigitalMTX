@@ -21,8 +21,12 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
+                                        <th>Fecha garantia</th>
+                                        <th>Hora garantia</th>
                                         <th>Numero de factura</th>
                                         <th>Cliente</th>
+                                        <th>Nombre</th>
                                         <th>Correo</th>
                                         <th>Aprobacion Garantia</th>
                                         <th>Estado</th>
@@ -32,17 +36,30 @@
                                 <tbody>
                                     <?php foreach ($garanties as $garanty) { ?>
                                         <tr>
+                                            <td><?php echo $garanty->No_Garantia ?></td>
+                                            <td><?php echo $garanty->Fecha ?></td>
+                                            <td><?php echo $garanty->Hora ?></td>
                                             <td><?php echo $garanty->Numero_Factura ?></td>
                                             <td><?php echo $garanty->Nombre_Cliente ?></td>
+                                            <td><?php echo $garanty->Descripcion_Producto ?></td>
                                             <td><?php echo $garanty->Correo_Cliente ?></td>
                                             <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                             <td><?php echo $garanty->Estado ?></td>
                                             <td>
-                                                <form action="?controller=garanty&method=consecutive" method="POST">
-                                                <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
-                                                <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
-                                                
-                                                </form>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <form action="?controller=garanty&method=consecutive" method="POST">
+                                                            <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                            <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="?controller=garanty&method=ticket" method="POST">
+                                                            <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                            <button type="submit" class="btn btn-success"><i class="material-icons">theaters</i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php } ?>

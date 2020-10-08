@@ -170,4 +170,18 @@ class GarantyController
 
       }
     }
+
+    public function ticket(){
+      if (isset($_REQUEST['id'])) {
+         $id = $_REQUEST['id'];
+         $data = $this->model->getById($id);
+        if (isset($data[0]->id)) {
+           $mpdf = new \Mpdf\Mpdf();
+           $html='<h1>'.$data[0]->id.'</h1>';
+           $mpdf -> WriteHTML($html);
+           $mpdf -> Output();
+        }         
+
+      }
+    }
 }
