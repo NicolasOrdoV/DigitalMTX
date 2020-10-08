@@ -4,9 +4,11 @@ require 'Models/Garanty.php';
 require 'Models/Client.php';
 require 'Models/Product.php';
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 
 require 'vendor/autoload.php';
 
@@ -152,5 +154,20 @@ class GarantyController
         require 'Views/Garanty/garantia_empleado.php';
         require 'Views/Persons/Footer.php';
         require 'Views/Persons/Scripts.php';
+    }
+    
+
+    public function consecutive(){
+      if (isset($_REQUEST['id'])) {
+         $id = $_REQUEST['id'];
+         $data = $this->model->getById($id);
+        if (isset($data[0]->id)) {
+           $mpdf = new \Mpdf\Mpdf();
+           $html='<h1>'.$data[0]->id.'</h1>';
+           $mpdf -> WriteHTML($html);
+           $mpdf -> Output();
+        }         
+
+      }
     }
 }
