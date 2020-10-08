@@ -445,3 +445,9 @@
         </div>
     </section>
     <!-- ***** Contact Us Area End ***** -->
+    <!-- Flot Charts Plugin Js -->
+    <script src="Assets/plugins/flot-charts/jquery.flot.js"></script>
+    <script src="Assets/plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="Assets/plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="Assets/plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="Assets/plugins/flot-charts/jquery.flot.time.js"></script>
