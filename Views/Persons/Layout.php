@@ -322,9 +322,9 @@ var_dump($_SESSION['user']);
                         </a>
                     </li>
                     <li>
-                        <a href="pages/helper-classes.html">
-                            <i class="material-icons">layers</i>
-                            <span>Helper Classes</span>
+                        <a href="?controller=garanty&method=listGaranty">
+                            <i class="material-icons">build</i>
+                            <span>Garantias</span>
                         </a>
                     </li>
                     <li>

@@ -74,5 +74,8 @@ class PersonController
     {
         $this->model->newPerson($_REQUEST);
         header('Location: ?controller=person&method=list');
-    }
+	}
+	
+
+
 }
