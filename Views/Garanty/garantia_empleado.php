@@ -10,7 +10,8 @@
                     <div class="header">
                         <h2>
                             Ingresar Garantías
-                            <?php //var_dump($clients); ?>
+                            <?php //var_dump($clients); 
+                            ?>
                         </h2>
                     </div>
                     <div class="body">
@@ -24,7 +25,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data); echo $total_data + 1; ?>" readonly>
+                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
+                                                                                                                echo $total_data + 1; ?>" readonly>
                                             <label class="form-label">Numero Garantia</label>
                                         </div>
                                     </div>
@@ -86,7 +88,7 @@
                                             <input list="Names" class="form-control" name="Nombre_Cliente">
                                             <datalist id="Names">
                                                 <?php foreach ($clients as $client) { ?>
-                                                    <option value="<?php echo $client->Nombres?>"><?php echo $client->Nombres?></option>
+                                                    <option value="<?php echo $client->Nombres ?>"><?php echo $client->Nombres ?></option>
                                                 <?php } ?>
                                             </datalist>
                                             <label class="form-label">Nombre de cliente </label>
@@ -99,13 +101,13 @@
                                             <input list="Id" class="form-control" name="Identificacion_Cliente">
                                             <datalist id="Id">
                                                 <?php foreach ($clients as $client) { ?>
-                                                    <option value="<?php echo $client->Identificacion?>"><?php echo $client->Identificacion?></option>
+                                                    <option value="<?php echo $client->Identificacion ?>"><?php echo $client->Identificacion ?></option>
                                                 <?php } ?>
                                             </datalist>
                                             <label class="form-label">Cedula </label>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <!--<div class="col-sm-4" id="select2lista">   
                                 </div>-->
                                 <div class="col-sm-4">
@@ -114,7 +116,7 @@
                                             <input list="Emails" class="form-control" name="Correo_Cliente">
                                             <datalist id="Emails">
                                                 <?php foreach ($clients as $client) { ?>
-                                                    <option value="<?php echo $client->Correo?>"><?php echo $client->Correo?></option>
+                                                    <option value="<?php echo $client->Correo ?>"><?php echo $client->Correo ?></option>
                                                 <?php } ?>
                                             </datalist>
                                             <label class="form-label">Correo </label>
@@ -129,22 +131,22 @@
                                             <input list="codes" class="form-control" name="Codigo_Producto">
                                             <datalist id="codes">
                                                 <?php foreach ($products as $product) { ?>
-                                                    <option value="<?php echo $product->Codigo?>"><?php echo $product->Codigo?></option>
+                                                    <option value="<?php echo $product->Codigo ?>"><?php echo $product->Codigo ?></option>
                                                 <?php } ?>
                                             </datalist>
                                             <label class="form-label">Codigo Producto </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>    
-                            <div class="row clearfix"> 
+                            </div>
+                            <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input rows="4" list="description" class="form-control no-resize" name="Descripcion_Producto"></input>
                                             <datalist id="description">
                                                 <?php foreach ($products as $product) { ?>
-                                                    <option value="<?php echo $product->Nombre?>"><?php echo $product->Nombre?></option>
+                                                    <option value="<?php echo $product->Nombre ?>"><?php echo $product->Nombre ?></option>
                                                 <?php } ?>
                                             </datalist>
                                             <label class="form-label">Descripcion Producto </label>
@@ -152,7 +154,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row clearfix">    
+                            <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -169,18 +171,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Flete(S/N)</label>
-                                        <div class="demo-radio-button">
-                                            <input name="Aprobacion_Garantia" type="radio" id="radio_7" class="radio-col-red" value="SI" checked />
-                                            <label for="radio_7">SI</label>
-                                            <input name="Aprobacion_Garantia" type="radio" id="radio_8" class="radio-col-red" value="NO" checked />
-                                            <label for="radio_8">NO</label>
+                                        <div class="demo-checkbox">
+                                            <input type="checkbox" id="md_checkbox_21" class="filled-in chk-col-red"  />
+                                            <label for="md_checkbox_21">SI</label>
+                                            <input type="checkbox" id="md_checkbox_22" class="filled-in chk-col-red"  />
+                                            <label for="md_checkbox_22">NO</label>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -261,22 +264,22 @@
 </section>
 <script src="Assets/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#lista1').val(0);
         recargarLista();
 
-        $('#lista1').change(function(){
+        $('#lista1').change(function() {
             recargarLista();
         });
-    }) 
+    })
 </script>
 <script type="text/javascript">
-    function recargarLista(){
+    function recargarLista() {
         $.ajax({
-            type:"POST",
-            url:"Views/Garanty/datos.php",
-            data:"Identificacion=" + $('#lista1').val(),
-            success:function(r){
+            type: "POST",
+            url: "Views/Garanty/datos.php",
+            data: "Identificacion=" + $('#lista1').val(),
+            success: function(r) {
                 $('#select2lista').html(r);
             }
         });
