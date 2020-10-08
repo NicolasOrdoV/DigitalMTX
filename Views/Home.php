@@ -4,7 +4,8 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12 col-md">
                     <div class="wellcome-heading">
-                        <h2>Seguimos Trabajando </h2>
+                        <h2>Seguimos</h2> 
+                        <h2>Trabajando </h2>
                         <h3><img src="Assets/img/bg-img/logo.png" class="img-fluid" width="280"></img></h3>
                         <p>Servicio Tecnico , Garantías</p>
                     </div>

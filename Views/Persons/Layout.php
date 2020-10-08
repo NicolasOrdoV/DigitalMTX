@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Digital MTX Dashboard</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="Assets/img/logo-rojo.png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <p>Please wait...</p>
+            <p>Por favor espere...</p>
         </div>
     </div>
     <!-- #END# Page Loader -->
@@ -83,7 +83,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
                     <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
-                    <li><a href="?controller=person&method=logout" class="js-search" data-close="true">Cerrar sesion</i></a></li>
                     <!-- #END# Call Search -->
                     <!-- Notifications -->
                     <li class="dropdown">
@@ -289,17 +288,12 @@
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo $_SESSION['user']->Nombres; ?></div>
-                    <div class="email">john.doe@example.com</div>
+                    <div class="email"><?php echo $_SESSION['user']->Correo; ?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Perfil</a></li>
+                            <li><a href="?controller=person&method=logout"><i class="material-icons">input</i>Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -308,11 +302,11 @@
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
-                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="header">Menu de navegación</li>
                     <li class="active">
                         <a href="?controller=person&method=template">
                             <i class="material-icons">home</i>
-                            <span>Home</span>
+                            <span>Inicio</span>
                         </a>
                     </li>
                     <li>
@@ -650,7 +644,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2016 - 2017 <a href="javascript:void(0);">Digital MTX</a>.
+                    &copy; <?php echo date('Y');?> <a href="javascript:void(0);">Digital MTX</a>.
                 </div>
             </div>
             <!-- #Footer -->

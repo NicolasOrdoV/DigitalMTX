@@ -11,18 +11,6 @@
                         <h2>
                             Ingresar Garantías
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another action</a></li>
-                                    <li><a href="javascript:void(0);">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <div class="body">
                         <h2 class="card-inside-title">Ingresar Garantías</h2>
@@ -91,15 +79,13 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label class="form-label">Aprobacion Garantía</label>
-                                            <div class="demo-radio-button">
-                                                <input name="Aprobacion_Garantia" type="radio" id="radio_7" class="radio-col-red" value="SI" checked />
-                                                <label for="radio_7">SI</label>
-                                                <input name="Aprobacion_Garantia" type="radio" id="radio_8" class="radio-col-red" value="NO" checked />
-                                                <label for="radio_8">NO</label>
-                                            </div>
-                                        </div>
+                                        <label>¿Se aprueba la garantía?</label>
+                                        <div class="demo-radio-button">
+                                            <input name="Aprobacion_Garantia" type="radio" id="radio_7" class="radio-col-red" value="SI" checked />
+                                            <label for="radio_7">SI</label>
+                                            <input name="Aprobacion_Garantia" type="radio" id="radio_8" class="radio-col-red" value="NO" checked />
+                                            <label for="radio_8">NO</label>
+                                        </div> 
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
