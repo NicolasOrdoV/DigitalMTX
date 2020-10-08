@@ -163,7 +163,29 @@ class GarantyController
          $data = $this->model->getById($id);
         if (isset($data[0]->id)) {
            $mpdf = new \Mpdf\Mpdf();
-           $html='<h1>'.$data[0]->id.'</h1>';
+           $html='<h1>'.$data[0]->id.'</h1><br>
+           <h1>'.$data[0]->No_Garantia.'</h1><br>
+           <h1>'.$data[0]->Fecha.'</h1><br>
+           <h1>'.$data[0]->Hora.'</h1><br>
+           <h1>'.$data[0]->Numero_Factura.'</h1><br>
+           <h1>'.$data[0]->Punto_Venta.'</h1><br>
+           <h1>'.$data[0]->Fecha_Compra.'</h1><br>
+           <h1>'.$data[0]->Nombre_Cliente.'</h1><br>
+           <h1>'.$data[0]->Identificacion_Cliente.'</h1><br>
+           <h1>'.$data[0]->Correo_Cliente.'</h1><br>
+           <h1>'.$data[0]->Codigo_Producto.'</h1><br>
+           <h1>'.$data[0]->Descripcion_Producto.'</h1><br>
+           <h1>'.$data[0]->Serial.'</h1><br>
+           <h1>'.$data[0]->Proveedor.'</h1><br>
+           <h1>'.$data[0]->Flete.'</h1><br>
+           <h1>'.$data[0]->Ciudad.'</h1><br>
+           <h1>'.$data[0]->Municipio.'</h1><br>
+           <h1>'.$data[0]->Valor_Producto.'</h1><br>
+           <h1>'.$data[0]->Observacion_Cliente.'</h1><br>
+           <h1>'.$data[0]->Observacion_Empleado.'</h1><br>
+           <h1>'.$data[0]->Aprobacion_Garantia.'</h1><br>
+           <h1>'.$data[0]->Estado.'</h1><br>
+           <h1>'.$data[0]->id_Personal.'</h1><br>';
            $mpdf -> WriteHTML($html);
            $mpdf -> Output();
         }         
@@ -177,7 +199,10 @@ class GarantyController
          $data = $this->model->getById($id);
         if (isset($data[0]->id)) {
            $mpdf = new \Mpdf\Mpdf();
-           $html='<h1>'.$data[0]->id.'</h1>';
+           $html='<h1>'.$data[0]->No_Garantia.'</h1>
+           <h1>'.$data[0]->Nombre_Cliente.'</h1>
+           <h1>'.$data[0]->Descripcion_Producto.'</h1>
+           <h1>'.$data[0]->Fecha.'</h1>';
            $mpdf -> WriteHTML($html);
            $mpdf -> Output();
         }         
