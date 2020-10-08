@@ -25,8 +25,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
-                                                                                                                echo $total_data + 1; ?>" readonly>
+                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data); echo $total_data + 1; ?>" readonly>
                                             <label class="form-label">Numero Garantia</label>
                                         </div>
                                     </div>
@@ -158,7 +157,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Direccion_Cliente">
+                                            <input type="text" class="form-control" name="Serial">
                                             <label class="form-label">Serial </label>
                                         </div>
                                     </div>
@@ -178,9 +177,9 @@
                                     <div class="form-group">
                                         <label>Flete(S/N)</label>
                                         <div class="demo-checkbox">
-                                            <input type="checkbox" id="md_checkbox_21" class="filled-in chk-col-red"  />
+                                            <input type="checkbox" name="Flete" id="md_checkbox_21" class="filled-in chk-col-red" value="SI" />
                                             <label for="md_checkbox_21">SI</label>
-                                            <input type="checkbox" id="md_checkbox_22" class="filled-in chk-col-red"  />
+                                            <input type="checkbox" name="Flete" id="md_checkbox_22" class="filled-in chk-col-red" value="NO" />
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
 
@@ -190,16 +189,18 @@
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <label>Ciudad</label>
-                                    <select>
+                                    <select name="Ciudad">
                                         <option value="">Seleccione..</option>
+                                        <option value="Bogota">Bogota D.C</option>
                                     </select>
                                 </div>
 
 
                                 <div class="col-sm-6">
                                     <label>Municipio</label>
-                                    <select>
+                                    <select name="Municipio">
                                         <option value="">Seleccione..</option>
+                                        <option value="Cundinamarca">Cundinamarca</option>
                                     </select>
                                 </div>
 
@@ -208,7 +209,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Direccion_Cliente">
+                                            <input type="number" class="form-control" name="Valor_Producto">
                                             <label class="form-label">Valor producto </label>
                                         </div>
                                     </div>
@@ -237,9 +238,9 @@
                                     <div class="form-group form-float">
                                         <label>¿Se aprueba la garantía?</label>
                                         <div class="demo-radio-button">
-                                            <input name="Aprobacion_Garantia" type="radio" id="radio_7" class="radio-col-red" value="SI" checked />
+                                            <input name="Aprobacion_Garantia" type="radio" id="radio_7" class="radio-col-red" value="SI" />
                                             <label for="radio_7">SI</label>
-                                            <input name="Aprobacion_Garantia" type="radio" id="radio_8" class="radio-col-red" value="NO" checked />
+                                            <input name="Aprobacion_Garantia" type="radio" id="radio_8" class="radio-col-red" value="NO" />
                                             <label for="radio_8">NO</label>
                                         </div>
                                     </div>
