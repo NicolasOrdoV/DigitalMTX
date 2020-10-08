@@ -21,6 +21,7 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
+                                            <th>Numero de factura</th>
                                             <th>Cliente</th>
                                             <th>Correo</th>
                                             <th>Aprobacion Garantia</th>
@@ -30,6 +31,7 @@
                                     <tbody>
                                         <?php foreach ($garanties as $garanty) { ?>
                                             <tr>
+                                                <td><?php echo $garanty->Numero_Factura ?></td>
                                                 <td><?php echo $garanty->Nombre_Cliente ?></td>
                                                 <td><?php echo $garanty->Correo_Cliente ?></td>
                                                 <td><?php echo $garanty->Aprobacion_Garantia ?></td>

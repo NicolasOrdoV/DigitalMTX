@@ -1,5 +1,5 @@
 <?php
-var_dump($_SESSION['user']);
+//var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,7 +75,7 @@ var_dump($_SESSION['user']);
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="?controller=person&method=template">
                     <img src="Assets/img/logo.png" width="50"></img>
                 </a>
             </div>
@@ -310,7 +310,7 @@ var_dump($_SESSION['user']);
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href="index.php">
+                        <a href="?controller=person&method=template">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>

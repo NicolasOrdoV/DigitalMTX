@@ -27,8 +27,20 @@
                     <div class="body">
                         <h2 class="card-inside-title">Ingresar Garantías</h2>
                         <form action="?controller=garanty&method=save" method="POST">
+                            <?php if (isset($succesfull)) { ?>
+                                <div class="alert alert-success"><?php echo $succesfull; ?></div>
+                            <?php } ?>
                             <input type="hidden" name="id_Personal" value="<?php echo $_SESSION['user']->id ?>">
+                            <input type="hidden" name="Estado" value="Pendiente">
                             <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="number" class="form-control" name="Numero_Factura">
+                                            <label class="form-label">Numero de factura</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">

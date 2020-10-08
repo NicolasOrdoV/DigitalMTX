@@ -29,7 +29,6 @@ class Garanty {
     public function newGaranty($data)
     {
         try {
-            $data['Estado'] = "Pendiente";
             $this->pdo->insert('garantias' , $data);
         } catch ( PDOException $e) {
             die($e->getMessage());
