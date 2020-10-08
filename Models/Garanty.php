@@ -13,8 +13,6 @@ class Garanty {
         }
     }
     
-    
-
     public function getAll()
     {
         try {
@@ -25,7 +23,7 @@ class Garanty {
             die($e->getMessage());
         }
     }
-
+    
     public function newGaranty($data)
     {
         try {

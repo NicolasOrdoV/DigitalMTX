@@ -24,7 +24,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" class="form-control" name="No_Garantia">
+                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data); echo $total_data + 1; ?>" readonly>
                                             <label class="form-label">Numero Garantia</label>
                                         </div>
                                     </div>
@@ -62,6 +62,12 @@
                                     <label>Punto Venta</label>
                                     <select name="Punto_Venta">
                                         <option value="">Seleccione..</option>
+                                        <option value="ALTA">ALTA</option>
+                                        <option value="BARRANQUILLA">BARRANQUILLA</option>
+                                        <option value="CENTRO">CENTRO</option>
+                                        <option value="MEDELLIN">MEDELLIN</option>
+                                        <option value="OFICINA">OFICINA</option>
+                                        <option value="UNILAGO">UNILAGO</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
@@ -90,7 +96,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input list="Id" class="form-control" name="Nombre_Cliente">
+                                            <input list="Id" class="form-control" name="Identificacion_Cliente">
                                             <datalist id="Id">
                                                 <?php foreach ($clients as $client) { ?>
                                                     <option value="<?php echo $client->Identificacion?>"><?php echo $client->Identificacion?></option>
@@ -105,7 +111,12 @@
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="email" class="form-control" name="Correo_Cliente">
+                                            <input list="Emails" class="form-control" name="Correo_Cliente">
+                                            <datalist id="Emails">
+                                                <?php foreach ($clients as $client) { ?>
+                                                    <option value="<?php echo $client->Correo?>"><?php echo $client->Correo?></option>
+                                                <?php } ?>
+                                            </datalist>
                                             <label class="form-label">Correo </label>
                                         </div>
                                     </div>
@@ -115,20 +126,34 @@
                                 <div class="col-sm-3">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Codigo_Producto">
+                                            <input list="codes" class="form-control" name="Codigo_Producto">
+                                            <datalist id="codes">
+                                                <?php foreach ($products as $product) { ?>
+                                                    <option value="<?php echo $product->Codigo?>"><?php echo $product->Codigo?></option>
+                                                <?php } ?>
+                                            </datalist>
                                             <label class="form-label">Codigo Producto </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                            </div>    
+                            <div class="row clearfix"> 
+                                <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
+                                            <input rows="4" list="description" class="form-control no-resize" name="Descripcion_Producto"></input>
+                                            <datalist id="description">
+                                                <?php foreach ($products as $product) { ?>
+                                                    <option value="<?php echo $product->Nombre?>"><?php echo $product->Nombre?></option>
+                                                <?php } ?>
+                                            </datalist>
                                             <label class="form-label">Descripcion Producto </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                            </div>
+                            <div class="row clearfix">    
+                                <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" class="form-control" name="Direccion_Cliente">
@@ -136,14 +161,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-3">
-                                        <label>Proveedor</label>
-                                        <select>
-                                            <option value="">Seleccione..</option>
-                                        </select>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Proveedor">
+                                            <label class="form-label">Proveedor</label>
+                                        </div>
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-12">

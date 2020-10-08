@@ -2,6 +2,7 @@
 
 require 'Models/Garanty.php';
 require 'Models/Client.php';
+require 'Models/Product.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -16,11 +17,13 @@ class GarantyController
 {
     private $model;
     private $client;
+    private $product;
 
     public function __construct()
     {
         $this->model = new Garanty;
         $this->client = new Client;
+        $this->product = new Product;
     }
 
 
@@ -143,7 +146,9 @@ class GarantyController
     public function new()
     {
         require 'Views/Persons/Layout.php';
+        $data = $this->model->getAll();
         $clients = $this->client->getAll();
+        $products = $this->product->getAll();
         require 'Views/Garanty/garantia_empleado.php';
         require 'Views/Persons/Footer.php';
         require 'Views/Persons/Scripts.php';
