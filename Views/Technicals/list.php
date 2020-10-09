@@ -21,8 +21,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Fecha garantia</th>
-                                            <th>Hora garantia</th>
                                             <th>Numero de factura</th>
                                             <th>Cliente</th>
                                             <th>Nombre</th>
@@ -36,8 +34,6 @@
                                         <?php foreach ($technicals as $technical) { ?>
                                             <tr>
                                                 <td><?php echo $technical->No_Garantia ?></td>
-                                                <td><?php echo $technical->Fecha ?></td>
-                                                <td><?php echo $technical->Hora ?></td>
                                                 <td><?php echo $technical->Numero_Factura ?></td>
                                                 <td><?php echo $technical->Nombre_Cliente ?></td>
                                                 <td><?php echo $technical->Descripcion_Producto ?></td>

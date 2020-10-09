@@ -12,7 +12,7 @@
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <form action="?controller=person&method=save" method="POST">
-                                        <div class="form-group row">
+                                        <div class="row clearfix">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="form-line">
@@ -28,7 +28,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <div class="row clearfix">
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <div class="form-line">
@@ -49,6 +49,8 @@
                                                         <input type="password" name="Contrasena" class="form-control" value="<?php echo rand('123456789','2');?>" readonly/>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-sm-3">    
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <select name="id_rol" class="form-control">

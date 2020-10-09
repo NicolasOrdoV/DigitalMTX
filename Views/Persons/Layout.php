@@ -151,7 +151,8 @@
                             <span>Inicio</span>
                         </a>
                     </li>
-                    <li>
+                    <?php if ($_SESSION['user']->id_rol == 3) { ?>
+                        <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">text_fields</i>
                             <span>Personal</span>
@@ -193,6 +194,37 @@
                             </li>
                         </ul>
                     </li>
+                    <?php }elseif ($_SESSION['user']->id_rol == 2) { ?>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">build</i>
+                            <span>Tecnico</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=technical&method=list" class="menu-toggle">
+                                    <span>Gestion de garantias pendientes</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <?php }elseif ($_SESSION['user']->id_rol == 1) { ?> 
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">build</i>
+                            <span>Garantias</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=garanty&method=listGaranty" class="menu-toggle">
+                                    <span>Anexo garantias</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <?php } ?>
                 </ul>
             </div>
             <!-- #Menu -->
