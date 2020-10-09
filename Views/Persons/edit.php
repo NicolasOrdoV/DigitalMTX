@@ -5,7 +5,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header bg-red">
-                        <h2>Cambiar Contraseña</h2>
+                        <h2>Editar perfil</h2>
                     </div>
                     <div class="body">
                         <form action="?controller=person&method=update" method="POST">
