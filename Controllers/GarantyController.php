@@ -209,34 +209,4 @@ class GarantyController
       }
     }
   }
-
-
-
-  public function Inputs()
-  {
-    if (isset($_GET['id'])) {
-      # conectare la base de datos
-      include('Models/Garanty.php');
-      $db_handle = new DBController();
-
-      $return_arr = array();
-
-      $sqlc = 'SELECT  * FROM clientes WHERE Identificacion_Cliente = "'.$_GET['id'].'"';
-
-      $faq = $db_handle->runQuery($sqlc);
-
-      foreach ($faq as $k => $v) {
-        /* Recuperar y almacenar en conjunto los resultados de la consulta.*/
-        $row_array['value'] = $faq[$k]['Identificacion_Cliente'];
-        $row_array['Identificacion_Cliente'] = $faq[$k]['Identificacion_Cliente'];
-
-        $row_array['Correo'] = $faq[$k]['Correo'];
-        $row_array['Nombre_Cliente'] = $faq[$k]['Nombre_Cliente'];
-
-        array_push($return_arr, $row_array);
-      }
-      /* Codifica el resultado del array en JSON. */
-      echo json_encode($return_arr);
-    }
-  }
 }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2020 a las 01:33:33
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 09-10-2020 a las 05:38:55
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -19166,7 +19166,7 @@ CREATE TABLE `garantias` (
 
 INSERT INTO `garantias` (`id`, `No_Garantia`, `Fecha`, `Hora`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Codigo_Producto`, `Descripcion_Producto`, `Serial`, `Proveedor`, `Flete`, `Ciudad`, `Municipio`, `Valor_Producto`, `Observacion_Cliente`, `Observacion_Empleado`, `Aprobacion_Garantia`, `Estado`, `id_Personal`) VALUES
 (1, 1, '2020-10-07', '17:20', '21321', 'CENTRO', '2020-10-26', 'PEDRO               ', '38491', 'lgmolina39@misena.edu.co', '1007.0', 'PANTALLA 12.5  SLIM                               ', '2312', 'sdasdsa', 'SI', 'Bogota', 'Cundinamarca', '199999', 'asdasd', 'asdas', 'SI', 'Pendiente', 1),
-(2, 2, '0000-00-00', '', '', '', '0000-00-00', '', '123', '', '', '', '', '', '', '', '', '', '', '', '', 'Pendiente', 1);
+(4, 2, '2020-10-08', '22:19', '42323', 'CENTRO', '2020-10-02', 'DE SOUZA PEDROSA UNB', '143620', 'jnordonez7@misena.edu.co', '2339.0', 'PANTALLA 14.4  SLIM N144NGE-E41                   ', '1213213', 'n/a', 'SI', 'Bogota', 'Cundinamarca', '22333', 'bla', 'bla', 'SI', 'Pendiente', 1);
 
 -- --------------------------------------------------------
 
@@ -23347,6 +23347,18 @@ INSERT INTO `rol` (`id`, `rol`) VALUES
 (2, 'Tecnico'),
 (3, 'Administrador');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tecnico`
+--
+
+CREATE TABLE `tecnico` (
+  `id` int(11) NOT NULL,
+  `Observacion_Tecnico` text NOT NULL,
+  `id_garantia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Índices para tablas volcadas
 --
@@ -23384,6 +23396,13 @@ ALTER TABLE `rol`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tecnico`
+--
+ALTER TABLE `tecnico`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tecnico_garantia` (`id_garantia`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -23397,7 +23416,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `garantias`
 --
 ALTER TABLE `garantias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `personal`
@@ -23418,6 +23437,12 @@ ALTER TABLE `rol`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `tecnico`
+--
+ALTER TABLE `tecnico`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -23432,6 +23457,12 @@ ALTER TABLE `garantias`
 --
 ALTER TABLE `personal`
   ADD CONSTRAINT `fk_personal_rol` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id`);
+
+--
+-- Filtros para la tabla `tecnico`
+--
+ALTER TABLE `tecnico`
+  ADD CONSTRAINT `fk_tecnico_garantia` FOREIGN KEY (`id_garantia`) REFERENCES `garantias` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

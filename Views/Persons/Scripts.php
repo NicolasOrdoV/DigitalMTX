@@ -42,18 +42,30 @@
     <!--<script src="Assets/js/pages/index.js"></script>-->
     <script src="Assets/js/pages/forms/basic-form-elements.js"></script>
     <script src="Assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="Assets/js/pages/forms/form-validation.js"></script>
     
     <!-- Autosize Plugin Js -->
     <script src="Assets/plugins/autosize/autosize.js"></script>
 
     <!-- Moment Plugin Js -->
-    <script src="Assets/plugins/momentjs/moment.js"></script>
+    <script src="Assets/plugins/momentjs/moment.js"></script> 
 
     <!-- Bootstrap Material Datetime Picker Plugin Js -->
     <script src="Assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Bootstrap Datepicker Plugin Js -->
     <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!-- Jquery Validation Plugin Css -->
+    <script src="Assets/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- JQuery Steps Plugin Js -->
+    <script src="Assets/plugins/jquery-steps/jquery.steps.js"></script>
+
+     <!-- Sweet Alert Plugin Js -->
+    <script src="Assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script src="Assets/js/validation.js"></script>
 
     <!-- Demo Js -->
     <script src="Assets/js/demo.js"></script>
