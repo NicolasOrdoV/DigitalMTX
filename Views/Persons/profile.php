@@ -28,7 +28,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
-                                    <a href="?controller=person&method=editPass&id=<?php echo $data[0]->id?>" class="btn btn-warning">Cambiar contraseña</a>
+                                    <a href="?controller=person&method=editPass" class="btn btn-warning">Cambiar contraseña</a>
                                 </div>
                             </div>
                         </div>

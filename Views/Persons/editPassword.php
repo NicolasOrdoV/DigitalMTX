@@ -12,7 +12,7 @@
                             <?php if (isset($error['errorMessage'])) {?>
                                 <div class="alert alert-danger"><?php echo $error['errorMessage']; ?></div>
                             <?php } ?>
-                            <input type="hidden" name="id" value="<?php echo $data[0]->id ?>">
+                            <input type="hidden" name="id" value="<?php echo $_SESSION['user']->id ?>">
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">

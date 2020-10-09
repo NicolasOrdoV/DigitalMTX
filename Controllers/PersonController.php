@@ -205,15 +205,23 @@ class PersonController
 		}
 	}
 
-	public function editPass()
+	public function edit()
 	{
-		if (isset($_GET['id'])) {
-			$id = $_GET['id'];
+		if (isset($_REQUEST['id'])) {
+			$id = $_REQUEST['id'];
 			$data = $this->model->getById($id);
 			require 'Views/Persons/Layout.php';
-			require 'Views/Persons/editPassword.php';
+			require 'Views/Persons/edit.php';
 			require 'Views/Persons/Scripts.php';
 		}
+	}
+
+	public function editPass()
+	{
+		require 'Views/Persons/Layout.php';
+		require 'Views/Persons/editPassword.php';
+		require 'Views/Persons/Scripts.php';
+		
 	}
 
 	public function updatePass()
@@ -236,6 +244,14 @@ class PersonController
 				require 'Views/Persons/editPassword.php';
 				require 'Views/Persons/Scripts.php';
 			}
+		}
+	}
+
+	public function update()
+	{
+		if ($_POST) {
+			$this->model->updatePerson($_POST);
+			header('Location: ?controller=person&method=profile&id=' . $_POST['id']);
 		}
 	}
 }
