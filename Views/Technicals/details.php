@@ -90,7 +90,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
-                                    <button type="button" class="btn btn-danger waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Onservaciones generales</button>
+                                    <button type="button" class="btn btn-danger waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Observaciones generales</button>
                                 </div>
                             </div>
                             <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
