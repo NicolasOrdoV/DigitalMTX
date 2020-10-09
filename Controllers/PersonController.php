@@ -193,4 +193,14 @@ class PersonController
 	      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 	    }  
 	}
+
+	public function profile(){
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$data = $this->model->getById($id);
+			require 'Views/Persons/Layout.php';
+			require 'Views/Persons/Profile.php';
+			require 'Views/Persons/Scripts.php';
+		}
+	}
 }

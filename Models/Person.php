@@ -63,5 +63,17 @@ class Person {
             die($e->getMessage());
         }
     }
+
+    public function getById($id){
+        try { 
+            $strSql = 'SELECT * FROM personal WHERE id = :id';
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            return $query;
+            
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
     
 }
