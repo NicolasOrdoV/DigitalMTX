@@ -128,7 +128,6 @@ class GarantyController
       $succesfull = "Garantia exitosa, correo enviado al cliente";
       require 'Views/Persons/Layout.php';
       require 'Views/Garanty/garantia_empleado.php';
-      require 'Views/Persons/Footer.php';
       require 'Views/Persons/Scripts.php';
       return $succesfull;
     } catch (Exception $e) {
@@ -142,7 +141,6 @@ class GarantyController
     require 'Views/Persons/Layout.php';
     $garanties = $this->model->getAll();
     require 'Views/Garanty/listGaranty.php';
-    require 'Views/Persons/Footer.php';
     require 'Views/Persons/Scripts.php';
   }
   public function new()
@@ -152,7 +150,6 @@ class GarantyController
     $clients = $this->client->getAll();
     $products = $this->product->getAll();
     require 'Views/Garanty/garantia_empleado.php';
-    require 'Views/Persons/Footer.php';
     require 'Views/Persons/Scripts.php';
   }
 

@@ -25,7 +25,6 @@ class PersonController
 		require 'Views/Persons/Layout.php';
 		require 'Views/Persons/Home.php';
 		require 'Views/Persons/Scripts.php';
-		require 'Views/Persons/Footer.php';
 	}
 
 	public function loginIn()
@@ -58,7 +57,6 @@ class PersonController
     	$roles = $this->rol->getAll();
 		require 'Views/Persons/new.php';
 		require 'Views/Persons/Scripts.php';
-		require 'Views/Persons/Footer.php';
     }
 
     public function list()
@@ -67,7 +65,6 @@ class PersonController
     	$persons = $this->model->getAll();
 		require 'Views/Persons/list.php';
 		require 'Views/Persons/Scripts.php';
-		require 'Views/Persons/Footer.php';
     }
 
     public function save()
