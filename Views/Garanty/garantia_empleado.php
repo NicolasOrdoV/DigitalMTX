@@ -25,8 +25,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
-                                                                                                                echo $total_data + 1; ?>" readonly required>
+                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);echo $total_data + 1; ?>" readonly required>
                                             <label class="form-label">Numero Garantia</label>
                                         </div>
                                     </div>
@@ -83,21 +82,6 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input list="Names" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required>
-                                            <!-- <datalist id="Names">
-                                                <?php ## foreach ($clients as $client) { ?>
-                                                    <option value="<?php ##echo $client->Nombres ?>"><?php echo $client->Nombres ?></option>
-                                                <?php ##} ?>
-                                            </datalist> -->
-
-                                            <label class="form-label">Nombre de cliente </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input list="Id" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente">
@@ -110,18 +94,20 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required readonly>
+                                            <label class="form-label">Nombre de cliente </label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--<div class="col-sm-4" id="select2lista">   
                                 </div>-->
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input list="Emails" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="" required>
-                                            <datalist id="Emails">
-                                                <?php foreach ($clients as $client) { ?>
-                                                    <option value="<?php echo $client->Correo ?>"><?php echo $client->Correo ?></option>
-                                                <?php } ?>
-                                            </datalist>
+                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="" readonly>
                                             <label class="form-label">Correo </label>
                                         </div>
                                     </div>
