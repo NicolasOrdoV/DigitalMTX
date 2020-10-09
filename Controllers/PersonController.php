@@ -56,7 +56,7 @@ class PersonController
 			header('Location: ?controller=person&method=template');
 		} else {
 			$error = [
-				'errorMessage' => $validateUser, 
+				'errorMessage' => $validateUser,
 				'email' => $_POST['Correo']
 			];
 			require 'Views/Persons/login.php';
@@ -64,55 +64,55 @@ class PersonController
 	}
 
 	public function logout()
-    {
-        if($_SESSION['user']) {
-            session_destroy();
-            header('Location: ?controller=home');
-        } else {
-            header('Location: ?controller=home');              
-        }
-    }
+	{
+		if ($_SESSION['user']) {
+			session_destroy();
+			header('Location: ?controller=home');
+		} else {
+			header('Location: ?controller=home');
+		}
+	}
 
-    public function new()
-    {
-    	require 'Views/Persons/Layout.php';
-    	$roles = $this->rol->getAll();
+	public function new()
+	{
+		require 'Views/Persons/Layout.php';
+		$roles = $this->rol->getAll();
 		require 'Views/Persons/new.php';
 		require 'Views/Persons/Scripts.php';
-    }
+	}
 
-    public function list()
-    {
-    	require 'Views/Persons/Layout.php';
-    	$persons = $this->model->getAll();
+	public function list()
+	{
+		require 'Views/Persons/Layout.php';
+		$persons = $this->model->getAll();
 		require 'Views/Persons/list.php';
 		require 'Views/Persons/Scripts.php';
-    }
+	}
 
-    public function save()
-    {
-        $this->model->newPerson($_REQUEST);
-        $mail = new PHPMailer(true);
+	public function save()
+	{
+		$this->model->newPerson($_REQUEST);
+		$mail = new PHPMailer(true);
 
-	    try {
-	      //Server settings
-	      $mail->SMTPDebug = 0;                      // Enable verbose debug output
-	      $mail->isSMTP();                                            // Send using SMTP
-	      $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-	      $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-	      $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-	      $mail->Password   = '1000464327bat';                               // SMTP password
-	      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-	      $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+		try {
+			//Server settings
+			$mail->SMTPDebug = 0;                      // Enable verbose debug output
+			$mail->isSMTP();                                            // Send using SMTP
+			$mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+			$mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+			$mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+			$mail->Password   = '1000464327bat';                               // SMTP password
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+			$mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-	      //Recipients
-	      $mail->setFrom('nikomegathet666@gmail.com');
-	      $mail->addAddress($_POST['Correo']);     // Add a recipient
+			//Recipients
+			$mail->setFrom('nikomegathet666@gmail.com');
+			$mail->addAddress($_POST['Correo']);     // Add a recipient
 
-	      // Content
-	      $mail->isHTML(true);                                  // Set email format to HTML
-	      $mail->Subject = 'Confirmacion de cuenta';
-	      $mail->Body    = '<!DOCTYPE html>
+			// Content
+			$mail->isHTML(true);                                  // Set email format to HTML
+			$mail->Subject = 'Confirmacion de cuenta';
+			$mail->Body    = '<!DOCTYPE html>
 	            <html lang="en" >
 	            <head>
 	              <meta charset="UTF-8">
@@ -159,9 +159,9 @@ class PersonController
 	                      <div class="form-group">
 	                      <p>Hola que tal: su usuario esta completado, con su usuario y contraseña podra ingresar, por favor tener en cuenta los siguientes items </p><br>
 	                      <h3>Correo</h3><br>
-	                      <p>'.$_POST['Correo'].'</p><br>
+	                      <p>' . $_POST['Correo'] . '</p><br>
 	                      <h3>Contraseña</h3><br>
-	                      <p>'.$_POST['Contrasena'].'</p><br>
+	                      <p>' . $_POST['Contrasena'] . '</p><br>
 	                      </div>
 	                    </form>
 	                  </div>
@@ -187,20 +187,55 @@ class PersonController
 	            </html>
 	            ';
 
-	      $mail->send();
-          header('Location: ?controller=person&method=list');
-	    } catch (Exception $e) {
-	      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-	    }  
+			$mail->send();
+			header('Location: ?controller=person&method=list');
+		} catch (Exception $e) {
+			echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+		}
 	}
 
-	public function profile(){
+	public function profile()
+	{
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 			$data = $this->model->getById($id);
 			require 'Views/Persons/Layout.php';
 			require 'Views/Persons/Profile.php';
 			require 'Views/Persons/Scripts.php';
+		}
+	}
+
+	public function editPass()
+	{
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$data = $this->model->getById($id);
+			require 'Views/Persons/Layout.php';
+			require 'Views/Persons/editPassword.php';
+			require 'Views/Persons/Scripts.php';
+		}
+	}
+
+	public function updatePass()
+	{
+		if ($_POST) {
+			$password = $_POST['Contrasena'];
+			$confirmation = $_POST['Confirmacion'];
+			$data = [
+				'id' => $_POST['id'], 
+			    'Contrasena' => $_POST['Contrasena']
+		    ];
+			if ($password ==  $confirmation) {
+				$this->model->updatePerson($data);
+				header('Location: ?controller=person&method=profile&id=' . $_POST['id']);
+			} else {
+				$error = [
+					'errorMessage' => 'Contraseñas no coinciden'
+				];
+				require 'Views/Persons/Layout.php';
+				require 'Views/Persons/editPassword.php';
+				require 'Views/Persons/Scripts.php';
+			}
 		}
 	}
 }

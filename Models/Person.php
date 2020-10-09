@@ -75,5 +75,14 @@ class Person {
             die($e->getMessage());
         }
     }
+
+    public function updatePerson($data){
+        try { 
+            $strWhere = 'id='.$data['id'];
+            $this->pdo->update('personal', $data, $strWhere); 
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
     
 }
