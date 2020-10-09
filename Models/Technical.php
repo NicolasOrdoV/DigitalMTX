@@ -39,12 +39,44 @@ class Technical
 		}
 	}
 
+	public function getByIdTec($id)
+	{
+		try {
+			$strSql = "SELECT g.*,t.Observacion_Tecnico as Observacion, t.id as idtec FROM tecnico t
+			INNER JOIN  garantias g ON g.id = t.id_garantia WHERE g.id = :id";
+			$array = ['id' => $id];
+			$query = $this->pdo->select($strSql, $array);
+			return $query;
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
 	public function editStatus($data)
 	{
 		try {
 			$strWhere = "id=" . $data['id'];
 			$this->pdo->update('garantias' , $data , $strWhere);
 		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
+	public function newTechnical($data)
+	{
+		try {
+			$this->pdo->insert('tecnico' , $data);
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
+	public function updateTechnical($data)
+	{
+     	try {
+     		$strWhere = "id=" .$data['id'];
+     		$this->pdo->update('tecnico' , $data, $strWhere);
+     	} catch (PDOException $e) {
 			die($e->getMessage());
 		}
 	}

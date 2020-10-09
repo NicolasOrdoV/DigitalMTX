@@ -113,19 +113,20 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
-                                    <form action="?controller=technical&method=save" method="POST">
+                                    <form action="?controller=technical&method=update" method="POST">
                                         <input type="hidden" name="id_garantia" value="<?php echo $data[0]->id?>">
+                                        <input type="hidden" name="id" value="<?php echo $data[0]->idtec?>">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <textarea rows="4" class="form-control no-resize" name="Observacion_tecnico" ></textarea>
+                                                <input type="text" rows="4" class="form-control no-resize" name="Observacion_tecnico" value="<?php echo $data[0]->Observacion?>">
                                                 <label class="form-label">Observacion tecnico</label>
                                             </div>
                                         </div>
                                         <div class="form-group form-float">
-                                            <button type="submit" class="btn btn-danger">Registrar observación</button>
+                                            <button type="submit" class="btn btn-warning">Editar observación</button>
                                         </div>
                                         <?php if (isset($succesfull)) { ?>
-                                            <div class="alert alert-success">
+                                            <div class="alert alert-warning">
                                                 <?php echo $succesfull; ?>
                                                 <a href="?controller=technical&method=list" class="btn btn-danger">Regresar</a>
                                             </div>
