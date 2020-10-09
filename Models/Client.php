@@ -34,4 +34,12 @@ class Client
             die($e->getMessage());
         }
     }
+
+    public function newClient($data){
+        try {
+            $this->pdo->insert('cliente',$data);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }
