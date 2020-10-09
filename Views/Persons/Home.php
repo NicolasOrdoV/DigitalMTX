@@ -12,7 +12,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Cantidad de clientes actuales</div>
-                            <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"><?php echo $totalClients; ?></div>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Garantias pendientes</div>
-                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"><?php echo $totalGaranties;  ?></div>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Personal existente</div>
-                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"><?php echo $totalPersons;  ?></div>
                         </div>
                     </div>
                 </div>
@@ -58,6 +58,16 @@
                                     <th>Cliente</th>
                                     <th>Correo</th>
                                 </thead>
+                                <tbody>
+                                  <?php foreach ($limitClients as $limitClient) {?>
+                                       <tr>
+                                           <td><?php echo $limitClient->id ?></td>
+                                           <td><?php echo $limitClient->Nombres ?></td>
+                                           <td><?php echo $limitClient->Correo ?></td>
+                                       </tr>
+                                  <?php } ?>
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -75,9 +85,19 @@
                             <table class="table">
                                 <thead>
                                     <th>#</th>
-                                    <th>Cliente</th>
-                                    <th>Correo</th>
+                                    <th>Nombre</th>
+                                    <th>Producto</th>
                                 </thead>
+                                <tbody>
+                                  <?php foreach ($limitGaranties as $limitGaranty) {?>
+                                       <tr>
+                                           <td><?php echo $limitGaranty->No_Garantia ?></td>
+                                           <td><?php echo $limitGaranty->Nombre_Cliente ?></td>
+                                           <td><?php echo $limitGaranty->Descripcion_Producto ?></td>
+                                       </tr>
+                                  <?php } ?>
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -95,8 +115,18 @@
                             <table class="table">
                                 <thead>
                                     <th>#</th>
-                                    <th>Cliente</th>
+                                    <th>Nombre</th>
                                     <th>Correo</th>
+                                    <tbody>
+                                  <?php foreach ($limitPersons as $limitPerson) {?>
+                                       <tr>
+                                           <td><?php echo $limitPerson->id ?></td>
+                                           <td><?php echo $limitPerson->Nombres ?></td>
+                                           <td><?php echo $limitPerson->Correo ?></td>
+                                       </tr>
+                                  <?php } ?>
+
+                                </tbody>
                                 </thead>
                             </table>
                         </div>

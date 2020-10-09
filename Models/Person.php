@@ -51,4 +51,17 @@ class Person {
             die($e->getMessage());
         }
     }
+
+
+    public function getAllFive()
+    {
+        try {
+            $strSql = "SELECT * from personal LIMIT 5";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+    
 }

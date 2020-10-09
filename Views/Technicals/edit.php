@@ -8,6 +8,7 @@
                             <h2>Detalle de la garantia</h2>
                             <small>Aqui puedes observar el detalle de la garantia y de alli sacar tu propia observacion</small>
                         </div>
+                      
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-3">

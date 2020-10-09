@@ -23,4 +23,15 @@ class Client
             die($e->getMessage());
         }
     }
+
+    public function getAllFive()
+    {
+        try {
+            $strSql = "SELECT * from cliente LIMIT 5";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }
