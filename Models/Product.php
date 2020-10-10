@@ -26,4 +26,13 @@ class Product
 			die($e->getMessage());
 		}
 	}
+
+	public function newProduct($data)
+	{
+    	try {
+    		$this->pdo->insert('productos' , $data);
+    	} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
 }

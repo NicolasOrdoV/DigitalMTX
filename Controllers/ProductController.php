@@ -21,4 +21,17 @@ class ProductController
         require 'Views/Products/list.php';
         require 'Views/Persons/Scripts.php';
 	}
+
+	public function new()
+	{
+		require 'Views/Persons/Layout.php';
+        require 'Views/Products/new.php';
+        require 'Views/Persons/Scripts.php';
+	}
+
+	public function save()
+	{
+		$this->model->newProduct($_REQUEST);
+		header('Location: ?controller=product&method=list');
+	}
 }

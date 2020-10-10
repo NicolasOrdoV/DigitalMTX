@@ -177,12 +177,9 @@ class TechnicalController
 	{
 		if ($_POST) {
 			$this->model->updateTechnical($_POST);
-			$succesfull = "Registro de tecnico actualiado";
 		    require 'Views/Persons/Layout.php';
-		    $data = $this->model->getByIdTec($_POST['id']);
-			require 'Views/Technicals/details.php';
+			require 'Views/Technicals/editSuccesfull.php';
 			require 'Views/Persons/Scripts.php';
-		    return $succesfull;
 		}
 	}
 }

@@ -10,8 +10,13 @@
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>Productos</h2>
+                    <div class="header row">
+                        <div class="col-sm-6">
+                            <h2>Productos</h2>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <a href="?controller=product&method=new" class="btn btn-danger">+Agregar</a>
+                        </div>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
