@@ -118,6 +118,7 @@
                                         <div class="form-line">
                                             <label>Correo </label>
                                             <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="" readonly>
+                                            <input type="hidden" name="id_cliente" id="id" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +148,8 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                              <label>Descripcion Producto </label>
-                                            <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required>
+                                             <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required>
+                                             <input type="hidden" name="id_producto" id="id_producto" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -302,8 +304,13 @@
         request.onreadystatechange = function() {
             // Revision si fue completada la peticion y si fue exitosa
             if (this.readyState === 4 && this.status === 200) {
+
+                var data = JSON.parse(this.responseText);
+                var data = data.toString().split(",");
                 // Ingresando la respuesta obtenida del PHP
-                document.getElementById("Descripcion_Producto").value = this.responseText;
+                document.getElementById("id_producto").value = data[0];
+                document.getElementById("Descripcion_Producto").value = data[1];
+                
             }
         };
 
@@ -337,8 +344,9 @@
                 //alert(data[0]);
                 //contenidosRecibidos = this.responseText.replace(contenidosRecibidos,'"]');
 
-                document.getElementById("Correo_Cliente").value = data[0];
-                document.getElementById("Nombre_Cliente").value = data[1];
+                document.getElementById("id").value = data[0];
+                document.getElementById("Correo_Cliente").value = data[1];
+                document.getElementById("Nombre_Cliente").value = data[2];
 
             }
         };

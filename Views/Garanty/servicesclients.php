@@ -7,11 +7,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
  
     $mysqli=new mysqli("localhost","root","","digitalmtx");
  
-    $sqlsi = "SELECT Correo,Nombres FROM cliente  WHERE  Identificacion  = '$identificacion'";
+    $sqlsi = "SELECT id,Correo,Nombres FROM cliente  WHERE  Identificacion  = '$identificacion'";
     $resultado = $mysqli->query($sqlsi);
 	$fila = $resultado->fetch_assoc();
     
-    $datos[]=$fila['Correo'].",".$fila['Nombres'];
+    $datos[]=$fila['id'].",".$fila['Correo'].",".$fila['Nombres'];
     echo json_encode($datos);
 
 } else {

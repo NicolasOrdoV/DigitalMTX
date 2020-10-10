@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2020 a las 07:04:12
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 10-10-2020 a las 23:48:43
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -19145,8 +19145,10 @@ CREATE TABLE `garantias` (
   `Nombre_Cliente` varchar(20) NOT NULL,
   `Identificacion_Cliente` varchar(20) NOT NULL,
   `Correo_Cliente` varchar(50) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
   `Codigo_Producto` varchar(20) NOT NULL,
   `Descripcion_Producto` text NOT NULL,
+  `id_producto` int(11) NOT NULL,
   `Serial` varchar(20) NOT NULL,
   `Proveedor` varchar(20) DEFAULT NULL,
   `Flete` varchar(5) NOT NULL,
@@ -19164,10 +19166,8 @@ CREATE TABLE `garantias` (
 -- Volcado de datos para la tabla `garantias`
 --
 
-INSERT INTO `garantias` (`id`, `No_Garantia`, `Fecha`, `Hora`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Codigo_Producto`, `Descripcion_Producto`, `Serial`, `Proveedor`, `Flete`, `Ciudad`, `Municipio`, `Valor_Producto`, `Observacion_Cliente`, `Observacion_Empleado`, `Aprobacion_Garantia`, `Estado`, `id_Personal`) VALUES
-(1, 1, '2020-10-07', '17:20', '21321', 'CENTRO', '2020-10-26', 'PEDRO               ', '38491', 'lgmolina39@misena.edu.co', '1007.0', 'PANTALLA 12.5  SLIM                               ', '2312', 'sdasdsa', 'SI', 'Bogota', 'Cundinamarca', '199999', 'asdasd', 'asdas', 'SI', 'Pendiente', 1),
-(4, 2, '2020-10-08', '22:19', '42323', 'CENTRO', '2020-10-02', 'DE SOUZA PEDROSA UNB', '143620', 'jnordonez7@misena.edu.co', '2339.0', 'PANTALLA 14.4  SLIM N144NGE-E41                   ', '1213213', 'n/a', 'SI', 'Bogota', 'Cundinamarca', '22333', 'bla', 'bla', 'SI', 'Pendiente', 1),
-(5, 3, '2020-10-09', '22:34', '213123', 'UNILAGO', '2020-10-03', 'PEDRO               ', '123', 'hdjhddjn@gmail.com', '1002.0', 'PANTALLA 8.9  LED                                 ', '1213213', 'n/a', 'SI', 'Bogota D.C', 'Cundinamarca', '2132321', 'Se reviso', 'No se aprobo', 'NO', 'No aprobado', 1);
+INSERT INTO `garantias` (`id`, `No_Garantia`, `Fecha`, `Hora`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `id_cliente`, `Codigo_Producto`, `Descripcion_Producto`, `id_producto`, `Serial`, `Proveedor`, `Flete`, `Ciudad`, `Municipio`, `Valor_Producto`, `Observacion_Cliente`, `Observacion_Empleado`, `Aprobacion_Garantia`, `Estado`, `id_Personal`) VALUES
+(7, 1, '2020-10-10', '16:46', '1213213', 'BARRANQUILLA', '2020-10-10', 'PEDRO               ', '123', 'hdjhddjn@gmail.com', 1, '1006', 'PANTALLA 11.6  SLIM HP                            ', 5, '2312', 'n/a', 'NO', 'Bogota D.C', 'Bogota D.C', '121212', 'Se reviso', 'No se aprobo', 'NO', 'No aprobado', 1);
 
 -- --------------------------------------------------------
 
@@ -19191,8 +19191,8 @@ CREATE TABLE `personal` (
 
 INSERT INTO `personal` (`id`, `Nombres`, `Apellidos`, `Correo`, `Contrasena`, `Telefono`, `id_rol`) VALUES
 (1, 'Fredy', 'Belson', 'fredy@gmail.com', '123456', '55555555', 3),
-(2, 'Nicolas', 'Ordoñez', 'jnordonez7@misena.edu.co', '56317381', '3229514515', 1),
-(3, 'Oswaldo', 'Siado', 'luis@gmail.com', '13797951', '523652563', 2);
+(2, 'Nicolas', 'Ordoñez', 'jnordonez7@misena.edu.co', '1234', '3229514515', 1),
+(3, 'Oswaldo', 'Siado', 'luis@gmail.com', '123', '523652563', 2);
 
 -- --------------------------------------------------------
 
@@ -23328,7 +23328,8 @@ INSERT INTO `productos` (`id`, `Codigo`, `Nombre`) VALUES
 (4110, '5226', 'DISCO ESTADO SOLIDO 120GB SANDISK 530MBS          '),
 (4111, '5227', 'DISCO ESTADO SOLIDO 480GB SANDISK 535MBS          '),
 (4112, '5228', 'DISCO EXTERNO 1 TB 2.5 TOSHIBA USB 3.0            '),
-(4113, '30', 'SERVICIOS ADMON MASTER                            ');
+(4113, '30', 'SERVICIOS ADMON MASTER                            '),
+(4114, '1145591', 'sasadasdasdas');
 
 -- --------------------------------------------------------
 
@@ -23377,7 +23378,9 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `garantias`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_garantias_personal` (`id_Personal`);
+  ADD KEY `fk_garantias_personal` (`id_Personal`),
+  ADD KEY `fk_garantias_cliente` (`id_cliente`),
+  ADD KEY `fk_garantias_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `personal`
@@ -23419,7 +23422,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `garantias`
 --
 ALTER TABLE `garantias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `personal`
@@ -23431,7 +23434,7 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4114;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4115;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -23453,7 +23456,9 @@ ALTER TABLE `tecnico`
 -- Filtros para la tabla `garantias`
 --
 ALTER TABLE `garantias`
-  ADD CONSTRAINT `fk_garantias_personal` FOREIGN KEY (`id_Personal`) REFERENCES `personal` (`id`);
+  ADD CONSTRAINT `fk_garantias_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `fk_garantias_personal` FOREIGN KEY (`id_Personal`) REFERENCES `personal` (`id`),
+  ADD CONSTRAINT `fk_garantias_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`);
 
 --
 -- Filtros para la tabla `personal`
