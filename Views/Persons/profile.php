@@ -4,8 +4,13 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header bg-red">
-                            <h2>Mi perfil<a href="?controller=person&method=edit&id=<?php echo $data[0]->id?>" class="btn btn-warning">Editar</a></h2>
+                        <div class="header bg-red row">
+                            <div class="col-sm-6">
+                                <h2>Mi perfil</h2>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a href="?controller=person&method=edit&id=<?php echo $data[0]->id?>" class="btn btn-warning">Editar</a>
+                            </div>
                         </div>
                         <div class="body">
                             <div class="row clearfix">

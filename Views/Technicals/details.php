@@ -1,12 +1,17 @@
 <section class="content">
         <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                    DETALLES DE GARANTIA
+                    <small>Aqui puedes visualisar el detalle de las garantias para empezar a reparar y dar tus conclusiones</small>
+                </h2>
+            </div>
             <!-- Input -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>Detalle de la garantia</h2>
-                            <small>Aqui puedes observar el detalle de la garantia y de alli sacar tu propia observacion</small>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
@@ -96,13 +101,13 @@
                             <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header bg-danger">
+                                        <div class="modal-header bg-red">
                                             <h4 class="modal-title" id="defaultModalLabel">Observaciones del cliente</h4>
                                         </div>
                                         <div class="modal-body">
                                             <p><?php echo $data[0]->Observacion_Cliente?></p>
                                         </div>
-                                        <div class="modal-header bg-danger">
+                                        <div class="modal-header bg-red">
                                             <h4 class="modal-title" id="defaultModalLabel">Observaciones del empleado</h4>
                                         </div>
                                         <div class="modal-body">

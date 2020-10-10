@@ -20,5 +20,9 @@
             <!-- ***** Removing this text is now allowed! This template is licensed under CC BY 3.0 ***** -->
             <p>Copyright ©<?php echo date("Y") ?> Digital MTX </p>
         </div>
+        <div class="copyright-text">
+            <!-- ***** Removing this text is now allowed! This template is licensed under CC BY 3.0 ***** -->
+            <p>Programado por: Nicolas O y Leixer M</p>
+        </div>
     </footer>
     <!-- ***** Footer Area Start ***** -->

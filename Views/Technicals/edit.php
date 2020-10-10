@@ -1,14 +1,18 @@
 <section class="content">
         <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                    EDITAR OBSERVACIÓN TECNICO
+                    <small>Aqui puedes editar la observación dada a la garantia registrada</small>
+                </h2>
+            </div>
             <!-- Input -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>Detalle de la garantia</h2>
-                            <small>Aqui puedes observar el detalle de la garantia y de alli sacar tu propia observacion</small>
+                        <div class="header row">
+                            <h2>Edita observación</h2>
                         </div>
-                      
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-3">

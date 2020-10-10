@@ -1,5 +1,11 @@
 <section class="content">
         <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                    REGISTRA EMPLEADOS
+                    <small>Aqui puedes registrar al personal que atendera la empresa</small>
+                </h2>
+            </div>
             <!-- Input -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

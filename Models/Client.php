@@ -24,6 +24,17 @@ class Client
         }
     }
 
+    public function getAll4000()
+    {
+        try {
+            $strSql = "SELECT * FROM cliente LIMIT 4000";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getAllFive()
     {
         try {

@@ -10,11 +10,13 @@
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>
-                            Garantías
-                            <a href="?controller=garanty&method=new" class="btn btn-danger text-right">+Agregar</a>
-                        </h2>
+                    <div class="header row">
+                        <div class="col-sm-6">
+                            <h2>Garantías</h2>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                           <a href="?controller=garanty&method=new" class="btn btn-danger float-right">+Agregar</a> 
+                        </div>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
@@ -46,20 +48,22 @@
                                             <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                             <td><?php echo $garanty->Estado ?></td>
                                             <td>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <form action="?controller=garanty&method=consecutive" method="POST">
-                                                            <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
-                                                            <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
-                                                        </form>
+                                                <?php if ($garanty->Aprobacion_Garantia == 'SI') { ?>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <form action="?controller=garanty&method=consecutive" method="POST">
+                                                                <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                                <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <form action="?controller=garanty&method=ticket" method="POST">
+                                                                <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                                <button type="submit" class="btn btn-success"><i class="material-icons">theaters</i></button>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <form action="?controller=garanty&method=ticket" method="POST">
-                                                            <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
-                                                            <button type="submit" class="btn btn-success"><i class="material-icons">theaters</i></button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>

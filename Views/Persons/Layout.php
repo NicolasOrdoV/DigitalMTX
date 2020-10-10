@@ -154,7 +154,7 @@
                     <?php if ($_SESSION['user']->id_rol == 3) { ?>
                         <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">text_fields</i>
+                            <i class="material-icons">people</i>
                             <span>Personal</span>
                         </a>
                         <ul class="ml-menu">
@@ -168,7 +168,7 @@
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">build</i>
+                            <i class="material-icons">assignment</i>
                             <span>Garantias</span>
                         </a>
                         <ul class="ml-menu">
@@ -194,6 +194,34 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">person_outline</i>
+                            <span>Clientes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=client&method=list" class="menu-toggle">
+                                    <span>Lista de clientes actuales</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">local_mall</i>
+                            <span>Productos</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=product&method=list" class="menu-toggle">
+                                    <span>Lista de productos en el sistema</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
                     <?php }elseif ($_SESSION['user']->id_rol == 2) { ?>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -212,7 +240,7 @@
                     <?php }elseif ($_SESSION['user']->id_rol == 1) { ?> 
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">build</i>
+                            <i class="material-icons">assignment</i>
                             <span>Garantias</span>
                         </a>
                         <ul class="ml-menu">

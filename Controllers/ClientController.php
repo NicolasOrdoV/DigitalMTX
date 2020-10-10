@@ -20,4 +20,12 @@ class ClientController{
         $this->model->newClient($_REQUEST);
         header('Location: ?controller=garanty&method=new');
     }
+
+    public function list()
+    {
+        require 'Views/Persons/Layout.php';
+        $clients = $this->model->getAll4000();
+        require 'Views/Clients/list.php';
+        require 'Views/Persons/Scripts.php';
+    }
 }

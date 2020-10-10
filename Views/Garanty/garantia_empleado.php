@@ -1,7 +1,10 @@
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
-            <h2>Garantias</h2>
+            <h2>
+                REGISTRO DE GARANTIAS
+                <small>Aqui puedes registrar la garantia y decides si la apruebas o no</small>
+            </h2>
         </div>
         <!-- Input -->
         <div class="row clearfix">
@@ -25,9 +28,10 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Numero Garantia</label>
                                             <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
-                                                                                                                echo $total_data + 1; ?>" readonly required>
-                                            <label class="form-label">Numero Garantia</label>
+                                                                                                                echo $total_data + 1; ?>" 
+                                                                                                                readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -55,22 +59,26 @@
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Numero_Factura</label>
                                             <input type="number" class="form-control" name="Numero_Factura" required>
-                                            <label class="form-label">Numero_Factura</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label>Punto Venta</label>
-                                    <select name="Punto_Venta" required>
-                                        <option value="">Seleccione..</option>
-                                        <option value="ALTA">ALTA</option>
-                                        <option value="BARRANQUILLA">BARRANQUILLA</option>
-                                        <option value="CENTRO">CENTRO</option>
-                                        <option value="MEDELLIN">MEDELLIN</option>
-                                        <option value="OFICINA">OFICINA</option>
-                                        <option value="UNILAGO">UNILAGO</option>
-                                    </select>
+                                    <div class="form-group form-float">
+                                        <p>
+                                            <b>Punto Venta</b>
+                                        </p>
+                                        <select name="Punto_Venta" class="form-control show-tick" required>
+                                            <option value="">Seleccione...</option>
+                                            <option value="ALTA">ALTA</option>
+                                            <option value="BARRANQUILLA">BARRANQUILLA</option>
+                                            <option value="CENTRO">CENTRO</option>
+                                            <option value="MEDELLIN">MEDELLIN</option>
+                                            <option value="OFICINA">OFICINA</option>
+                                            <option value="UNILAGO">UNILAGO</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -85,21 +93,21 @@
                                 <div class="col-sm-3">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Cedula </label>
                                             <input list="Id" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente">
                                             <datalist id="Id">
                                                 <?php foreach ($clients as $client) { ?>
                                                     <option value="<?php echo $client->Identificacion ?>"><?php echo $client->Identificacion ?></option>
                                                 <?php } ?>
                                             </datalist>
-                                            <label class="form-label">Cedula </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <div class="form-line">
+                                            <label>Nombre de cliente </label>
                                             <input type="text" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required readonly>
-                                            <label class="form-label">Nombre de cliente </label>
                                         </div>
                                     </div>
                                 </div>
@@ -108,30 +116,28 @@
                                 <div class="col-sm-3">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Correo </label>
                                             <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="" readonly>
-                                            <label class="form-label">Correo </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group ">
                                         <a href="?controller=client&method=new" class="btn btn-danger"><i class="material-icons">add</i></a>
-                                        
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Codigo Producto </label>
                                             <input list="codes" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required>
                                             <datalist id="codes">
                                                 <?php foreach ($products as $product) { ?>
                                                     <option value="<?php echo $product->Codigo ?>"><?php echo $product->Codigo ?></option>
                                                 <?php } ?>
                                             </datalist>
-                                            <label class="form-label">Codigo Producto </label>
                                         </div>
                                     </div>
                                 </div>
@@ -140,8 +146,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                             <label>Descripcion Producto </label>
                                             <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required>
-                                            <label class="form-label">Descripcion Producto </label>
                                         </div>
                                     </div>
                                 </div>
@@ -150,16 +156,16 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Serial </label>
                                             <input type="text" class="form-control" name="Serial" required>
-                                            <label class="form-label">Serial </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Proveedor</label>
                                             <input type="text" class="form-control" name="Proveedor" required>
-                                            <label class="form-label">Proveedor</label>
                                         </div>
                                     </div>
                                 </div>
@@ -181,19 +187,29 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Ciudad</label>
-                                    <select name="Ciudad" required>
+                                    <p>
+                                        <b>Ciudad</b>
+                                    </p>
+                                    <select name="Ciudad" class="form-control show-tick" required>
                                         <option value="">Seleccione..</option>
-                                        <option value="Bogota">Bogota D.C</option>
+                                        <option value="Bogota D.C">Bogota D.C</option>
+                                        <option value="Medellin">Medellin</option>
+                                        <option value="Barranquilla">Barranquilla</option>
+                                        <option value="Cali">Cali</option>
                                     </select>
                                 </div>
 
 
                                 <div class="col-sm-6">
-                                    <label>Municipio</label>
-                                    <select name="Municipio" required>
+                                    <p>
+                                        <b>Municipio</b>
+                                    </p>
+                                    <select name="Municipio" class="form-control show-tick" required>
                                         <option value="">Seleccione..</option>
                                         <option value="Cundinamarca">Cundinamarca</option>
+                                        <option value="Bogota D.C">Bogota D.C</option>
+                                        <option value="Comuna 12">Comuna 12</option>
+                                        <option value="Miraflores">Miraflores</option>
                                     </select>
                                 </div>
 
@@ -202,8 +218,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Valor producto </label>
                                             <input type="number" class="form-control" name="Valor_Producto" required>
-                                            <label class="form-label">Valor producto </label>
                                         </div>
                                     </div>
                                 </div>
@@ -212,16 +228,16 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Observacion Cliente</label>
                                             <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
-                                            <label class="form-label">Observacion Cliente</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label>Observacion Empleado</label>
                                             <textarea rows="4" class="form-control no-resize" name="Observacion_Empleado"></textarea>
-                                            <label class="form-label">Observacion Empleado</label>
                                         </div>
                                     </div>
                                 </div>
