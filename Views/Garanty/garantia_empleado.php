@@ -1,3 +1,4 @@
+
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
@@ -41,7 +42,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha</label>
-                                            <input type="date" class="form-control" name="Fecha" required>
+                                            <input type="text" class="form-control" name="Fecha" value="<?php echo date('yy/m/d')?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +50,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Hora</label>
-                                            <input type="time" class="form-control" name="Hora" required>
+                                            <input type="text" class="form-control" name="Hora" value="<?php echo date('h:i A');?>" readonly required>
 
                                         </div>
                                     </div>
