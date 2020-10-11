@@ -1,4 +1,7 @@
-
+<?php 
+date_default_timezone_set('America/Bogota');
+$hora_actual = date("h:i a");
+?>
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
@@ -50,7 +53,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Hora</label>
-                                            <input type="text" class="form-control" name="Hora" value="<?php echo date('h:i A');?>" readonly required>
+                                            <input type="text" class="form-control" name="Hora" value="<?php echo $hora_actual ?>" readonly required>
 
                                         </div>
                                     </div>
