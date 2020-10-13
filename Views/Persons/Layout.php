@@ -237,6 +237,34 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">person_outline</i>
+                            <span>Clientes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=client&method=list" class="menu-toggle">
+                                    <span>Lista de clientes actuales</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">local_mall</i>
+                            <span>Productos</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=product&method=list" class="menu-toggle">
+                                    <span>Lista de productos en el sistema</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
                     <?php }elseif ($_SESSION['user']->id_rol == 1) { ?> 
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -247,6 +275,34 @@
                             <li>
                                 <a href="?controller=garanty&method=listGaranty" class="menu-toggle">
                                     <span>Anexo garantias</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">person_outline</i>
+                            <span>Clientes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=client&method=list" class="menu-toggle">
+                                    <span>Lista de clientes actuales</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">local_mall</i>
+                            <span>Productos</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=product&method=list" class="menu-toggle">
+                                    <span>Lista de productos en el sistema</span>
                                 </a>
                                 
                             </li>

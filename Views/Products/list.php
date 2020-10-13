@@ -14,9 +14,11 @@
                         <div class="col-sm-6">
                             <h2>Productos</h2>
                         </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="?controller=product&method=new" class="btn btn-danger">+Agregar</a>
-                        </div>
+                        <?php if ($_SESSION['user']->id_rol == 1 || $_SESSION['user']->id_rol == 3) { ?>
+                            <div class="col-sm-6 text-right">
+                                <a href="?controller=product&method=new" class="btn btn-danger">+Agregar</a>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
