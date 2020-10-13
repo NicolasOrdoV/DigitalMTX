@@ -21,19 +21,19 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-3">
-                                    <h5>No garantia</h5>
+                                    <h5>Nombres:</h5>
                                     <p><?php echo $data[0]->Nombres?></p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h5>Fecha de garantia</h5>
+                                    <h5>Apellidos:</h5>
                                     <p><?php echo $data[0]->Apellidos?></p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h5>hora de garantia</h5>
+                                    <h5>Correo electronico:</h5>
                                     <p><?php echo $data[0]->Correo?></p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h5>Numero de factura</h5>
+                                    <h5>Telefono:</h5>
                                     <p><?php echo $data[0]->Telefono?></p>
                                 </div>
                             </div>
