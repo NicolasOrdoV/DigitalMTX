@@ -11,9 +11,9 @@ class ClientController{
     }
 
     public function new(){
-        require 'Views/Persons/Layout.php';
+        require 'Views/Layout.php';
         require 'Views/Clients/new.php';
-        require 'Views/Persons/Scripts.php';
+        require 'Views/Scripts.php';
     }
 
     public function save(){
@@ -23,9 +23,9 @@ class ClientController{
 
     public function list()
     {
-        require 'Views/Persons/Layout.php';
+        require 'Views/Layout.php';
         $clients = $this->model->getAll();
         require 'Views/Clients/list.php';
-        require 'Views/Persons/Scripts.php';
+        require 'Views/Scripts.php';
     }
 }

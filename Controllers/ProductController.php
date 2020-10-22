@@ -16,17 +16,17 @@ class ProductController
 
 	public function list()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
         $products = $this->model->getAll();
         require 'Views/Products/list.php';
-        require 'Views/Persons/Scripts.php';
+        require 'Views/Scripts.php';
 	}
 
 	public function new()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
         require 'Views/Products/new.php';
-        require 'Views/Persons/Scripts.php';
+        require 'Views/Scripts.php';
 	}
 
 	public function save()

@@ -26,10 +26,10 @@ class TechnicalController
 
 	public function list()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
 		$technicals = $this->model->getAll();
 		require 'Views/Technicals/list.php';
-		require 'Views/Persons/Scripts.php';
+		require 'Views/Scripts.php';
 	}
 
 	public function details()
@@ -37,9 +37,9 @@ class TechnicalController
 		if (isset($_REQUEST['id'])) {
 			$id = $_REQUEST['id'];
 			$data = $this->garanty->getById($id);
-		    require 'Views/Persons/Layout.php';
+		    require 'Views/Layout.php';
 			require 'Views/Technicals/details.php';
-			require 'Views/Persons/Scripts.php';
+			require 'Views/Scripts.php';
 		}
 	}
 
@@ -150,10 +150,10 @@ class TechnicalController
 
 	      $mail->send();
 	      $succesfull = "Registro de tecnico exitoso, correo enviado al cliente";
-	      require 'Views/Persons/Layout.php';
+	      require 'Views/Layout.php';
 	      $data = $this->garanty->getById($id);
 		  require 'Views/Technicals/details.php';
-		  require 'Views/Persons/Scripts.php';
+		  require 'Views/Scripts.php';
 	      return $succesfull;
 	    } catch (Exception $e) {
 	      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -166,9 +166,9 @@ class TechnicalController
 		if ($_REQUEST['id']) {
 			$id = $_REQUEST['id'];
 			$data = $this->model->getByIdTec($id);
-			require 'Views/Persons/Layout.php';
+			require 'Views/Layout.php';
 			require 'Views/Technicals/edit.php';
-			require 'Views/Persons/Scripts.php';
+			require 'Views/Scripts.php';
 
 		}
 	}
@@ -177,9 +177,9 @@ class TechnicalController
 	{
 		if ($_POST) {
 			$this->model->updateTechnical($_POST);
-		    require 'Views/Persons/Layout.php';
+		    require 'Views/Layout.php';
 			require 'Views/Technicals/editSuccesfull.php';
-			require 'Views/Persons/Scripts.php';
+			require 'Views/Scripts.php';
 		}
 	}
 }

@@ -144,19 +144,19 @@ class GarantyController
 
   public function listGaranty()
   {
-    require 'Views/Persons/Layout.php';
+    require 'Views/Layout.php';
     $garanties = $this->model->getAll();
     require 'Views/Garanty/listGaranty.php';
-    require 'Views/Persons/Scripts.php';
+    require 'Views/Scripts.php';
   }
   public function new()
   {
-    require 'Views/Persons/Layout.php';
+    require 'Views/Layout.php';
     $data = $this->model->getAll();
     $clients = $this->client->getAll();
     $products = $this->product->getAll();
     require 'Views/Garanty/garantia_empleado.php';
-    require 'Views/Persons/Scripts.php';
+    require 'Views/Scripts.php';
   }
 
 

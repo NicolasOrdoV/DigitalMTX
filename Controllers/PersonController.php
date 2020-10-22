@@ -47,18 +47,18 @@ class PersonController
 
 	public function new()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
 		$roles = $this->rol->getAll();
 		require 'Views/Persons/new.php';
-		require 'Views/Persons/Scripts.php';
+		require 'Views/Scripts.php';
 	}
 
 	public function list()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
 		$persons = $this->model->getAll();
 		require 'Views/Persons/list.php';
-		require 'Views/Persons/Scripts.php';
+		require 'Views/Scripts.php';
 	}
 
 	public function save()
@@ -171,9 +171,9 @@ class PersonController
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 			$data = $this->model->getById($id);
-			require 'Views/Persons/Layout.php';
+			require 'Views/Layout.php';
 			require 'Views/Persons/Profile.php';
-			require 'Views/Persons/Scripts.php';
+			require 'Views/Scripts.php';
 		}
 	}
 
@@ -182,17 +182,17 @@ class PersonController
 		if (isset($_REQUEST['id'])) {
 			$id = $_REQUEST['id'];
 			$data = $this->model->getById($id);
-			require 'Views/Persons/Layout.php';
+			require 'Views/Layout.php';
 			require 'Views/Persons/edit.php';
-			require 'Views/Persons/Scripts.php';
+			require 'Views/Scripts.php';
 		}
 	}
 
 	public function editPass()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
 		require 'Views/Persons/editPassword.php';
-		require 'Views/Persons/Scripts.php';
+		require 'Views/Scripts.php';
 		
 	}
 
@@ -212,9 +212,9 @@ class PersonController
 				$error = [
 					'errorMessage' => 'Contraseñas no coinciden'
 				];
-				require 'Views/Persons/Layout.php';
+				require 'Views/Layout.php';
 				require 'Views/Persons/editPassword.php';
-				require 'Views/Persons/Scripts.php';
+				require 'Views/Scripts.php';
 			}
 		}
 	}
