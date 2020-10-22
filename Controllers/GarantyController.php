@@ -134,7 +134,7 @@ class GarantyController
       } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
-    }else{
+    } else {
       $_REQUEST['Estado'] = 'No aprobado';
       $this->model->newGaranty($_REQUEST);
       header('Location: ?controller=garanty&method=listGaranty');
@@ -157,6 +157,20 @@ class GarantyController
     $products = $this->product->getAll();
     require 'Views/Garanty/garantia_empleado.php';
     require 'Views/Scripts.php';
+  }
+
+  public function findBill()
+  {
+    if (isset($_POST['Numero_Factura'])) {
+      $bill = $_POST['Numero_Factura'];
+      $bills = $this->model->getBill($bill);
+      require 'Views/Layout.php';
+      $data = $this->model->getAll();
+      $clients = $this->client->getAll();
+      $products = $this->product->getAll();
+      require 'Views/Garanty/garantia_empleado.php';
+      require 'Views/Scripts.php';
+    }
   }
 
 

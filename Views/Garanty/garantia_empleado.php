@@ -22,6 +22,37 @@ $hora_actual = date("h:i a");
                         </h2>
                     </div>
                     <div class="body">
+
+
+                        <form action="?controller=garanty&method=findBill" method="POST">
+                            <div class="row clearfix">
+                                <div class="col-sm-10">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label>Numero_Factura</label>
+                                            <input type="number" class="form-control" name="Numero_Factura" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group form-float">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-danger">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php var_dump($bills); ?>
+                            <hr>
+                            <?php 
+                            $productos = [];
+                                foreach ($bills as $bif) {
+                                  $productos = $bif->Descripcion_Producto;
+                                  echo $productos.'<br>';
+                                }
+                            
+                           // var_dump($productos); ?>
+                        </form>
                         <form action="?controller=garanty&method=save" method="POST" id="form_validation" novalidate>
                             <?php if (isset($succesfull)) { ?>
                                 <div class="alert alert-success"><?php echo $succesfull; ?></div>
@@ -54,23 +85,6 @@ $hora_actual = date("h:i a");
                                             <label>Hora</label>
                                             <input type="text" class="form-control" name="Hora" value="<?php echo $hora_actual ?>" readonly required>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <label>Numero_Factura</label>
-                                            <input type="number" class="form-control" name="Numero_Factura" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group form-float">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-danger">Buscar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -127,31 +141,35 @@ $hora_actual = date("h:i a");
                                     </div>
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-3">
+                            <!-- <div class="row clearfix">
+                                <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Codigo Producto </label>
                                             <input list="codes" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required>
                                             <datalist id="codes">
-                                                <?php foreach ($products as $product) { ?>
-                                                    <option value="<?php echo $product->Codigo ?>"><?php echo $product->Codigo ?></option>
-                                                <?php } ?>
+                                                <?php ##foreach ($products as $product) { 
+                                                ?>
+                                                    <option value="<?php## echo $product->Codigo ?>"><?php ##echo $product->Codigo 
+                                                                                                        ?></option>
+                                                <?php ##} 
+                                                ?>
                                             </datalist>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row clearfix">
                                 <div class="col-sm-8">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Descripcion Producto </label>
-                                            <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required>
+                                            <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required re>
                                             <input type="hidden" name="id_producto" id="id_producto" value="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row clearfix">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -177,7 +195,7 @@ $hora_actual = date("h:i a");
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group">

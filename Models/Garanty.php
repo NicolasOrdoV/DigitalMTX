@@ -56,4 +56,14 @@ class Garanty {
         }
     }
 
+    public function getBill($bill){
+       try {
+           $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura LIKE '%$bill%'";
+           $query = $this->pdo->select($strSql);
+           return $query;
+       } catch ( PDOException $e) {
+           die($e->getMessage());
+       }
+    }
+
 }
