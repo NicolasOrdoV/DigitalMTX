@@ -59,41 +59,42 @@ $hora_actual = date("h:i a");
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <div class="form-group form-float">
+                                <div class="col-sm-10">
+                                    <div class="form-group">
                                         <div class="form-line">
                                             <label>Numero_Factura</label>
                                             <input type="number" class="form-control" name="Numero_Factura" required>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <div class="form-group form-float">
-                                        <p>
-                                            <b>Punto Venta</b>
-                                        </p>
-                                        <select name="Punto_Venta" class="form-control show-tick" required>
-                                            <option value="">Seleccione...</option>
-                                            <option value="ALTA">ALTA</option>
-                                            <option value="BARRANQUILLA">BARRANQUILLA</option>
-                                            <option value="CENTRO">CENTRO</option>
-                                            <option value="MEDELLIN">MEDELLIN</option>
-                                            <option value="OFICINA">OFICINA</option>
-                                            <option value="UNILAGO">UNILAGO</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <label>Fecha de Compra</label>
-                                            <input type="date" class="form-control" name="Fecha_Compra" required>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-danger">Buscar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label>Punto de Venta</label>
+                                            <input type="text" class="form-control" name="Punto_Venta" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label>Fecha de Compra</label>
+                                            <input type="text" class="form-control" name="Fecha_Compra" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Cedula </label>
@@ -106,7 +107,7 @@ $hora_actual = date("h:i a");
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Nombre de cliente </label>
@@ -116,18 +117,13 @@ $hora_actual = date("h:i a");
                                 </div>
                                 <!--<div class="col-sm-4" id="select2lista">   
                                 </div>-->
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Correo </label>
-                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="" readonly>
+                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="">
                                             <input type="hidden" name="id_cliente" id="id" value="">
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group ">
-                                        <a href="?controller=client&method=new" class="btn btn-danger"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -145,9 +141,7 @@ $hora_actual = date("h:i a");
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
+                                <div class="col-sm-8">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Descripcion Producto </label>
@@ -157,24 +151,32 @@ $hora_actual = date("h:i a");
                                     </div>
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Serial </label>
-                                            <input type="text" class="form-control" name="Serial" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Proveedor</label>
-                                            <input type="text" class="form-control" name="Proveedor" required>
-                                        </div>
-                                    </div>
-                                </div>
 
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label>Marca Producto</label>
+                                            <input type="text" class="form-control" name="Marca_Producto" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <div class="form-line">
+                                            <label>Sello Producto</label>
+                                            <input type="text" class="form-control" name="Sello_Producto" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <div class="form-line">
+                                            <label>Referencia</label>
+                                            <input type="text" class="form-control" name="Referencia" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
@@ -191,7 +193,17 @@ $hora_actual = date("h:i a");
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
+                                    <p>
+                                        <b>Proveedor</b>
+                                    </p>
+                                    <select name="Proveedor" class="form-control show-tick" required>
+                                        <option value="">Seleccione..</option>
+                                        <option value="Colombia">Colombia</option>
+                                        <option value="China">China</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
                                     <p>
                                         <b>Ciudad</b>
                                     </p>
@@ -203,9 +215,7 @@ $hora_actual = date("h:i a");
                                         <option value="Cali">Cali</option>
                                     </select>
                                 </div>
-
-
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <p>
                                         <b>Municipio</b>
                                     </p>
@@ -220,25 +230,35 @@ $hora_actual = date("h:i a");
 
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-12">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <label>Valor producto </label>
-                                            <input type="number" class="form-control" name="Valor_Producto" required>
+                                            <label>Valor Flete </label>
+                                            <input type="number" class="form-control" name="Valor_Flete" required>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label>Numero Guia </label>
+                                            <input type="number" class="form-control" name="No_Guia" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p>
+                                        <b>Transportadora</b>
+                                    </p>
+                                    <select name="Transportadora" class="form-control show-tick" required>
+                                        <option value="">Seleccione..</option>
+                                        <option value="Envia">Envia</option>
+                                        <option value="Servientrega">Servientrega</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Observacion Cliente</label>
-                                            <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Observacion Empleado</label>

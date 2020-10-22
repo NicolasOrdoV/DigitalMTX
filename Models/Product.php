@@ -19,7 +19,7 @@ class Product
 	public function getAll()
 	{
 		try {
-			$strSql = "SELECT * FROM productos";
+			$strSql = "SELECT * FROM dtm_productos";
 			$query = $this->pdo->select($strSql);
 			return $query;
 		} catch (PDOException $e) {
@@ -30,7 +30,7 @@ class Product
 	public function newProduct($data)
 	{
     	try {
-    		$this->pdo->insert('productos' , $data);
+    		$this->pdo->insert('dtm_productos' , $data);
     	} catch (PDOException $e) {
 			die($e->getMessage());
 		}
