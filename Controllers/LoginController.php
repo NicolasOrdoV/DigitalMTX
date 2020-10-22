@@ -18,12 +18,13 @@ class LoginController
     
     public function loginIn()
 	{
-		$validateUser = $this->model->validateUser($_POST);
-		if ($validateUser === true) {
+		$validateUserEmp = $this->model->validateUserEmp($_POST);
+		$validateAdmin = $this->model->validateAdmin($_POST);
+		if ($validateUserEmp === true || $validateAdmin === true) {
 			header('Location: ?controller=person&method=template');
-		} else {
+	    }else {
 			$error = [
-				'errorMessage' => $validateUser,
+				'errorMessage' => $validateUserEmp,
 				'email' => $_POST['correo']
 			];
 			require 'Views/login.php';

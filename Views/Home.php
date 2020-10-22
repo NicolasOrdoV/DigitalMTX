@@ -1,7 +1,16 @@
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>BIENVENIDO <?php echo $_SESSION['user']->nombre?></h2>
+                <h2>BIENVENIDO 
+                    <?php 
+                        if($_SESSION['user']->cargo == 'Administrador'){
+                            echo  $_SESSION['user']->usuario;
+                        }
+                        elseif($_SESSION['user']->cargo == 'Recepcion'){
+                            echo  $_SESSION['user']->nombre;
+                        }
+                    ?>
+                </h2>
             </div>
             <!-- Widgets -->
             <div class="row clearfix">
