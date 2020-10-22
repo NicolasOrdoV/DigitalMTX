@@ -19,12 +19,12 @@
         <div class="white-panel">
             <div class="login-show">
                 <h2>Iniciar Sesión </h2>
-                <form action="?controller=person&method=loginIn" method="POST">
+                <form action="?controller=login&method=loginIn" method="POST">
                     <?php if(isset($error['errorMessage'])){ ?>
                         <div class="alert alert-danger"><?php echo $error['errorMessage']; ?></div>
                     <?php } ?>
-                    <input type="text" name="Correo" placeholder="Correo" value="<?php echo isset($error['email']) ? $error['email'] : '' ?>">
-                    <input type="password" name="Contrasena" placeholder="Contraseña">
+                    <input type="text" name="correo" placeholder="Correo" value="<?php echo isset($error['email']) ? $error['email'] : '' ?>">
+                    <input type="password" name="password" placeholder="Contraseña">
                     <button type="submit" class="btn btn-danger float-right">Ingresar</button>
                 </form>
                 <a href="">Recuperar contraseña?</a>

@@ -16,7 +16,7 @@ class Garanty {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * FROM garantias";
+            $strSql = "SELECT * FROM mg_garantia";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -27,7 +27,7 @@ class Garanty {
     public function newGaranty($data)
     {
         try {
-            $this->pdo->insert('garantias' , $data);
+            $this->pdo->insert('mg_garantia' , $data);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -36,7 +36,7 @@ class Garanty {
     public function getById($id)
     {
         try {
-            $strSql = "SELECT * FROM garantias WHERE id = :id";
+            $strSql = "SELECT * FROM mg_garantia WHERE id = :id";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql, $array);
             return $query;
@@ -48,7 +48,7 @@ class Garanty {
     public function getAllFive()
     {
         try {
-            $strSql = "SELECT * from garantias LIMIT 5";
+            $strSql = "SELECT * from mg_garantia LIMIT 5";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {

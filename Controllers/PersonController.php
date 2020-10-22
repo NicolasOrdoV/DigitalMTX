@@ -28,14 +28,10 @@ class PersonController
 		$this->client = new Client;
 		$this->garanty = new Garanty;
 	}
-	public function login()
-	{
-		require 'Views/Persons/login.php';
-	}
 
 	public function template()
 	{
-		require 'Views/Persons/Layout.php';
+		require 'Views/Layout.php';
 		$dataClients = $this->client->getAll();
 		$limitClients = $this->client->getAllFive();
 		$totalClients = count($dataClients);
@@ -45,32 +41,8 @@ class PersonController
 		$dataPersons = $this->model->getAll();
 		$limitPersons = $this->model->getAllFive();
 		$totalPersons = count($dataPersons);
-		require 'Views/Persons/Home.php';
-		require 'Views/Persons/Scripts.php';
-	}
-
-	public function loginIn()
-	{
-		$validateUser = $this->model->validateUser($_POST);
-		if ($validateUser === true) {
-			header('Location: ?controller=person&method=template');
-		} else {
-			$error = [
-				'errorMessage' => $validateUser,
-				'email' => $_POST['Correo']
-			];
-			require 'Views/Persons/login.php';
-		}
-	}
-
-	public function logout()
-	{
-		if ($_SESSION['user']) {
-			session_destroy();
-			header('Location: ?controller=home');
-		} else {
-			header('Location: ?controller=home');
-		}
+		require 'Views/Home.php';
+		require 'Views/Scripts.php';
 	}
 
 	public function new()

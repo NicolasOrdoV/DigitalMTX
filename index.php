@@ -3,7 +3,7 @@
 session_start();
 require 'Providers/Database.php';
 
-$controller = 'HomeController';
+$controller = 'LoginController';
 
 if(!isset($_REQUEST['controller'])) {
 	require 'Controllers/'.$controller. '.php';

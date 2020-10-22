@@ -1,4 +1,4 @@
-<?php 
+<?php
 date_default_timezone_set('America/Bogota');
 $hora_actual = date("h:i a");
 ?>
@@ -34,8 +34,7 @@ $hora_actual = date("h:i a");
                                         <div class="form-line">
                                             <label>Numero Garantia</label>
                                             <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
-                                                                                                                echo $total_data + 1; ?>" 
-                                                                                                                readonly required>
+                                                                                                                echo $total_data + 1; ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +44,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha</label>
-                                            <input type="text" class="form-control" name="Fecha" value="<?php echo date('yy/m/d')?>" readonly required>
+                                            <input type="text" class="form-control" name="Fecha" value="<?php echo date('yy/m/d') ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -151,9 +150,9 @@ $hora_actual = date("h:i a");
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                             <label>Descripcion Producto </label>
-                                             <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required>
-                                             <input type="hidden" name="id_producto" id="id_producto" value="">
+                                            <label>Descripcion Producto </label>
+                                            <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required>
+                                            <input type="hidden" name="id_producto" id="id_producto" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +313,7 @@ $hora_actual = date("h:i a");
                 // Ingresando la respuesta obtenida del PHP
                 document.getElementById("id_producto").value = data[0];
                 document.getElementById("Descripcion_Producto").value = data[1];
-                
+
             }
         };
 

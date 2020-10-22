@@ -24,7 +24,7 @@ class ClientController{
     public function list()
     {
         require 'Views/Persons/Layout.php';
-        $clients = $this->model->getAll4000();
+        $clients = $this->model->getAll();
         require 'Views/Clients/list.php';
         require 'Views/Persons/Scripts.php';
     }
