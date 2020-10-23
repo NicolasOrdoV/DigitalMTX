@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2020 a las 01:58:33
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 23-10-2020 a las 06:31:42
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -3510,26 +3510,25 @@ CREATE TABLE `mg_facturas` (
   `Numero_Factura` varchar(100) NOT NULL,
   `fecha_factura` date NOT NULL,
   `nit` varchar(50) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
   `hora_factura` varchar(50) NOT NULL,
   `Nombre_Cliente` varchar(50) NOT NULL,
   `Identificacion_Cliente` varchar(50) NOT NULL,
   `Correo_Cliente` varchar(50) NOT NULL,
-  `id_Producto` int(11) NOT NULL,
-  `id_centro_costo` int(11) NOT NULL,
+  `Centro_costo` varchar(50) NOT NULL,
   `Codigo_Producto` varchar(50) NOT NULL,
   `Descripcion_Producto` text NOT NULL,
   `Referencia_Producto` varchar(50) NOT NULL,
-  `Sello_Producto` varchar(50) NOT NULL
+  `Sello_Producto` varchar(50) NOT NULL,
+  `Marca_Producto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `mg_facturas`
 --
 
-INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `id_cliente`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `id_Producto`, `id_centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`) VALUES
-(1, '123', '2020-10-21', '1234455', 3, '13:00 ', 'sadada', '123', 'sadsada@email.com', 1, 1, '1', 'sdsdasda-asdadas', '21312', '213214'),
-(2, '123', '2020-10-14', '2312312', 1, '13:00', 'sdsa', '21312', 'sadsada@email.com', 1, 1, '123', 'Bateria', '3232', '1234');
+INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`, `Marca_Producto`) VALUES
+(1, '123', '2020-10-21', '1234455', '13:00 ', 'sadada', '123', 'sadsada@email.com', 'UNILAGO', '1', 'sdsdasda-asdadas', '21312', '213214', 'Acer'),
+(2, '123', '2020-10-14', '2312312', '13:00', 'sdsa', '21312', 'sadsada@email.com', 'UNILAGO', '123', 'Bateria', '3232', '1234', 'Samsung');
 
 -- --------------------------------------------------------
 

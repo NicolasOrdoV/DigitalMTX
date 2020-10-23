@@ -37,14 +37,6 @@
     <script src="Assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="Assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
-    <!-- Custom Js -->
-    <script src="Assets/js/admin.js"></script>
-    <!--<script src="Assets/js/pages/index.js"></script>-->
-    <script src="Assets/js/pages/forms/basic-form-elements.js"></script>
-    <script src="Assets/js/pages/tables/jquery-datatable.js"></script>
-    <script src="Assets/js/pages/forms/form-validation.js"></script>
-    <script src="Aseets/js/pages/ui/modals.js"></script>
-    
     <!-- Autosize Plugin Js -->
     <script src="Assets/plugins/autosize/autosize.js"></script>
 
@@ -70,3 +62,11 @@
 
     <!-- Demo Js -->
     <script src="Assets/js/demo.js"></script>
+
+    <!-- Custom Js -->
+    <script src="Assets/js/admin.js"></script>
+    <!--<script src="Assets/js/pages/index.js"></script>-->
+    <script src="Assets/js/pages/forms/basic-form-elements.js"></script>
+    <script src="Assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="Assets/js/pages/forms/form-validation.js"></script>
+    <script src="Aseets/js/pages/ui/modals.js"></script>

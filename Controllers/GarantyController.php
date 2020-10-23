@@ -161,8 +161,8 @@ class GarantyController
 
   public function findBill()
   {
-    if (isset($_POST['Numero_Factura'])) {
-      $bill = $_POST['Numero_Factura'];
+    if (isset($_POST['NumFactura'])) {
+      $bill = $_POST['NumFactura'];
       $bills = $this->model->getBill($bill);
       require 'Views/Layout.php';
       $data = $this->model->getAll();

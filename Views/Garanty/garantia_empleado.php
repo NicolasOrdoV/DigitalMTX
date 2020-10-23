@@ -22,45 +22,35 @@ $hora_actual = date("h:i a");
                         </h2>
                     </div>
                     <div class="body">
-
-
                         <form action="?controller=garanty&method=findBill" method="POST">
                             <div class="row clearfix">
                                 <div class="col-sm-10">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Numero_Factura</label>
-                                            <input type="number" class="form-control" name="Numero_Factura" required>
+                                            <input type="number" class="form-control" name="NumFactura" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group form-float">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-danger">Buscar</button>
+                                            <button type="submit" class="btn btn-danger my-3">Buscar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <?php var_dump($bills[0]); ?>
-                            <hr>
-                            <?php 
-                            $productos = [];
-                                foreach ($bills as $bif) {
-                                  $productos = [
-                                      'Descripcion' => $bif->Descripcion_Producto,
-                                      'Numero' => $bif->Numero_Factura
-                                  ];
-                                  
-                                  var_dump($productos);
-                                }
-                            
-                           // var_dump($productos); ?>
                         </form>
                         <form action="?controller=garanty&method=save" method="POST" id="form_validation" novalidate>
                             <?php if (isset($succesfull)) { ?>
                                 <div class="alert alert-success"><?php echo $succesfull; ?></div>
                             <?php } ?>
+                            <?php
+                                if (isset($bills)) {
+                                   //var_dump($bills[0]);
+                                } 
+                            ?>
+                            <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
                             <input type="hidden" name="id_Personal" value="<?php echo $_SESSION['user']->id ?>">
                             <input type="hidden" name="Estado" value="Pendiente">
                             <div class="row clearfix">
@@ -68,8 +58,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Numero Garantia</label>
-                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
-                                                                                                                echo $total_data + 1; ?>" readonly required>
+                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);echo $total_data + 1; ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +87,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Punto de Venta</label>
-                                            <input type="text" class="form-control" name="Punto_Venta" required readonly>
+                                            <input type="text" class="form-control" name="Punto_Venta" required readonly value="<?php echo isset($bills) ? $bills[0]->Centro_costo : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +95,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha de Compra</label>
-                                            <input type="text" class="form-control" name="Fecha_Compra" required readonly>
+                                            <input type="text" class="form-control" name="Fecha_Compra" required readonly value="<?php echo isset($bills) ? $bills[0]->fecha_factura : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -116,12 +105,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Cedula </label>
-                                            <input list="Id" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente">
-                                            <datalist id="Id">
-                                                <?php foreach ($clients as $client) { ?>
-                                                    <option value="<?php echo $client->Identificacion ?>"><?php echo $client->Identificacion ?></option>
-                                                <?php } ?>
-                                            </datalist>
+                                            <input type="text" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente" value="<?php echo isset($bills) ? $bills[0]->Identificacion_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +113,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Nombre de cliente </label>
-                                            <input type="text" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required readonly>
+                                            <input type="text" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required readonly value="<?php echo isset($bills) ? $bills[0]->Nombre_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -139,67 +123,88 @@ $hora_actual = date("h:i a");
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Correo </label>
-                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="">
-                                            <input type="hidden" name="id_cliente" id="id" value="">
+                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="<?php echo isset($bills) ? $bills[0]->Correo_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Codigo Producto </label>
-                                            <input list="codes" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required>
-                                            <datalist id="codes">
-                                                <?php ##foreach ($products as $product) { 
-                                                ?>
-                                                    <option value="<?php## echo $product->Codigo ?>"><?php ##echo $product->Codigo 
-                                                                                                        ?></option>
-                                                <?php ##} 
-                                                ?>
-                                            </datalist>
+                            <?php if (isset($bills)) {
+                                $i = 0;
+                                $productos = []; 
+                                foreach ($bills as $bif) {
+                                    $productos = [
+                                        'Codigo' => $bif->Codigo_Producto,
+                                        'Descripcion' => $bif->Descripcion_Producto,
+                                        'Referencia' => $bif->Referencia_Producto,
+                                        'Sello' => $bif->Sello_Producto,
+                                        'Marca' => $bif->Marca_Producto
+                                    ];
+                            ?>
+                            <hr>
+                                <div class="row clearfix">
+                                    <div class="col-sm-2">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <label>Codigo Producto </label>
+                                                <input type="text" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <label>Descripcion Producto </label>
+                                                <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                <!--<input type="hidden" name="id_producto" id="id_producto" value="">-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <label>Marca Producto</label>
+                                                <input type="text" class="form-control" name="Marca_Producto" required readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group ">
+                                            <div class="form-line">
+                                                <label>Sello Producto</label>
+                                                <input type="text" class="form-control" name="Sello_Producto" required value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group ">
+                                            <div class="form-line">
+                                                <label>Referencia</label>
+                                                <input type="text" class="form-control" name="Referencia" required readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group ">
+                                            <div class="demo-checkbox">
+                                                <input type="checkbox" id="md_checkbox_1" class="chk-col-red" name="garanty" value="SI" />
+                                                <label for="md_checkbox_1">¿Garantia?</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-8">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Descripcion Producto </label>
-                                            <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required re>
-                                            <input type="hidden" name="id_producto" id="id_producto" value="">
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group ">
+                                            <div class="form-line">
+                                                <label>Observacion cliente</label>
+                                                <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <label>Marca Producto</label>
-                                            <input type="text" class="form-control" name="Marca_Producto" required readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group ">
-                                        <div class="form-line">
-                                            <label>Sello Producto</label>
-                                            <input type="text" class="form-control" name="Sello_Producto" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group ">
-                                        <div class="form-line">
-                                            <label>Referencia</label>
-                                            <input type="text" class="form-control" name="Referencia" required readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                            <?php }
+                              }
+                            ?>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group">

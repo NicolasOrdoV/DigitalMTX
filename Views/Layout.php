@@ -28,7 +28,7 @@
     <link href="Assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="Assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <link href="Assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" /> 
 
     <!-- Bootstrap DatePicker Css -->
     <link href="Assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
