@@ -47,8 +47,12 @@ $hora_actual = date("h:i a");
                             <?php 
                             $productos = [];
                                 foreach ($bills as $bif) {
-                                  $productos = $bif->Descripcion_Producto;
-                                  echo $productos.'<br>';
+                                  $productos = [
+                                      'Descripcion' => $bif->Descripcion_Producto,
+                                      'Numero' => $bif->Numero_Factura
+                                  ];
+                                  
+                                  var_dump($productos);
                                 }
                             
                            // var_dump($productos); ?>
