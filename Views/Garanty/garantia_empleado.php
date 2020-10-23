@@ -42,7 +42,7 @@ $hora_actual = date("h:i a");
                                     </div>
                                 </div>
                             </div>
-                            <?php var_dump($bills); ?>
+                            <?php var_dump($bills[0]); ?>
                             <hr>
                             <?php 
                             $productos = [];

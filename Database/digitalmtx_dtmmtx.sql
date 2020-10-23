@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2020 a las 00:20:36
+-- Tiempo de generación: 23-10-2020 a las 01:58:33
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -31,15 +31,17 @@ CREATE TABLE `dtm_administrador` (
   `id` int(11) NOT NULL,
   `usuario` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `sesion` text NOT NULL
+  `sesion` text NOT NULL,
+  `cargo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `dtm_administrador`
 --
 
-INSERT INTO `dtm_administrador` (`id`, `usuario`, `password`, `sesion`) VALUES
-(2, 'useradminwebapp', '7aa62bcaaf24ca63e5ae7421fbd86341a18db582', '201.244.82.74 2020-10-21 09:18:46am; \n201.244.82.74 2020-10-20 10:16:44am;');
+INSERT INTO `dtm_administrador` (`id`, `usuario`, `password`, `sesion`, `cargo`) VALUES
+(2, 'useradminwebapp', '7aa62bcaaf24ca63e5ae7421fbd86341a18db582', '201.244.82.74 2020-10-21 09:18:46am; \n201.244.82.74 2020-10-20 10:16:44am;', ''),
+(2, 'user@gmail.com', '123', 'sda', 'Administrador');
 
 --
 -- Disparadores `dtm_administrador`
@@ -47,7 +49,7 @@ INSERT INTO `dtm_administrador` (`id`, `usuario`, `password`, `sesion`) VALUES
 DELIMITER $$
 CREATE TRIGGER `table_size_trigger` BEFORE INSERT ON `dtm_administrador` FOR EACH ROW BEGIN
 SELECT COUNT(*) INTO @count FROM dtm_administrador;
-IF @count >= 1 THEN
+IF @count >= 2 THEN
 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Table size limit reached';
 END IF;
 END
@@ -339,7 +341,7 @@ INSERT INTO `dtm_empleados` (`id`, `sesion`, `nombre`, `apellidos`, `tipodoc`, `
 (6, '201.244.82.74 \n2020-09-25 05:47:43pm; \n201.244.82.74 \n2020-09-25 05:46:00pm;', 'Nicolas', 'Martinez', 'C.C', '1003496610', 'bodega@digitalmtx.com', '3133132242', 'Hombre', 'Bodega', 'Jefe de Bodega', '1997-10-09', '51fd8cd19a1e7002f4d74e2aa341e2472a9b6dc0', 0, 0, 0, 1, 0, 0, 1, 0, 0),
 (7, '201.244.82.74 \n2019-12-27 09:35:25am; \n201.244.82.74 \n2019-12-27 09:35:04am;', 'Fredy', 'Torres', 'C.C', '1016101056', 'bodega2@digitalmtx.com', '3112859624', 'Hombre', 'Bodega', 'Jefe de Bodega', '1997-10-06', '6701d7c8c3c16914b1af6bea3c78371e381a1e6c', 0, 0, 0, 1, 0, 0, 0, 0, 0),
 (8, '201.244.82.74 \n2020-10-19 02:24:13pm; \n201.244.82.74 \n2020-10-16 10:23:33am;', 'JUAN CARLOS', 'RINCON CORRALES', 'C.C', '1032366142', 'juancar707@gmail.com', '3123518762', 'Hombre', 'Oficina', 'Marketing Digital', '1986-07-08', 'd2451f17a3b7843ddc90ab9f15ea409f43bb1b68', 0, 0, 1, 0, 1, 1, 0, 1, 0),
-(0, 'sadsad', 'Juan', 'Perez', 'CC', '12345678', 'Juan@email.com', '123456', 'Masculino', 'Bogota D.C', 'Administrador', '10/08/1980', '123', 1, 1, 1, 1, 1, 1, 1, 1, 1);
+(0, 'sadsad', 'Juan', 'Perez', 'CC', '12345678', 'Juan@email.com', '123456', 'Masculino', 'Bogota D.C', 'Recepcion', '10/08/1980', '123', 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3505,6 +3507,7 @@ CREATE TABLE `mg_estados_garantia` (
 
 CREATE TABLE `mg_facturas` (
   `id` int(11) NOT NULL,
+  `Numero_Factura` varchar(100) NOT NULL,
   `fecha_factura` date NOT NULL,
   `nit` varchar(50) NOT NULL,
   `id_cliente` int(11) NOT NULL,
@@ -3519,6 +3522,14 @@ CREATE TABLE `mg_facturas` (
   `Referencia_Producto` varchar(50) NOT NULL,
   `Sello_Producto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mg_facturas`
+--
+
+INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `id_cliente`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `id_Producto`, `id_centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`) VALUES
+(1, '123', '2020-10-21', '1234455', 3, '13:00 ', 'sadada', '123', 'sadsada@email.com', 1, 1, '1', 'sdsdasda-asdadas', '21312', '213214'),
+(2, '123', '2020-10-14', '2312312', 1, '13:00', 'sdsa', '21312', 'sadsada@email.com', 1, 1, '123', 'Bateria', '3232', '1234');
 
 -- --------------------------------------------------------
 
@@ -5058,7 +5069,7 @@ ALTER TABLE `mg_estados_garantia`
 -- AUTO_INCREMENT de la tabla `mg_facturas`
 --
 ALTER TABLE `mg_facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_garantia`
