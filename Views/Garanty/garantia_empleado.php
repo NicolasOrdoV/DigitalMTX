@@ -46,9 +46,9 @@ $hora_actual = date("h:i a");
                                 <div class="alert alert-success"><?php echo $succesfull; ?></div>
                             <?php } ?>
                             <?php
-                                if (isset($bills)) {
-                                   //var_dump($bills[0]);
-                                } 
+                            if (isset($bills)) {
+                                //var_dump($bills[0]);
+                            }
                             ?>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
                             <input type="hidden" name="id_Personal" value="<?php echo $_SESSION['user']->id ?>">
@@ -58,7 +58,8 @@ $hora_actual = date("h:i a");
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Numero Garantia</label>
-                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);echo $total_data + 1; ?>" readonly required>
+                                            <input type="number" class="form-control" name="No_Garantia" value="<?php $total_data = count($data);
+                                                                                                                echo $total_data + 1; ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +131,7 @@ $hora_actual = date("h:i a");
                             </div>
                             <?php if (isset($bills)) {
                                 $i = 0;
-                                $productos = []; 
+                                $productos = [];
                                 foreach ($bills as $bif) {
                                     $productos = [
                                         'Codigo' => $bif->Codigo_Producto,
@@ -140,148 +141,151 @@ $hora_actual = date("h:i a");
                                         'Marca' => $bif->Marca_Producto
                                     ];
                             ?>
-                            <hr>
-                                <div class="row clearfix">
-                                    <div class="col-sm-2">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                <label>Codigo Producto </label>
-                                                <input type="text" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                    <hr>
+                                    <div class="row clearfix">
+                                        <div class="col-sm-2">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <label>Codigo Producto </label>
+                                                    <input type="text" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <label>Descripcion Producto </label>
+                                                    <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                    <!--<input type="hidden" name="id_producto" id="id_producto" value="">-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <label>Marca Producto</label>
+                                                    <input type="text" class="form-control" name="Marca_Producto" required readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group ">
+                                                <div class="form-line">
+                                                    <label>Sello Producto</label>
+                                                    <input type="text" class="form-control" name="Sello_Producto" required value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group ">
+                                                <div class="form-line">
+                                                    <label>Referencia</label>
+                                                    <input type="text" class="form-control" name="Referencia" required readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group ">
+                                                <div class="demo-checkbox">
+                                                    <input type="checkbox" id="md_checkbox_
+                                                " class="chk-col-red" name="garanty" value="SI" />
+                                                    <label for="md_checkbox_1">¿Garantia?</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                <label>Descripcion Producto </label>
-                                                <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
-                                                <!--<input type="hidden" name="id_producto" id="id_producto" value="">-->
+                                    <div class="row clearfix">
+                                        <div class="col-sm-12">
+                                            <div class="form-group ">
+                                                <div class="form-line">
+                                                    <label>Observacion cliente</label>
+                                                    <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <label>Marca Producto</label>
-                                                <input type="text" class="form-control" name="Marca_Producto" required readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group ">
-                                            <div class="form-line">
-                                                <label>Sello Producto</label>
-                                                <input type="text" class="form-control" name="Sello_Producto" required value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group ">
-                                            <div class="form-line">
-                                                <label>Referencia</label>
-                                                <input type="text" class="form-control" name="Referencia" required readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group ">
-                                            <div class="demo-checkbox">
-                                                <input type="checkbox" id="md_checkbox_1" class="chk-col-red" name="garanty" value="SI" />
-                                                <label for="md_checkbox_1">¿Garantia?</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-12">
-                                        <div class="form-group ">
-                                            <div class="form-line">
-                                                <label>Observacion cliente</label>
-                                                <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             <?php }
-                              }
+                            }
                             ?>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Flete(S/N)</label>
                                         <div class="demo-checkbox">
-                                            <input type="checkbox" name="Flete" id="md_checkbox_21" class="filled-in chk-col-red" value="SI" />
+                                            <input type="checkbox" name="Flete" id="md_checkbox_21" class="filled-in chk-col-red" value="SI" onchange="javascript:showContent()"  require />
                                             <label for="md_checkbox_21">SI</label>
-                                            <input type="checkbox" name="Flete" id="md_checkbox_22" class="filled-in chk-col-red" value="NO" />
+                                            <input type="checkbox" name="Flete" id="md_checkbox_22" class="filled-in chk-col-red" value="NO" require />
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <p>
-                                        <b>Proveedor</b>
-                                    </p>
-                                    <select name="Proveedor" class="form-control show-tick" required>
-                                        <option value="">Seleccione..</option>
-                                        <option value="Colombia">Colombia</option>
-                                        <option value="China">China</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p>
-                                        <b>Ciudad</b>
-                                    </p>
-                                    <select name="Ciudad" class="form-control show-tick" required>
-                                        <option value="">Seleccione..</option>
-                                        <option value="Bogota D.C">Bogota D.C</option>
-                                        <option value="Medellin">Medellin</option>
-                                        <option value="Barranquilla">Barranquilla</option>
-                                        <option value="Cali">Cali</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p>
-                                        <b>Municipio</b>
-                                    </p>
-                                    <select name="Municipio" class="form-control show-tick" required>
-                                        <option value="">Seleccione..</option>
-                                        <option value="Cundinamarca">Cundinamarca</option>
-                                        <option value="Bogota D.C">Bogota D.C</option>
-                                        <option value="Comuna 12">Comuna 12</option>
-                                        <option value="Miraflores">Miraflores</option>
-                                    </select>
-                                </div>
+                            <div id="content" style="display:none">
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <p>
+                                            <b>Proveedor</b>
+                                        </p>
+                                        <select name="Proveedor" class="form-control show-tick" required>
+                                            <option value="">Seleccione..</option>
+                                            <option value="Colombia">Colombia</option>
+                                            <option value="China">China</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p>
+                                            <b>Ciudad</b>
+                                        </p>
+                                        <select name="Ciudad" class="form-control show-tick" required>
+                                            <option value="">Seleccione..</option>
+                                            <option value="Bogota D.C">Bogota D.C</option>
+                                            <option value="Medellin">Medellin</option>
+                                            <option value="Barranquilla">Barranquilla</option>
+                                            <option value="Cali">Cali</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p>
+                                            <b>Municipio</b>
+                                        </p>
+                                        <select name="Municipio" class="form-control show-tick" required>
+                                            <option value="">Seleccione..</option>
+                                            <option value="Cundinamarca">Cundinamarca</option>
+                                            <option value="Bogota D.C">Bogota D.C</option>
+                                            <option value="Comuna 12">Comuna 12</option>
+                                            <option value="Miraflores">Miraflores</option>
+                                        </select>
+                                    </div>
 
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Valor Flete </label>
-                                            <input type="number" class="form-control" name="Valor_Flete" required>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <label>Valor Flete </label>
+                                                <input type="number" class="form-control" name="Valor_Flete" required>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Numero Guia </label>
-                                            <input type="number" class="form-control" name="No_Guia" required>
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <label>Numero Guia </label>
+                                                <input type="number" class="form-control" name="No_Guia" required>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p>
-                                        <b>Transportadora</b>
-                                    </p>
-                                    <select name="Transportadora" class="form-control show-tick" required>
-                                        <option value="">Seleccione..</option>
-                                        <option value="Envia">Envia</option>
-                                        <option value="Servientrega">Servientrega</option>
-                                    </select>
+                                    <div class="col-sm-4">
+                                        <p>
+                                            <b>Transportadora</b>
+                                        </p>
+                                        <select name="Transportadora" class="form-control show-tick" required>
+                                            <option value="">Seleccione..</option>
+                                            <option value="Envia">Envia</option>
+                                            <option value="Servientrega">Servientrega</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row clearfix">
@@ -408,5 +412,18 @@ $hora_actual = date("h:i a");
 
         // Enviando la data al PHP
         request.send(formData);
+    }
+</script>
+
+<script type="text/javascript">
+    function showContent() {
+        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
+        element = document.getElementById("content");
+        check = document.getElementById("md_checkbox_21");
+        if (check.checked) {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
     }
 </script>
