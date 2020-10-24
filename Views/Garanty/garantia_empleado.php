@@ -132,7 +132,7 @@ $hora_actual = date("h:i a");
                             <?php if (isset($bills)) {
                                 $i = 0;
                                 $productos = [];
-                                foreach ($bills as $bif) {
+                                foreach ($bills as $key => $bif) {
                                     $productos = [
                                         'Codigo' => $bif->Codigo_Producto,
                                         'Descripcion' => $bif->Descripcion_Producto,
@@ -187,9 +187,8 @@ $hora_actual = date("h:i a");
                                         <div class="col-sm-2">
                                             <div class="form-group ">
                                                 <div class="demo-checkbox">
-                                                    <input type="checkbox" id="md_checkbox_
-                                                " class="chk-col-red" name="garanty" value="SI" />
-                                                    <label for="md_checkbox_1">¿Garantia?</label>
+                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="garanty" value="SI" />
+                                                    <label for="md_checkbox_<?php echo $key+1; ?>">¿Garantia?</label>
                                                 </div>
                                             </div>
                                         </div>
