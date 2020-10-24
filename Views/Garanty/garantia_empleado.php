@@ -137,6 +137,7 @@ $hora_actual = date("h:i a");
                                         'Sello' => $bif->Sello_Producto,
                                         'Marca' => $bif->Marca_Producto
                                     ];
+                                   
                             ?>
                                     <hr>
                                     <div class="row clearfix">
@@ -144,7 +145,7 @@ $hora_actual = date("h:i a");
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     <label>Codigo Producto </label>
-                                                    <input type="text" class="form-control" name="Codigo_Producto" id="Codigo_Producto" required readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Codigo_Producto<?php echo $key+1 ?>" id="Codigo_Producto" required readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +153,7 @@ $hora_actual = date("h:i a");
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     <label>Descripcion Producto </label>
-                                                    <input type="text" class="form-control no-resize" name="Descripcion_Producto" id="Descripcion_Producto" required value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                    <input type="text" class="form-control no-resize" name="Descripcion_Producto<?php echo $key+1 ?>" id="Descripcion_Producto" required value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
                                                     <!--<input type="hidden" name="id_producto" id="id_producto" value="">-->
                                                 </div>
                                             </div>
@@ -161,7 +162,7 @@ $hora_actual = date("h:i a");
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <label>Marca Producto</label>
-                                                    <input type="text" class="form-control" name="Marca_Producto" required readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Marca_Producto<?php echo $key+1 ?>" required readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +170,7 @@ $hora_actual = date("h:i a");
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Sello Producto</label>
-                                                    <input type="text" class="form-control" name="Sello_Producto" required value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Sello_Producto<?php echo $key+1 ?>" required value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -177,14 +178,14 @@ $hora_actual = date("h:i a");
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Referencia</label>
-                                                    <input type="text" class="form-control" name="Referencia" required readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Referencia<?php echo $key+1 ?>" required readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group ">
                                                 <div class="demo-checkbox">
-                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="garanty" value="SI" />
+                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="garanty<?php echo $key+1 ?>" value="SI" />
                                                     <label for="md_checkbox_<?php echo $key+1; ?>">¿Garantia?</label>
                                                 </div>
                                             </div>
@@ -195,7 +196,7 @@ $hora_actual = date("h:i a");
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Observacion cliente</label>
-                                                    <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente"></textarea>
+                                                    <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente<?php echo $key+1 ?>"></textarea>
                                                 </div>
                                             </div>
                                         </div>

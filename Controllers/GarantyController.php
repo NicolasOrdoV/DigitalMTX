@@ -64,8 +64,9 @@ class GarantyController
         'Observacion_Cliente' => $_POST['Observacion_Cliente'],
         'garanty' => $_POST['garanty']
       ];
+      array_push($detaills);
      
-      var_dump($detaills);
+     
 
       $answerNewGaranty = $this->model->newGaranty($data);
       $lastId = $this->model->getLastId();
