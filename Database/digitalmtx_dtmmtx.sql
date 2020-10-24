@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2020 a las 06:56:54
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 25-10-2020 a las 01:29:10
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -3518,6 +3518,7 @@ CREATE TABLE `mg_facturas` (
   `Nombre_Cliente` varchar(50) NOT NULL,
   `Identificacion_Cliente` varchar(50) NOT NULL,
   `Correo_Cliente` varchar(50) NOT NULL,
+  `Direccion_Cliente` varchar(50) NOT NULL,
   `Centro_costo` varchar(50) NOT NULL,
   `Codigo_Producto` varchar(50) NOT NULL,
   `Descripcion_Producto` text NOT NULL,
@@ -3530,9 +3531,9 @@ CREATE TABLE `mg_facturas` (
 -- Volcado de datos para la tabla `mg_facturas`
 --
 
-INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`, `Marca_Producto`) VALUES
-(1, '123', '2020-10-21', '1234455', '13:00 ', 'sadada', '123', 'sadsada@email.com', 'UNILAGO', '1', 'sdsdasda-asdadas', '21312', '213214', 'Acer'),
-(2, '123', '2020-10-14', '2312312', '13:00', 'sdsa', '21312', 'sadsada@email.com', 'UNILAGO', '123', 'Bateria', '3232', '1234', 'Samsung');
+INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`, `Marca_Producto`) VALUES
+(1, '123', '2020-10-21', '1234455', '13:00 ', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '1', 'sdsdasda-asdadas', '21312', '213214', 'Acer'),
+(2, '123', '2020-10-14', '2312312', '13:00', 'sdsa', '21312', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '123', 'Bateria', '3232', '1234', 'Samsung');
 
 -- --------------------------------------------------------
 
@@ -3551,6 +3552,7 @@ CREATE TABLE `mg_garantia` (
   `Nombre_Cliente` varchar(50) NOT NULL,
   `Identificacion_Cliente` varchar(50) NOT NULL,
   `Correo_Cliente` varchar(50) NOT NULL,
+  `Direccion_Cliente` varchar(50) NOT NULL,
   `Proveedor` varchar(50) NOT NULL,
   `Flete` varchar(5) NOT NULL,
   `Departamento` varchar(50) DEFAULT NULL,

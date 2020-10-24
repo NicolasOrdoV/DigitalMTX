@@ -46,21 +46,10 @@ class Garanty
         }
     }
 
-    public function saveDetail($details,$lastId)
+    public function saveDetail($data)
     {
         try {
-            foreach ($details as $detail ) {
-                 $data = [
-                    'Codigo_Producto' => $detail['Codigo_Producto'],
-                    'Descripcion_Producto' => $detail['Descripcion_Producto'],  
-                    'Marca_Producto' => $detail['Marca_Producto'],
-                    'Sello_Producto' => $detail['Sello_Producto'],
-                    'Referencia' => $detail['Referencia'],
-                    'Id_Garantia' => $lastId,
-                    'Observacion_Cliente' => $detail['Observacion_Cliente'] 
-                ];
-                $this->pdo->insert('mg_detalle_garantia',$data);
-            }
+            $this->pdo->insert('mg_detalle_garantia',$data);
             return true;
         } catch (PDOException $e) {
             die($e->getMessage());

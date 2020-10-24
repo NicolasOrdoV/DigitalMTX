@@ -17,7 +17,7 @@
                                 <div class="col-sm-12">
                                     <div class="alert alert-warning">
                                         Edición de observación tecnica actualizada
-                                        <a href="?controller=technical&method=list" class="btn btn-danger">Regresar</a>
+                                        <a href="?controller=garanty&method=listGaranty" class="btn btn-danger">Regresar</a>
                                     </div>
                                 </div>
                             </div>
