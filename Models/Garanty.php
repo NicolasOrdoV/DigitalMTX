@@ -38,7 +38,7 @@ class Garanty
     public function getLastId()
     {
         try {
-            $strSql = 'SELECT MAX(id) FROM mg_garantia';
+            $strSql = 'SELECT MAX(id) as id FROM mg_garantia';
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -50,13 +50,15 @@ class Garanty
     {
         try {
             foreach ($details as $detail ) {
-                 $data = ['Codigo_Producto' => $detail->Codigo_Producto,
-                 'Descripcion_Producto' => $detail->Descripcion_Producto,  
-                 'Marca_Producto' => $detail->Marca_Producto,
-                 'Sello_Producto' => $detail->Sello_Producto,
-                 'Referencia' => $detail->Referencia,
-                 'Id_Garantia' => $lastId,
-                 'Observacion_Cliente' => $detail->Observacion_Cliente ];
+                 $data = [
+                    'Codigo_Producto' => $detail['Codigo_Producto'],
+                    'Descripcion_Producto' => $detail['Descripcion_Producto'],  
+                    'Marca_Producto' => $detail['Marca_Producto'],
+                    'Sello_Producto' => $detail['Sello_Producto'],
+                    'Referencia' => $detail['Referencia'],
+                    'Id_Garantia' => $lastId,
+                    'Observacion_Cliente' => $detail['Observacion_Cliente'] 
+                ];
                 $this->pdo->insert('mg_detalle_garantia',$data);
             }
             return true;

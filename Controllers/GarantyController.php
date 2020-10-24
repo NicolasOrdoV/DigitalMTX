@@ -69,9 +69,9 @@ class GarantyController
 
       $answerNewGaranty = $this->model->newGaranty($data);
       $lastId = $this->model->getLastId();
+      var_dump($lastId);
 
-
-      if (isset($lastId[0]->id) && $answerNewGaranty == true &&  $detaills['garanty'] == 'SI') {
+      if (isset($lastId[0]->id) && $answerNewGaranty == true) {
         $answerNewDetaills = $this->model->saveDetail($detaills, $lastId[0]->id);
         if ($answerNewDetaills == true) {
           /* $mail = new PHPMailer(true);
@@ -177,7 +177,11 @@ class GarantyController
           } */
           header('Location: ?controller=garanty&method=sucessfull');
 
+        }else{
+          echo 'No se registro detalle';
         }
+      }else{
+        echo 'Nose registro detalle';
       }
     } else {
       $_REQUEST['Estado'] = 'No aprobado';
