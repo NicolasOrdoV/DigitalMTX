@@ -42,16 +42,13 @@ $hora_actual = date("h:i a");
                             </div>
                         </form>
                         <form action="?controller=garanty&method=save" method="POST" id="form_validation" novalidate>
-                            <?php if (isset($succesfull)) { ?>
-                                <div class="alert alert-success"><?php echo $succesfull; ?></div>
-                            <?php } ?>
                             <?php
                             if (isset($bills)) {
                                 //var_dump($bills[0]);
                             }
                             ?>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
-                            <input type="hidden" name="id_Personal" value="<?php echo $_SESSION['user']->id ?>">
+                            <input type="hidden" name="Empleado" value="<?php echo $_SESSION['user']->nombre ?>">
                             <input type="hidden" name="Estado" value="Pendiente">
                             <div class="row clearfix">
                                 <div class="col-sm-12">
@@ -69,7 +66,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha</label>
-                                            <input type="text" class="form-control" name="Fecha" value="<?php echo date('yy/m/d') ?>" readonly required>
+                                            <input type="text" class="form-control" name="Fecha_ingreso" value="<?php echo date('yy/m/d') ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +74,7 @@ $hora_actual = date("h:i a");
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Hora</label>
-                                            <input type="text" class="form-control" name="Hora" value="<?php echo $hora_actual ?>" readonly required>
+                                            <input type="text" class="form-control" name="Hora_ingreso" value="<?php echo $hora_actual ?>" readonly required>
 
                                         </div>
                                     </div>
@@ -226,7 +223,7 @@ $hora_actual = date("h:i a");
                                         <p>
                                             <b>Proveedor</b>
                                         </p>
-                                        <select name="Proveedor" class="form-control show-tick" required>
+                                        <select name="Proveedor" class="form-control show-tick" >
                                             <option value="">Seleccione..</option>
                                             <option value="Colombia">Colombia</option>
                                             <option value="China">China</option>
@@ -236,7 +233,7 @@ $hora_actual = date("h:i a");
                                         <p>
                                             <b>Ciudad</b>
                                         </p>
-                                        <select name="Ciudad" class="form-control show-tick" required>
+                                        <select name="Departamento" class="form-control show-tick" >
                                             <option value="">Seleccione..</option>
                                             <option value="Bogota D.C">Bogota D.C</option>
                                             <option value="Medellin">Medellin</option>
@@ -248,7 +245,7 @@ $hora_actual = date("h:i a");
                                         <p>
                                             <b>Municipio</b>
                                         </p>
-                                        <select name="Municipio" class="form-control show-tick" required>
+                                        <select name="Municipio" class="form-control show-tick" >
                                             <option value="">Seleccione..</option>
                                             <option value="Cundinamarca">Cundinamarca</option>
                                             <option value="Bogota D.C">Bogota D.C</option>
@@ -263,7 +260,7 @@ $hora_actual = date("h:i a");
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label>Valor Flete </label>
-                                                <input type="number" class="form-control" name="Valor_Flete" required>
+                                                <input type="number" class="form-control" name="Valor_Flete" >
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +268,7 @@ $hora_actual = date("h:i a");
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label>Numero Guia </label>
-                                                <input type="number" class="form-control" name="No_Guia" required>
+                                                <input type="number" class="form-control" name="No_Guia" >
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +276,7 @@ $hora_actual = date("h:i a");
                                         <p>
                                             <b>Transportadora</b>
                                         </p>
-                                        <select name="Transportadora" class="form-control show-tick" required>
+                                        <select name="Transportadora" class="form-control show-tick" >
                                             <option value="">Seleccione..</option>
                                             <option value="Envia">Envia</option>
                                             <option value="Servientrega">Servientrega</option>
