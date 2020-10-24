@@ -61,14 +61,17 @@ class GarantyController
         'Marca_Producto' => $_POST['Marca_Producto'],
         'Sello_Producto' => $_POST['Sello_Producto'],
         'Referencia' => $_POST['Referencia'],
-        'Observacion_Cliente' => $_POST['Observacion_Cliente']
+        'Observacion_Cliente' => $_POST['Observacion_Cliente'],
+        'garanty' => $_POST['garanty']
       ];
+     
+      var_dump($detaills);
 
       $answerNewGaranty = $this->model->newGaranty($data);
       $lastId = $this->model->getLastId();
 
 
-      if (isset($lastId[0]->id) && $answerNewGaranty == true &&  $_POST['garanty'] == 'SI') {
+      if (isset($lastId[0]->id) && $answerNewGaranty == true &&  $detaills['garanty'] == 'SI') {
         $answerNewDetaills = $this->model->saveDetail($detaills, $lastId[0]->id);
         if ($answerNewDetaills == true) {
           /* $mail = new PHPMailer(true);

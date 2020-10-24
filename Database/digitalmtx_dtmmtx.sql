@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2020 a las 06:31:42
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.34
+-- Tiempo de generación: 24-10-2020 a las 06:56:54
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -3483,9 +3483,13 @@ INSERT INTO `mg_departamentos` (`id`, `Departamento`) VALUES
 
 CREATE TABLE `mg_detalle_garantia` (
   `id` int(11) NOT NULL,
-  `Id_Producto` int(11) NOT NULL,
+  `Codigo_Producto` varchar(50) NOT NULL,
+  `Descripcion_Producto` text NOT NULL,
+  `Marca_Producto` varchar(50) NOT NULL,
+  `Sello_Producto` varchar(50) NOT NULL,
+  `Referencia` varchar(50) NOT NULL,
   `Id_Garantia` int(11) NOT NULL,
-  `Observacion_Empleado` text NOT NULL
+  `Observacion_Cliente` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -3547,11 +3551,6 @@ CREATE TABLE `mg_garantia` (
   `Nombre_Cliente` varchar(50) NOT NULL,
   `Identificacion_Cliente` varchar(50) NOT NULL,
   `Correo_Cliente` varchar(50) NOT NULL,
-  `Codigo_Producto` varchar(50) NOT NULL,
-  `Descripcion_Producto` text NOT NULL,
-  `Marca_Producto` varchar(50) NOT NULL,
-  `Sello_Producto` varchar(50) NOT NULL,
-  `Referencia` varchar(10) NOT NULL,
   `Proveedor` varchar(50) NOT NULL,
   `Flete` varchar(5) NOT NULL,
   `Departamento` varchar(50) DEFAULT NULL,
@@ -3562,8 +3561,7 @@ CREATE TABLE `mg_garantia` (
   `Observacion_Empleado` text NOT NULL,
   `Aprobacion_Garantia` varchar(5) NOT NULL,
   `Estado` varchar(50) NOT NULL,
-  `Empleado` varchar(50) NOT NULL,
-  `Factura` varchar(50) NOT NULL
+  `Empleado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
