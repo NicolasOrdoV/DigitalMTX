@@ -90,4 +90,16 @@ class Garanty
             die($e->getMessage());
         }
     }
+
+    public function showNum($bill)
+    {
+        try {
+            $strSql = "SELECT * FROM mg_garantia WHERE Numero_Factura = :Numero_Factura";
+            $array = ['Numero_Factura' => $bill];
+            $query = $this->pdo->select($strSql, $array);
+            return $query; 
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

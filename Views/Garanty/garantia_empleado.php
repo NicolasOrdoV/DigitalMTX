@@ -29,7 +29,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Numero_Factura</label>
-                                            <input type="number" class="form-control" name="NumFactura" required>
+                                            <input type="number" class="form-control" name="NumFactura" required autofocus>
                                         </div>
                                     </div>
                                 </div>

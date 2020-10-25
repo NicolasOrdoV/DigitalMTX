@@ -100,9 +100,9 @@
                                 <tbody>
                                   <?php foreach ($limitGaranties as $limitGaranty) {?>
                                        <tr>
-                                           <td><?php echo $limitGaranty->No_Garantia ?></td>
+                                           <td><?php echo $limitGaranty->No_garantia ?></td>
                                            <td><?php echo $limitGaranty->Nombre_Cliente ?></td>
-                                           <td><?php echo $limitGaranty->Descripcion_Producto ?></td>
+                                           <td><?php echo $limitGaranty->Fecha_ingreso ?></td>
                                        </tr>
                                   <?php } ?>
 

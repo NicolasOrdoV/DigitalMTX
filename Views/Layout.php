@@ -138,7 +138,11 @@
                         ?>        
                     </div>
                     <div class="email">
-                        <?php echo $_SESSION['user']->correo; ?>        
+                        <?php 
+                            if ($_SESSION['user']->cargo == "Tecnico" || $_SESSION['user']->cargo == "Recepcion") {
+                                 echo $_SESSION['user']->correo;
+                            }
+                        ?>        
                     </div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>

@@ -28,6 +28,38 @@ class GarantyController
     $this->product = new Product;
   }
 
+  public function listGaranty()
+  {
+    require 'Views/Layout.php';
+    $garanties = $this->model->getAll();
+    require 'Views/Garanty/listGaranty.php';
+    require 'Views/Scripts.php';
+  }
+  public function new()
+  {
+    require 'Views/Layout.php';
+    $data = $this->model->getAll();
+    $total_data = count($data);
+    $clients = $this->client->getAll();
+    $products = $this->product->getAll();
+    require 'Views/Garanty/garantia_empleado.php';
+    require 'Views/Scripts.php';
+  }
+
+  public function findBill()
+  {
+    if (isset($_POST['NumFactura'])) {
+      $bill = $_POST['NumFactura'];
+      $bills = $this->model->getBill($bill);
+      require 'Views/Layout.php';
+      $data = $this->model->getAll();
+      $total_data = count($data);
+      $clients = $this->client->getAll();
+      $products = $this->product->getAll();
+      require 'Views/Garanty/garantia_empleado.php';
+      require 'Views/Scripts.php';
+    }
+  }
 
   public function save()
   {
@@ -396,87 +428,53 @@ class GarantyController
     require 'Views/Scripts.php';
   }
 
-  public function listGaranty()
-  {
-    require 'Views/Layout.php';
-    $garanties = $this->model->getAll();
-    require 'Views/Garanty/listGaranty.php';
-    require 'Views/Scripts.php';
-  }
-  public function new()
-  {
-    require 'Views/Layout.php';
-    $data = $this->model->getAll();
-    $total_data = count($data);
-    $clients = $this->client->getAll();
-    $products = $this->product->getAll();
-    require 'Views/Garanty/garantia_empleado.php';
-    require 'Views/Scripts.php';
-  }
-
-  public function findBill()
-  {
-    if (isset($_POST['NumFactura'])) {
-      $bill = $_POST['NumFactura'];
-      $bills = $this->model->getBill($bill);
-      require 'Views/Layout.php';
-      $data = $this->model->getAll();
-      $total_data = count($data);
-      $clients = $this->client->getAll();
-      $products = $this->product->getAll();
-      require 'Views/Garanty/garantia_empleado.php';
-      require 'Views/Scripts.php';
-    }
-  }
-
-
   public function consecutive()
   {
     if (isset($_REQUEST['id'])) {
+      $mpdf = new \Mpdf\Mpdf();
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
-      if (isset($data[0]->id)) {
-        $mpdf = new \Mpdf\Mpdf();
-        $html = '<h1>' . $data[0]->id . '</h1><br>
-           <h1>' . $data[0]->No_garantia . '</h1><br>
-           <h3>' . $data[0]->Fecha_ingreso . '</h3><br>
-           <h3>' . $data[0]->Hora_ingreso . '</h3><br>
-           <h3>' . $data[0]->Numero_Factura . '</h3><br>
-           <h3>' . $data[0]->Punto_Venta . '</h3><br>
-           <h3>' . $data[0]->Fecha_Compra . '</h3><br>
-           <h3>' . $data[0]->Nombre_Cliente . '</h3><br>
-           <h3>' . $data[0]->Identificacion_Cliente . '</h3><br>
-           <h3>' . $data[0]->Correo_Cliente . '</h3><br>
-           <h3>' . $data[0]->Serial . '</h3><br>
-           <h3>' . $data[0]->Proveedor . '</h3><br>
-           <h3>' . $data[0]->Flete . '</h3><br>
-           <h3>' . $data[0]->Departamento . '</h3><br>
-           <h3>' . $data[0]->Municipio . '</h3><br>
-           <h3>' . $data[0]->Valor_Flete . '</h3><br>
-           <h3>' . $data[0]->Observacion_Empleado . '</h3><br>
-           <h3>' . $data[0]->Aprobacion_Garantia . '</h3><br>
-           <h3>' . $data[0]->Estado . '</h3><br>
-           <h3>' . $data[0]->Descripcion_Producto . '</h3><br>';   
-        $mpdf->WriteHTML($html);
-        $mpdf->Output();
+      echo '<pre>';
+      var_dump($data[0]);
+      echo '</pre>';
+
+      foreach ($data as $product) {
+        echo $product->Descripcion_Producto.'<br>';
       }
+      //$productos = [];
+      /*foreach ($data as $product) {
+        $html = '
+          <h6>'.$product->Descripcion_Producto.'</h6><br>
+          <h6>'.$product->Codigo_Producto.'</h6><br>
+        '; 
+      }  
+      $mpdf->WriteHTML($html);
+      $mpdf->Output();*/
     }
   }
 
   public function ticket()
   {
     if (isset($_REQUEST['id'])) {
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [190, 236] , 'orientation' => 'L']);
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
-      if (isset($data[0]->id)) {
-        $mpdf = new \Mpdf\Mpdf();
-        $html = '<h1>' . $data[0]->No_Garantia . '</h1>
-           <h1>' . $data[0]->Nombre_Cliente . '</h1>
-           <h1>' . $data[0]->Descripcion_Producto . '</h1>
-           <h1>' . $data[0]->Fecha . '</h1>';
-        $mpdf->WriteHTML($html);
-        $mpdf->Output();
+      foreach ($data as $product) {
+        echo $data[0]->No_garantia.'<br>';
+        echo $data[0]->Nombre_Cliente.'<br>';
+        echo $product->Descripcion_Producto.'<br>';
+        echo $data[0]->Fecha_ingreso.'<br>';
+        echo '<hr>';
       }
+      /*foreach ($data as $product) {
+        $html = '<h1>' . $data[0]->No_garantia . '</h1>
+                 <h1>' . $data[0]->Nombre_Cliente . '</h1>
+                 <h1>' . $product->Descripcion_Producto . '</h1>
+                 <h1>' . $data[0]->Fecha_ingreso . '</h1>';
+      //$mpdf->AddPage('L');
+      //$mpdf->WriteHTML($html);
+      //$mpdf->Output();
+      //*/
     }
   }
 }

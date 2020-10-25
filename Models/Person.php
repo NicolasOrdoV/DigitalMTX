@@ -16,8 +16,7 @@ class Person {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * from dtm_empleados
-            WHERE id = 5 OR id = 6 ";
+            $strSql = "SELECT * from dtm_empleados";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
