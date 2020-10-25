@@ -219,9 +219,9 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <label>Flete(S/N)</label>
                                         <div class="demo-checkbox">
-                                            <input type="checkbox" name="Flete" id="md_checkbox_21" class="filled-in chk-col-red" value="SI" onchange="javascript:showContent()"  require />
+                                            <input type="radio" name="Flete" id="md_checkbox_21" class="with-gap-radio-col-red" value="SI" onchange="javascript:ocultContent()"  />
                                             <label for="md_checkbox_21">SI</label>
-                                            <input type="checkbox" name="Flete" id="md_checkbox_22" class="filled-in chk-col-red" value="NO" require checked/>
+                                            <input type="radio" name="Flete" id="md_checkbox_22" class="with-gap-radio-col-red" value="NO"  onchange="javascript:showContent()" checked/>
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
 
@@ -431,6 +431,18 @@ $td = $total_data + 0001;
             element.style.display = 'block';
         } else {
             element.style.display = 'none';
+        }
+    }
+</script>
+<script type="text/javascript">
+    function ocultContent() {
+        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
+        element = document.getElementById("content");
+        check = document.getElementById("md_checkbox_22");
+        if (check.checked) {
+            element.style.display = 'none';
+        } else {
+            element.style.display = 'block';
         }
     }
 </script>
