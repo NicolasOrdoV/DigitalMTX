@@ -29,7 +29,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Numero_Factura</label>
-                                            <input type="number" class="form-control" name="NumFactura" required autofocus>
+                                            <input type="number" class="form-control" name="NumFactura" required autofocus value="<?php echo isset($_POST['NumFactura']) ? $_POST['NumFactura'] : ''?>">
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@ $td = $total_data + 0001;
                                 //var_dump($bills[0]);
                             }
                             ?>
-                            <h1>Numero de factura: <?php echo isset($bills) ? $bills[0]->Numero_Factura : ''?></h1>
+                            <h1>Detalle de factura: <?php echo isset($bills) ? $bills[0]->Numero_Factura : ''?></h1>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
                             <input type="hidden" name="Empleado" value="<?php echo $_SESSION['user']->nombre ?>">
                             <input type="hidden" name="Estado" value="Pendiente">
@@ -148,7 +148,7 @@ $td = $total_data + 0001;
                                     ];
                                    
                             ?>
-                                    <h1>Bloque: <?php echo $key+1;?></h1>
+                                    <h1>Producto: <?php echo $key+1;?></h1>
                                     <hr>
                                     <div class="row clearfix">
                                         <div class="col-sm-2">
@@ -221,7 +221,7 @@ $td = $total_data + 0001;
                                         <div class="demo-checkbox">
                                             <input type="checkbox" name="Flete" id="md_checkbox_21" class="filled-in chk-col-red" value="SI" onchange="javascript:showContent()"  require />
                                             <label for="md_checkbox_21">SI</label>
-                                            <input type="checkbox" name="Flete" id="md_checkbox_22" class="filled-in chk-col-red" value="NO" require />
+                                            <input type="checkbox" name="Flete" id="md_checkbox_22" class="filled-in chk-col-red" value="NO" require checked/>
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
 

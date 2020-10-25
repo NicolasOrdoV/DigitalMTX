@@ -434,22 +434,20 @@ class GarantyController
       $mpdf = new \Mpdf\Mpdf();
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
-      echo '<pre>';
-      var_dump($data[0]);
-      echo '</pre>';
 
-      foreach ($data as $product) {
-        echo $product->Descripcion_Producto.'<br>';
-      }
-      //$productos = [];
       /*foreach ($data as $product) {
+        echo $product->Descripcion_Producto.'<br>';
+      }*/
+      //$productos = [];
+      foreach ($data as $product) {
         $html = '
-          <h6>'.$product->Descripcion_Producto.'</h6><br>
-          <h6>'.$product->Codigo_Producto.'</h6><br>
+          <p>'.$data[0]->No_garantia.'</p><br>
+          <p>'.$product->Descripcion_Producto.'</p><br>
+          <p>'.$product->Codigo_Producto.'</p><br>
         '; 
+        $mpdf->WriteHTML($html);
       }  
-      $mpdf->WriteHTML($html);
-      $mpdf->Output();*/
+      $mpdf->Output();
     }
   }
 
@@ -459,22 +457,26 @@ class GarantyController
       $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [190, 236] , 'orientation' => 'L']);
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
-      foreach ($data as $product) {
+      $html = '';
+      /*foreach ($data as $product) {
         echo $data[0]->No_garantia.'<br>';
         echo $data[0]->Nombre_Cliente.'<br>';
         echo $product->Descripcion_Producto.'<br>';
         echo $data[0]->Fecha_ingreso.'<br>';
         echo '<hr>';
+      }*/
+      foreach ($data as $product) {
+        $html = '';
+        $html .= '<h1>' . $data[0]->No_garantia . '</h1>
+                 <h1>' . $data[0]->Referencia . '</h1>
+                 <h1>' . $data[0]->Codigo_Producto . '</h1>
+                 <h1>' . $data[0]->Descripcion_Producto . '</h1>
+                 <h1>' . $product->Observacion_Cliente . '</h1>';
+                 $mpdf->AddPage('L');
+                 $mpdf->WriteHTML($html);
       }
-      /*foreach ($data as $product) {
-        $html = '<h1>' . $data[0]->No_garantia . '</h1>
-                 <h1>' . $data[0]->Nombre_Cliente . '</h1>
-                 <h1>' . $product->Descripcion_Producto . '</h1>
-                 <h1>' . $data[0]->Fecha_ingreso . '</h1>';
-      //$mpdf->AddPage('L');
-      //$mpdf->WriteHTML($html);
-      //$mpdf->Output();
-      //*/
+      
+      $mpdf->Output();
     }
   }
 }
