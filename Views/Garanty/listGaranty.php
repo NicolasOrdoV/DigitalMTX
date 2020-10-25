@@ -28,7 +28,6 @@
                                         <th>Hora garantia</th>
                                         <th>Numero de factura</th>
                                         <th>Cliente</th>
-                                        <th>Nombre</th>
                                         <th>Correo</th>
                                         <th>Aprobacion Garantia</th>
                                         <th>Estado</th>
@@ -38,15 +37,14 @@
                                 <tbody>
                                     <?php foreach ($garanties as $garanty) { ?>
                                         <tr>
-                                            <td><?php echo $garanty->No_Garantia ?></td>
-                                            <td><?php echo $garanty->Fecha ?></td>
-                                            <td><?php echo $garanty->Hora ?></td>
+                                            <td><?php echo $garanty->No_garantia ?></td>
+                                            <td><?php echo $garanty->Fecha_ingreso ?></td>
+                                            <td><?php echo $garanty->Hora_ingreso ?></td>
                                             <td><?php echo $garanty->Numero_Factura ?></td>
                                             <td><?php echo $garanty->Nombre_Cliente ?></td>
-                                            <td><?php echo $garanty->Descripcion_Producto ?></td>
                                             <td><?php echo $garanty->Correo_Cliente ?></td>
                                             <td><?php echo $garanty->Aprobacion_Garantia ?></td>
-                                            <td><?php echo $garanty->Estado ?></td>
+                                            <td><?php echo $garanty->Estado ?></td> 
                                             <td>
                                                 <?php if ($garanty->Aprobacion_Garantia == 'SI') { ?>
                                                     <div class="row">

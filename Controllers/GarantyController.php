@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 require 'Models/Garanty.php';
 require 'Models/Client.php';
@@ -438,28 +438,25 @@ class GarantyController
       if (isset($data[0]->id)) {
         $mpdf = new \Mpdf\Mpdf();
         $html = '<h1>' . $data[0]->id . '</h1><br>
-           <h1>' . $data[0]->No_Garantia . '</h1><br>
-           <h3>' . $data[0]->Fecha . '</h3><br>
-           <h3>' . $data[0]->Hora . '</h3><br>
+           <h1>' . $data[0]->No_garantia . '</h1><br>
+           <h3>' . $data[0]->Fecha_ingreso . '</h3><br>
+           <h3>' . $data[0]->Hora_ingreso . '</h3><br>
            <h3>' . $data[0]->Numero_Factura . '</h3><br>
            <h3>' . $data[0]->Punto_Venta . '</h3><br>
            <h3>' . $data[0]->Fecha_Compra . '</h3><br>
            <h3>' . $data[0]->Nombre_Cliente . '</h3><br>
            <h3>' . $data[0]->Identificacion_Cliente . '</h3><br>
            <h3>' . $data[0]->Correo_Cliente . '</h3><br>
-           <h3>' . $data[0]->Codigo_Producto . '</h3><br>
-           <h3>' . $data[0]->Descripcion_Producto . '</h3><br>
            <h3>' . $data[0]->Serial . '</h3><br>
            <h3>' . $data[0]->Proveedor . '</h3><br>
            <h3>' . $data[0]->Flete . '</h3><br>
-           <h3>' . $data[0]->Ciudad . '</h3><br>
+           <h3>' . $data[0]->Departamento . '</h3><br>
            <h3>' . $data[0]->Municipio . '</h3><br>
-           <h3>' . $data[0]->Valor_Producto . '</h3><br>
-           <h3>' . $data[0]->Observacion_Cliente . '</h3><br>
+           <h3>' . $data[0]->Valor_Flete . '</h3><br>
            <h3>' . $data[0]->Observacion_Empleado . '</h3><br>
            <h3>' . $data[0]->Aprobacion_Garantia . '</h3><br>
            <h3>' . $data[0]->Estado . '</h3><br>
-           <h3>' . $data[0]->id_Personal . '</h3><br>';
+           <h3>' . $data[0]->Descripcion_Producto . '</h3><br>';   
         $mpdf->WriteHTML($html);
         $mpdf->Output();
       }
