@@ -234,10 +234,12 @@ $td = $total_data + 0001;
                                         <p>
                                             <b>Proveedor</b>
                                         </p>
+                                        <?php //var_dump($providers) ?>
                                         <select name="Proveedor" class="form-control show-tick" >
                                             <option value="">Seleccione..</option>
-                                            <option value="Colombia">Colombia</option>
-                                            <option value="China">China</option>
+                                            <?php foreach ($providers as $provider) { ?>
+                                                <option value="<?php echo $provider->Nombre_Proveedor?>"><?php echo $provider->Nombre_Proveedor?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-sm-4">

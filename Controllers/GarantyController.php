@@ -3,6 +3,7 @@
 require 'Models/Garanty.php';
 require 'Models/Client.php';
 require 'Models/Product.php';
+require 'Models/Provider.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -20,12 +21,14 @@ class GarantyController
   private $model;
   private $client;
   private $product;
+  private $provider;
 
   public function __construct()
   {
     $this->model = new Garanty;
     $this->client = new Client;
     $this->product = new Product;
+    $this->provider = new Provider;
   }
 
   public function listGaranty()
@@ -42,6 +45,7 @@ class GarantyController
     $total_data = count($data);
     $clients = $this->client->getAll();
     $products = $this->product->getAll();
+    $providers = $this->provider->getAll();
     require 'Views/Garanty/garantia_empleado.php';
     require 'Views/Scripts.php';
   }
@@ -54,8 +58,7 @@ class GarantyController
       require 'Views/Layout.php';
       $data = $this->model->getAll();
       $total_data = count($data);
-      $clients = $this->client->getAll();
-      $products = $this->product->getAll();
+      $providers = $this->provider->getAll();
       require 'Views/Garanty/garantia_empleado.php';
       require 'Views/Scripts.php';
     }
