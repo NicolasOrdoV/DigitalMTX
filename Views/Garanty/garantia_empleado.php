@@ -246,15 +246,17 @@ $td = $total_data + 0001;
                                         <p>
                                             <b>Ciudad</b>
                                         </p>
-                                        <select name="Departamento" class="form-control show-tick" >
-                                            <option value="">Seleccione..</option>
-                                            <option value="Bogota D.C">Bogota D.C</option>
-                                            <option value="Medellin">Medellin</option>
-                                            <option value="Barranquilla">Barranquilla</option>
-                                            <option value="Cali">Cali</option>
+                                        <select name="Departamento" class="form-control show-tick" id="lista1">
+                                            <option value="0">Seleccione..</option>
+                                            <?php foreach ($departaments as $departament) { ?>
+                                                <option value="<?php echo $departament->Departamento?>"><?php echo $departament->Departamento?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div id="select2lista" class="col-sm-4">
+                                        
+                                    </div>
+                                    <!--<div class="col-sm-4">
                                         <p>
                                             <b>Municipio</b>
                                         </p>
@@ -265,7 +267,7 @@ $td = $total_data + 0001;
                                             <option value="Comuna 12">Comuna 12</option>
                                             <option value="Miraflores">Miraflores</option>
                                         </select>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                                 <div class="row clearfix">
@@ -351,7 +353,7 @@ $td = $total_data + 0001;
         });
     });
 </script> -->
-<script>
+<!--<script>
     document.getElementById("Codigo_Producto").onchange = function() {
         alerta2()
     };
@@ -422,7 +424,7 @@ $td = $total_data + 0001;
         // Enviando la data al PHP
         request.send(formData);
     }
-</script>
+</script>-->
 
 <script type="text/javascript">
     function showContent() {
@@ -446,5 +448,29 @@ $td = $total_data + 0001;
         } else {
             element.style.display = 'block';
         }
+    }
+</script>
+<script src="Assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#lista1').val(0);
+        recargarLista();
+
+        $('#lista1').change(function(){
+            recargarLista();
+        });
+    }) 
+</script>
+<script type="text/javascript">
+    function recargarLista(){
+        $.ajax({
+            type:"POST",
+            url:"Views/Garanty/datos.php",
+            data:"Municipio=" + $('#lista1').val(),
+            success:function(r){
+                $('#select2lista').html(r);
+            }
+            //console.log(data);
+        });
     }
 </script>

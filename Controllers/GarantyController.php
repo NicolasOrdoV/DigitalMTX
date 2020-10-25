@@ -4,6 +4,8 @@ require 'Models/Garanty.php';
 require 'Models/Client.php';
 require 'Models/Product.php';
 require 'Models/Provider.php';
+require 'Models/Departament.php';
+require 'Models/Municipality.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -22,6 +24,8 @@ class GarantyController
   private $client;
   private $product;
   private $provider;
+  private $departament;
+  private $municipality;
 
   public function __construct()
   {
@@ -29,6 +33,8 @@ class GarantyController
     $this->client = new Client;
     $this->product = new Product;
     $this->provider = new Provider;
+    $this->departament = new Departament;
+    $this->municipality = new Municipality;
   }
 
   public function listGaranty()
@@ -46,6 +52,8 @@ class GarantyController
     $clients = $this->client->getAll();
     $products = $this->product->getAll();
     $providers = $this->provider->getAll();
+    $departaments = $this->departament->getAll();
+    $municipalities = $this->municipality->getAll();
     require 'Views/Garanty/garantia_empleado.php';
     require 'Views/Scripts.php';
   }
@@ -59,6 +67,8 @@ class GarantyController
       $data = $this->model->getAll();
       $total_data = count($data);
       $providers = $this->provider->getAll();
+      $departaments = $this->departament->getAll();
+      $municipalities = $this->municipality->getAll();
       require 'Views/Garanty/garantia_empleado.php';
       require 'Views/Scripts.php';
     }
