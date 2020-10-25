@@ -219,9 +219,9 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <label>Flete(S/N)</label>
                                         <div class="demo-checkbox">
-                                            <input type="radio" name="Flete" id="md_checkbox_21" class="with-gap-radio-col-red" value="SI" onchange="javascript:ocultContent()"  />
+                                            <input type="radio" name="Flete" id="md_checkbox_21" class="radio-col-red" value="SI" onchange="javascript:ocultContent()"  />
                                             <label for="md_checkbox_21">SI</label>
-                                            <input type="radio" name="Flete" id="md_checkbox_22" class="with-gap-radio-col-red" value="NO"  onchange="javascript:showContent()" checked/>
+                                            <input type="radio" name="Flete" id="md_checkbox_22" class="radio-col-red" value="NO"  onchange="javascript:showContent()" checked/>
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
 
