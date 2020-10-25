@@ -303,7 +303,7 @@ class GarantyController
           'Id_Garantia' => $lastId[0]->id,
           'Observacion_Cliente' => $op
         ];
-        if (isset($lastId[0]->id) && $answerNewGaranty == true) {
+        if (isset($lastId[0]->id) && $answerNewGaranty == true && $gp == 'SI') {
           $answerNewDetaills = $this->model->saveDetail($detaills);
           if ($answerNewDetaills == true) {
             $mail = new PHPMailer(true);
