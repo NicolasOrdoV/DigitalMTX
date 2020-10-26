@@ -40,7 +40,7 @@ class GarantyController
   public function listGaranty()
   {
     require 'Views/Layout.php';
-    $garanties = $this->model->getAll();
+    $garanties = $this->model->getAllDet();
     require 'Views/Garanty/listGaranty.php';
     require 'Views/Scripts.php';
   }
@@ -76,7 +76,6 @@ class GarantyController
 
   public function save()
   {
-    if ($_POST['Aprobacion_Garantia'] == 'SI') {
       $data = [
         'No_Garantia' => $_POST['No_Garantia'],
         'Fecha_ingreso' => $_POST['Fecha_ingreso'],
@@ -96,8 +95,6 @@ class GarantyController
         'No_Guia' => $_POST['No_Guia'],
         'Transportadora' => $_POST['Transportadora'],
         'Observacion_Empleado' => $_POST['Observacion_Empleado'],
-        'Aprobacion_Garantia' => $_POST['Aprobacion_Garantia'],
-        'Estado' => $_POST['Estado'],
         'Empleado' => $_POST['Empleado']
       ];
       
@@ -111,6 +108,9 @@ class GarantyController
       $Referencia = ($_POST['Referencia']);
       $garanty = ($_POST['garanty']);
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
+      $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
+      $Aprobacion_GarantiaN = ($_POST['Aprobacion_GarantiaN']);
+      $Estado = ($_POST['Estado']);
 
       while (true) {
         $item1 = current($Codigo_Producto);
@@ -118,16 +118,20 @@ class GarantyController
         $item3 = current($Marca_Producto);
         $item4 = current($Sello_Producto);
         $item5 = current($Referencia);
-        $item6 = current($garanty);
-        $item7 = current($Observacion_Cliente);
+        $item6 = current($Observacion_Cliente);
+        $item7 = current($Aprobacion_Garantia);
+        $item8 = current($Aprobacion_GarantiaN);
+        $item9 = current($Estado);
 
         $cp = (($item1 !== false) ? $item1 : ", &nbsp;");
         $dp = (($item2 !== false) ? $item2 : ", &nbsp;");
         $mp = (($item3 !== false) ? $item3 : ", &nbsp;");
         $sp = (($item4 !== false) ? $item4 : ", &nbsp;");
         $rp = (($item5 !== false) ? $item5 : ", &nbsp;");
-        $gp = (($item6 !== false) ? $item6 : ", &nbsp;");
-        $op = (($item7 !== false) ? $item7 : ", &nbsp;");
+        $op = (($item6 !== false) ? $item6 : ", &nbsp;");
+        $ag = (($item7 !== false) ? $item7 : ", &nbsp;");
+        $agN = (($item8 !== false) ? $item8 : ", &nbsp;");
+        $es = (($item9 !== false) ? $item9 : ", &nbsp;");
 
         $detaills = [
           'Codigo_Producto' => $cp,
@@ -136,11 +140,14 @@ class GarantyController
           'Sello_Producto' => $sp,
           'Referencia' => $rp,
           'Id_Garantia' => $lastId[0]->id,
-          'Observacion_Cliente' => $op
+          'Observacion_Cliente' => $op,
+          'Aprobacion_Garantia' => $ag,
+          'Estado' => $es
         ];
-        if (isset($lastId[0]->id) && $answerNewGaranty == true && $gp == 'SI') {
+        if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag == 'SI') {
           $answerNewDetaills = $this->model->saveDetail($detaills);
           if ($answerNewDetaills == true) {
+            $dates = $this->model->getAlDetails();
             $mail = new PHPMailer(true);
 
             try {
@@ -206,7 +213,7 @@ class GarantyController
                                 <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
                               </div>
                               <div class="form-group">
-                              <p>Hola que tal: Su proceso de garantia fue: ' . $data['Estado'] . '</p><br>
+                              <p>Hola que tal: Su proceso de garantia fue: ' . $dates['Estado'] . '</p><br>
                               <p>Por favor este pendiente de su correo para alguna novedad.</p>
                               </div>
                             </form>
@@ -238,87 +245,28 @@ class GarantyController
               echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
             // Up! Next Value
-            $item1 = next( $Codigo_Producto );
-            $item2 = next( $Descripcion_Producto );
-            $item3 = next( $Marca_Producto );
-            $item4 = next( $Sello_Producto );
-            $item5 = next( $Referencia );
-            $item6 = next( $garanty );
-            $item7 = next( $Observacion_Cliente );
+            $item1 = next($Codigo_Producto);
+            $item2 = next($Descripcion_Producto);
+            $item3 = next($Marca_Producto);
+            $item4 = next($Sello_Producto);
+            $item5 = next($Referencia);
+            $item6 = next($Observacion_Cliente);
+            $item7 = next($Aprobacion_Garantia);
+            $item8 = next($Aprobacion_GarantiaN);
+            $item9 = next($Estado);
             
             // Check terminator
-            if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false) break;
-            header('Location: ?controller=garanty&method=sucessfull');
-          }
-        }else{
-          echo "No se realizo detalle";
-        }
-      }
-    } else {
-       $data = [
-        'No_Garantia' => $_POST['No_Garantia'],
-        'Fecha_ingreso' => $_POST['Fecha_ingreso'],
-        'Hora_ingreso' => $_POST['Hora_ingreso'],
-        'Numero_Factura' => $_POST['Numero_Factura'],
-        'Punto_Venta' => $_POST['Punto_Venta'],
-        'Fecha_Compra' => $_POST['Fecha_Compra'],
-        'Nombre_Cliente' => $_POST['Nombre_Cliente'],
-        'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
-        'Correo_Cliente' => $_POST['Correo_Cliente'],
-        'Direccion_Cliente' => $_POST['Direccion_Cliente'],
-        'Proveedor' => $_POST['Proveedor'],
-        'Flete' => $_POST['Flete'],
-        'Departamento' => $_POST['Departamento'],
-        'Municipio' => $_POST['Municipio'],
-        'Valor_Flete' => $_POST['Valor_Flete'],
-        'No_Guia' => $_POST['No_Guia'],
-        'Transportadora' => $_POST['Transportadora'],
-        'Observacion_Empleado' => $_POST['Observacion_Empleado'],
-        'Aprobacion_Garantia' => $_POST['Aprobacion_Garantia'],
-        'Estado' => 'No aprobado',
-        'Empleado' => $_POST['Empleado']
-      ];
-      
-      $answerNewGaranty = $this->model->newGaranty($data);
-      $lastId = $this->model->getLastId();
-
-      $Codigo_Producto = ($_POST['Codigo_Producto']);
-      $Descripcion_Producto = ($_POST['Descripcion_Producto']);
-      $Marca_Producto = ($_POST['Marca_Producto']);
-      $Sello_Producto = ($_POST['Sello_Producto']);
-      $Referencia = ($_POST['Referencia']);
-      $garanty = ($_POST['garanty']);
-      $Observacion_Cliente = ($_POST['Observacion_Cliente']);
-
-      while (true) {
-        $item1 = current($Codigo_Producto);
-        $item2 = current($Descripcion_Producto);
-        $item3 = current($Marca_Producto);
-        $item4 = current($Sello_Producto);
-        $item5 = current($Referencia);
-        $item6 = current($garanty);
-        $item7 = current($Observacion_Cliente);
-
-        $cp = (($item1 !== false) ? $item1 : ", &nbsp;");
-        $dp = (($item2 !== false) ? $item2 : ", &nbsp;");
-        $mp = (($item3 !== false) ? $item3 : ", &nbsp;");
-        $sp = (($item4 !== false) ? $item4 : ", &nbsp;");
-        $rp = (($item5 !== false) ? $item5 : ", &nbsp;");
-        $gp = (($item6 !== false) ? $item6 : ", &nbsp;");
-        $op = (($item7 !== false) ? $item7 : ", &nbsp;");
-
-        $detaills = [
-          'Codigo_Producto' => $cp,
-          'Descripcion_Producto' => $dp,
-          'Marca_Producto' => $mp,
-          'Sello_Producto' => $sp,
-          'Referencia' => $rp,
-          'Id_Garantia' => $lastId[0]->id,
-          'Observacion_Cliente' => $op
-        ];
-        if (isset($lastId[0]->id) && $answerNewGaranty == true && $gp == 'SI') {
+            if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item8 === false&& $item9 === false) break;
+            header('Location: ?controller=garanty&method=sucessfull'); 
+          }else{
+            echo 'Hubo un error';
+          }  
+        }elseif(isset($lastId[0]->id) && $answerNewGaranty == true && $agN == 'NO'){
+          $detaills['Estado'] = 'Cerrado';
+          $detaills['Aprobacion_Garantia'] = $agN;
           $answerNewDetaills = $this->model->saveDetail($detaills);
           if ($answerNewDetaills == true) {
+            $datesN = $this->model->getAll();
             $mail = new PHPMailer(true);
 
             try {
@@ -384,7 +332,7 @@ class GarantyController
                                 <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
                               </div>
                               <div class="form-group">
-                              <p>Hola que tal: Su proceso de garantia fue: ' . $data['Estado'] . '</p><br>
+                              <p>Hola que tal: Su proceso de garantia fue: ' . $datesN['Estado'] . '</p><br>
                               <p>Segun las observaciones de garantia: '.$data['Observacion_Empleado'].'.</p>
                               </div>
                             </form>
@@ -416,23 +364,22 @@ class GarantyController
               echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
             // Up! Next Value
-            $item1 = next( $Codigo_Producto );
-            $item2 = next( $Descripcion_Producto );
-            $item3 = next( $Marca_Producto );
-            $item4 = next( $Sello_Producto );
-            $item5 = next( $Referencia );
-            $item6 = next( $garanty );
-            $item7 = next( $Observacion_Cliente );
+              $item1 = next($Codigo_Producto);
+              $item2 = next($Descripcion_Producto);
+              $item3 = next($Marca_Producto);
+              $item4 = next($Sello_Producto);
+              $item5 = next($Referencia);
+              $item6 = next($Observacion_Cliente);
+              $item7 = next($Aprobacion_Garantia);
+              $item8 = next($Aprobacion_GarantiaN);
+              $item9 = next($Estado); 
             
             // Check terminator
-            if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false) break;
-            header('Location: ?controller=garanty&method=sucessfull');
+            if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item8 === false&& $item9 === false) break;
+            header('Location: ?controller=garanty&method=sucessfull'); 
           }
-        }else{
-          echo "No se realizo detalle";
         }
       }
-    }
   }
    
   public function sucessfull(){

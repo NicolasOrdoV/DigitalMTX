@@ -25,6 +25,17 @@ class Garanty
         }
     }
 
+    public function getAlDetails()
+    {
+        try {
+            $strSql = "SELECT * FROM mg_detalle_garantia";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function newGaranty($data)
     {
         try {
@@ -39,6 +50,17 @@ class Garanty
     {
         try {
             $strSql = 'SELECT MAX(id) as id FROM mg_garantia';
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getAllDet()
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

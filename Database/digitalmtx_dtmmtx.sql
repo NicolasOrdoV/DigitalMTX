@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2020 a las 01:29:10
+-- Tiempo de generación: 26-10-2020 a las 01:08:21
 -- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.11
+-- Versión de PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -3489,7 +3489,9 @@ CREATE TABLE `mg_detalle_garantia` (
   `Sello_Producto` varchar(50) NOT NULL,
   `Referencia` varchar(50) NOT NULL,
   `Id_Garantia` int(11) NOT NULL,
-  `Observacion_Cliente` text NOT NULL
+  `Observacion_Cliente` text NOT NULL,
+  `Aprobacion_Garantia` varchar(5) NOT NULL,
+  `Estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -3561,8 +3563,6 @@ CREATE TABLE `mg_garantia` (
   `No_Guia` varchar(20) DEFAULT NULL,
   `Transportadora` varchar(50) DEFAULT NULL,
   `Observacion_Empleado` text NOT NULL,
-  `Aprobacion_Garantia` varchar(5) NOT NULL,
-  `Estado` varchar(50) NOT NULL,
   `Empleado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -3908,7 +3908,7 @@ INSERT INTO `mg_municipio` (`id`, `Municipio`, `id_departamento`) VALUES
 (17174, 'Chinchiná', 17),
 (17272, 'Filadelfia', 17),
 (17380, 'La Dorada', 17),
-(17388, 'La Merced', 17),
+(17388, 'La merced', 17),
 (17433, 'Manzanares', 17),
 (17442, 'Marmato', 17),
 (17444, 'Marquetalia', 17),

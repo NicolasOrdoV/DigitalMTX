@@ -51,7 +51,6 @@ $td = $total_data + 0001;
                             <h1>Detalle de factura: <?php echo isset($bills) ? $bills[0]->Numero_Factura : ''?></h1>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
                             <input type="hidden" name="Empleado" value="<?php echo $_SESSION['user']->nombre ?>">
-                            <input type="hidden" name="Estado" value="Pendiente">
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
@@ -150,6 +149,7 @@ $td = $total_data + 0001;
                             ?>
                                     <h1>Producto: <?php echo $key+1;?></h1>
                                     <hr>
+                                    <input type="hidden" name="Estado[]" value="Tramite">
                                     <div class="row clearfix">
                                         <div class="col-sm-2">
                                             <div class="form-group form-float">
@@ -194,9 +194,12 @@ $td = $total_data + 0001;
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group ">
-                                                <div class="demo-checkbox">
-                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="garanty[]" value="SI" />
-                                                    <label for="md_checkbox_<?php echo $key+1; ?>">¿Garantia?</label>
+                                                <label>¿Se aprueba garantia?</label>
+                                                <div class="demo-checkbox form-line">
+                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
+                                                    <label for="md_checkbox_<?php echo $key+1; ?>">SI</label>
+                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+3; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
+                                                    <label for="md_checkbox_<?php echo $key+3; ?>">NO</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -305,19 +308,6 @@ $td = $total_data + 0001;
                                         <div class="form-line">
                                             <label>Observacion Empleado</label>
                                             <textarea rows="4" class="form-control no-resize" name="Observacion_Empleado"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <div class="form-group form-float">
-                                        <label>¿Se aprueba la garantía?</label>
-                                        <div class="demo-radio-button">
-                                            <input name="Aprobacion_Garantia" type="radio" id="radio_7" class="radio-col-red" value="SI" />
-                                            <label for="radio_7">SI</label>
-                                            <input name="Aprobacion_Garantia" type="radio" id="radio_8" class="radio-col-red" value="NO" />
-                                            <label for="radio_8">NO</label>
                                         </div>
                                     </div>
                                 </div>
