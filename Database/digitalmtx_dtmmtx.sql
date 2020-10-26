@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2020 a las 01:08:21
+-- Tiempo de generación: 26-10-2020 a las 03:52:06
 -- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.10
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -341,7 +341,8 @@ INSERT INTO `dtm_empleados` (`id`, `sesion`, `nombre`, `apellidos`, `tipodoc`, `
 (6, '201.244.82.74 \n2020-09-25 05:47:43pm; \n201.244.82.74 \n2020-09-25 05:46:00pm;', 'Nicolas', 'Martinez', 'C.C', '1003496610', 'bodega@digitalmtx.com', '3133132242', 'Hombre', 'Bodega', 'Jefe de Bodega', '1997-10-09', '51fd8cd19a1e7002f4d74e2aa341e2472a9b6dc0', 0, 0, 0, 1, 0, 0, 1, 0, 0),
 (7, '201.244.82.74 \n2019-12-27 09:35:25am; \n201.244.82.74 \n2019-12-27 09:35:04am;', 'Fredy', 'Torres', 'C.C', '1016101056', 'bodega2@digitalmtx.com', '3112859624', 'Hombre', 'Bodega', 'Jefe de Bodega', '1997-10-06', '6701d7c8c3c16914b1af6bea3c78371e381a1e6c', 0, 0, 0, 1, 0, 0, 0, 0, 0),
 (8, '201.244.82.74 \n2020-10-19 02:24:13pm; \n201.244.82.74 \n2020-10-16 10:23:33am;', 'JUAN CARLOS', 'RINCON CORRALES', 'C.C', '1032366142', 'juancar707@gmail.com', '3123518762', 'Hombre', 'Oficina', 'Marketing Digital', '1986-07-08', 'd2451f17a3b7843ddc90ab9f15ea409f43bb1b68', 0, 0, 1, 0, 1, 1, 0, 1, 0),
-(0, 'sadsad', 'Juan', 'Perez', 'CC', '12345678', 'Juan@email.com', '123456', 'Masculino', 'Bogota D.C', 'Recepcion', '10/08/1980', '123', 1, 1, 1, 1, 1, 1, 1, 1, 1);
+(0, 'sadsad', 'Juan', 'Perez', 'CC', '12345678', 'Juan@email.com', '123456', 'Masculino', 'Bogota D.C', 'Recepcion', '10/08/1980', '123', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(1, 'ggggggggg', 'pepe', 'pepito', 'CC', '345678', 'pepe@gmail.com', '34567', 'm', 'm', 'Tecnico', 'tdtdtd', '123', 1, 0, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3483,15 +3484,15 @@ INSERT INTO `mg_departamentos` (`id`, `Departamento`) VALUES
 
 CREATE TABLE `mg_detalle_garantia` (
   `id` int(11) NOT NULL,
-  `Codigo_Producto` varchar(50) NOT NULL,
-  `Descripcion_Producto` text NOT NULL,
-  `Marca_Producto` varchar(50) NOT NULL,
-  `Sello_Producto` varchar(50) NOT NULL,
-  `Referencia` varchar(50) NOT NULL,
-  `Id_Garantia` int(11) NOT NULL,
-  `Observacion_Cliente` text NOT NULL,
-  `Aprobacion_Garantia` varchar(5) NOT NULL,
-  `Estado` varchar(20) NOT NULL
+  `Codigo_Producto` varchar(50) DEFAULT NULL,
+  `Descripcion_Producto` text DEFAULT NULL,
+  `Marca_Producto` varchar(50) DEFAULT NULL,
+  `Sello_Producto` varchar(50) DEFAULT NULL,
+  `Referencia` varchar(50) DEFAULT NULL,
+  `Id_Garantia` int(11) DEFAULT NULL,
+  `Observacion_Cliente` text DEFAULT NULL,
+  `Aprobacion_Garantia` varchar(5) DEFAULT NULL,
+  `Estado` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

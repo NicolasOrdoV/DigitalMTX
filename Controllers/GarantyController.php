@@ -108,7 +108,7 @@ class GarantyController
       $Referencia = ($_POST['Referencia']);
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
       $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
-      $Aprobacion_GarantiaN = ($_POST['Aprobacion_GarantiaN']);
+      //$Aprobacion_GarantiaN = ($_POST['Aprobacion_GarantiaN']);
       $Estado = ($_POST['Estado']);
 
       while (true) {
@@ -119,7 +119,7 @@ class GarantyController
         $item5 = current($Referencia);
         $item6 = current($Observacion_Cliente);
         $item7 = current($Aprobacion_Garantia);
-        $item8 = current($Aprobacion_GarantiaN);
+        //$item8 = current($Aprobacion_GarantiaN);
         $item9 = current($Estado);
 
         $cp = (($item1 !== false) ? $item1 : ", &nbsp;");
@@ -160,10 +160,10 @@ class GarantyController
         $item5 = next($Referencia);
         $item6 = next($Observacion_Cliente);
         $item7 = next($Aprobacion_Garantia);
-        $item8 = next($Aprobacion_GarantiaN);
+        //$item8 = next($Aprobacion_GarantiaN);
         $item9 = next($Estado);
         // Check terminator
-        if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item8 === false&& $item9 === false) break;  
+        if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item9 === false) break;  
       }
       $dates = $this->model->getAlDetails($lastId[0]->id);
       if ($dates[0]->Estado == 'Tramite') {

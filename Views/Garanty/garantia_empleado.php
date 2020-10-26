@@ -155,7 +155,7 @@ $td = $total_data + 0001;
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     <label>Codigo Producto </label>
-                                                    <input type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" required readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@ $td = $total_data + 0001;
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     <label>Descripcion Producto </label>
-                                                    <input type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" required value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                    <input type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
                                                     <!--<input type="hidden" name="id_producto" id="id_producto" value="">-->
                                                 </div>
                                             </div>
@@ -172,7 +172,7 @@ $td = $total_data + 0001;
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <label>Marca Producto</label>
-                                                    <input type="text" class="form-control" name="Marca_Producto[]" required readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -180,7 +180,7 @@ $td = $total_data + 0001;
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Sello Producto</label>
-                                                    <input type="text" class="form-control" name="Sello_Producto[]" required value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Sello_Producto[]" readonly value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@ $td = $total_data + 0001;
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Referencia</label>
-                                                    <input type="text" class="form-control" name="Referencia[]" required readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
+                                                    <input type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
                                                 </div>
                                             </div>
                                         </div>
