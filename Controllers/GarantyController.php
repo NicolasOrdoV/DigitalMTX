@@ -106,7 +106,6 @@ class GarantyController
       $Marca_Producto = ($_POST['Marca_Producto']);
       $Sello_Producto = ($_POST['Sello_Producto']);
       $Referencia = ($_POST['Referencia']);
-      $garanty = ($_POST['garanty']);
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
       $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
       $Aprobacion_GarantiaN = ($_POST['Aprobacion_GarantiaN']);
@@ -144,240 +143,224 @@ class GarantyController
           'Aprobacion_Garantia' => $ag,
           'Estado' => $es
         ];
-        if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag == 'SI') {
-          $answerNewDetaills = $this->model->saveDetail($detaills);
-          if ($answerNewDetaills == true) {
-            $dates = $this->model->getAlDetails();
-            $mail = new PHPMailer(true);
 
-            try {
-              //Server settings
-              $mail->SMTPDebug = 0;                      // Enable verbose debug output
-              $mail->isSMTP();                                            // Send using SMTP
-              $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-              $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-              $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-              $mail->Password   = '1000464327bat';                               // SMTP password
-              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-              $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+        if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag == 'SI'){
+          $this->model->saveDetail($detaills);
+        }else{
+          $detaills['Estado'] = "Cerrado";
+          $detaills['Aprobacion_Garantia'] = 'NO';
+          $this->model->saveDetail($detaills);
+        }
+         
+         // Up! Next Value
+        $item1 = next($Codigo_Producto);
+        $item2 = next($Descripcion_Producto);
+        $item3 = next($Marca_Producto);
+        $item4 = next($Sello_Producto);
+        $item5 = next($Referencia);
+        $item6 = next($Observacion_Cliente);
+        $item7 = next($Aprobacion_Garantia);
+        $item8 = next($Aprobacion_GarantiaN);
+        $item9 = next($Estado);
+        // Check terminator
+        if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item8 === false&& $item9 === false) break;  
+      }
+      $dates = $this->model->getAlDetails($lastId[0]->id);
+      if ($dates[0]->Estado == 'Tramite') {
+        $mail = new PHPMailer(true);
 
-              //Recipients
-              $mail->setFrom('nikomegathet666@gmail.com');
-              $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+        try {
+          //Server settings
+          $mail->SMTPDebug = 0;                      // Enable verbose debug output
+          $mail->isSMTP();                                            // Send using SMTP
+          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+          $mail->Password   = '1000464327bat';                               // SMTP password
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-              // Content
-              $mail->isHTML(true);                                  // Set email format to HTML
-              $mail->Subject = 'Solicitud de garantia';
-              $mail->Body    = '<!DOCTYPE html>
-                    <html lang="en" >
-                    <head>
-                      <meta charset="UTF-8">
-                      <title>CodePen - Avisado Prototipo</title>
-                      <link rel="stylesheet" href="./style.css">
-                    
-                    </head>
-                    <body>
-                    <!-- partial:index.partial.html -->
-                    <html>
-                      <head>
-                        <meta charset="utf-8" />
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-                        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-                        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-                        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-                      </head>
-                      <body>
-                        <header>
-                          <div class="container">
-                            <section class="banner_row">
-                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                  <figure class="animated fadeInLeft">
-                                    <a href="index.html">
-                                      <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-                                    </a>
-                                  </figure>
-                              </div>
-                              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-                              </div>
-                            </section>
+          //Recipients
+          $mail->setFrom('nikomegathet666@gmail.com');
+          $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+
+          // Content
+          $mail->isHTML(true);                                  // Set email format to HTML
+          $mail->Subject = 'Solicitud de garantia';
+          $mail->Body    = '<!DOCTYPE html>
+                <html lang="en" >
+                <head>
+                  <meta charset="UTF-8">
+                  <title>CodePen - Avisado Prototipo</title>
+                  <link rel="stylesheet" href="./style.css">
+                
+                </head>
+                <body>
+                <!-- partial:index.partial.html -->
+                <html>
+                  <head>
+                    <meta charset="utf-8" />
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
+                    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+                    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                  </head>
+                  <body>
+                    <header>
+                      <div class="container">
+                        <section class="banner_row">
+                          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <figure class="animated fadeInLeft">
+                                <a href="index.html">
+                                  <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
+                                </a>
+                              </figure>
                           </div>
-                        </header>
-                        <section class="formulario-princ">
-                          <div class="container">
-                            <form class="form-inline">
-                              <div class="form-group">
-                                <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-                              </div>
-                              <div class="form-group">
-                              <p>Hola que tal: Su proceso de garantia fue: ' . $dates['Estado'] . '</p><br>
-                              <p>Por favor este pendiente de su correo para alguna novedad.</p>
-                              </div>
-                            </form>
-                          </div>
-                        </section>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="footer-container">
-                        <footer class="wrapper">
-                          <div class="container">
-                            <h3>Trabajamos para ti, ¡Espéranos!</h3>
-                            <p>Para más información, <strong>puedes escribirnos a:</strong> 
-                              <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-                            </p>
-                          </div>
-                        </footer>
-                        </div>
-                      </body>
-                    </html>
-                    <!-- partial -->
-                      
-                    </body>
-                    </html>
-                    ';
-
-              $mail->send();
-            } catch (Exception $e) {
-              echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            // Up! Next Value
-            $item1 = next($Codigo_Producto);
-            $item2 = next($Descripcion_Producto);
-            $item3 = next($Marca_Producto);
-            $item4 = next($Sello_Producto);
-            $item5 = next($Referencia);
-            $item6 = next($Observacion_Cliente);
-            $item7 = next($Aprobacion_Garantia);
-            $item8 = next($Aprobacion_GarantiaN);
-            $item9 = next($Estado);
-            
-            // Check terminator
-            if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item8 === false&& $item9 === false) break;
-            header('Location: ?controller=garanty&method=sucessfull'); 
-          }else{
-            echo 'Hubo un error';
-          }  
-        }elseif(isset($lastId[0]->id) && $answerNewGaranty == true && $agN == 'NO'){
-          $detaills['Estado'] = 'Cerrado';
-          $detaills['Aprobacion_Garantia'] = $agN;
-          $answerNewDetaills = $this->model->saveDetail($detaills);
-          if ($answerNewDetaills == true) {
-            $datesN = $this->model->getAll();
-            $mail = new PHPMailer(true);
-
-            try {
-              //Server settings
-              $mail->SMTPDebug = 0;                      // Enable verbose debug output
-              $mail->isSMTP();                                            // Send using SMTP
-              $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-              $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-              $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-              $mail->Password   = '1000464327bat';                               // SMTP password
-              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-              $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-
-              //Recipients
-              $mail->setFrom('nikomegathet666@gmail.com');
-              $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
-
-              // Content
-              $mail->isHTML(true);                                  // Set email format to HTML
-              $mail->Subject = 'Solicitud de garantia';
-              $mail->Body    = '<!DOCTYPE html>
-                    <html lang="en" >
-                    <head>
-                      <meta charset="UTF-8">
-                      <title>CodePen - Avisado Prototipo</title>
-                      <link rel="stylesheet" href="./style.css">
-                    
-                    </head>
-                    <body>
-                    <!-- partial:index.partial.html -->
-                    <html>
-                      <head>
-                        <meta charset="utf-8" />
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-                        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-                        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-                        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-                      </head>
-                      <body>
-                        <header>
-                          <div class="container">
-                            <section class="banner_row">
-                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                  <figure class="animated fadeInLeft">
-                                    <a href="index.html">
-                                      <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-                                    </a>
-                                  </figure>
-                              </div>
-                              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-                              </div>
-                            </section>
-                          </div>
-                        </header>
-                        <section class="formulario-princ">
-                          <div class="container">
-                            <form class="form-inline">
-                              <div class="form-group">
-                                <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-                              </div>
-                              <div class="form-group">
-                              <p>Hola que tal: Su proceso de garantia fue: ' . $datesN['Estado'] . '</p><br>
-                              <p>Segun las observaciones de garantia: '.$data['Observacion_Empleado'].'.</p>
-                              </div>
-                            </form>
+                          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <h1 class="animated fadeInLeft">>>AVISADO!</h1>
                           </div>
                         </section>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="footer-container">
-                        <footer class="wrapper">
-                          <div class="container">
-                            <h3>Trabajamos para ti, ¡Espéranos!</h3>
-                            <p>Para más información, <strong>puedes escribirnos a:</strong> 
-                              <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-                            </p>
+                      </div>
+                    </header>
+                    <section class="formulario-princ">
+                      <div class="container">
+                        <form class="form-inline">
+                          <div class="form-group">
+                            <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
                           </div>
-                        </footer>
-                        </div>
-                      </body>
-                    </html>
-                    <!-- partial -->
-                      
-                    </body>
-                    </html>
-                    ';
+                          <div class="form-group">
+                          <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
+                          <p>Por favor este pendiente de su correo para alguna novedad.</p>
+                          </div>
+                        </form>
+                      </div>
+                    </section>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="footer-container">
+                    <footer class="wrapper">
+                      <div class="container">
+                        <h3>Trabajamos para ti, ¡Espéranos!</h3>
+                        <p>Para más información, <strong>puedes escribirnos a:</strong> 
+                          <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
+                        </p>
+                      </div>
+                    </footer>
+                    </div>
+                  </body>
+                </html>
+                <!-- partial -->
+                  
+                </body>
+                </html>
+                ';
 
-              $mail->send();
-            } catch (Exception $e) {
-              echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            // Up! Next Value
-              $item1 = next($Codigo_Producto);
-              $item2 = next($Descripcion_Producto);
-              $item3 = next($Marca_Producto);
-              $item4 = next($Sello_Producto);
-              $item5 = next($Referencia);
-              $item6 = next($Observacion_Cliente);
-              $item7 = next($Aprobacion_Garantia);
-              $item8 = next($Aprobacion_GarantiaN);
-              $item9 = next($Estado); 
-            
-            // Check terminator
-            if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item8 === false&& $item9 === false) break;
-            header('Location: ?controller=garanty&method=sucessfull'); 
-          }
+          $mail->send();
+          header('Location: ?controller=garanty&method=sucessfull');
+        } catch (Exception $e) {
+          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+      }elseif ($dates[0]->Estado == 'Cerrado') {
+        $mail = new PHPMailer(true);
+
+        try {
+          //Server settings
+          $mail->SMTPDebug = 0;                      // Enable verbose debug output
+          $mail->isSMTP();                                            // Send using SMTP
+          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+          $mail->Password   = '1000464327bat';                               // SMTP password
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+          //Recipients
+          $mail->setFrom('nikomegathet666@gmail.com');
+          $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+
+          // Content
+          $mail->isHTML(true);                                  // Set email format to HTML
+          $mail->Subject = 'Solicitud de garantia';
+          $mail->Body    = '<!DOCTYPE html>
+                <html lang="en" >
+                <head>
+                  <meta charset="UTF-8">
+                  <title>CodePen - Avisado Prototipo</title>
+                  <link rel="stylesheet" href="./style.css">
+                
+                </head>
+                <body>
+                <!-- partial:index.partial.html -->
+                <html>
+                  <head>
+                    <meta charset="utf-8" />
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
+                    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+                    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                  </head>
+                  <body>
+                    <header>
+                      <div class="container">
+                        <section class="banner_row">
+                          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                              <figure class="animated fadeInLeft">
+                                <a href="index.html">
+                                  <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
+                                </a>
+                              </figure>
+                          </div>
+                          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <h1 class="animated fadeInLeft">>>AVISADO!</h1>
+                          </div>
+                        </section>
+                      </div>
+                    </header>
+                    <section class="formulario-princ">
+                      <div class="container">
+                        <form class="form-inline">
+                          <div class="form-group">
+                            <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
+                          </div>
+                          <div class="form-group">
+                          <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado. '</p><br>
+                          <p>Segun las observaciones de garantia: '.$data['Observacion_Empleado'].'.</p>
+                          </div>
+                        </form>
+                      </div>
+                    </section>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="footer-container">
+                    <footer class="wrapper">
+                      <div class="container">
+                        <h3>Trabajamos para ti, ¡Espéranos!</h3>
+                        <p>Para más información, <strong>puedes escribirnos a:</strong> 
+                          <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
+                        </p>
+                      </div>
+                    </footer>
+                    </div>
+                  </body>
+                </html>
+                <!-- partial -->
+                  
+                </body>
+                </html>
+                ';
+
+          $mail->send();
+          header('Location: ?controller=garanty&method=sucessfull'); 
+        } catch (Exception $e) {
+          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
       }
   }

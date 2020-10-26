@@ -25,10 +25,10 @@ class Garanty
         }
     }
 
-    public function getAlDetails()
+    public function getAlDetails($id)
     {
         try {
-            $strSql = "SELECT * FROM mg_detalle_garantia";
+            $strSql = "SELECT * FROM mg_detalle_garantia WHERE Id_Garantia = $id";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -72,7 +72,6 @@ class Garanty
     {
         try {
             $this->pdo->insert('mg_detalle_garantia',$data);
-            return true;
         } catch (PDOException $e) {
             die($e->getMessage());
         }
