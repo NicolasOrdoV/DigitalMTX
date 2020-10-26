@@ -101,14 +101,14 @@ class GarantyController
       $answerNewGaranty = $this->model->newGaranty($data);
       $lastId = $this->model->getLastId();
 
-      $Codigo_Producto = ($_POST['Codigo_Producto']);
-      $Descripcion_Producto = ($_POST['Descripcion_Producto']);
-      $Marca_Producto = ($_POST['Marca_Producto']);
-      $Sello_Producto = ($_POST['Sello_Producto']);
-      $Referencia = ($_POST['Referencia']);
+      $Codigo_Producto = $_POST['Codigo_Producto'];
+      $Descripcion_Producto = $_POST['Descripcion_Producto'];
+      $Marca_Producto = $_POST['Marca_Producto'];
+      $Sello_Producto = $_POST['Sello_Producto'];
+      $Referencia = $_POST['Referencia'];
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
-      $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
-      //$Aprobacion_GarantiaN = ($_POST['Aprobacion_GarantiaN']);
+      $Aprobacion_Garantia = isset($_POST['Aprobacion_Garantia']) ? $_POST['Aprobacion_Garantia'] : '' ;
+      $Aprobacion_GarantiaN = isset($_POST['Aprobacion_GarantiaN']) ? $_POST['Aprobacion_GarantiaN'] : '' ;
       $Estado = ($_POST['Estado']);
 
       while (true) {
@@ -118,19 +118,23 @@ class GarantyController
         $item4 = current($Sello_Producto);
         $item5 = current($Referencia);
         $item6 = current($Observacion_Cliente);
-        $item7 = current($Aprobacion_Garantia);
-        //$item8 = current($Aprobacion_GarantiaN);
+        if (!empty($Aprobacion_Garantia)) {
+          $item7 = current($Aprobacion_Garantia);
+        }
+        if (!empty($Aprobacion_GarantiaN)) {
+           $item8 = current($Aprobacion_GarantiaN);
+        }
         $item9 = current($Estado);
 
-        $cp = (($item1 !== false) ? $item1 : ", &nbsp;");
-        $dp = (($item2 !== false) ? $item2 : ", &nbsp;");
-        $mp = (($item3 !== false) ? $item3 : ", &nbsp;");
-        $sp = (($item4 !== false) ? $item4 : ", &nbsp;");
-        $rp = (($item5 !== false) ? $item5 : ", &nbsp;");
-        $op = (($item6 !== false) ? $item6 : ", &nbsp;");
-        $ag = (($item7 !== false) ? $item7 : ", &nbsp;");
-        $agN = (($item8 !== false) ? $item8 : ", &nbsp;");
-        $es = (($item9 !== false) ? $item9 : ", &nbsp;");
+        $cp = (($item1 !== false) ? $item1 : '');
+        $dp = (($item2 !== false) ? $item2 : '');
+        $mp = (($item3 !== false) ? $item3 : '');
+        $sp = (($item4 !== false) ? $item4 : '');
+        $rp = (($item5 !== false) ? $item5 : '');
+        $op = (($item6 !== false) ? $item6 : '');
+        $ag = (($item7 !== false) ? $item7 : '');
+        $agN = (($item8 !== false) ? $item8 : '');
+        $es = (($item9 !== false) ? $item9 : '');
 
         $detaills = [
           'Codigo_Producto' => $cp,
@@ -159,11 +163,15 @@ class GarantyController
         $item4 = next($Sello_Producto);
         $item5 = next($Referencia);
         $item6 = next($Observacion_Cliente);
-        $item7 = next($Aprobacion_Garantia);
-        //$item8 = next($Aprobacion_GarantiaN);
+        if (!empty($Aprobacion_Garantia)) {
+          $item7 = next($Aprobacion_Garantia);
+        }
+        if (!empty($Aprobacion_GarantiaN)) {
+          $item8 = next($Aprobacion_GarantiaN);
+        }
         $item9 = next($Estado);
         // Check terminator
-        if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item7 === false && $item9 === false) break;  
+        if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item9 === false) break;  
       }
       $dates = $this->model->getAlDetails($lastId[0]->id);
       if ($dates[0]->Estado == 'Tramite') {
