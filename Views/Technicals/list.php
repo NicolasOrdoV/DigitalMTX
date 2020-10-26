@@ -33,7 +33,7 @@
                                     <tbody>
                                         <?php foreach ($technicals as $technical) { ?>
                                             <tr>
-                                                <td><?php echo $technical->No_Garantia ?></td>
+                                                <td><?php echo $technical->No_garantia ?></td>
                                                 <td><?php echo $technical->Numero_Factura ?></td>
                                                 <td><?php echo $technical->Nombre_Cliente ?></td>
                                                 <td><?php echo $technical->Descripcion_Producto ?></td>
@@ -42,14 +42,9 @@
                                                 <td><?php echo $technical->Estado ?></td>
                                                 <td>
                                                     <div class="row clearfix">
-                                                        <?php if ($technical->Estado == "Pendiente") { ?>
+                                                        <?php if ($technical->Estado == "Tramite") { ?>
                                                             <div class="col-sm-6">
                                                                 <a href="?controller=technical&method=details&id=<?php echo $technical->id?>" class="btn btn-info"><i class="material-icons">add</i></a>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <?php if ($technical->Estado == "En revision") { ?>
-                                                            <div class="col-sm-6">
-                                                                <a href="?controller=technical&method=edit&id=<?php echo $technical->id?>" class="btn btn-warning"><i class="material-icons">brush</i></a>
                                                             </div>
                                                         <?php } ?>
                                                     </div>
