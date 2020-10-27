@@ -382,7 +382,7 @@ class GarantyController
   public function consecutive()
   {
     if (isset($_REQUEST['id'])) {
-      $mpdf = new \Mpdf\Mpdf();
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [40, 60]]);
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
 
@@ -405,7 +405,7 @@ class GarantyController
   public function ticket()
   {
     if (isset($_REQUEST['id'])) {
-      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [190, 236] , 'orientation' => 'L']);
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [100,180]]);
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
       $html = '';
@@ -418,15 +418,176 @@ class GarantyController
       }*/
       foreach ($data as $product) {
         $html = '';
-        $html .= '<h1>' . $data[0]->No_garantia . '</h1>
-                 <h1>' . $data[0]->Referencia . '</h1>
-                 <h1>' . $data[0]->Codigo_Producto . '</h1>
-                 <h1>' . $data[0]->Descripcion_Producto . '</h1>
-                 <h1>' . $product->Observacion_Cliente . '</h1>';
-                 $mpdf->AddPage('L');
-                 $mpdf->WriteHTML($html);
+        $html .= '<!DOCTYPE html>
+        <html lang="en" >
+        <head>
+          <meta charset="UTF-8">
+          <title>Ticket</title>
+          <style type="text/css">
+
+          .cardWrap {
+          width: 290px;
+          margin: 3em auto;
+          color: #fff;
+          font-family: sans-serif;
+        }
+
+        .card {
+          background: linear-gradient(to top, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
+          height: 11em;
+          float: left;
+          position: top;
+          padding: 1em;
+          margin-top: 90px;
+        }
+
+        .cardLeft {
+          border-radius: 8px;
+          border-bottom-radius: 8px;
+          width: 16em;
+        }
+
+        .cardRight {
+          width: 6.5em;
+          border-left: .18em dashed #fff;
+          border-top-right-radius: 8px;
+          border-bottom-right-radius: 8px;
+        }
+        .cardRight:before, .cardRight:after {
+          content: "";
+          position: absolute;
+          display: block;
+          width: .9em;
+          height: .9em;
+          background: #fff;
+          border-radius: 50%;
+          left: -.5em;
+        }
+        .cardRight:before {
+          top: -.4em;
+        }
+        .cardRight:after {
+          bottom: -.4em;
+        }
+
+        h1 {
+          font-size: 1.1em;
+          margin-top: 0;
+        }
+        h1 span {
+          font-weight: normal;
+        }
+
+        .title, .name, .seat, .time {
+          text-transform: uppercase;
+          font-weight: normal;
+        }
+        .title h2, .name h2, .seat h2, .time h2 {
+          font-size: .9em;
+          color: #525252;
+          margin: 0;
+        }
+        .title span, .name span, .seat span, .time span {
+          font-size: .7em;
+          color: #a2aeae;
+        }
+
+        .title {
+          margin: 2em 0 0 0;
+        }
+
+        .name, .seat {
+          margin: .7em 0 0 0;
+        }
+
+        .time {
+          margin: .7em 0 0 1em;
+        }
+
+        .seat, .time {
+          float: left;
+        }
+
+        .eye {
+          position: relative;
+          width: 2em;
+          height: 1.5em;
+          background: #fff;
+          margin: 0 auto;
+          border-radius: 1em/0.6em;
+          z-index: 1;
+        }
+        .eye:before, .eye:after {
+          content: "";
+          display: block;
+          position: absolute;
+          border-radius: 50%;
+        }
+        .eye:before {
+          width: 1em;
+          height: 1em;
+          background: #e84c3d;
+          z-index: 2;
+          left: 8px;
+          top: 4px;
+        }
+        .eye:after {
+          width: .5em;
+          height: .5em;
+          background: #fff;
+          z-index: 3;
+          left: 12px;
+          top: 8px;
+        }
+
+        .number {
+          text-align: center;
+          text-transform: uppercase;
+        }
+        .number h3 {
+          color: #e84c3d;
+          margin: .9em 0 0 0;
+          font-size: 2.5em;
+        }
+        .number span {
+          display: block;
+          color: #a2aeae;
+        }
+          </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+        </head>
+        <body>
+        <!-- partial:index.partial.html -->
+        <div class="cardWrap">
+          <div class="card cardLeft">
+            <h1>Sticker <span>garantia</span></h1>
+            <div class="title">
+              <h2>'.$product->Descripcion_Producto.'</h2>
+              <span>Descripcion producto</span>
+            </div>
+            <div class="name">
+              <h2>'.$product->Observacion_Cliente.'</h2>
+              <span>observacion del cliente</span>
+            </div>
+            <div class="seat">
+              <h2>'.$data[0]->No_garantia.'</h2>
+              <span>Numero garantia</span>
+            </div>
+            <div class="seat">
+              <h2>'.$data[0]->Referencia.'</h2>
+              <span>Referencia</span>
+            </div>
+          </div>
+        </div>
+        <!-- partial -->
+          
+        </body>
+        </html>
+        ';
+        $mpdf->AddPage('L');
+        $mpdf->WriteHTML($html);
       }
-      
       $mpdf->Output();
     }
   }
