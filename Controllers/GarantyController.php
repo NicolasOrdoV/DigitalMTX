@@ -383,593 +383,122 @@ class GarantyController
   public function consecutive()
   {
     if (isset($_REQUEST['id'])) {
-      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [130, 120]]);
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A5']);
       $id = $_REQUEST['id'];
-      $data = $this->model->getById($id);
-
-      /*foreach ($data as $product) {
+      $dates = $this->model->getById($id);
+      $html = '';
+      /*foreach ($dates as $product) {
         echo $product->Descripcion_Producto.'<br>';
       }*/
       //$productos = [];
-      foreach ($data as $product) {
-        $html = '';
-        $html .= '
-        <!DOCTYPE html>
+      foreach ($dates as $producte) {
+        $html = '<!DOCTYPE html>
         <html lang="en" >
         <head>
           <meta charset="UTF-8">
-          <title>Garantía Digital MTX </title>
-          <style  type="text/css">
-          html,
-        body,
-        div,
-        span,
-        applet,
-        object,
-        iframe,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        blockquote,
-        pre,
-        a,
-        abbr,
-        acronym,
-        address,
-        big,
-        cite,
-        code,
-        del,
-        dfn,
-        em,
-        img,
-        ins,
-        kbd,
-        q,
-        s,
-        samp,
-        small,
-        strike,
-        strong,
-        sub,
-        sup,
-        tt,
-        var,
-        b,
-        u,
-        i,
-        center,
-        dl,
-        dt,
-        dd,
-        ol,
-        ul,
-        li,
-        fieldset,
-        form,
-        label,
-        legend,
-        table,
-        caption,
-        tbody,
-        tfoot,
-        thead,
-        tr,
-        th,
-        td,
-        article,
-        aside,
-        canvas,
-        details,
-        embed,
-        figure,
-        figcaption,
-        footer,
-        header,
-        hgroup,
-        menu,
-        nav,
-        output,
-        ruby,
-        section,
-        summary,
-        time,
-        mark,
-        audio,
-        video {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-size: 100%;
-            font: inherit;
-            vertical-align: baseline;
-        }
-        
-        body {
-            width: 100%;
-            font-size: 12px;
-        }
-        
-        
-        /* HTML5 display-role reset for older browsers */
-        
-        article,
-        aside,
-        details,
-        figcaption,
-        figure,
-        footer,
-        header,
-        hgroup,
-        menu,
-        nav,
-        section {
-            display: block;
-        }
-        
-        body {
-            line-height: 1;
-        }
-        
-        div.header {
-            padding-top: 140px;
-        }
-        
-        ol,
-        ul {
-            list-style: none;
-        }
-        
-        blockquote,
-        q {
-            quotes: none;
-        }
-        
-        blockquote:before,
-        blockquote:after,
-        q:before,
-        q:after {
-            content: "";
-            content: none;
-        }
-        
-        table {
-            border-spacing: 0;
-        }
-        
-        
-        /*Clearrrr*/
-        
-        img {
-            opacity: 0.5;
-            filter: alpha(opacity=50);
-            width: 40%;
-            height: auto;
-        }
-        
-        html {
-            font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif
-        }
-        
-        table#signature {
-            width: 50%
-        }
-        
-        body table,
-        th,
-        td {
-            padding: 3px;
-        }
-        
-        
-        /*Tamaño de encabezado*/
-        
-        table#header {
-            border-collapse: collapse;
-            width: 50%;
-        }
-        
-        
-        /*Estilo tabla con borde*/
-        
-        table.wborder {
-            border: 1.5px solid black;
-            border-collapse: collapse;
-            width: 85%;
-        }
-        
-        table.wborder th,
-        td.clear,
-        th.clear,
-        tr.clear,
-        tr.clear td {
-            border: 1px solid black;
-        }
-        
-        table.wborder1sub1,
-        table.wborder1sub2 {
-            width: 90%;
-        }
-        
-        table.wborder1sub1 tr:first-child {
-            boder-left: 1px solid black;
-        }
-        
-        table.wborder1sub1 tr:first-child th:first-child {
-            border-top-left-radius: 10px;
-            paddind: 0px;
-            background-color: gray;
-            border-top: 1px solid black;
-            border-left: 1px solid black;
-            border-right: 1px solid black;
-        }
-        
-        table.wborder1sub1 tr:first-child th:last-child {
-            border-top-right-radius: 10px;
-            paddind: 0px;
-            background-color: gray;
-            border-top: 1px solid black;
-            border-right: 1px solid black;
-            border-spacing: 0px;
-        }
-        
-        table.wborder1sub2 tr th,
-        table.wborder1sub1 tr th {
-            paddind: 0px;
-            background-color: gray;
-            border-top: 1px solid black;
-            border-right: 1px solid black;
-            border-spacing: 0px;
-        }
-        
-        table.wborder1sub1 {
-            margin: 0;
-        }
-        
-        table.wborder1sub2 tr:last-child td:first-child {
-            border-bottom-left-radius: 10px;
-            border-Bottom: 1px solid black;
-            border-left: 1px solid black;
-        }
-        
-        table.wborder1sub2 tr:last-child td:last-child {
-            border-bottom-right-radius: 10px;
-            border-bottom: 1px solid black;
-            border-right: 1px solid black;
-        }
-        
-        table.wborder1sub1 tr td {
-            border-right: 1px solid black;
-        }
-        
-        table.wborder1sub1 tr td:first-child {
-            border-left: 1px solid black;
-        }
-        
-        table.wborder1 tr:first-child th:first-child {
-            border-top-left-radius: 10px;
-            border-left: 1px solid black;
-            border-top: 1px solid black;
-        }
-        
-        table.wborder1 tr th {
-            background-color: gray;
-            padding-left: 23px;
-            padding-right: 23px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        
-        table.wborder1 tr:first-child th:last-child {
-            border-top-right-radius: 10px;
-            border-right: 1px solid black;
-            border-top: 1px solid black;
-        }
-        
-        table.wborder1 tr:last-child td:first-child {
-            border-bottom-left-radius: 10px;
-            border-left: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-        
-        table.wborder1 tr td {
-            padding-left: 23px;
-            padding-right: 23px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-left: 1px solid black;
-        }
-        
-        table.wborder1 tr:last-child td:last-child {
-            border-bottom-right-radius: 10px;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-        
-        
-        /*Estilo tabla sin borde*/
-        
-        table.clear,
-        table.clear th,
-        td.clear,
-        th.clear,
-        tr.clear,
-        tr.clear td {
-            border: 0px;
-            padding: 0px;
-        }
-        
-        table.clear {
-            border-collapse: collapse;
-            width: 75%;
-        }
-        
-        table.clear2 {
-            border-collapse: collapse;
-            width: 20%;
-        }
-        
-        table.wborder2 tr:last-child td:last-child {
-            border-radius: 10px;
-            border: 1px solid black;
-            width: 30%;
-            vertical-align: text-top;
-            heigth: 150px;
-        }
-        
-        table.wborder2 tr:first-child td:first-child {
-            width: 30%;
-            border-radius: 10px;
-            vertical-align: text-top;
-            border: 1px solid black;
-            heigth: 150px;
-        }
-        
-        table.wborder2 tr {
-            width: 100%;
-            heigth: 150px;
-        }
-        
-        table.wborder2 {
-            width: 95%;
-            margin: 10px;
-        }
-        
-        td.thsmall {
-            width: 2%;
-        }
-        
-        th.small {
-            width: 10%;
-        }
-        
-        th.medium {
-            width: 16%;
-        }
-        
-        th.small2 {
-            width: 12%;
-        }
-        
-        th.big {
-            width: 30%;
-        }
-        
-        th.big2 {
-            width: 45%;
-        }
-        
-        table.wborder1sub2 tr td {
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-        
-        .fclose td:first-child {
-            border-bottom-left-radius: 10px;
-            vertical-align: text-top;
-            border-left: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-        
-        .fclose td:last-child {
-            width: 30%;
-            border-bottom-right-radius: 10px;
-            vertical-align: text-top;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
-        }
-        
-        .fclose td {
-            border-bottom: 1px solid black;
-        }
-        
-        .fclose {}
-        
-        .wborder1sub3 {
-            aling: left;
-        }
-        
-        table.t4 {
-            width: 20%;
-            align: left;
-            position: absolute;
-            right: 5%;
-        }
-        
-        table.t4 tr {
-            heigth: 200px;
-        }
-        
-        p.leftT {
-            width: 60%;
-            position: absolute;
-            left: 5%;
-        }
-        
-        table.wborder3 {
-            width: 90%;
-            border-radius: 10px;
-            vertical-align: text-top;
-            border: 1px solid black;
-            height: 120px;
-        }
-        
-        table.wborder4 {
-            width: 90%;
-            border-radius: 10px;
-            vertical-align: text-top;
-            border: 1px solid black;
-            height: 200px;
-        }
-        
-        img {
-            width: 300px;
-        }
-        
-        table.wborder1 {
-            position: absolute;
-            top: 75px;
-            right: 15%;
-            width: 200px;
-        }
-        
-        table.wborder4 tr td {
-            border-right: 1px solid black;
-        }
-        
-        table.wborder4 tr td:last-child {
-            border-right: 0;
-        }
-        </style>
+          <title>CodePen - PDF Factura Ecuador</title>
+          
+
         </head>
-        <!-- partial:index.partial.html -->
-        <!DOCTYPE html>
-        <html>
         <body>
-          <div class = header>
-            <table id = "header" class="clear"><tr class="clear">
-            <td ><img src="h" stylesheet = "padding-top:140px"></td>
-            <td class="clear">
-            <table class="wborder1">
-            <tr><th>
-            <p>NUMERO GARANTIA</p>
-            </th></tr>
-            <td><p>'.$data[0]->No_garantia.'</p></td>
-            </tr></table></td>
-            </tr></table></td>
-           
-        <div>
-            </Header>
+        <!-- partial:index.partial.html -->
         <center>
-          <!-- Titulo -->
-        
-          
-          <table class="wborder1" >
-            <table class="wborder1sub1" >
-            <tr> 
-              <th class="medium">FACTURA NO.</th> 
-              <th class="medium">PUNTO DE VENTA </th>
-              <th class="medium">NOMBRE CLIENTE</th>
-              <th class="medium">DOCUMENTO</th>
-              <th  class="medium">CORREO</th>
-               <th  class="medium">DIRECCION</th>
-           
-            </tr> 
-            
-            <tr>
-              <td>'.$data[0]->Numero_Factura.'</td>
-              <td>'.$data[0]->Punto_Venta.'</td>
-              <td>'.$data[0]->Nombre_Cliente.'</td>
-              <td>'.$data[0]->Numero_Factura.'</td>
-              <td>'.$data[0]->Identificacion_Cliente.'</td>
-              <td>'.$data[0]->Direccion_Cliente.'</td>
-              
-            </tr>
-              </table>
+          <div style="width: 580px;">
+            <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
+              <tr>
+                <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
+                  <img src="http://siwcargo.com/img/logo.png" alt="" width="70px">
+                  <div style="display: inline-block; margin-left: 320px;">
+                    <p style="font-weight: bold;">SIW CARGO S.A.</p>
+                    <p>Fecha de impresion: ${pParam.fecha_emision}</p>
+                  </div>
+                  <hr>
+                  <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Compra/Venta: ${pPram.pos}</b></p>
+                </td>
               </tr>
-            <tr>
-            <table class="wborder1sub2">
-               <tr> 
-              <th class = "small"> PROVEEDOR </th> 
-              <th class = "small"> FLETE </th>
-              <th class = "small"> DEPARTAMENTO </th>
-              <th class = "medium"> MUNICIPIO </th>
-              <th class = "medium"> VALOR FLETE </th>
-              <th class = "small"> NUMERO GUIA </th>
-              <th class = "small"> TRANSPORTADORA </th>
-              <th class = "big2"> OBSERVACION CLIENTE </th>
-              
-              
-            </tr> 
-            <tr>
-              <td>'.$data[0]->Proveedor.'</td>
-              <td>'.$data[0]->Flete.'</td>
-              <td>'.$data[0]->Departamento.'</td>
-              <td>'.$data[0]->Municipio.'</td>
-              <td>'.$data[0]->Valor_Flete.'</td>
-              <td>'.$data[0]->No_Guia.'</td>
-              <td>'.$data[0]->Transportadora.'</td>
-              <td>'.$product->Observacion_Cliente.'</td>
-              
-            </tr>
+              <tr>
+                <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
+                  <p><b>Fecha de emisión:</b> ${pParam.fecha_emision}</p>
+                  <P><b>Documento:</b>${pParam.tipo_documento} ${pParam.documento}</p>
+                  <p><b>Cliente:</b> ${pParam.persona.razon_social}</p>
+                  <p><b>Estado:</b> ${pParam.estado}</p>
+                  <p><b>Dirección:</b> ${pParam.persona.direccion}</p>
+                </td>
+                <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+                  <p><b>Vencimiento:</b> ${pParam.fecha_vencimiento}</p>
+                  <p><b>Autorización:</b> ${pParam.autorizacion}</p>
+                  <p><b>RUC:</b> ${pParam.persona.ruc}</p>
+                </td>
+              </tr>
             </table>
+
+            <p style="font-size: 12px; text-align: left;"><b><i><u>Bienes/Servicios</u></i></b></p>
+            <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+              <tr>
+                <th>Cantidad</th>
+                <th>Codigo</th>
+                <th>Bien/Servicio</th>
+                <th>Detalle</th>
+                <th>Precio</th>
               </tr>
-          </table>
-        <br> <br>
-            <!-- Tabla sin bordes -->
-          <table >
-            
-          </table>
-            <table class="wborder1sub1">
-              <tr >
-                  <th class = "small2">CODIGO PRODUCTO</th>
-                  <th class = "big">DESCRIPCION PRODUCTO</th>
-                  <th class = "small2">MARCA PRODUCTO</th>
-                  <th class = "small2">SELLO PRODUCTO</th>
-                  <th class = "small2">REFERENCIA</th>
-                  <th class = "small2">ESTADO</th>
-                </tr>
-                <tr height="350px" >
-                  <td>'.$product->Codigo_Producto.'</td>
-                  <td>'.$product->Descripcion_Producto.'</td>
-                  <td>'.$product->Marca_Producto.'</td>
-                  <td>'.$product->Sello_Producto.'</td>
-                  <td>'.$product->Referencia.'</td>
-                  <td>'.$product->Estado.'</td>
-              </tr >
-                  <tr class="fclose">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+              <tr>
+                <td>${pParam.detalles.cantidad}</td>
+                <td>${pParam.detalles.producto_id}</td>
+                <td>${pParam.detalles.producto_nombre}</td>
+                <td>${pParam.detalles.producto_nombre}</td>
+                <td>${pParam.detalles.precio}</td>
               </tr>
-            </table><div calss="left">
-          
+            </table><br>
+
+            <p style="font-size: 12px; text-align: left;"><b><i><u>Asiento Contable</u></i></b></p>
+            <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+              <tr>
+                <th>Cuenta</th>
+                <th>Debe</th>
+                <th>Haber</th>
+                <th>Centro de Costo</th>
+              </tr>
+              <tr>
+                <td>${pParam.cuenta}</td>
+                <td>${pParam.debe}</td>
+                <td>${pParam.haber}</td>
+                <td>${pParam.centroDeCosto}</td>
+              </tr>
+            </table><br>
+
+            <p style="font-size: 12px; text-align: left;"><b><i><u>Formas de Pago</u></i></b></p>
+            <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+              <tr>
+                <th>Forma de Pago</th>
+                <th>Plazo</th>
+                <th>Unid. tiempo</th>
+                <th>Valor</th>
+              </tr>
+              <tr>
+                <td>${pParam.cobros.forma_cobro}</td>
+                <td>${pParam.cobros.plazo}</td>
+                <td>${pParam.cobros.unid_tiempo}</td>
+                <td>${pParam.cobros.monto}</td>
+              </tr>
+            </table><br>
+
+            <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
+              <div>
+                <div style="display:table; margin:auto; text-align:left;">
+                  <p><b>Descripción:</b> ${pParam.descripcion}</p>
+                </div>
+              </div>
+            </div><br>
+
           </div>
-        </TABLE>
-            <p class="leftT">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-         <br></br>
-          <br></br>
-        
-          <table class="wborder3">
-            <tr ><th>Observaciones Garantia</th></tr>
-            <tr><td> '.$data[0]->Observacion_Empleado.' <td></tr>
-         
-          </table>
-             
-         <br><br>
         </center>
+        <!-- partial -->
+          
         </body>
         </html>
-        <!-- partial -->';
-        $mpdf->WriteHTML($html);
+        ';
       }
+      $mpdf->WriteHTML($html);
       $mpdf->Output();
     }
   }
