@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require 'Models/Garanty.php';
 require 'Models/Client.php';
@@ -76,126 +76,126 @@ class GarantyController
 
   public function save()
   {
-      $data = [
-        'No_Garantia' => $_POST['No_Garantia'],
-        'Fecha_ingreso' => $_POST['Fecha_ingreso'],
-        'Hora_ingreso' => $_POST['Hora_ingreso'],
-        'Numero_Factura' => $_POST['Numero_Factura'],
-        'Punto_Venta' => $_POST['Punto_Venta'],
-        'Fecha_Compra' => $_POST['Fecha_Compra'],
-        'Nombre_Cliente' => $_POST['Nombre_Cliente'],
-        'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
-        'Correo_Cliente' => $_POST['Correo_Cliente'],
-        'Direccion_Cliente' => $_POST['Direccion_Cliente'],
-        'Proveedor' => $_POST['Proveedor'],
-        'Flete' => $_POST['Flete'],
-        'Departamento' => $_POST['Departamento'],
-        'Municipio' => $_POST['Municipio'],
-        'Valor_Flete' => $_POST['Valor_Flete'],
-        'No_Guia' => $_POST['No_Guia'],
-        'Transportadora' => $_POST['Transportadora'],
-        'Observacion_Empleado' => $_POST['Observacion_Empleado'],
-        'Empleado' => $_POST['Empleado']
-      ];
-      
-      $answerNewGaranty = $this->model->newGaranty($data);
-      $lastId = $this->model->getLastId();
+    $data = [
+      'No_Garantia' => $_POST['No_Garantia'],
+      'Fecha_ingreso' => $_POST['Fecha_ingreso'],
+      'Hora_ingreso' => $_POST['Hora_ingreso'],
+      'Numero_Factura' => $_POST['Numero_Factura'],
+      'Punto_Venta' => $_POST['Punto_Venta'],
+      'Fecha_Compra' => $_POST['Fecha_Compra'],
+      'Nombre_Cliente' => $_POST['Nombre_Cliente'],
+      'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
+      'Correo_Cliente' => $_POST['Correo_Cliente'],
+      'Direccion_Cliente' => $_POST['Direccion_Cliente'],
+      'Proveedor' => $_POST['Proveedor'],
+      'Flete' => $_POST['Flete'],
+      'Departamento' => $_POST['Departamento'],
+      'Municipio' => $_POST['Municipio'],
+      'Valor_Flete' => $_POST['Valor_Flete'],
+      'No_Guia' => $_POST['No_Guia'],
+      'Transportadora' => $_POST['Transportadora'],
+      'Observacion_Empleado' => $_POST['Observacion_Empleado'],
+      'Empleado' => $_POST['Empleado']
+    ];
 
-      $Codigo_Producto = $_POST['Codigo_Producto'];
-      $Descripcion_Producto = $_POST['Descripcion_Producto'];
-      $Marca_Producto = $_POST['Marca_Producto'];
-      $Sello_Producto = $_POST['Sello_Producto'];
-      $Referencia = $_POST['Referencia'];
-      $Observacion_Cliente = ($_POST['Observacion_Cliente']);
-      $Aprobacion_Garantia = isset($_POST['Aprobacion_Garantia']) ? $_POST['Aprobacion_Garantia'] : '' ;
-      $Aprobacion_GarantiaN = isset($_POST['Aprobacion_GarantiaN']) ? $_POST['Aprobacion_GarantiaN'] : '' ;
-      $Estado = ($_POST['Estado']);
+    $answerNewGaranty = $this->model->newGaranty($data);
+    $lastId = $this->model->getLastId();
 
-      while (true) {
-        $item1 = current($Codigo_Producto);
-        $item2 = current($Descripcion_Producto);
-        $item3 = current($Marca_Producto);
-        $item4 = current($Sello_Producto);
-        $item5 = current($Referencia);
-        $item6 = current($Observacion_Cliente);
-        if (!empty($Aprobacion_Garantia)) {
-          $item7 = current($Aprobacion_Garantia);
-        }
-        if (!empty($Aprobacion_GarantiaN)) {
-           $item8 = current($Aprobacion_GarantiaN);
-        }
-        $item9 = current($Estado);
+    $Codigo_Producto = $_POST['Codigo_Producto'];
+    $Descripcion_Producto = $_POST['Descripcion_Producto'];
+    $Marca_Producto = $_POST['Marca_Producto'];
+    $Sello_Producto = $_POST['Sello_Producto'];
+    $Referencia = $_POST['Referencia'];
+    $Observacion_Cliente = ($_POST['Observacion_Cliente']);
+    $Aprobacion_Garantia = isset($_POST['Aprobacion_Garantia']) ? $_POST['Aprobacion_Garantia'] : '';
+    $Aprobacion_GarantiaN = isset($_POST['Aprobacion_GarantiaN']) ? $_POST['Aprobacion_GarantiaN'] : '';
+    $Estado = ($_POST['Estado']);
 
-        $cp = (($item1 !== false) ? $item1 : '');
-        $dp = (($item2 !== false) ? $item2 : '');
-        $mp = (($item3 !== false) ? $item3 : '');
-        $sp = (($item4 !== false) ? $item4 : '');
-        $rp = (($item5 !== false) ? $item5 : '');
-        $op = (($item6 !== false) ? $item6 : '');
-        $ag = (($item7 !== false) ? $item7 : '');
-        $agN = (($item8 !== false) ? $item8 : '');
-        $es = (($item9 !== false) ? $item9 : '');
-
-        $detaills = [
-          'Codigo_Producto' => $cp,
-          'Descripcion_Producto' => $dp,
-          'Marca_Producto' => $mp,
-          'Sello_Producto' => $sp,
-          'Referencia' => $rp,
-          'Id_Garantia' => $lastId[0]->id,
-          'Observacion_Cliente' => $op,
-          'Aprobacion_Garantia' => $ag,
-          'Estado' => $es
-        ];
-
-        if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag == 'SI'){
-          $this->model->saveDetail($detaills);
-        }else{
-          $detaills['Estado'] = "Cerrado";
-          $detaills['Aprobacion_Garantia'] = 'NO';
-          $this->model->saveDetail($detaills);
-        }
-         
-         // Up! Next Value
-        $item1 = next($Codigo_Producto);
-        $item2 = next($Descripcion_Producto);
-        $item3 = next($Marca_Producto);
-        $item4 = next($Sello_Producto);
-        $item5 = next($Referencia);
-        $item6 = next($Observacion_Cliente);
-        if (!empty($Aprobacion_Garantia)) {
-          $item7 = next($Aprobacion_Garantia);
-        }
-        if (!empty($Aprobacion_GarantiaN)) {
-          $item8 = next($Aprobacion_GarantiaN);
-        }
-        $item9 = next($Estado);
-        // Check terminator
-        if($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item9 === false) break;  
+    while (true) {
+      $item1 = current($Codigo_Producto);
+      $item2 = current($Descripcion_Producto);
+      $item3 = current($Marca_Producto);
+      $item4 = current($Sello_Producto);
+      $item5 = current($Referencia);
+      $item6 = current($Observacion_Cliente);
+      if (!empty($Aprobacion_Garantia)) {
+        $item7 = current($Aprobacion_Garantia);
       }
-      $dates = $this->model->getAlDetails($lastId[0]->id);
-      if ($dates[0]->Estado == 'Tramite') {
-        $mail = new PHPMailer(true);
+      if (!empty($Aprobacion_GarantiaN)) {
+        $item8 = current($Aprobacion_GarantiaN);
+      }
+      $item9 = current($Estado);
 
-        try {
-          //Server settings
-          $mail->SMTPDebug = 0;                      // Enable verbose debug output
-          $mail->isSMTP();                                            // Send using SMTP
-          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-          $mail->Password   = '1000464327bat';                               // SMTP password
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+      $cp = (($item1 !== false) ? $item1 : '');
+      $dp = (($item2 !== false) ? $item2 : '');
+      $mp = (($item3 !== false) ? $item3 : '');
+      $sp = (($item4 !== false) ? $item4 : '');
+      $rp = (($item5 !== false) ? $item5 : '');
+      $op = (($item6 !== false) ? $item6 : '');
+      $ag = (($item7 !== false) ? $item7 : '');
+      $agN = (($item8 !== false) ? $item8 : '');
+      $es = (($item9 !== false) ? $item9 : '');
 
-          //Recipients
-          $mail->setFrom('nikomegathet666@gmail.com');
-          $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+      $detaills = [
+        'Codigo_Producto' => $cp,
+        'Descripcion_Producto' => $dp,
+        'Marca_Producto' => $mp,
+        'Sello_Producto' => $sp,
+        'Referencia' => $rp,
+        'Id_Garantia' => $lastId[0]->id,
+        'Observacion_Cliente' => $op,
+        'Aprobacion_Garantia' => $ag,
+        'Estado' => $es
+      ];
 
-          // Content
-          $mail->isHTML(true);                                  // Set email format to HTML
-          $mail->Subject = 'Solicitud de garantia';
-          $mail->Body    = '<!DOCTYPE html>
+      if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag == 'SI') {
+        $this->model->saveDetail($detaills);
+      } else {
+        $detaills['Estado'] = "Cerrado";
+        $detaills['Aprobacion_Garantia'] = 'NO';
+        $this->model->saveDetail($detaills);
+      }
+
+      // Up! Next Value
+      $item1 = next($Codigo_Producto);
+      $item2 = next($Descripcion_Producto);
+      $item3 = next($Marca_Producto);
+      $item4 = next($Sello_Producto);
+      $item5 = next($Referencia);
+      $item6 = next($Observacion_Cliente);
+      if (!empty($Aprobacion_Garantia)) {
+        $item7 = next($Aprobacion_Garantia);
+      }
+      if (!empty($Aprobacion_GarantiaN)) {
+        $item8 = next($Aprobacion_GarantiaN);
+      }
+      $item9 = next($Estado);
+      // Check terminator
+      if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item9 === false) break;
+    }
+    $dates = $this->model->getAlDetails($lastId[0]->id);
+    if ($dates[0]->Estado == 'Tramite') {
+      $mail = new PHPMailer(true);
+
+      try {
+        //Server settings
+        $mail->SMTPDebug = 0;                      // Enable verbose debug output
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+        $mail->Password   = '1000464327bat';                               // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+        //Recipients
+        $mail->setFrom('nikomegathet666@gmail.com');
+        $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Solicitud de garantia';
+        $mail->Body    = '<!DOCTYPE html>
                 <html lang="en" >
                 <head>
                   <meta charset="UTF-8">
@@ -267,33 +267,33 @@ class GarantyController
                 </html>
                 ';
 
-          $mail->send();
-          header('Location: ?controller=garanty&method=sucessfull');
-        } catch (Exception $e) {
-          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-      }elseif ($dates[0]->Estado == 'Cerrado') {
-        $mail = new PHPMailer(true);
+        $mail->send();
+        header('Location: ?controller=garanty&method=sucessfull');
+      } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+      }
+    } elseif ($dates[0]->Estado == 'Cerrado') {
+      $mail = new PHPMailer(true);
 
-        try {
-          //Server settings
-          $mail->SMTPDebug = 0;                      // Enable verbose debug output
-          $mail->isSMTP();                                            // Send using SMTP
-          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-          $mail->Password   = '1000464327bat';                               // SMTP password
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+      try {
+        //Server settings
+        $mail->SMTPDebug = 0;                      // Enable verbose debug output
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+        $mail->Password   = '1000464327bat';                               // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-          //Recipients
-          $mail->setFrom('nikomegathet666@gmail.com');
-          $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+        //Recipients
+        $mail->setFrom('nikomegathet666@gmail.com');
+        $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
 
-          // Content
-          $mail->isHTML(true);                                  // Set email format to HTML
-          $mail->Subject = 'Solicitud de garantia';
-          $mail->Body    = '<!DOCTYPE html>
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Solicitud de garantia';
+        $mail->Body    = '<!DOCTYPE html>
                 <html lang="en" >
                 <head>
                   <meta charset="UTF-8">
@@ -338,8 +338,8 @@ class GarantyController
                             <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
                           </div>
                           <div class="form-group">
-                          <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado. '</p><br>
-                          <p>Segun las observaciones de garantia: '.$data['Observacion_Empleado'].'.</p>
+                          <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
+                          <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
                           </div>
                         </form>
                       </div>
@@ -365,15 +365,16 @@ class GarantyController
                 </html>
                 ';
 
-          $mail->send();
-          header('Location: ?controller=garanty&method=sucessfull'); 
-        } catch (Exception $e) {
-          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
+        $mail->send();
+        header('Location: ?controller=garanty&method=sucessfull');
+      } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
+    }
   }
-   
-  public function sucessfull(){
+
+  public function sucessfull()
+  {
     require 'Views/Layout.php';
     require 'Views/Garanty/succesfull.php';
     require 'Views/Scripts.php';
@@ -382,7 +383,7 @@ class GarantyController
   public function consecutive()
   {
     if (isset($_REQUEST['id'])) {
-      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [40, 60]]);
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [130, 120]]);
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
 
@@ -391,13 +392,584 @@ class GarantyController
       }*/
       //$productos = [];
       foreach ($data as $product) {
-        $html = '
-          <p>'.$data[0]->No_garantia.'</p><br>
-          <p>'.$product->Descripcion_Producto.'</p><br>
-          <p>'.$product->Codigo_Producto.'</p><br>
-        '; 
+        $html = '';
+        $html .= '
+        <!DOCTYPE html>
+        <html lang="en" >
+        <head>
+          <meta charset="UTF-8">
+          <title>Garantía Digital MTX </title>
+          <style  type="text/css">
+          html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        
+        body {
+            width: 100%;
+            font-size: 12px;
+        }
+        
+        
+        /* HTML5 display-role reset for older browsers */
+        
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+        
+        body {
+            line-height: 1;
+        }
+        
+        div.header {
+            padding-top: 140px;
+        }
+        
+        ol,
+        ul {
+            list-style: none;
+        }
+        
+        blockquote,
+        q {
+            quotes: none;
+        }
+        
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none;
+        }
+        
+        table {
+            border-spacing: 0;
+        }
+        
+        
+        /*Clearrrr*/
+        
+        img {
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            width: 40%;
+            height: auto;
+        }
+        
+        html {
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif
+        }
+        
+        table#signature {
+            width: 50%
+        }
+        
+        body table,
+        th,
+        td {
+            padding: 3px;
+        }
+        
+        
+        /*Tamaño de encabezado*/
+        
+        table#header {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        
+        
+        /*Estilo tabla con borde*/
+        
+        table.wborder {
+            border: 1.5px solid black;
+            border-collapse: collapse;
+            width: 85%;
+        }
+        
+        table.wborder th,
+        td.clear,
+        th.clear,
+        tr.clear,
+        tr.clear td {
+            border: 1px solid black;
+        }
+        
+        table.wborder1sub1,
+        table.wborder1sub2 {
+            width: 90%;
+        }
+        
+        table.wborder1sub1 tr:first-child {
+            boder-left: 1px solid black;
+        }
+        
+        table.wborder1sub1 tr:first-child th:first-child {
+            border-top-left-radius: 10px;
+            paddind: 0px;
+            background-color: gray;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+        }
+        
+        table.wborder1sub1 tr:first-child th:last-child {
+            border-top-right-radius: 10px;
+            paddind: 0px;
+            background-color: gray;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            border-spacing: 0px;
+        }
+        
+        table.wborder1sub2 tr th,
+        table.wborder1sub1 tr th {
+            paddind: 0px;
+            background-color: gray;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            border-spacing: 0px;
+        }
+        
+        table.wborder1sub1 {
+            margin: 0;
+        }
+        
+        table.wborder1sub2 tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+            border-Bottom: 1px solid black;
+            border-left: 1px solid black;
+        }
+        
+        table.wborder1sub2 tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+        }
+        
+        table.wborder1sub1 tr td {
+            border-right: 1px solid black;
+        }
+        
+        table.wborder1sub1 tr td:first-child {
+            border-left: 1px solid black;
+        }
+        
+        table.wborder1 tr:first-child th:first-child {
+            border-top-left-radius: 10px;
+            border-left: 1px solid black;
+            border-top: 1px solid black;
+        }
+        
+        table.wborder1 tr th {
+            background-color: gray;
+            padding-left: 23px;
+            padding-right: 23px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        
+        table.wborder1 tr:first-child th:last-child {
+            border-top-right-radius: 10px;
+            border-right: 1px solid black;
+            border-top: 1px solid black;
+        }
+        
+        table.wborder1 tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        
+        table.wborder1 tr td {
+            padding-left: 23px;
+            padding-right: 23px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-left: 1px solid black;
+        }
+        
+        table.wborder1 tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        
+        
+        /*Estilo tabla sin borde*/
+        
+        table.clear,
+        table.clear th,
+        td.clear,
+        th.clear,
+        tr.clear,
+        tr.clear td {
+            border: 0px;
+            padding: 0px;
+        }
+        
+        table.clear {
+            border-collapse: collapse;
+            width: 75%;
+        }
+        
+        table.clear2 {
+            border-collapse: collapse;
+            width: 20%;
+        }
+        
+        table.wborder2 tr:last-child td:last-child {
+            border-radius: 10px;
+            border: 1px solid black;
+            width: 30%;
+            vertical-align: text-top;
+            heigth: 150px;
+        }
+        
+        table.wborder2 tr:first-child td:first-child {
+            width: 30%;
+            border-radius: 10px;
+            vertical-align: text-top;
+            border: 1px solid black;
+            heigth: 150px;
+        }
+        
+        table.wborder2 tr {
+            width: 100%;
+            heigth: 150px;
+        }
+        
+        table.wborder2 {
+            width: 95%;
+            margin: 10px;
+        }
+        
+        td.thsmall {
+            width: 2%;
+        }
+        
+        th.small {
+            width: 10%;
+        }
+        
+        th.medium {
+            width: 16%;
+        }
+        
+        th.small2 {
+            width: 12%;
+        }
+        
+        th.big {
+            width: 30%;
+        }
+        
+        th.big2 {
+            width: 45%;
+        }
+        
+        table.wborder1sub2 tr td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        
+        .fclose td:first-child {
+            border-bottom-left-radius: 10px;
+            vertical-align: text-top;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        
+        .fclose td:last-child {
+            width: 30%;
+            border-bottom-right-radius: 10px;
+            vertical-align: text-top;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        
+        .fclose td {
+            border-bottom: 1px solid black;
+        }
+        
+        .fclose {}
+        
+        .wborder1sub3 {
+            aling: left;
+        }
+        
+        table.t4 {
+            width: 20%;
+            align: left;
+            position: absolute;
+            right: 5%;
+        }
+        
+        table.t4 tr {
+            heigth: 200px;
+        }
+        
+        p.leftT {
+            width: 60%;
+            position: absolute;
+            left: 5%;
+        }
+        
+        table.wborder3 {
+            width: 90%;
+            border-radius: 10px;
+            vertical-align: text-top;
+            border: 1px solid black;
+            height: 120px;
+        }
+        
+        table.wborder4 {
+            width: 90%;
+            border-radius: 10px;
+            vertical-align: text-top;
+            border: 1px solid black;
+            height: 200px;
+        }
+        
+        img {
+            width: 300px;
+        }
+        
+        table.wborder1 {
+            position: absolute;
+            top: 75px;
+            right: 15%;
+            width: 200px;
+        }
+        
+        table.wborder4 tr td {
+            border-right: 1px solid black;
+        }
+        
+        table.wborder4 tr td:last-child {
+            border-right: 0;
+        }
+        </style>
+        </head>
+        <!-- partial:index.partial.html -->
+        <!DOCTYPE html>
+        <html>
+        <body>
+          <div class = header>
+            <table id = "header" class="clear"><tr class="clear">
+            <td ><img src="h" stylesheet = "padding-top:140px"></td>
+            <td class="clear">
+            <table class="wborder1">
+            <tr><th>
+            <p>NUMERO GARANTIA</p>
+            </th></tr>
+            <td><p>'.$data[0]->No_garantia.'</p></td>
+            </tr></table></td>
+            </tr></table></td>
+           
+        <div>
+            </Header>
+        <center>
+          <!-- Titulo -->
+        
+          
+          <table class="wborder1" >
+            <table class="wborder1sub1" >
+            <tr> 
+              <th class="medium">FACTURA NO.</th> 
+              <th class="medium">PUNTO DE VENTA </th>
+              <th class="medium">NOMBRE CLIENTE</th>
+              <th class="medium">DOCUMENTO</th>
+              <th  class="medium">CORREO</th>
+               <th  class="medium">DIRECCION</th>
+           
+            </tr> 
+            
+            <tr>
+              <td>'.$data[0]->Numero_Factura.'</td>
+              <td>'.$data[0]->Punto_Venta.'</td>
+              <td>'.$data[0]->Nombre_Cliente.'</td>
+              <td>'.$data[0]->Numero_Factura.'</td>
+              <td>'.$data[0]->Identificacion_Cliente.'</td>
+              <td>'.$data[0]->Direccion_Cliente.'</td>
+              
+            </tr>
+              </table>
+              </tr>
+            <tr>
+            <table class="wborder1sub2">
+               <tr> 
+              <th class = "small"> PROVEEDOR </th> 
+              <th class = "small"> FLETE </th>
+              <th class = "small"> DEPARTAMENTO </th>
+              <th class = "medium"> MUNICIPIO </th>
+              <th class = "medium"> VALOR FLETE </th>
+              <th class = "small"> NUMERO GUIA </th>
+              <th class = "small"> TRANSPORTADORA </th>
+              <th class = "big2"> OBSERVACION CLIENTE </th>
+              
+              
+            </tr> 
+            <tr>
+              <td>'.$data[0]->Proveedor.'</td>
+              <td>'.$data[0]->Flete.'</td>
+              <td>'.$data[0]->Departamento.'</td>
+              <td>'.$data[0]->Municipio.'</td>
+              <td>'.$data[0]->Valor_Flete.'</td>
+              <td>'.$data[0]->No_Guia.'</td>
+              <td>'.$data[0]->Transportadora.'</td>
+              <td>'.$product->Observacion_Cliente.'</td>
+              
+            </tr>
+            </table>
+              </tr>
+          </table>
+        <br> <br>
+            <!-- Tabla sin bordes -->
+          <table >
+            
+          </table>
+            <table class="wborder1sub1">
+              <tr >
+                  <th class = "small2">CODIGO PRODUCTO</th>
+                  <th class = "big">DESCRIPCION PRODUCTO</th>
+                  <th class = "small2">MARCA PRODUCTO</th>
+                  <th class = "small2">SELLO PRODUCTO</th>
+                  <th class = "small2">REFERENCIA</th>
+                  <th class = "small2">ESTADO</th>
+                </tr>
+                <tr height="350px" >
+                  <td>'.$product->Codigo_Producto.'</td>
+                  <td>'.$product->Descripcion_Producto.'</td>
+                  <td>'.$product->Marca_Producto.'</td>
+                  <td>'.$product->Sello_Producto.'</td>
+                  <td>'.$product->Referencia.'</td>
+                  <td>'.$product->Estado.'</td>
+              </tr >
+                  <tr class="fclose">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+            </table><div calss="left">
+          
+          </div>
+        </TABLE>
+            <p class="leftT">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+         <br></br>
+          <br></br>
+        
+          <table class="wborder3">
+            <tr ><th>Observaciones Garantia</th></tr>
+            <tr><td> '.$data[0]->Observacion_Empleado.' <td></tr>
+         
+          </table>
+             
+         <br><br>
+        </center>
+        </body>
+        </html>
+        <!-- partial -->';
         $mpdf->WriteHTML($html);
-      }  
+      }
       $mpdf->Output();
     }
   }
@@ -405,7 +977,7 @@ class GarantyController
   public function ticket()
   {
     if (isset($_REQUEST['id'])) {
-      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [100,180]]);
+      $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [100, 180]]);
       $id = $_REQUEST['id'];
       $data = $this->model->getById($id);
       $html = '';
@@ -563,19 +1135,19 @@ class GarantyController
           <div class="card cardLeft">
             <h1>Sticker <span>garantia</span></h1>
             <div class="title">
-              <h2>'.$product->Descripcion_Producto.'</h2>
+              <h2>' . $product->Descripcion_Producto . '</h2>
               <span>Descripcion producto</span>
             </div>
             <div class="name">
-              <h2>'.$product->Observacion_Cliente.'</h2>
+              <h2>' . $product->Observacion_Cliente . '</h2>
               <span>observacion del cliente</span>
             </div>
             <div class="seat">
-              <h2>'.$data[0]->No_garantia.'</h2>
+              <h2>' . $data[0]->No_garantia . '</h2>
               <span>Numero garantia</span>
             </div>
             <div class="seat">
-              <h2>'.$data[0]->Referencia.'</h2>
+              <h2>' . $data[0]->Referencia . '</h2>
               <span>Referencia</span>
             </div>
           </div>
