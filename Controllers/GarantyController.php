@@ -1,6 +1,6 @@
 <?php
 
-require 'Models/Garanty.php';
+require 'Models/Garanty.php'; 
 require 'Models/Client.php';
 require 'Models/Product.php';
 require 'Models/Provider.php';
