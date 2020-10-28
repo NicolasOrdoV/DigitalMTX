@@ -175,6 +175,7 @@ class GarantyController
     }
     $dates = $this->model->getAlDetails($lastId[0]->id);
     if ($dates[0]->Estado == 'Tramite') {
+      $datas = $this->model->getAlDetails($lastId[0]->id);
       $mail = new PHPMailer(true);
 
       try {
@@ -196,76 +197,83 @@ class GarantyController
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Solicitud de garantia';
         $mail->Body    = '<!DOCTYPE html>
-                <html lang="en" >
-                <head>
-                  <meta charset="UTF-8">
-                  <title>CodePen - Avisado Prototipo</title>
-                  <link rel="stylesheet" href="./style.css">
-                
-                </head>
-                <body>
-                <!-- partial:index.partial.html -->
-                <html>
-                  <head>
-                    <meta charset="utf-8" />
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-                    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-                    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-                    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-                  </head>
-                  <body>
-                    <header>
-                      <div class="container">
-                        <section class="banner_row">
-                          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                              <figure class="animated fadeInLeft">
-                                <a href="index.html">
-                                  <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-                                </a>
-                              </figure>
-                          </div>
-                          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                            <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-                          </div>
-                        </section>
-                      </div>
-                    </header>
-                    <section class="formulario-princ">
-                      <div class="container">
-                        <form class="form-inline">
-                          <div class="form-group">
-                            <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-                          </div>
-                          <div class="form-group">
-                          <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
-                          <p>Por favor este pendiente de su correo para alguna novedad.</p>
-                          </div>
-                        </form>
-                      </div>
-                    </section>
-                    </div>
-                    <br />
-                    <br />
-                    <div class="footer-container">
-                    <footer class="wrapper">
-                      <div class="container">
-                        <h3>Trabajamos para ti, ¡Espéranos!</h3>
-                        <p>Para más información, <strong>puedes escribirnos a:</strong> 
-                          <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-                        </p>
-                      </div>
-                    </footer>
-                    </div>
-                  </body>
-                </html>
-                <!-- partial -->
-                  
-                </body>
-                </html>
-                ';
+        <html lang="en" >
+        <head>
+          <meta charset="UTF-8">
+          <title>CodePen - PDF Factura Ecuador</title>
+          
+
+        </head>
+        <body>
+        <!-- partial:index.partial.html -->
+        <center>
+          <div style="width: 580px;">
+            <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
+              <tr>
+                <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
+                  <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
+                  <div style="display: inline-block; margin-left: 320px;">
+                    <p style="font-weight: bold;">Digital MTX</p>
+                    <p>Fecha de impresion: '.$data['Fecha_ingreso'].'</p>
+                  </div>
+                  <hr>
+                  <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates['No_garantia'].'</b></p>
+                </td>
+              </tr>
+              <tr>
+                <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
+                  <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
+                  <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
+                  <p><b>Nombre</b>'.$data['Nombre_Cliente'].'</p>
+                  <p><b>Identificacion</b> '.$data['Identificacion_Cliente'].'</p>
+                  <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
+                </td>
+                <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+                  <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
+                  <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
+                  <p><b>Proveedor:</b> '.$data['Proveedor'].'</p>
+                  <p><b>Departamento:</b> '.$data['Departamento'].'</p>
+                  <p><b>Municipio:</b> '.$data['Municipio'].'</p>
+                  <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
+                  <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
+                </td>
+              </tr>
+            </table>
+
+            <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
+            <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+              <tr>
+                <th>Codigo Producto</th>
+                <th>Descripcion Producto</th>
+                <th>Marca Producto</th>
+                <th>Sello Producto</th>
+                <th>Referencia Producto</th>
+              </tr>
+              <tr>
+                <td>'.$datas[0]->Codigo_Producto.'</td>
+                <td>'.$datas[0]->Descripcion_Producto.'</td>
+                <td>'.$datas[0]->Marca_Producto.'</td>
+                <td>'.$datas[0]->Sello_Producto.'</td>
+                <td>'.$datas[0]->Referencia.'</td>
+              </tr>
+            </table><br>
+
+
+          
+
+            <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
+              <div>
+                <div style="display:table; margin:auto; text-align:left;">
+                  <p><b>Observacion Garantia:</b> '.$data['Observacion_Empleado'].'</p>
+                </div>
+               
+          </div>
+        </center>
+        <!-- partial -->
+          
+        </body>
+        </html>
+        ';
 
         $mail->send();
         header('Location: ?controller=garanty&method=sucessfull');
