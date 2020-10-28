@@ -31,7 +31,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($technicals as $technical) { ?>
+                                        <?php foreach ($technicals as $key => $technical) { ?>
                                             <tr>
                                                 <td><?php echo $technical->No_garantia ?></td>
                                                 <td><?php echo $technical->Numero_Factura ?></td>
@@ -42,15 +42,15 @@
                                                 <td><?php echo $technical->Estado ?></td>
                                                 <td>
                                                     <div class="row clearfix">
-                                                        <?php if ($technical->Estado == "Tramite") { ?>
+                                                        <?php if ($technical->Estado == "Tramite" || $technical->Estado == "Pendiente por servicio tecnico") { ?>
                                                             <div class="col-sm-6">
-                                                                <a href="?controller=technical&method=details&id=<?php echo $technical->id?>" class="btn btn-info"><i class="material-icons">add</i></a>
+                                                                <a href="?controller=technical&method=details&name=<?php echo $technical->Descripcion_Producto?>" class="btn btn-info"><i class="material-icons">add</i></a>
                                                             </div>
                                                         <?php } ?>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php }?>
                                     </tbody>
                                 </table>
                             </div>

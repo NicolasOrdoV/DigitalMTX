@@ -1,7 +1,11 @@
+<?php
+date_default_timezone_set('America/Bogota');
+$hora_actual = date("h:i a"); ?> 
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
                 <h2>
+                    <?php var_dump($data)?>
                     DETALLES DE GARANTIA
                     <small>Aqui puedes visualisar el detalle de las garantias para empezar a reparar y dar tus conclusiones</small>
                 </h2>
@@ -17,15 +21,15 @@
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <h5>No garantia</h5>
-                                    <p><?php echo $data[0]->No_Garantia?></p>
+                                    <p><?php echo $data[0]->No_garantia?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Fecha de garantia</h5>
-                                    <p><?php echo $data[0]->Fecha?></p>
+                                    <p><?php echo $data[0]->Fecha_ingreso?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>hora de garantia</h5>
-                                    <p><?php echo $data[0]->Hora?></p>
+                                    <p><?php echo $data[0]->Hora_ingreso?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Numero de factura</h5>
@@ -42,20 +46,6 @@
                                     <p><?php echo $data[0]->Fecha_Compra?></p>
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-4">
-                                    <h5>Nombre del cliente</h5>
-                                    <p><?php echo $data[0]->Nombre_Cliente?></p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h5>Identificacion del cliente</h5>
-                                    <p><?php echo $data[0]->Identificacion_Cliente?></p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h5>Correo del cliente</h5>
-                                    <p><?php echo $data[0]->Correo_Cliente?></p>
-                                </div>
-                            </div>
                             <h2>Producto</h2>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
@@ -68,7 +58,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Serial</h5>
-                                    <p><?php echo $data[0]->Serial?></p>
+                                    <p><?php echo $data[0]->Sello_Producto?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Proveedor</h5>
@@ -82,7 +72,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Ciudad</h5>
-                                    <p><?php echo $data[0]->Ciudad?></p>
+                                    <p><?php echo $data[0]->Departamento?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Municipio</h5>
@@ -90,12 +80,12 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Valor del producto</h5>
-                                    <p><?php echo $data[0]->Valor_Producto?></p>
+                                    <p><?php echo $data[0]->Valor_Flete?></p>
                                 </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
-                                    <button type="button" class="btn btn-danger waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Onservaciones generales</button>
+                                    <button type="button" class="btn btn-danger waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Observaciones generales</button>
                                 </div>
                             </div>
                             <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
@@ -116,14 +106,66 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php if(isset($consecutives)){
+                                foreach($consecutives as $consecutive){?>
+                                    <div class="row clearfix">
+                                        <div class="col-sm-12">
+                                            <table class="table">
+                                                <thead class="bg-red">
+                                                    <th>Fechas</th>
+                                                    <th>Horas</th>
+                                                    <th>Observaciones</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php echo $consecutive->Fecha_anexo_Tecnico?></td>
+                                                        <td><?php echo $consecutive->Hora_Anexo_Tecnico?></td>
+                                                        <td><?php echo $consecutive->Observacion_tecnico?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                               <?php } 
+                            }?>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <form action="?controller=technical&method=save" method="POST">
-                                        <input type="hidden" name="id_garantia" value="<?php echo $data[0]->id?>">
+                                        <input type="hidden" name="Id_Garantia" value="<?php echo $data[0]->id?>">
+                                        <input type="hidden" name="Id_Empleado" value="<?php echo $_SESSION['user']->id?>">
+                                        <input type="hidden" name="nombre" value="<?php echo $data[0]->Descripcion_Producto?>">
+                                        <div class="row clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        <label>Fecha:</label>
+                                                        <input type="text" name="Fecha_anexo_Tecnico" class="form-control" value="<?php echo date('yy/m/d') ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                        <label>Hora:</label>
+                                                        <input type="text" name="Hora_Anexo_Tecnico" class="form-control" value="<?php echo $hora_actual ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <textarea rows="4" class="form-control no-resize" name="Observacion_tecnico" ></textarea>
                                                 <label class="form-label">Observacion tecnico</label>
+                                            </div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <div class="col-sm-6">
+                                                <label>Estado del tecnico*</label>
+                                                <select name="Estado_tecnico" class="form-control show-tick" >
+                                                    <option value="">Seleccione..</option>
+                                                    <option value="Pendiente por servicio tecnico">Pendiente por servicio tecnico</option>
+                                                    <option value="Solucionado por servicio tecnico">Solucionado por servicio tecnico</option>
+                                                </select>    
                                             </div>
                                         </div>
                                         <div class="form-group form-float">

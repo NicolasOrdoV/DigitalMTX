@@ -19,8 +19,21 @@ class Technical
 	public function getAll()
 	{
 		try {
-			$strSql = "SELECT g.*,d.* FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Estado = 'Tramite' OR d.Estado = 'Revisado por servicio tecnico'";
+			$strSql = "SELECT g.*,d.* FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Estado = 'Tramite' OR d.Estado = 'Revisado por servicio tecnico' OR d.Estado = 'Pendiente por servicio tecnico'";
 			$query = $this->pdo->select($strSql);
+			return $query;
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
+	public function consecutives($name)
+	{
+		try {
+			$strSql = "SELECT t.*,d.* FROM mg_servicio_tecnico t
+			INNER JOIN mg_detalle_garantia d ON t.id = d.Id_Garantia WHERE d.Descripcion_Producto = :Descripcion_Producto";
+			$array = ['Descripcion_Producto' => $name];
+			$query = $this->pdo->select($strSql, $array);
 			return $query;
 		} catch (PDOException $e) {
 			die($e->getMessage());
@@ -30,7 +43,7 @@ class Technical
 	public function getById($id)
 	{
 		try {
-			$strSql = "SELECT * FROM garantias WHERE id = :id";
+			$strSql = "SELECT * FROM mg_detalle_garantia WHERE id = :id";
 			$array = ['id' => $id];
 			$query = $this->pdo->select($strSql, $array);
 			return $query;
@@ -39,11 +52,37 @@ class Technical
 		}
 	}
 
+	public function getByIdDet($name)
+	{
+		try {
+			$strSql = "SELECT * FROM  mg_detalle_garantia  WHERE Descripcion_Producto = :Descripcion_Producto";
+			$array = ['Descripcion_Producto' => $name];
+			$query = $this->pdo->select($strSql, $array);
+			return $query;
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
+	public function getByIdDetM($id)
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
+            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
+            WHERE d.id = :id";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql, $array);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
 	public function getByIdTec($id)
 	{
 		try {
-			$strSql = "SELECT g.*,t.Observacion_Tecnico as Observacion, t.id as idtec FROM tecnico t
-			INNER JOIN  garantias g ON g.id = t.id_garantia WHERE g.id = :id";
+			$strSql = "SELECT g.*,t.Observacion_Tecnico as Observacion, t.id as idtec FROM mg_servicio_tecnico t
+			INNER JOIN  mg_garantia g ON g.id = t.Id_Garantia WHERE g.id = :id";
 			$array = ['id' => $id];
 			$query = $this->pdo->select($strSql, $array);
 			return $query;
@@ -55,8 +94,8 @@ class Technical
 	public function editStatus($data)
 	{
 		try {
-			$strWhere = "id=" . $data['id'];
-			$this->pdo->update('garantias' , $data , $strWhere);
+			$strWhere = "id=". $data['id'];
+			$this->pdo->update('mg_detalle_garantia' , $data , $strWhere);
 		} catch (PDOException $e) {
 			die($e->getMessage());
 		}
@@ -65,7 +104,7 @@ class Technical
 	public function newTechnical($data)
 	{
 		try {
-			$this->pdo->insert('tecnico' , $data);
+			$this->pdo->insert('mg_servicio_tecnico' , $data);
 		} catch (PDOException $e) {
 			die($e->getMessage());
 		}
@@ -75,7 +114,7 @@ class Technical
 	{
      	try {
      		$strWhere = "id=" .$data['id'];
-     		$this->pdo->update('tecnico' , $data, $strWhere);
+     		$this->pdo->update('mg_servicio_tecnico' , $data, $strWhere);
      	} catch (PDOException $e) {
 			die($e->getMessage());
 		}

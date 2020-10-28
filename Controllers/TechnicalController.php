@@ -34,9 +34,11 @@ class TechnicalController
 
 	public function details()
 	{
-		if (isset($_REQUEST['id'])) {
-			$id = $_REQUEST['id'];
-			$data = $this->garanty->getById($id);
+		if (isset($_REQUEST['name'])) {
+			$name = $_REQUEST['name'];
+			$data = $this->garanty->getByIdTec($name);
+			$consecutives = $this->model->consecutives($name);
+			//$details = $this->garanty->getAlDetails($id);
 		    require 'Views/Layout.php';
 			require 'Views/Technicals/details.php';
 			require 'Views/Scripts.php';
@@ -45,18 +47,26 @@ class TechnicalController
 
 	public function save()
 	{
-		$id = $_REQUEST['id_garantia'];
-		$this->model->newTechnical($_REQUEST);
-		$role = $this->model->getById($id);
+		$data = [
+           'Observacion_tecnico' => $_POST['Observacion_tecnico'],
+           'Fecha_anexo_Tecnico' => $_POST['Fecha_anexo_Tecnico'],
+           'Hora_Anexo_Tecnico' => $_POST['Hora_Anexo_Tecnico'],
+           'Id_Garantia' => $_POST['Id_Garantia'],
+           'Id_Empleado' => $_POST['Id_Empleado']
+		];
+		//$id = $_REQUEST['Id_Garantia'];
+		$name = $_POST['nombre'];
+		$this->model->newTechnical($data);
+		$role = $this->model->getByIdDet($name);
 		$dates = [];
-		if ($role[0]->Estado == 'Pendiente') {
+		if ($role[0]->Estado == 'Tramite') {
 			$dates = [
-				'id' => $id,
-				'Estado' => 'En revision'
+				'id' => $data['Id_Garantia'],
+				'Estado' => $_POST['Estado_tecnico']
 			];
 		}
 		$this->model->editStatus($dates);
-		$dataTec = $this->model->getById($id);
+		$dataTec = $this->model->getByIdDetM($_POST['Id_Garantia']);
 		$mail = new PHPMailer(true);
 	    try {
 	      //Server settings
@@ -149,12 +159,7 @@ class TechnicalController
 	            ';
 
 	      $mail->send();
-	      $succesfull = "Registro de tecnico exitoso, correo enviado al cliente";
-	      require 'Views/Layout.php';
-	      $data = $this->garanty->getById($id);
-		  require 'Views/Technicals/details.php';
-		  require 'Views/Scripts.php';
-	      return $succesfull;
+	      header('Location: ?controller=technical&method=succesfull');
 	    } catch (Exception $e) {
 	      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 	    }
@@ -181,5 +186,12 @@ class TechnicalController
 			require 'Views/Technicals/editSuccesfull.php';
 			require 'Views/Scripts.php';
 		}
+	}
+
+	public function succesfull()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Technicals/editSuccesfull.php';
+		require 'Views/Scripts.php';
 	}
 }

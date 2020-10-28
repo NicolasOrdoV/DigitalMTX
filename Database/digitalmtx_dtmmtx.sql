@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2020 a las 03:52:06
+-- Tiempo de generación: 28-10-2020 a las 06:30:03
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -3492,8 +3492,16 @@ CREATE TABLE `mg_detalle_garantia` (
   `Id_Garantia` int(11) DEFAULT NULL,
   `Observacion_Cliente` text DEFAULT NULL,
   `Aprobacion_Garantia` varchar(5) DEFAULT NULL,
-  `Estado` varchar(20) DEFAULT NULL
+  `Estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mg_detalle_garantia`
+--
+
+INSERT INTO `mg_detalle_garantia` (`id`, `Codigo_Producto`, `Descripcion_Producto`, `Marca_Producto`, `Sello_Producto`, `Referencia`, `Id_Garantia`, `Observacion_Cliente`, `Aprobacion_Garantia`, `Estado`) VALUES
+(1, '1', 'sdsdasda-asdadas', 'Acer', '213214', '21312', 1, 'dfdfdffdfd', 'SI', 'Pendiente por servicio tecnico'),
+(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, 'fxfxgfx', 'NO', 'Cerrado');
 
 -- --------------------------------------------------------
 
@@ -3566,6 +3574,13 @@ CREATE TABLE `mg_garantia` (
   `Observacion_Empleado` text NOT NULL,
   `Empleado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mg_garantia`
+--
+
+INSERT INTO `mg_garantia` (`id`, `No_garantia`, `Fecha_ingreso`, `Hora_ingreso`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Proveedor`, `Flete`, `Departamento`, `Municipio`, `Valor_Flete`, `No_Guia`, `Transportadora`, `Observacion_Empleado`, `Empleado`) VALUES
+(1, 'G-1', '2020-10-27', '11:21 pm', '123', 'UNILAGO', '2020-10-21', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', '', 'NO', '0', '', '', '', '', 'ffxtfcf', 'Juan');
 
 -- --------------------------------------------------------
 
@@ -4892,9 +4907,15 @@ CREATE TABLE `mg_servicio_tecnico` (
   `Fecha_anexo_Tecnico` date NOT NULL,
   `Hora_Anexo_Tecnico` varchar(20) NOT NULL,
   `Id_Garantia` int(11) NOT NULL,
-  `Id_Estado` int(11) NOT NULL,
   `Id_Empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mg_servicio_tecnico`
+--
+
+INSERT INTO `mg_servicio_tecnico` (`id`, `Observacion_tecnico`, `Fecha_anexo_Tecnico`, `Hora_Anexo_Tecnico`, `Id_Garantia`, `Id_Empleado`) VALUES
+(1, 'Se queda pendiente', '2020-10-28', '12:17 am', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5057,7 +5078,7 @@ ALTER TABLE `mg_centro_costos`
 -- AUTO_INCREMENT de la tabla `mg_detalle_garantia`
 --
 ALTER TABLE `mg_detalle_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_estados_garantia`
@@ -5075,13 +5096,13 @@ ALTER TABLE `mg_facturas`
 -- AUTO_INCREMENT de la tabla `mg_garantia`
 --
 ALTER TABLE `mg_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_servicio_tecnico`
 --
 ALTER TABLE `mg_servicio_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_transportadora`

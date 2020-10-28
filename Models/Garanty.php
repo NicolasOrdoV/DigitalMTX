@@ -92,6 +92,20 @@ class Garanty
         }
     }
 
+    public function getByIdTec($name)
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
+            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
+            WHERE d.Descripcion_Producto = :Descripcion_Producto OR d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' ";
+            $array = ['Descripcion_Producto' => $name];
+            $query = $this->pdo->select($strSql, $array);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getAllFive()
     {
         try {
