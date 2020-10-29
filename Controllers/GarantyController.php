@@ -63,15 +63,32 @@ class GarantyController
     if (isset($_POST['NumFactura'])) {
       $bill = $_POST['NumFactura'];
       $bills = $this->model->getBill($bill);
-      require 'Views/Layout.php';
-      $data = $this->model->getAll();
-      $total_data = count($data);
-      $providers = $this->provider->getAll();
-      $departaments = $this->departament->getAll();
-      $municipalities = $this->municipality->getAll();
-      require 'Views/Garanty/garantia_empleado.php';
-      require 'Views/Scripts.php';
+      $dataF = $this->model->getAllF($bill);
+      if ($bills == null) {
+        $billError = [
+          'error' => 'No se encontro la factura solicitada'
+        ];
+      }
+      //if ($dataF[0]->factura === $bills[0]->Numero_Factura) {
+        //header('Location: ?controller=garanty&method=failed');
+      //}else{
+        require 'Views/Layout.php';
+        $data = $this->model->getAll();
+        $total_data = count($data);
+        $providers = $this->provider->getAll();
+        $departaments = $this->departament->getAll();
+        $municipalities = $this->municipality->getAll();
+        require 'Views/Garanty/garantia_empleado.php';
+        require 'Views/Scripts.php';
+      //}
     }
+  }
+
+  public function failed()
+  {
+    require 'Views/Layout.php';
+    require 'Views/Garanty/failed.php';
+    require 'Views/Scripts.php';
   }
 
   public function save()

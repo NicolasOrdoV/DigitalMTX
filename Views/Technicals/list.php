@@ -44,7 +44,7 @@
                                                     <div class="row clearfix">
                                                         <?php if ($technical->Estado == "Tramite" || $technical->Estado == "Pendiente por servicio tecnico") { ?>
                                                             <div class="col-sm-6">
-                                                                <a href="?controller=technical&method=details&name=<?php echo $technical->Descripcion_Producto?>" class="btn btn-info"><i class="material-icons">add</i></a>
+                                                                <a href="?controller=technical&method=details&name=<?php echo $technical->Descripcion_Producto?>&id=<?php echo $technical->id ?>" class="btn btn-info"><i class="material-icons">add</i></a>
                                                             </div>
                                                         <?php } ?>
                                                     </div>

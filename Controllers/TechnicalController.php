@@ -36,8 +36,9 @@ class TechnicalController
 	{
 		if (isset($_REQUEST['name'])) {
 			$name = $_REQUEST['name'];
+			$id = $_REQUEST['id'];
 			$data = $this->garanty->getByIdTec($name);
-			$consecutives = $this->model->consecutives($name);
+			$consecutives = $this->model->consecutives($id);
 			//$details = $this->garanty->getAlDetails($id);
 		    require 'Views/Layout.php';
 			require 'Views/Technicals/details.php';
@@ -59,7 +60,12 @@ class TechnicalController
 		$this->model->newTechnical($data);
 		$role = $this->model->getByIdDet($name);
 		$dates = [];
-		if ($role[0]->Estado == 'Tramite') {
+		if ($role[0]->Estado == 'Tramite' && $role[0]->Estado == "Pendiente por servicio tecnico") {
+			$dates = [
+				'id' => $data['Id_Garantia'],
+				'Estado' => $_POST['Estado_tecnico']
+			];
+		}else{
 			$dates = [
 				'id' => $data['Id_Garantia'],
 				'Estado' => $_POST['Estado_tecnico']

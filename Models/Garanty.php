@@ -128,6 +128,18 @@ class Garanty
         }
     }
 
+    public function getAllF($bill)
+    {
+        try {
+            $strSql = "SELECT g.*,f.Numero_Factura as factura FROM mg_garantia g, mg_facturas f
+            WHERE f.Numero_Factura LIKE '%$bill%'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function showNum($bill)
     {
         try {

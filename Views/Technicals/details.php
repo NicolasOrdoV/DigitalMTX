@@ -5,7 +5,6 @@ $hora_actual = date("h:i a"); ?>
         <div class="container-fluid">
             <div class="block-header">
                 <h2>
-                    <?php var_dump($data)?>
                     DETALLES DE GARANTIA
                     <small>Aqui puedes visualisar el detalle de las garantias para empezar a reparar y dar tus conclusiones</small>
                 </h2>
@@ -106,8 +105,7 @@ $hora_actual = date("h:i a"); ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php if(isset($consecutives)){
-                                foreach($consecutives as $consecutive){?>
+                            <?php if(isset($consecutives)){ ?>
                                     <div class="row clearfix">
                                         <div class="col-sm-12">
                                             <table class="table">
@@ -117,17 +115,18 @@ $hora_actual = date("h:i a"); ?>
                                                     <th>Observaciones</th>
                                                 </thead>
                                                 <tbody>
+                                                    <?php foreach($consecutives as $consecutive){?>
                                                     <tr>
                                                         <td><?php echo $consecutive->Fecha_anexo_Tecnico?></td>
                                                         <td><?php echo $consecutive->Hora_Anexo_Tecnico?></td>
                                                         <td><?php echo $consecutive->Observacion_tecnico?></td>
                                                     </tr>
+                                                    <?php } ?>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                               <?php } 
-                            }?>
+                               <?php } ?>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <form action="?controller=technical&method=save" method="POST">

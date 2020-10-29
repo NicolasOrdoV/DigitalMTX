@@ -18,8 +18,6 @@ $td = $total_data + 0001;
                     <div class="header">
                         <h2>
                             Ingresar Garantías
-                            <?php //var_dump($clients); 
-                            ?>
                         </h2>
                     </div>
                     <div class="body">
@@ -43,12 +41,10 @@ $td = $total_data + 0001;
                             </div>
                         </form>
                         <form action="?controller=garanty&method=save" method="POST" id="form_validation" novalidate>
-                            <?php
-                            if (isset($bills)) {
-                                //var_dump($bills[0]);
-                            }
-                            ?>
-                            <h1>Detalle de factura: <?php echo isset($bills) ? $bills[0]->Numero_Factura : ''?></h1>
+                            <?php if(isset($billError)){?>
+                                <div class="alert alert-danger"><?php echo $billError['error'] ?></div>
+                            <?php } ?>
+                            <h1>Detalle de factura: <?php echo isset($bills[0]) ? $bills[0]->Numero_Factura : ''?></h1>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
                             <input type="hidden" name="Empleado" value="<?php echo $_SESSION['user']->nombre ?>">
                             <div class="row clearfix">
@@ -85,7 +81,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Punto de Venta</label>
-                                            <input type="text" class="form-control" name="Punto_Venta" required readonly value="<?php echo isset($bills) ? $bills[0]->Centro_costo : '' ?>">
+                                            <input type="text" class="form-control" name="Punto_Venta" required readonly value="<?php echo isset($bills[0]) ? $bills[0]->Centro_costo : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +89,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha de Compra</label>
-                                            <input type="text" class="form-control" name="Fecha_Compra" required readonly value="<?php echo isset($bills) ? $bills[0]->fecha_factura : '' ?>">
+                                            <input type="text" class="form-control" name="Fecha_Compra" required readonly value="<?php echo isset($bills[0]) ? $bills[0]->fecha_factura : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +99,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Cedula </label>
-                                            <input type="text" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente" value="<?php echo isset($bills) ? $bills[0]->Identificacion_Cliente : '' ?>">
+                                            <input type="text" autofocus class="form-control" name="Identificacion_Cliente" id="Identificacion_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Identificacion_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +107,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Nombre de cliente </label>
-                                            <input type="text" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required readonly value="<?php echo isset($bills) ? $bills[0]->Nombre_Cliente : '' ?>">
+                                            <input type="text" class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required readonly value="<?php echo isset($bills[0]) ? $bills[0]->Nombre_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +117,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Correo </label>
-                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="<?php echo isset($bills) ? $bills[0]->Correo_Cliente : '' ?>">
+                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Correo_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +125,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Direccion </label>
-                                            <input type="text" class="form-control" name="Direccion_Cliente" id="Direccion_Cliente" value="<?php echo isset($bills) ? $bills[0]->Direccion_Cliente : '' ?>">
+                                            <input type="text" class="form-control" name="Direccion_Cliente" id="Direccion_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Direccion_Cliente : '' ?>">
                                         </div>
                                     </div>
                                 </div>
