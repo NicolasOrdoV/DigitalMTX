@@ -92,6 +92,21 @@ class Garanty
         }
     }
 
+    
+    public function getByIdEnd($id)
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
+            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
+            WHERE g.id = :id";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql, $array);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getByIdTec($name)
     {
         try {
@@ -147,6 +162,28 @@ class Garanty
             $array = ['Numero_Factura' => $bill];
             $query = $this->pdo->select($strSql, $array);
             return $query; 
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function saveGarantyEnd($data){
+        try {
+            $strWhere = "id =".$data['id'];
+            $this->pdo->update('mg_detalle_garantia',$data,$strWhere);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getOptions($id){
+        try {
+           $strSql = "SELECT g.*,t.*,d.* FROM mg_garantia g
+           INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia
+           INNER JOIN mg_servicio_tecnico t ON g.id = t.Id_Garantia Where g.id = :id ";
+           $array = ['id' => $id];
+           $query = $this->pdo->select($strSql,$array);
+           return $query;
         } catch (PDOException $e) {
             die($e->getMessage());
         }

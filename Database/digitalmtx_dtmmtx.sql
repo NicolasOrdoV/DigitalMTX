@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2020 a las 06:30:03
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.11
+-- Tiempo de generación: 29-10-2020 a las 05:56:07
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -3492,16 +3492,17 @@ CREATE TABLE `mg_detalle_garantia` (
   `Id_Garantia` int(11) DEFAULT NULL,
   `Observacion_Cliente` text DEFAULT NULL,
   `Aprobacion_Garantia` varchar(5) DEFAULT NULL,
-  `Estado` varchar(50) DEFAULT NULL
+  `Estado` varchar(50) DEFAULT NULL,
+  `Observacion_Final` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `mg_detalle_garantia`
 --
 
-INSERT INTO `mg_detalle_garantia` (`id`, `Codigo_Producto`, `Descripcion_Producto`, `Marca_Producto`, `Sello_Producto`, `Referencia`, `Id_Garantia`, `Observacion_Cliente`, `Aprobacion_Garantia`, `Estado`) VALUES
-(1, '1', 'sdsdasda-asdadas', 'Acer', '213214', '21312', 1, 'dfdfdffdfd', 'SI', 'Pendiente por servicio tecnico'),
-(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, 'fxfxgfx', 'NO', 'Cerrado');
+INSERT INTO `mg_detalle_garantia` (`id`, `Codigo_Producto`, `Descripcion_Producto`, `Marca_Producto`, `Sello_Producto`, `Referencia`, `Id_Garantia`, `Observacion_Cliente`, `Aprobacion_Garantia`, `Estado`, `Observacion_Final`) VALUES
+(1, '1', 'sdsdasda-asdadas', 'Acer', '', '21312', 1, 'dfdfdffdfd', 'SI', 'Tramite', NULL),
+(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, 'fxfxgfx', 'NO', 'Cerrado', NULL);
 
 -- --------------------------------------------------------
 
@@ -4915,7 +4916,12 @@ CREATE TABLE `mg_servicio_tecnico` (
 --
 
 INSERT INTO `mg_servicio_tecnico` (`id`, `Observacion_tecnico`, `Fecha_anexo_Tecnico`, `Hora_Anexo_Tecnico`, `Id_Garantia`, `Id_Empleado`) VALUES
-(1, 'Se queda pendiente', '2020-10-28', '12:17 am', 1, 1);
+(1, 'Se queda pendiente', '2020-10-28', '12:17 am', 1, 1),
+(2, 'eeereret', '2020-10-28', '06:31 pm', 1, 1),
+(3, 'eeereret', '2020-10-28', '06:31 pm', 1, 1),
+(4, 'sdasdasdas', '2020-10-28', '06:34 pm', 1, 1),
+(5, 'sdasdasdsa', '2020-10-28', '06:48 pm', 1, 1),
+(6, 'sdasdasdsa', '2020-10-28', '06:48 pm', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5102,7 +5108,7 @@ ALTER TABLE `mg_garantia`
 -- AUTO_INCREMENT de la tabla `mg_servicio_tecnico`
 --
 ALTER TABLE `mg_servicio_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_transportadora`
