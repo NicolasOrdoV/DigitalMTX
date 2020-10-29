@@ -17,7 +17,6 @@
                         </h2>
                     </div>
                     <div class="body">
-                        <?php var_dump($data[0]) ?>
                         <form action="?controller=garanty&method=saveEndGaranty" method="POST">
                             <input  type = "hidden" name="id" value="<?php echo $data[0]->Id_Garantia ?>">
                             <div class="row clearfix">
@@ -59,7 +58,7 @@
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Sello Producto</label>
-                                                    <input type="text" class="form-control" name="Sello_Producto" readonly >
+                                                    <input type="text" class="form-control" name="Sello_Producto">
                                                 </div>
                                             </div>
                                         </div>

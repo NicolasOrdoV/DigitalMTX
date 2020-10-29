@@ -62,7 +62,7 @@
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                    <?php } elseif ($garanty->Estado == 'Pendiente por servicio tecnico' && $garanty->Aprobacion_Garantia == 'SI' ) {  ?>                                                                                                                              
+                                                    <?php } elseif ($garanty->Estado == 'Solucionado por servicio tecnico' && $garanty->Aprobacion_Garantia == 'SI' ) {  ?>                                                                                                                              
                                                         <div class="col-sm-6">
                                                             <form action="?controller=garanty&method=options" method="POST">
                                                                 <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
