@@ -3,8 +3,8 @@
     <div class="container-fluid">
         <div class="block-header">
             <h2>
-                REGISTRO DE GARANTIAS
-                <small>Aqui puedes registrar la garantia y decides si la apruebas o no</small>
+                OPCIONES DE GARANTIAS
+                <small>Aqui puedes registrar el registro final de la garantia</small>
             </h2>
         </div>
         <!-- Input -->
@@ -13,8 +13,10 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            Ingresar Garantías
+                            Ingresar Garantía final
                         </h2>
+                        <p>Observacion del tecnico</p>
+                        <?php echo $data[0]->Observacion_tecnico?>
                     </div>
                     <div class="body">
                         <form action="?controller=garanty&method=saveEndGaranty" method="POST">

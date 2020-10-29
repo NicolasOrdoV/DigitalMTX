@@ -180,7 +180,7 @@ class Garanty
         try {
            $strSql = "SELECT g.*,t.*,d.* FROM mg_garantia g
            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia
-           INNER JOIN mg_servicio_tecnico t ON g.id = t.Id_Garantia Where g.id = :id ";
+           INNER JOIN mg_servicio_tecnico t ON g.id = t.Id_Garantia WHERE g.id = :id ORDER BY t.id DESC LIMIT 1";
            $array = ['id' => $id];
            $query = $this->pdo->select($strSql,$array);
            return $query;

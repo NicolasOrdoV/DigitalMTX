@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="Assets/css/jquery.dataTables.min.css">
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
@@ -20,7 +21,7 @@
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="myTable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -85,3 +86,9 @@
     <!-- #END# Exportable Table -->
     </div>
 </section>
+<script src="Assets/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>

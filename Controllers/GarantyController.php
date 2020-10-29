@@ -572,7 +572,6 @@ class GarantyController
       require 'Views/Garanty/options.php';
       require 'Views/Scripts.php';
     }
-
   }
 
   public function saveEndGaranty(){
