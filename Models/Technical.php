@@ -19,7 +19,7 @@ class Technical
 	public function getAll()
 	{
 		try {
-			$strSql = "SELECT g.*,d.* FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Estado = 'Tramite' OR d.Estado = 'Solucionado por servicio tecnico' OR d.Estado = 'Pendiente por servicio tecnico'";
+			$strSql = "SELECT g.*,d.id as idDetalle ,d.Codigo_Producto as idProducto,d.Descripcion_Producto as DescripcionP ,d.Marca_Producto as Marca ,d.Sello_Producto as Serie ,d.Referencia as ReferenciaProducto , d.Id_Garantia as N_garantia , d.Observacion_Cliente as ObsCliente , d.Aprobacion_Garantia as Aprobo, d.Estado as EstadoG   FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Estado = 'Tramite' OR d.Estado = 'Solucionado por servicio tecnico' OR d.Estado = 'Pendiente por servicio tecnico'";
 			$query = $this->pdo->select($strSql);
 			return $query;
 		} catch (PDOException $e) {

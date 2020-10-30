@@ -19,6 +19,7 @@ $hora_actual = date("h:i a"); ?>
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-3">
+                                    <?php var_dump($data) ?>
                                     <h5>No garantia</h5>
                                     <p><?php echo $data[0]->No_garantia?></p>
                                 </div>

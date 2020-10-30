@@ -94,7 +94,7 @@ class GarantyController
   public function save()
   {
     $data = [
-      'No_Garantia' => $_POST['No_Garantia'],
+      'No_garantia' => $_POST['No_garantia'],
       'Fecha_ingreso' => $_POST['Fecha_ingreso'],
       'Hora_ingreso' => $_POST['Hora_ingreso'],
       'Numero_Factura' => $_POST['Numero_Factura'],
@@ -213,7 +213,7 @@ class GarantyController
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Solicitud de garantia';
-        $mail->Body    = '<!DOCTYPE html>
+        $html = '<!DOCTYPE html>
         <html lang="en" >
         <head>
           <meta charset="UTF-8">
@@ -234,7 +234,7 @@ class GarantyController
                     <p>Fecha de impresion: '.$data['Fecha_ingreso'].'</p>
                   </div>
                   <hr>
-                  <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates['No_garantia'].'</b></p>
+                  <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$data['No_garantia'].'</b></p>
                 </td>
               </tr>
               <tr>
@@ -265,19 +265,17 @@ class GarantyController
                 <th>Marca Producto</th>
                 <th>Sello Producto</th>
                 <th>Referencia Producto</th>
-              </tr>
-              <tr>
-                <td>'.$datas[0]->Codigo_Producto.'</td>
-                <td>'.$datas[0]->Descripcion_Producto.'</td>
-                <td>'.$datas[0]->Marca_Producto.'</td>
-                <td>'.$datas[0]->Sello_Producto.'</td>
-                <td>'.$datas[0]->Referencia.'</td>
-              </tr>
-            </table><br>
-
-
-          
-
+              </tr>';
+              foreach ($datas as $product) {
+              $html .= '<tr>
+                <td>'.$product->Codigo_Producto.'</td>
+                <td>'.$product->Descripcion_Producto.'</td>
+                <td>'.$product->Marca_Producto.'</td>
+                <td>'.$product->Sello_Producto.'</td>
+                <td>'.$product->Referencia.'</td>
+              </tr>';
+            }
+            $html .= '</table><br>
             <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
               <div>
                 <div style="display:table; margin:auto; text-align:left;">
@@ -291,6 +289,7 @@ class GarantyController
         </body>
         </html>
         ';
+        $mail->Body = $html;
 
         $mail->send();
         header('Location: ?controller=garanty&method=sucessfull');
@@ -411,12 +410,11 @@ class GarantyController
       $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A5']);
       $id = $_REQUEST['id'];
       $dates = $this->model->getById($id);
-      $html = '';
       /*foreach ($dates as $product) {
         echo $product->Descripcion_Producto.'<br>';
       }*/
       //$productos = [];
-      foreach ($dates as $producte) {
+      // foreach ($dates as $producte) {
         $html = '<!DOCTYPE html>
         <html lang="en" >
         <head>
@@ -469,15 +467,17 @@ class GarantyController
                 <th>Marca Producto</th>
                 <th>Sello Producto</th>
                 <th>Referencia Producto</th>
-              </tr>
-              <tr>
+              </tr>';
+              foreach ($dates as $producte){ 
+             $html .= '<tr>
                 <td>'.$producte->Codigo_Producto.'</td>
                 <td>'.$producte->Descripcion_Producto.'</td>
                 <td>'.$producte->Marca_Producto.'</td>
                 <td>'.$producte->Sello_Producto.'</td>
                 <td>'.$producte->Referencia.'</td>
-              </tr>
-            </table><br>
+              </tr>';
+              }
+            $html .= '</table><br>
 
 
           
@@ -487,77 +487,74 @@ class GarantyController
                 <div style="display:table; margin:auto; text-align:left;">
                   <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p>
                 </div>
-                --------------------------------------------------------------------------------------------------------------------------------------------------
-              </div>
-            </div><br>
-            <div style="width: 580px;">
-            <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
-              <tr>
-                <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
-                  <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
-                  <div style="display: inline-block; margin-left: 320px;">
-                    <p style="font-weight: bold;">Digital MTX</p>
-                    <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p>
-                  </div>
-                  <hr>
-                  <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
-                </td>
-              </tr>
-              <tr>
-                <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-                  <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p>
-                  <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p>
-                  <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p>
-                  <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p>
-                  <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p>
-                </td>
-                <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-                  <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
-                  <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
-                  <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
-                  <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
-                  <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
-                  <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
-                  <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p>
-                </td>
-              </tr>
-            </table>
-
-            <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
-            <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
-              <tr>
-                <th>Codigo Producto</th>
-                <th>Descripcion Producto</th>
-                <th>Marca Producto</th>
-                <th>Sello Producto</th>
-                <th>Referencia Producto</th>
-              </tr>
-              <tr>
-                <td>'.$producte->Codigo_Producto.'</td>
-                <td>'.$producte->Descripcion_Producto.'</td>
-                <td>'.$producte->Marca_Producto.'</td>
-                <td>'.$producte->Sello_Producto.'</td>
-                <td>'.$producte->Referencia.'</td>
-              </tr>
-            </table><br>
-
-
-          
-
-            <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
-              <div>
-                <div style="display:table; margin:auto; text-align:left;">
-                  <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p>
-                </div>
-          </div>
-        </center>
+          --------------------------------------------------------------------------------------------------------------------------------------------------
         <!-- partial -->
-          
+        <div style="width: 580px;">
+        <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
+          <tr>
+            <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
+              <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
+              <div style="display: inline-block; margin-left: 320px;">
+                <p style="font-weight: bold;">Digital MTX</p>
+                <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p>
+              </div>
+              <hr>
+              <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
+            </td>
+          </tr>
+          <tr>
+            <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
+              <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p>
+              <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p>
+              <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p>
+              <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p>
+              <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p>
+            </td>
+            <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+              <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
+              <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
+              <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
+              <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
+              <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
+              <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
+              <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p>
+            </td>
+          </tr>
+        </table>
+
+        <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
+        <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+          <tr>
+            <th>Codigo Producto</th>
+            <th>Descripcion Producto</th>
+            <th>Marca Producto</th>
+            <th>Sello Producto</th>
+            <th>Referencia Producto</th>
+          </tr>';
+          foreach ($dates as $producte){ 
+         $html .= '<tr>
+            <td>'.$producte->Codigo_Producto.'</td>
+            <td>'.$producte->Descripcion_Producto.'</td>
+            <td>'.$producte->Marca_Producto.'</td>
+            <td>'.$producte->Sello_Producto.'</td>
+            <td>'.$producte->Referencia.'</td>
+          </tr>';
+          }
+        $html .= '</table><br>
+
+
+      
+
+        <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
+          <div>
+            <div style="display:table; margin:auto; text-align:left;">
+              <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p>
+            </div>
         </body>
         </html>
         ';
-      }
-      $mpdf->WriteHTML($html);
+        $mpdf->WriteHTML($html);
+      // }
       $mpdf->Output();
     }
   }

@@ -52,7 +52,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Numero Garantia</label>
-                                            <input type="text" class="form-control" name="No_Garantia" value="<?php echo "G-".$td; ?>" readonly>
+                                            <input type="text" class="form-control" name="No_garantia" value="<?php echo "G-".$td; ?>" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -194,8 +194,8 @@ $td = $total_data + 0001;
                                                 <div class="demo-checkbox form-line">
                                                     <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
                                                     <label for="md_checkbox_<?php echo $key+1; ?>">SI</label>
-                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+3; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
-                                                    <label for="md_checkbox_<?php echo $key+3; ?>">NO</label>
+                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+10; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
+                                                    <label for="md_checkbox_<?php echo $key+10; ?>">NO</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -237,13 +237,13 @@ $td = $total_data + 0001;
                                         <select name="Proveedor" class="form-control show-tick" >
                                             <option value="">Seleccione..</option>
                                             <?php foreach ($providers as $provider) { ?>
-                                                <option value="<?php echo $provider->Nombre_Proveedor?>"><?php echo $provider->Nombre_Proveedor?></option>
+                                                <option value="<?php echo $provider->id?>"><?php echo $provider->id?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
                                         <p>
-                                            <b>Ciudad</b>
+                                            <b>Departamento</b>
                                         </p>
                                         <select name="Departamento" class="form-control show-tick" id="lista1">
                                             <option value="0">Seleccione..</option>

@@ -60,7 +60,7 @@ class Garanty
     public function getAllDet()
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia";
+            $strSql = "SELECT g.*,d.* FROM  mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia GROUP BY g.id ORDER BY d.Id_Garantia ASC";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -107,14 +107,15 @@ class Garanty
         }
     }
 
-    public function getByIdTec($name)
+    public function getByIdTec($name,$id)
     {
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE d.Descripcion_Producto = :Descripcion_Producto OR d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' ";
-            $array = ['Descripcion_Producto' => $name];
-            $query = $this->pdo->select($strSql, $array);
+            WHERE d.Descripcion_Producto = '$name' AND d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' AND d.Id_Garantia = $id ";
+           /*  $array = ['Descripcion_Producto' => $name,
+                      'Id_Garantia' => $id]; */
+            $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -135,7 +136,7 @@ class Garanty
     public function getBill($bill)
     {
         try {
-            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura LIKE '%$bill%'";
+            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura LIKE '%$bill'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

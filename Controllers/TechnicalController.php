@@ -37,7 +37,7 @@ class TechnicalController
 		if (isset($_REQUEST['name'])) {
 			$name = $_REQUEST['name'];
 			$id = $_REQUEST['id'];
-			$data = $this->garanty->getByIdTec($name);
+			$data = $this->garanty->getByIdTec($name,$id);
 			$consecutives = $this->model->consecutives($id);
 			//$details = $this->garanty->getAlDetails($id);
 		    require 'Views/Layout.php';

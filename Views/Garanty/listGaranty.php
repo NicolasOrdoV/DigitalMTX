@@ -37,7 +37,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($garanties as $key => $garanty) {
-                                        if ($key == 0) { ?>
+                                        //  if ($garant) { ?>
                                             <tr>
                                                 <td><?php echo $garanty->No_garantia ?></td>
                                                 <td><?php echo $garanty->Fecha_ingreso ?></td>
@@ -74,7 +74,7 @@
                                             <?php } ?>
                                         </td>
                                      </tr>
-                                <?php }
+                                <?php //}
                             } ?>
                         </tbody>
                     </table>

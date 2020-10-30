@@ -33,18 +33,18 @@
                                     <tbody>
                                         <?php foreach ($technicals as $key => $technical) { ?>
                                             <tr>
-                                                <td><?php echo $technical->No_garantia ?></td>
+                                                <td><?php echo $technical->N_garantia ?></td>
                                                 <td><?php echo $technical->Numero_Factura ?></td>
                                                 <td><?php echo $technical->Nombre_Cliente ?></td>
-                                                <td><?php echo $technical->Descripcion_Producto ?></td>
+                                                <td><?php echo $technical->idProducto ?></td>
                                                 <td><?php echo $technical->Correo_Cliente ?></td>
-                                                <td><?php echo $technical->Aprobacion_Garantia ?></td>
-                                                <td><?php echo $technical->Estado ?></td>
+                                                <td><?php echo $technical->Aprobo ?></td>
+                                                <td><?php echo $technical->EstadoG ?></td>
                                                 <td>
                                                     <div class="row clearfix">
-                                                        <?php if ($technical->Estado == "Tramite" || $technical->Estado == "Pendiente por servicio tecnico") { ?>
+                                                        <?php if ($technical->EstadoG == "Tramite" || $technical->EstadoG == "Pendiente por servicio tecnico") { ?>
                                                             <div class="col-sm-6">
-                                                                <a href="?controller=technical&method=details&name=<?php echo $technical->Descripcion_Producto?>&id=<?php echo $technical->id ?>" class="btn btn-info"><i class="material-icons">add</i></a>
+                                                                <a href="?controller=technical&method=details&name=<?php echo $technical->DescripcionP?>&id=<?php echo $technical->idDetalle ?>" class="btn btn-info"><i class="material-icons">add</i></a>
                                                             </div>
                                                         <?php } ?>
                                                     </div>
