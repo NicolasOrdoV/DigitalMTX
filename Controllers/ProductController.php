@@ -16,10 +16,14 @@ class ProductController
 
 	public function list()
 	{
-		require 'Views/Layout.php';
-        $products = $this->model->getAll();
-        require 'Views/Products/list.php';
-        require 'Views/Scripts.php';
+		if (isset($_SESSION['user'])) {
+			require 'Views/Layout.php';
+	        $products = $this->model->getAll();
+	        require 'Views/Products/list.php';
+	        require 'Views/Scripts.php';
+        }else{
+			header('Location: ?controller=login');
+		}
 	}
 
 	public function new()

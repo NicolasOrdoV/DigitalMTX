@@ -12,20 +12,34 @@ class ClientController{
 
     public function list()
     {
-        require 'Views/Layout.php';
-        $clients = $this->model->getAll();
-        require 'Views/Clients/list.php';
-        require 'Views/Scripts.php';
+        if (isset($_SESSION['user'])) {
+            require 'Views/Layout.php';
+            $clients = $this->model->getAll();
+            require 'Views/Clients/list.php';
+            require 'Views/Scripts.php';
+        }else{
+            header('Location: ?controller=login');
+        }
     }
 
-    public function new(){
-        require 'Views/Layout.php';
-        require 'Views/Clients/new.php';
-        require 'Views/Scripts.php';
+    public function new()
+    {
+        if (isset($_SESSION['user'])) {
+            require 'Views/Layout.php';
+            require 'Views/Clients/new.php';
+            require 'Views/Scripts.php';
+        }else{
+            header('Location: ?controller=login');
+        }
     }
 
-    public function save(){
-        $this->model->newClient($_REQUEST);
-        header('Location: ?controller=garanty&method=new');
+    public function save()
+    {
+        if (isset($_SESSION['user'])) {
+            $this->model->newClient($_REQUEST);
+            header('Location: ?controller=garanty&method=new');
+        }else{
+            header('Location: ?controller=login');
+        }
     }
 }

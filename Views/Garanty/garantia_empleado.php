@@ -132,7 +132,7 @@ $td = $total_data + 0001;
                             </div>
                                     <hr>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                             <thead>
                                                 <tr>
                                                     <th>Codigo</th>
@@ -165,7 +165,10 @@ $td = $total_data + 0001;
                                                     <td><input size="5" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>"></td>
                                                     <td><input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>"></td>
                                                     <td><input size="5" type="text" class="form-control" name="Sello_Producto[]" readonly value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>"></td>
-                                                    <td><input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>"></td>
+                                                    <td>
+                                                        <input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
+                                                        <input type="hidden" name="fecha_factura" value="<?php echo $bills[0]->fecha_factura ?>">
+                                                    </td>
                                                     <td>
                                                        <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
                                                        <input type="hidden" name="Estado[]" value="Tramite">
