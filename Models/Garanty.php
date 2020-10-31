@@ -17,7 +17,7 @@ class Garanty
     public function getAll()
     {
         try {
-            $strSql = "SELECT * FROM mg_garantia";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Estado = 'Tramite'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

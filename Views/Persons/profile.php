@@ -22,19 +22,19 @@
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <h5>Nombres:</h5>
-                                    <p><?php echo $data[0]->Nombres?></p>
+                                    <p><?php echo $data[0]->nombre?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Apellidos:</h5>
-                                    <p><?php echo $data[0]->Apellidos?></p>
+                                    <p><?php echo $data[0]->apellidos?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Correo electronico:</h5>
-                                    <p><?php echo $data[0]->Correo?></p>
+                                    <p><?php echo $data[0]->correo?></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Telefono:</h5>
-                                    <p><?php echo $data[0]->Telefono?></p>
+                                    <p><?php echo $data[0]->telefono?></p>
                                 </div>
                             </div>
                             <div class="row clearfix">
