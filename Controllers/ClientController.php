@@ -10,6 +10,14 @@ class ClientController{
         $this-> model = new Client();
     }
 
+    public function list()
+    {
+        require 'Views/Layout.php';
+        $clients = $this->model->getAll();
+        require 'Views/Clients/list.php';
+        require 'Views/Scripts.php';
+    }
+
     public function new(){
         require 'Views/Layout.php';
         require 'Views/Clients/new.php';
@@ -19,13 +27,5 @@ class ClientController{
     public function save(){
         $this->model->newClient($_REQUEST);
         header('Location: ?controller=garanty&method=new');
-    }
-
-    public function list()
-    {
-        require 'Views/Layout.php';
-        $clients = $this->model->getAll();
-        require 'Views/Clients/list.php';
-        require 'Views/Scripts.php';
     }
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2020 a las 05:56:07
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 31-10-2020 a las 20:02:27
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -308,7 +308,7 @@ CREATE TABLE `dtm_cupones` (
 
 CREATE TABLE `dtm_empleados` (
   `id` int(11) NOT NULL,
-  `sesion` text COLLATE utf8_spanish_ci NOT NULL,
+  `sesion` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `tipodoc` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
@@ -320,15 +320,15 @@ CREATE TABLE `dtm_empleados` (
   `cargo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `fechanac` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `finanza` tinyint(1) NOT NULL,
-  `chat` tinyint(1) NOT NULL,
-  `verperfil` tinyint(1) NOT NULL,
-  `despacho` tinyint(1) NOT NULL,
-  `productos` tinyint(1) NOT NULL,
-  `contenido` tinyint(1) NOT NULL,
-  `factura` tinyint(1) NOT NULL,
-  `mail` tinyint(1) NOT NULL,
-  `activo` tinyint(1) NOT NULL
+  `finanza` tinyint(1) DEFAULT NULL,
+  `chat` tinyint(1) DEFAULT NULL,
+  `verperfil` tinyint(1) DEFAULT NULL,
+  `despacho` tinyint(1) DEFAULT NULL,
+  `productos` tinyint(1) DEFAULT NULL,
+  `contenido` tinyint(1) DEFAULT NULL,
+  `factura` tinyint(1) DEFAULT NULL,
+  `mail` tinyint(1) DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -342,7 +342,8 @@ INSERT INTO `dtm_empleados` (`id`, `sesion`, `nombre`, `apellidos`, `tipodoc`, `
 (7, '201.244.82.74 \n2019-12-27 09:35:25am; \n201.244.82.74 \n2019-12-27 09:35:04am;', 'Fredy', 'Torres', 'C.C', '1016101056', 'bodega2@digitalmtx.com', '3112859624', 'Hombre', 'Bodega', 'Jefe de Bodega', '1997-10-06', '6701d7c8c3c16914b1af6bea3c78371e381a1e6c', 0, 0, 0, 1, 0, 0, 0, 0, 0),
 (8, '201.244.82.74 \n2020-10-19 02:24:13pm; \n201.244.82.74 \n2020-10-16 10:23:33am;', 'JUAN CARLOS', 'RINCON CORRALES', 'C.C', '1032366142', 'juancar707@gmail.com', '3123518762', 'Hombre', 'Oficina', 'Marketing Digital', '1986-07-08', 'd2451f17a3b7843ddc90ab9f15ea409f43bb1b68', 0, 0, 1, 0, 1, 1, 0, 1, 0),
 (0, 'sadsad', 'Juan', 'Perez', 'CC', '12345678', 'Juan@email.com', '123456', 'Masculino', 'Bogota D.C', 'Recepcion', '10/08/1980', '123', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(1, 'ggggggggg', 'pepe', 'pepito', 'CC', '345678', 'pepe@gmail.com', '34567', 'm', 'm', 'Tecnico', 'tdtdtd', '123', 1, 0, 1, 1, 1, 1, 1, 1, 1);
+(1, 'ggggggggg', 'pepe', 'pepito', 'CC', '345678', 'pepe@gmail.com', '34567', 'm', 'm', 'Tecnico', 'tdtdtd', '123', 1, 0, 1, 1, 1, 1, 1, 1, 1),
+(9, NULL, 'pepioto', 'peprez', 'CC', '456765', 'nikomegathet666@gmail.com', '455555', 'Masculino', 'Oficina', 'Recepcion', '2020-10-13', '112487765', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3501,8 +3502,11 @@ CREATE TABLE `mg_detalle_garantia` (
 --
 
 INSERT INTO `mg_detalle_garantia` (`id`, `Codigo_Producto`, `Descripcion_Producto`, `Marca_Producto`, `Sello_Producto`, `Referencia`, `Id_Garantia`, `Observacion_Cliente`, `Aprobacion_Garantia`, `Estado`, `Observacion_Final`) VALUES
-(1, '1', 'sdsdasda-asdadas', 'Acer', '', '21312', 1, 'dfdfdffdfd', 'SI', 'Tramite', NULL),
-(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, 'fxfxgfx', 'NO', 'Cerrado', NULL);
+(1, '1', 'sdsdasda-asdadas', 'Acer', '213214', '21312', 1, 'Se daño', 'SI', 'Tramite', NULL),
+(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, '', 'NO', 'Cerrado', NULL),
+(3, '3456', 'Cargador', 'Proveedor(CHINA)', '1234', '2345', 2, 'se daño', 'SI', 'Tramite', NULL),
+(4, '3457', 'Bateria', 'Proveedor(CHINA)', '1679', '2345', 2, 'Se daño', 'SI', 'Tramite', NULL),
+(5, '3457', 'Bateria', 'Proveedor(CHINA)', '1679', '2345', 2, '', 'NO', 'Cerrado', NULL);
 
 -- --------------------------------------------------------
 
@@ -3545,7 +3549,20 @@ CREATE TABLE `mg_facturas` (
 
 INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`, `Marca_Producto`) VALUES
 (1, '123', '2020-10-21', '1234455', '13:00 ', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '1', 'sdsdasda-asdadas', '21312', '213214', 'Acer'),
-(2, '123', '2020-10-14', '2312312', '13:00', 'sdsa', '21312', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '123', 'Bateria', '3232', '1234', 'Samsung');
+(2, '123', '2020-10-14', '2312312', '13:00', 'sdsa', '21312', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '123', 'Bateria', '3232', '1234', 'Samsung'),
+(3, '1234', '2020-10-13', '10:00', '13:00', 'Juanito', '120003', 'Juanito@email.com', 'Calle 100', 'UNILAGO', '1234', 'Bateria de pc', '2345', '2212', 'ACER'),
+(4, '12345', '2020-10-08', '21312312', '15:00', 'Fernando', '213213123', 'Fernando@gmail.com', 'Calle 23', 'ALTA', '3456', 'Cargador', '2345', '1234', 'Proveedor(CHINA)'),
+(5, '12345', '2020-10-08', '21312312', '13:00', 'Fernando', '213213123', 'Fernando@gmail.com', 'Calle 23', 'ALTA', '3457', 'Bateria', '2345', '1679', 'Proveedor(CHINA)'),
+(6, '12345', '2020-10-14', '21312312', '12:00', 'Fernando', '213213123', 'Fernando@gmail.com', 'Calle 23', 'ALTA', '3457', 'Bateria', '2345', '1679', 'Proveedor(CHINA)'),
+(7, '1001', '2020-10-07', '12200', '13:00', 'Pepe', '12000', 'Pepes@gmail.com', 'Av calle 100', 'ALTA', '1222', 'Monitor', '3456', '2334', 'APPLE'),
+(8, '1001', '2020-10-07', '12200', '13:00', 'Pepe', '12000', 'Pepes@gmail.com', 'Av calle 100', 'ALTA', '1222', 'Monitor', '3456', '2334', 'APPLE'),
+(9, '1001', '2020-10-07', '12200', '13:00', 'Pepe', '12000', 'Pepes@gmail.com', 'Av calle 100', 'ALTA', '1222', 'Monitor', '3456', '2334', 'APPLE'),
+(10, '1002', '2020-10-01', '23000', '09:00', 'Hugo', '1234567', 'Hugo@gmail.com', 'Calle 200', 'UNILAGO', '12345', 'Diademas', '1113', '1222', 'Digital MTX'),
+(11, '1002', '2020-10-01', '23000', '09:00', 'Hugo', '1234567', 'Hugo@gmail.com', 'Calle 200', 'UNILAGO', '12345', 'Diademas', '1113', '1222', 'Digital MTX'),
+(12, '1002', '2020-10-01', '23000', '09:00', 'Hugo', '1234567', 'Hugo@gmail.com', 'Calle 200', 'UNILAGO', '12345', 'Diademas', '1113', '1222', 'Digital MTX'),
+(13, '1003', '2020-10-08', '22011', '10:00', 'Diego', '12333', 'Diego@gmail.com', 'Calle 26', 'ALTA', '1123', 'Celular', '1114', '1223', 'XIAOMI'),
+(14, '1003', '2020-10-08', '22011', '10:00', 'Diego', '12333', 'Diego@gmail.com', 'Calle 26', 'ALTA', '1123', 'Celular', '1114', '1223', 'XIAOMI'),
+(15, '1003', '2020-10-08', '22011', '10:00', 'Diego', '12333', 'Diego@gmail.com', 'Calle 26', 'ALTA', '1123', 'Celular', '1114', '1223', 'XIAOMI');
 
 -- --------------------------------------------------------
 
@@ -3581,7 +3598,8 @@ CREATE TABLE `mg_garantia` (
 --
 
 INSERT INTO `mg_garantia` (`id`, `No_garantia`, `Fecha_ingreso`, `Hora_ingreso`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Proveedor`, `Flete`, `Departamento`, `Municipio`, `Valor_Flete`, `No_Guia`, `Transportadora`, `Observacion_Empleado`, `Empleado`) VALUES
-(1, 'G-1', '2020-10-27', '11:21 pm', '123', 'UNILAGO', '2020-10-21', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', '', 'NO', '0', '', '', '', '', 'ffxtfcf', 'Juan');
+(1, 'G-1', '2020-10-30', '10:01 pm', '123', 'UNILAGO', '2020-10-21', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', '', 'NO', '0', '', '', '', '', 'Se aprobo garantia', 'Juan'),
+(2, 'G-2', '2020-10-30', '10:10 pm', '12345', 'ALTA', '2020-10-08', 'Fernando', '213213123', 'jnordonez7@misena.edu.co', 'Calle 23', '70', 'SI', 'Cundinamarca', 'Caqueza', '34000', '2343', 'Envia', 'Se aprobo garantia y se pasa al tecnico', 'Juan');
 
 -- --------------------------------------------------------
 
@@ -4911,18 +4929,6 @@ CREATE TABLE `mg_servicio_tecnico` (
   `Id_Empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `mg_servicio_tecnico`
---
-
-INSERT INTO `mg_servicio_tecnico` (`id`, `Observacion_tecnico`, `Fecha_anexo_Tecnico`, `Hora_Anexo_Tecnico`, `Id_Garantia`, `Id_Empleado`) VALUES
-(1, 'Se queda pendiente', '2020-10-28', '12:17 am', 1, 1),
-(2, 'eeereret', '2020-10-28', '06:31 pm', 1, 1),
-(3, 'eeereret', '2020-10-28', '06:31 pm', 1, 1),
-(4, 'sdasdasdas', '2020-10-28', '06:34 pm', 1, 1),
-(5, 'sdasdasdsa', '2020-10-28', '06:48 pm', 1, 1),
-(6, 'sdasdasdsa', '2020-10-28', '06:48 pm', 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -5084,7 +5090,7 @@ ALTER TABLE `mg_centro_costos`
 -- AUTO_INCREMENT de la tabla `mg_detalle_garantia`
 --
 ALTER TABLE `mg_detalle_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_estados_garantia`
@@ -5096,19 +5102,19 @@ ALTER TABLE `mg_estados_garantia`
 -- AUTO_INCREMENT de la tabla `mg_facturas`
 --
 ALTER TABLE `mg_facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_garantia`
 --
 ALTER TABLE `mg_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_servicio_tecnico`
 --
 ALTER TABLE `mg_servicio_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_transportadora`

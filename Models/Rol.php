@@ -19,7 +19,7 @@ class Rol
 	public function getAll()
     {
         try {
-            $strSql = "SELECT * FROM rol ";
+            $strSql = "SELECT * FROM dtm_cargos ";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {

@@ -48,6 +48,8 @@ class PersonController
 	public function new()
 	{
 		require 'Views/Layout.php';
+		$dataPersons = $this->model->getAll();
+		$totalPersons = count($dataPersons);
 		$roles = $this->rol->getAll();
 		require 'Views/Persons/new.php';
 		require 'Views/Scripts.php';
@@ -58,7 +60,7 @@ class PersonController
 		require 'Views/Layout.php';
 		$persons = $this->model->getAll();
 		require 'Views/Persons/list.php';
-		require 'Views/Scripts.php';
+		require 'Views/Scripts.php'; 
 	}
 
 	public function save()
@@ -79,7 +81,7 @@ class PersonController
 
 			//Recipients
 			$mail->setFrom('nikomegathet666@gmail.com');
-			$mail->addAddress($_POST['Correo']);     // Add a recipient
+			$mail->addAddress($_POST['correo']);     // Add a recipient
 
 			// Content
 			$mail->isHTML(true);                                  // Set email format to HTML
@@ -131,9 +133,9 @@ class PersonController
 	                      <div class="form-group">
 	                      <p>Hola que tal: su usuario esta completado, con su usuario y contraseña podra ingresar, por favor tener en cuenta los siguientes items </p><br>
 	                      <h3>Correo</h3><br>
-	                      <p>' . $_POST['Correo'] . '</p><br>
+	                      <p>' . $_POST['correo'] . '</p><br>
 	                      <h3>Contraseña</h3><br>
-	                      <p>' . $_POST['Contrasena'] . '</p><br>
+	                      <p>' . $_POST['password'] . '</p><br>
 	                      </div>
 	                    </form>
 	                  </div>

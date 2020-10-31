@@ -27,17 +27,17 @@
                                             <th>Apellidos</th>
                                             <th>Correo</th>
                                             <th>Telefono</th>
-                                            <th>Rol</th>
+                                            <th>Rol</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($persons as $person) { ?>
                                             <tr>
-                                                <td><?php echo $person->Nombres ?></td>
-                                                <td><?php echo $person->Apellidos ?></td>
-                                                <td><?php echo $person->Correo ?></td>
-                                                <td><?php echo $person->Telefono ?></td>
-                                                <td><?php echo $person->rol ?></td>
+                                                <td><?php echo $person->nombre ?></td>
+                                                <td><?php echo $person->apellidos ?></td>
+                                                <td><?php echo $person->correo ?></td>
+                                                <td><?php echo $person->telefono ?></td>
+                                                <td><?php echo $person->cargo ?></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
