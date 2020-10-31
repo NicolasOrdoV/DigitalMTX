@@ -130,89 +130,62 @@ $td = $total_data + 0001;
                                     </div>
                                 </div>
                             </div>
-                            <?php if (isset($bills)) {
-                                $i = 0;
-                                $productos = [];
-                                foreach ($bills as $key => $bif) {
-                                    $productos = [
-                                        'Codigo' => $bif->Codigo_Producto,
-                                        'Descripcion' => $bif->Descripcion_Producto,
-                                        'Referencia' => $bif->Referencia_Producto,
-                                        'Sello' => $bif->Sello_Producto,
-                                        'Marca' => $bif->Marca_Producto
-                                    ];
-                                   
-                            ?>
-                                    <h1>Producto: <?php echo $key+1;?></h1>
                                     <hr>
-                                    <input type="hidden" name="Estado[]" value="Tramite">
-                                    <div class="row clearfix">
-                                        <div class="col-sm-2">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    <label>Codigo Producto </label>
-                                                    <input type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    <label>Descripcion Producto </label>
-                                                    <input type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
-                                                    <!--<input type="hidden" name="id_producto" id="id_producto" value="">-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <label>Marca Producto</label>
-                                                    <input type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group ">
-                                                <div class="form-line">
-                                                    <label>Sello Producto</label>
-                                                    <input type="text" class="form-control" name="Sello_Producto[]" readonly value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group ">
-                                                <div class="form-line">
-                                                    <label>Referencia</label>
-                                                    <input type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group ">
-                                                <label>¿Se aprueba garantia?</label>
-                                                <div class="demo-checkbox form-line">
-                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
-                                                    <label for="md_checkbox_<?php echo $key+1; ?>">SI</label>
-                                                    <input type="checkbox" id="md_checkbox_<?php echo $key+10; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
-                                                    <label for="md_checkbox_<?php echo $key+10; ?>">NO</label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Codigo</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Referencia</th>
+                                                    <th>Sello</th>
+                                                    <th>Marca</th>
+                                                    <th>Observacion del cliente</th>
+                                                    <th>¿Se aprueba la garantia?</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (isset($bills)) {
+                                                    $i = 0;
+                                                    $productos = [];
+                                                    foreach ($bills as $key => $bif) {
+                                                        $productos = [
+                                                            'Codigo' => $bif->Codigo_Producto,
+                                                            'Descripcion' => $bif->Descripcion_Producto,
+                                                            'Referencia' => $bif->Referencia_Producto,
+                                                            'Sello' => $bif->Sello_Producto,
+                                                            'Marca' => $bif->Marca_Producto
+                                                        ];
+                                                       
+                                                ?>
+                                                <tr>
+                                                    <td>
+                                                        <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>" >
+                                                    </td>
+                                                    <td><input size="5" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>"></td>
+                                                    <td><input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>"></td>
+                                                    <td><input size="5" type="text" class="form-control" name="Sello_Producto[]" readonly value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>"></td>
+                                                    <td><input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>"></td>
+                                                    <td>
+                                                       <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
+                                                       <input type="hidden" name="Estado[]" value="Tramite">
+                                                   </td>
+                                                    <td>
+                                                        <div class="demo-checkbox form-line">
+                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
+                                                            <label for="md_checkbox_<?php echo $key+1; ?>">SI</label>
+                                                            <input type="checkbox" id="md_checkbox_<?php echo $key+10; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
+                                                            <label for="md_checkbox_<?php echo $key+10; ?>">NO</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <?php }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="row clearfix">
-                                        <div class="col-sm-12">
-                                            <div class="form-group ">
-                                                <div class="form-line">
-                                                    <label>Observacion cliente</label>
-                                                    <textarea rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            <?php }
-                            }
-                            ?>
+                            
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group">

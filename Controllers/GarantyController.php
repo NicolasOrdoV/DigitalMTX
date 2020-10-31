@@ -249,8 +249,6 @@ class GarantyController
                   <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
                   <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
                   <p><b>Proveedor:</b> '.$data['Proveedor'].'</p>
-                  <p><b>Departamento:</b> '.$data['Departamento'].'</p>
-                  <p><b>Municipio:</b> '.$data['Municipio'].'</p>
                   <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
                   <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
                 </td>
@@ -263,7 +261,6 @@ class GarantyController
                 <th>Codigo Producto</th>
                 <th>Descripcion Producto</th>
                 <th>Marca Producto</th>
-                <th>Sello Producto</th>
                 <th>Referencia Producto</th>
               </tr>';
               foreach ($datas as $product) {
@@ -271,7 +268,6 @@ class GarantyController
                 <td>'.$product->Codigo_Producto.'</td>
                 <td>'.$product->Descripcion_Producto.'</td>
                 <td>'.$product->Marca_Producto.'</td>
-                <td>'.$product->Sello_Producto.'</td>
                 <td>'.$product->Referencia.'</td>
               </tr>';
             }

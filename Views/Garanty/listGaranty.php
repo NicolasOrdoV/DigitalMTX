@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="Assets/css/jquery.dataTables.min.css">
+
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="myTable">
+                            <table class="table table-bordered table-striped table-hover dataTable <?php echo $_SESSION['user']->cargo == "Administrador" ? 'js-exportable' : 'js-basic-example' ?>">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -52,13 +52,13 @@
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <form action="?controller=garanty&method=consecutive" method="POST">
-                                                                    <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                                    <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
                                                                     <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
                                                                 </form>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <form action="?controller=garanty&method=ticket" method="POST">
-                                                                    <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                                    <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
                                                                     <button type="submit" class="btn btn-success"><i class="material-icons">theaters</i></button>
                                                                 </form>
                                                             </div>
@@ -86,9 +86,3 @@
     <!-- #END# Exportable Table -->
     </div>
 </section>
-<script src="Assets/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript">
-    $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-</script>

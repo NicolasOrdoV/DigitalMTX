@@ -14,7 +14,7 @@
                         <div class="col-sm-6">
                             <h2>Productos</h2>
                         </div>
-                        <?php if ($_SESSION['user']->id_rol == 1 || $_SESSION['user']->id_rol == 3) { ?>
+                        <?php if ($_SESSION['user']->cargo == "Administrador") { ?>
                             <div class="col-sm-6 text-right">
                                 <a href="?controller=product&method=new" class="btn btn-danger">+Agregar</a>
                             </div>
@@ -34,8 +34,8 @@
                                     <?php foreach ($products as $product) { ?>
                                         <tr>
                                             <td><?php echo $product->id ?></td>
-                                            <td><?php echo $product->Codigo ?></td>
-                                            <td><?php echo $product->Nombre ?></td>
+                                            <td><?php echo $product->codigo ?></td>
+                                            <td><?php echo $product->nombre ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
