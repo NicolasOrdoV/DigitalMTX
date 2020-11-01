@@ -17,7 +17,7 @@
                                 <div class="col-sm-12">
                                     <div class="alert alert-danger">
                                         La garantia a ofrecer ya esta asociada a un numero de factura
-                                        <a href="?controller=garanty&method=listGaranty" class="btn btn-danger">Regresar</a>
+                                        <a href="?controller=garanty&method=new" class="btn btn-danger">Regresar</a>
                                     </div>
                                 </div>
                             </div>

@@ -28,14 +28,22 @@ class ProductController
 
 	public function new()
 	{
-		require 'Views/Layout.php';
-        require 'Views/Products/new.php';
-        require 'Views/Scripts.php';
+		if (isset($_SESSION['user'])) {
+			require 'Views/Layout.php';
+	        require 'Views/Products/new.php';
+	        require 'Views/Scripts.php';
+        }else{
+			header('Location: ?controller=login');
+		}
 	}
 
 	public function save()
 	{
-		$this->model->newProduct($_REQUEST);
-		header('Location: ?controller=product&method=list');
+		if (isset($_SESSION['user'])) {
+			$this->model->newProduct($_REQUEST);
+			header('Location: ?controller=product&method=list');
+		}else{
+			header('Location: ?controller=login');
+		}
 	}
 }

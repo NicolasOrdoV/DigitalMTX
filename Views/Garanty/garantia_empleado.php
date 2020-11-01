@@ -52,7 +52,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Numero Garantia</label>
-                                            <input type="text" class="form-control" name="No_garantia" value="<?php echo "G-".$td; ?>" readonly>
+                                            <input type="text" class="form-control" name="No_garantia" value="<?php echo "G-".$td; ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Correo </label>
-                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Correo_Cliente : '' ?>">
+                                            <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Correo_Cliente : '' ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -125,13 +125,14 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Direccion </label>
-                                            <input type="text" class="form-control" name="Direccion_Cliente" id="Direccion_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Direccion_Cliente : '' ?>">
+                                            <input type="text" class="form-control" name="Direccion_Cliente" id="Direccion_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Direccion_Cliente : '' ?>" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                                     <hr>
                                     <div class="table-responsive">
+                                        <h3>Productos</h3>
                                         <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                             <thead>
                                                 <tr>
@@ -160,12 +161,31 @@ $td = $total_data + 0001;
                                                 ?>
                                                 <tr>
                                                     <td>
+                                                        <small style="visibility: hidden"><?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?></small>
                                                         <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>" >
                                                     </td>
-                                                    <td><input size="5" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>"></td>
-                                                    <td><input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>"></td>
-                                                    <td><input size="5" type="text" class="form-control" name="Sello_Producto[]" readonly value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>"></td>
                                                     <td>
+                                                        <small style="visibility: hidden">
+                                                            <?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
+                                                        </small>
+                                                        <input size="5" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                    </td>
+                                                    <td>
+                                                        <small style="visibility: hidden">
+                                                            <?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>
+                                                        </small>
+                                                        <input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
+                                                    </td>
+                                                    <td>
+                                                        <small style="visibility: hidden">
+                                                            <?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>
+                                                        </small>
+                                                        <input size="5" type="text" class="form-control" name="Sello_Producto[]" readonly value="<?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>">
+                                                    </td>
+                                                    <td>
+                                                        <small style="visibility: hidden">
+                                                            <?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>
+                                                        </small>
                                                         <input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
                                                         <input type="hidden" name="fecha_factura" value="<?php echo $bills[0]->fecha_factura ?>">
                                                     </td>
@@ -210,7 +230,7 @@ $td = $total_data + 0001;
                                             <b>Proveedor</b>
                                         </p>
                                         <?php //var_dump($providers) ?>
-                                        <select name="Proveedor" class="form-control show-tick" >
+                                        <select name="Proveedor" class="form-control show-tick">
                                             <option value="">Seleccione..</option>
                                             <?php foreach ($providers as $provider) { ?>
                                                 <option value="<?php echo $provider->id?>"><?php echo $provider->id?></option>
@@ -279,7 +299,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Observacion Empleado</label>
-                                            <textarea rows="4" class="form-control no-resize" name="Observacion_Empleado"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" name="Observacion_Empleado" required></textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -78,9 +78,11 @@ class GarantyController
             'error' => 'No se encontro la factura solicitada'
           ];
         }
-        //if ($dataF[0]->factura === $bills[0]->Numero_Factura) {
+        //$fac1 = $dataF[0]->factura;
+        //$fac2 = $bills[0]->Numero_Factura;
+        //if ($fac1 === $fac2) {
           //header('Location: ?controller=garanty&method=failed');
-        //}else{
+        //}elseif($fac1 !== $fac2){
           require 'Views/Layout.php';
           $data = $this->model->getAll();
           $total_data = count($data);
@@ -196,16 +198,19 @@ class GarantyController
 
         //----Aqui va la validacion de rango de fechas
         if ($fecha_actual >= $fecha_factura && $fecha_actual <= $fecha_proxima) {
-          if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag == 'SI') {
+          if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag === 'SI') {
             $this->model->saveDetail($detaills);
-          } elseif(isset($lastId[0]->id) && $answerNewGaranty == true && $agN == 'NO') {
-            $detaills['Estado'] = "Cerrado";
-            $detaills['Aprobacion_Garantia'] = 'NO';
-            $this->model->saveDetail($detaills);
+            if(isset($lastId[0]->id) && $answerNewGaranty == true && $agN === 'NO') {
+              $detaills['Estado'] = "Cerrado";
+              $detaills['Aprobacion_Garantia'] = 'NO';
+              $this->model->saveDetail($detaills);
+            }
           }
         }else{
-          echo '<script>alert("La fecha de garantia expiro")</script>';
-          header('Location: ?controller=garanty&method=listGaranty');
+          echo '<script>
+                  alert("La fecha de garantia expiro");
+                  window.location = "?controller=garanty&method=listGaranty";
+                </script>';
         }
         //---Aqui termina el proceso de rango de fechas
 
