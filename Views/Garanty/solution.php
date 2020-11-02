@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="block-header">
             <h2>
-                LISTA DE GARANTÍAS
+                LISTA DE GARANTÍAS SOLUCIONADAS POR TECNICO
                 <small>Consulta las garantías</small>
             </h2>
         </div>
@@ -48,21 +48,14 @@
                                                 <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                                 <td><?php echo $garanty->Estado ?></td>
                                                 <td>
-                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite') { ?>
-                                                        <div class="row">
+                                                    <?php if ($garanty->Estado == 'Solucionado por servicio tecnico' && $garanty->Aprobacion_Garantia == 'SI' ) {  ?>                                                                                                 <div class="row clearfix">
                                                             <div class="col-sm-6">
-                                                                <form action="?controller=garanty&method=consecutive" method="POST">
-                                                                    <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
-                                                                    <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
+                                                                <form action="?controller=garanty&method=options" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                                    <button type="submit" class="btn bg-deep-orange"><i class="material-icons">visibility</i></button>
                                                                 </form>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <form action="?controller=garanty&method=ticket" method="POST">
-                                                                    <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
-                                                                    <button type="submit" class="btn btn-success"><i class="material-icons">theaters</i></button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                        </div>                             
                                                 <?php } ?>
                                             </td>
                                          </tr>

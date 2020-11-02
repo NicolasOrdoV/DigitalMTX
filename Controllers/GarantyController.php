@@ -723,7 +723,7 @@ class GarantyController
   	            ';
 
   	      $mail->send();
-  	      header('Location: ?controller=garanty&method=listGaranty');
+  	      header('Location: ?controller=garanty&method=solutionTechnical');
   	    } catch (Exception $e) {
   	      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   	    }
@@ -924,6 +924,18 @@ class GarantyController
         }
         $mpdf->Output();
       }
+    }else{
+      header('Location: ?controller=login');
+    }
+  }
+
+  public function solutionTechnical()
+  {
+    if (isset($_SESSION['user'])) {
+      require 'Views/Layout.php';
+      $garanties = $this->model->getAllSolution();
+      require 'Views/Garanty/solution.php';
+      require 'Views/Scripts.php';
     }else{
       header('Location: ?controller=login');
     }

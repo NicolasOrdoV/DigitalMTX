@@ -79,6 +79,17 @@ class Garanty
         }
     }
 
+    public function getAllSolution()
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia ORDER BY d.Id_Garantia ASC";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function saveDetail($data)
     {
         try {
@@ -109,7 +120,7 @@ class Garanty
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE g.id = :id";
+            WHERE d.id = :id";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql, $array);
             return $query;
@@ -123,7 +134,7 @@ class Garanty
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE d.Descripcion_Producto = '$name' AND d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' AND d.Id_Garantia = $id ";
+            WHERE d.Descripcion_Producto = '$name' AND d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' AND d.id = $id ";
            /*  $array = ['Descripcion_Producto' => $name,
                       'Id_Garantia' => $id]; */
             $query = $this->pdo->select($strSql);
@@ -190,9 +201,8 @@ class Garanty
 
     public function getOptions($id){
         try {
-           $strSql = "SELECT g.*,t.*,d.* FROM mg_garantia g
-           INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia
-           INNER JOIN mg_servicio_tecnico t ON g.id = t.Id_Garantia WHERE g.id = :id ORDER BY t.id DESC LIMIT 1";
+           $strSql = "SELECT t.Observacion_tecnico as Observacion_tecnico, t.Id_Garantia as idg ,d.* FROM mg_detalle_garantia d
+           INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia WHERE d.id = :id ORDER BY t.id DESC LIMIT 1";
            $array = ['id' => $id];
            $query = $this->pdo->select($strSql,$array);
            return $query;

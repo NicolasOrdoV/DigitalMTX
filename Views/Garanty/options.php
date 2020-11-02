@@ -20,7 +20,7 @@
                     </div>
                     <div class="body">
                         <form action="?controller=garanty&method=saveEndGaranty" method="POST">
-                            <input  type = "hidden" name="id" value="<?php echo $data[0]->Id_Garantia ?>">
+                            <input  type = "hidden" name="id" value="<?php echo $data[0]->id ?>">
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <div class="form-group">

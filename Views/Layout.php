@@ -307,6 +307,12 @@
                                 </a>
                                 
                             </li>
+                            <li>
+                                <a href="?controller=garanty&method=solutionTechnical" class="menu-toggle">
+                                    <span>Solución del tecnico a garantias pendientes</span>
+                                </a>
+                                
+                            </li>
                         </ul>
                     </li>
                     <li>
