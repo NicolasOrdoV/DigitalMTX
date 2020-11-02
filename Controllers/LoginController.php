@@ -21,18 +21,29 @@ class LoginController
     }
     
     public function loginIn()
-	{
-		$validateUserEmp = $this->model->validateUserEmp($_POST);
-		$validateAdmin = $this->model->validateAdmin($_POST);
-		if ($validateUserEmp === true || $validateAdmin === true) {
-			header('Location: ?controller=person&method=template');
-	    }else {
-			$error = [
-				'errorMessage' => $validateUserEmp,
-				'email' => $_POST['correo']
-			];
+	{    
+		if (filter_var($_POST['correo'],FILTER_VALIDATE_EMAIL)) {
+
+			$validateUserEmp = $this->model->validateUserEmp($_POST);
+			$validateAdmin = $this->model->validateAdmin($_POST);
+			if ($validateUserEmp === true || $validateAdmin === true) {
+				header('Location: ?controller=person&method=template');
+		    }else {
+				$error = [
+					'errorMessage' => $validateUserEmp,
+					'email' => $_POST['correo']
+				];
+				require 'Views/login.php';
+			}
+		} else {
+			$errorFailed = [
+					'errorEmail' => 'Correo no tiene formato correcto',
+					'email' => $_POST['correo'],
+					'password' => $_POST['password']
+				];
 			require 'Views/login.php';
 		}
+			
 	}
 
 	public function logout()

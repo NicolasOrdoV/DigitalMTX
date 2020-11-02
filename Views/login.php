@@ -24,6 +24,9 @@
                         <div class="alert alert-danger"><?php echo $error['errorMessage']; ?></div>
                     <?php } ?>
                     <input type="text" name="correo" placeholder="Correo" value="<?php echo isset($error['email']) ? $error['email'] : '' ?>">
+                    <?php if (isset($errorFailed)) { ?>
+                         <div class='text-danger'><?php echo $errorFailed['errorEmail'] ?></div>
+                    <?php } ?>
                     <input type="password" name="password" placeholder="Contraseña">
                     <button type="submit" class="btn btn-danger float-right">Ingresar</button>
                 </form>
