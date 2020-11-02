@@ -10,7 +10,9 @@ if(isset($_POST['import_data'])){
             // get data records from csv file
             while(($emp_record = fgetcsv($csv_file)) !== FALSE){
 
-                var_dump($emp_record);
+                //echo '<pre>';
+                //var_dump($emp_record);
+                //echo '</pre>';
                 // Check if employee already exists with same email
                 $sql_query = "SELECT Numero_Factura, fecha_factura, nit, hora_factura,
                 Nombre_Cliente, Identificacion_Cliente, Correo_Cliente, Direccion_Cliente, Centro_costo,
@@ -41,7 +43,7 @@ if(isset($_POST['import_data'])){
                     VALUES('.$emp_record[0].', '".$emp_record[1]."', '".$emp_record[2]."', '".$emp_record[3]."',
                     '".$emp_record[4]."', '".$emp_record[5]."', '".$emp_record[6]."', '".$emp_record[7]."',
                     '".$emp_record[8]."', '".$emp_record[9]."', '".$emp_record[10]."', '".$emp_record[11]."',
-                    '".$emp_record[12]."', '".$emp_record[13]."', '".$emp_record[14]."')";
+                    '".$emp_record[12]."', '".$emp_record[13]."')";
 					mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
                 }
             }            
@@ -54,4 +56,6 @@ if(isset($_POST['import_data'])){
         $import_status = '?import_status=invalid_file';
     }
 }
-header("Location: ?controller=bill");
+echo '<script>
+window.location = "../../?controller=bill";
+</script>';

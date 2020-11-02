@@ -20,18 +20,15 @@
                             <h2>Importar</h2>
                         </div>
                         <div class="col-sm-12">
-                        <?php if(!empty($import_status_message)){
-                            echo '<div class="alert '.$message_stauts_class.'">'.$import_status_message.'</div>';
-                        } ?>
                             <form action="Views/Bills/import.php" method="post" enctype="multipart/form-data" id="import_form">				
                                 <input type="file" name="file" class="form-control"/>
-                                <input type="submit" class="btn btn-primary" name="import_data" value="IMPORT">		
+                                <input type="submit" class="btn btn-danger" name="import_data" value="IMPORTAR">		
                            </form>
                         </div>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
                                         <th>Numero_Factura </th>

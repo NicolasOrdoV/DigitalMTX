@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2020 a las 20:02:27
+-- Tiempo de generación: 02-11-2020 a las 02:05:19
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -3497,17 +3497,6 @@ CREATE TABLE `mg_detalle_garantia` (
   `Observacion_Final` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `mg_detalle_garantia`
---
-
-INSERT INTO `mg_detalle_garantia` (`id`, `Codigo_Producto`, `Descripcion_Producto`, `Marca_Producto`, `Sello_Producto`, `Referencia`, `Id_Garantia`, `Observacion_Cliente`, `Aprobacion_Garantia`, `Estado`, `Observacion_Final`) VALUES
-(1, '1', 'sdsdasda-asdadas', 'Acer', '213214', '21312', 1, 'Se daño', 'SI', 'Tramite', NULL),
-(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, '', 'NO', 'Cerrado', NULL),
-(3, '3456', 'Cargador', 'Proveedor(CHINA)', '1234', '2345', 2, 'se daño', 'SI', 'Tramite', NULL),
-(4, '3457', 'Bateria', 'Proveedor(CHINA)', '1679', '2345', 2, 'Se daño', 'SI', 'Tramite', NULL),
-(5, '3457', 'Bateria', 'Proveedor(CHINA)', '1679', '2345', 2, '', 'NO', 'Cerrado', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -3526,8 +3515,7 @@ CREATE TABLE `mg_estados_garantia` (
 --
 
 CREATE TABLE `mg_facturas` (
-  `id` int(11) NOT NULL,
-  `Numero_Factura` varchar(100) NOT NULL,
+  `Numero_Factura` int(11) NOT NULL,
   `fecha_factura` date NOT NULL,
   `nit` varchar(50) NOT NULL,
   `hora_factura` varchar(50) NOT NULL,
@@ -3542,27 +3530,6 @@ CREATE TABLE `mg_facturas` (
   `Sello_Producto` varchar(50) NOT NULL,
   `Marca_Producto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `mg_facturas`
---
-
-INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Sello_Producto`, `Marca_Producto`) VALUES
-(1, '123', '2020-10-21', '1234455', '13:00 ', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '1', 'sdsdasda-asdadas', '21312', '213214', 'Acer'),
-(2, '123', '2020-10-14', '2312312', '13:00', 'sdsa', '21312', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '123', 'Bateria', '3232', '1234', 'Samsung'),
-(3, '1234', '2020-10-13', '10:00', '13:00', 'Juanito', '120003', 'Juanito@email.com', 'Calle 100', 'UNILAGO', '1234', 'Bateria de pc', '2345', '2212', 'ACER'),
-(4, '12345', '2020-10-08', '21312312', '15:00', 'Fernando', '213213123', 'Fernando@gmail.com', 'Calle 23', 'ALTA', '3456', 'Cargador', '2345', '1234', 'Proveedor(CHINA)'),
-(5, '12345', '2020-10-08', '21312312', '13:00', 'Fernando', '213213123', 'Fernando@gmail.com', 'Calle 23', 'ALTA', '3457', 'Bateria', '2345', '1679', 'Proveedor(CHINA)'),
-(6, '12345', '2020-10-14', '21312312', '12:00', 'Fernando', '213213123', 'Fernando@gmail.com', 'Calle 23', 'ALTA', '3457', 'Bateria', '2345', '1679', 'Proveedor(CHINA)'),
-(7, '1001', '2020-10-07', '12200', '13:00', 'Pepe', '12000', 'Pepes@gmail.com', 'Av calle 100', 'ALTA', '1222', 'Monitor', '3456', '2334', 'APPLE'),
-(8, '1001', '2020-10-07', '12200', '13:00', 'Pepe', '12000', 'Pepes@gmail.com', 'Av calle 100', 'ALTA', '1222', 'Monitor', '3456', '2334', 'APPLE'),
-(9, '1001', '2020-10-07', '12200', '13:00', 'Pepe', '12000', 'Pepes@gmail.com', 'Av calle 100', 'ALTA', '1222', 'Monitor', '3456', '2334', 'APPLE'),
-(10, '1002', '2020-10-01', '23000', '09:00', 'Hugo', '1234567', 'Hugo@gmail.com', 'Calle 200', 'UNILAGO', '12345', 'Diademas', '1113', '1222', 'Digital MTX'),
-(11, '1002', '2020-10-01', '23000', '09:00', 'Hugo', '1234567', 'Hugo@gmail.com', 'Calle 200', 'UNILAGO', '12345', 'Diademas', '1113', '1222', 'Digital MTX'),
-(12, '1002', '2020-10-01', '23000', '09:00', 'Hugo', '1234567', 'Hugo@gmail.com', 'Calle 200', 'UNILAGO', '12345', 'Diademas', '1113', '1222', 'Digital MTX'),
-(13, '1003', '2020-10-08', '22011', '10:00', 'Diego', '12333', 'Diego@gmail.com', 'Calle 26', 'ALTA', '1123', 'Celular', '1114', '1223', 'XIAOMI'),
-(14, '1003', '2020-10-08', '22011', '10:00', 'Diego', '12333', 'Diego@gmail.com', 'Calle 26', 'ALTA', '1123', 'Celular', '1114', '1223', 'XIAOMI'),
-(15, '1003', '2020-10-08', '22011', '10:00', 'Diego', '12333', 'Diego@gmail.com', 'Calle 26', 'ALTA', '1123', 'Celular', '1114', '1223', 'XIAOMI');
 
 -- --------------------------------------------------------
 
@@ -3592,14 +3559,6 @@ CREATE TABLE `mg_garantia` (
   `Observacion_Empleado` text NOT NULL,
   `Empleado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `mg_garantia`
---
-
-INSERT INTO `mg_garantia` (`id`, `No_garantia`, `Fecha_ingreso`, `Hora_ingreso`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Proveedor`, `Flete`, `Departamento`, `Municipio`, `Valor_Flete`, `No_Guia`, `Transportadora`, `Observacion_Empleado`, `Empleado`) VALUES
-(1, 'G-1', '2020-10-30', '10:01 pm', '123', 'UNILAGO', '2020-10-21', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', '', 'NO', '0', '', '', '', '', 'Se aprobo garantia', 'Juan'),
-(2, 'G-2', '2020-10-30', '10:10 pm', '12345', 'ALTA', '2020-10-08', 'Fernando', '213213123', 'jnordonez7@misena.edu.co', 'Calle 23', '70', 'SI', 'Cundinamarca', 'Caqueza', '34000', '2343', 'Envia', 'Se aprobo garantia y se pasa al tecnico', 'Juan');
 
 -- --------------------------------------------------------
 
@@ -5005,12 +4964,6 @@ ALTER TABLE `mg_estados_garantia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `mg_facturas`
---
-ALTER TABLE `mg_facturas`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `mg_garantia`
 --
 ALTER TABLE `mg_garantia`
@@ -5090,7 +5043,7 @@ ALTER TABLE `mg_centro_costos`
 -- AUTO_INCREMENT de la tabla `mg_detalle_garantia`
 --
 ALTER TABLE `mg_detalle_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_estados_garantia`
@@ -5099,16 +5052,10 @@ ALTER TABLE `mg_estados_garantia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `mg_facturas`
---
-ALTER TABLE `mg_facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
 -- AUTO_INCREMENT de la tabla `mg_garantia`
 --
 ALTER TABLE `mg_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_servicio_tecnico`
