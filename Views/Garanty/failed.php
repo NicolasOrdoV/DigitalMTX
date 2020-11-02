@@ -16,7 +16,7 @@
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="alert alert-danger">
-                                        La garantia a ofrecer ya esta asociada a un numero de factura
+                                        La garantia a ofrecer ya esta asociada a un numero de factura o no existe en la base de datos.
                                         <a href="?controller=garanty&method=new" class="btn btn-danger">Regresar</a>
                                     </div>
                                 </div>

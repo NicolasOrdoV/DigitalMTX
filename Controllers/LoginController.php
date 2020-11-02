@@ -13,7 +13,11 @@ class LoginController
     
     public function index()
 	{
-		require 'Views/login.php';
+		if (!isset($_SESSION['user'])) {
+			require 'Views/login.php';
+		}else{
+			header('Location: ?controller=person&method=template');
+		}
     }
     
     public function loginIn()

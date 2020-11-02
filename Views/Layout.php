@@ -147,7 +147,9 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
+                            <?php if($_SESSION['user']->cargo == "Tecnico" || $_SESSION['user']->cargo == "Recepcion"){?>
                             <li><a href="?controller=person&method=profile&id=<?php echo $_SESSION['user']->id?>"><i class="material-icons">person</i>Perfil</a></li>
+                            <?php } ?>
                             <li><a href="?controller=login&method=logout"><i class="material-icons">input</i>Cerrar sesión</a></li>
                         </ul>
                     </div>
