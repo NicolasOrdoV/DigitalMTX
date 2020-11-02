@@ -30,7 +30,8 @@ class Technical
 	public function consecutives($id)
 	{
 		try {
-			$strSql = "SELECT t.*,d.* FROM mg_servicio_tecnico t, mg_detalle_garantia d
+			$strSql = "SELECT t.*,d.* FROM mg_servicio_tecnico t
+			INNER JOIN mg_detalle_garantia d ON d.id = t.Id_Garantia 
 			WHERE d.Id_Garantia = :id AND d.Estado = 'Pendiente por servicio tecnico'";
 			$array = ['id' => $id];
 			$query = $this->pdo->select($strSql, $array);

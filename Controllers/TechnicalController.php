@@ -69,7 +69,7 @@ class TechnicalController
 			$this->model->newTechnical($data);
 			$role = $this->model->getByIdDet($name);
 			$dates = [];
-			if ($role[0]->Estado == 'Tramite' && $role[0]->Estado == "Pendiente por servicio tecnico") {
+			if ($role[0]->Estado == 'Tramite' || $role[0]->Estado == "Pendiente por servicio tecnico") {
 				$dates = [
 					'id' => $data['Id_Garantia'],
 					'Estado' => $_POST['Estado_tecnico']
