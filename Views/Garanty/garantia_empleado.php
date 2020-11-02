@@ -168,7 +168,7 @@ $td = $total_data + 0001;
                                                         <small style="visibility: hidden">
                                                             <?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
                                                         </small>
-                                                        <input size="5" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                        <input size="10" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
                                                     </td>
                                                     <td>
                                                         <small style="visibility: hidden">

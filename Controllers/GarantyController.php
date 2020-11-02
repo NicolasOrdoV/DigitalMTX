@@ -205,6 +205,11 @@ class GarantyController
               $detaills['Aprobacion_Garantia'] = 'NO';
               $this->model->saveDetail($detaills);
             }
+          }else{
+            echo '<script>
+            alert("La garantia se registro, pero no se selecciono un producto");
+            window.location = "?controller=garanty&method=listGaranty";
+            </script>';
           }
         }else{
           echo '<script>

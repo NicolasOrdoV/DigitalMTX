@@ -235,6 +235,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">local_mall</i>
+                            <span>Facturas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=bill" class="menu-toggle">
+                                    <span>Carga masiva de facturas</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
                     <?php }elseif ($_SESSION['user']->cargo == 'Tecnico' ) { ?>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
