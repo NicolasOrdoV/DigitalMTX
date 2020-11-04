@@ -41,9 +41,8 @@ $td = $total_data + 0001;
                             </div>
                         </form>
                         <form action="?controller=garanty&method=save" method="POST" id="form_validation" novalidate>
-                            <?php if (isset($details)) { ?>
+                            <?php if (!empty($details)) { ?>
                                 <button type="button" class="btn btn-danger waves-effect m-r-20" data-toggle="modal" data-target="#largeModal">Garantías Asociadas</button>
-
                             <?php } ?>
                             <h1>Detalle de factura: <?php echo isset($bills[0]) ? $bills[0]->Numero_Factura : '' ?></h1>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
@@ -321,158 +320,152 @@ $td = $total_data + 0001;
             <!-- Textarea -->
             <!--#END# Switch Button -->
         </div>
-        <?php if (isset($details)) {
+        <?php if (!empty($details)) {
             foreach ($details as $detail) { ?>
                  
                  <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="largeModalLabel">Numero Garantia<?php echo $detail->No_garantia?></h4>
+                        <div class="modal-header bg-red">
+                            <h4 class="modal-title" id="largeModalLabel">Numero Garantia: <?php echo $detail->No_garantia?></h4>
                         </div>
                         <div class="modal-body">
-                        <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="largeModalLabel">Fecha ingreso</h4>
-                                        <p><?php echo $detail->Fecha_ingreso ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Hora ingreso</h4>
-                                        <p><?php echo $detail->Hora_ingreso ?></p>
-                                    </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="largeModalLabel">Fecha ingreso</h4>
+                                    <p><?php echo $detail->Fecha_ingreso ?></p>
                                 </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Numero Factura</h4>
-                                        <p><?php echo $detail->Numero_Factura ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Punto Venta</h4>
-                                        <p><?php echo $detail->Punto_Venta ?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Fecha Compra</h4>
-                                        <p><?php echo $detail->Fecha_Compra ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Nombre Cliente</h4>
-                                        <p><?php echo $detail->Nombre_Cliente?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Nombre Cliente</h4>
-                                        <p><?php echo $detail->Fecha_Compra ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Identificacion Cliente</h4>
-                                        <p><?php echo $detail->Nombre_Cliente?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Correo Cliente</h4>
-                                        <p><?php echo $detail->Correo_Cliente ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Direccion Cliente</h4>
-                                        <p><?php echo $detail->Direccion_Cliente?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
-                                        <p><?php echo $detail->Proveedor ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Flete</h4>
-                                        <p><?php echo $detail->Flete?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
-                                        <p><?php echo $detail->Proveedor ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Valor Flete</h4>
-                                        <p><?php echo $detail->Flete?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">No_Guia</h4>
-                                        <p><?php echo $detail->Proveedor ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Transportadora</h4>
-                                        <p><?php echo $detail->Flete?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Empleado</h4>
-                                        <p><?php echo $detail->Observacion_Empleado ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Empleado</h4>
-                                        <p><?php echo $detail->Empleado?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Codigo Producto</h4>
-                                        <p><?php echo $detail->Codigo_Producto ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Descripcion Producto</h4>
-                                        <p><?php echo $detail->Descripcion_Producto?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Marca Producto</h4>
-                                        <p><?php echo $detail->Marca_Producto ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Sello Producto</h4>
-                                        <p><?php echo $detail->Sello_Producto?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Referencia Producto</h4>
-                                        <p><?php echo $detail->Referencia ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Cliente</h4>
-                                        <p><?php echo $detail->Observacion_Cliente?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Aprobacion Garantia</h4>
-                                        <p><?php echo $detail->Aprobacion_Garantia ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Cliente</h4>
-                                        <p><?php echo $detail->Observacion_Cliente?></p>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Estado</h4>
-                                        <p><?php echo $detail->Estado ?></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Final</h4>
-                                        <p><?php echo $detail->Observacion_Final?></p>
-                                    </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Hora ingreso</h4>
+                                    <p><?php echo $detail->Hora_ingreso ?></p>
                                 </div>
                             </div>
-                           
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Numero Factura</h4>
+                                    <p><?php echo $detail->Numero_Factura ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Punto Venta</h4>
+                                    <p><?php echo $detail->Punto_Venta ?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Fecha Compra</h4>
+                                    <p><?php echo $detail->Fecha_Compra ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Nombre Cliente</h4>
+                                    <p><?php echo $detail->Nombre_Cliente?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Nombre Cliente</h4>
+                                    <p><?php echo $detail->Fecha_Compra ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Identificacion Cliente</h4>
+                                    <p><?php echo $detail->Nombre_Cliente?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Correo Cliente</h4>
+                                    <p><?php echo $detail->Correo_Cliente ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Direccion Cliente</h4>
+                                    <p><?php echo $detail->Direccion_Cliente?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
+                                    <p><?php echo $detail->Proveedor ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Flete</h4>
+                                    <p><?php echo $detail->Flete?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
+                                    <p><?php echo $detail->Proveedor ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Valor Flete</h4>
+                                    <p><?php echo $detail->Flete?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">No_Guia</h4>
+                                    <p><?php echo $detail->Proveedor ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Transportadora</h4>
+                                    <p><?php echo $detail->Flete?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Observacion Empleado</h4>
+                                    <p><?php echo $detail->Observacion_Empleado ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Empleado</h4>
+                                    <p><?php echo $detail->Empleado?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Codigo Producto</h4>
+                                    <p><?php echo $detail->Codigo_Producto ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Descripcion Producto</h4>
+                                    <p><?php echo $detail->Descripcion_Producto?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Marca Producto</h4>
+                                    <p><?php echo $detail->Marca_Producto ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Sello Producto</h4>
+                                    <p><?php echo $detail->Sello_Producto?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <h4 class="modal-title" id="defaultModalLabel">Referencia Producto</h4>
+                                    <p><?php echo $detail->Referencia ?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Aprobacion Garantia</h4>
+                                    <p><?php echo $detail->Aprobacion_Garantia ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Observacion Cliente</h4>
+                                    <p><?php echo $detail->Observacion_Cliente?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Estado</h4>
+                                    <p><?php echo $detail->Estado ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="modal-title" id="defaultModalLabel">Observacion Final</h4>
+                                    <p><?php echo $detail->Observacion_Final?></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
