@@ -80,6 +80,7 @@ class GarantyController
         }elseif ($fac1 === $fac2) {
           header('Location: ?controller=garanty&method=failed');
         }elseif($fac1 !== $fac2){
+          $details = $this->model->getGaranty($bill);
           require 'Views/Layout.php';
           $data = $this->model->getAll();
           $total_data = count($data);

@@ -27,7 +27,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Numero_Factura</label>
-                                            <input type="number" class="form-control" name="NumFactura" required autofocus value="<?php echo isset($_POST['NumFactura']) ? $_POST['NumFactura'] : ''?>">
+                                            <input type="number" class="form-control" name="NumFactura" required autofocus value="<?php echo isset($_POST['NumFactura']) ? $_POST['NumFactura'] : '' ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -41,10 +41,11 @@ $td = $total_data + 0001;
                             </div>
                         </form>
                         <form action="?controller=garanty&method=save" method="POST" id="form_validation" novalidate>
-                            <?php if(isset($billError)){?>
-                                <div class="alert alert-danger"><?php echo $billError['error'] ?></div>
+                            <?php if (isset($details)) { ?>
+                                <button type="button" class="btn btn-danger waves-effect m-r-20" data-toggle="modal" data-target="#largeModal">Garantías Asociadas</button>
+
                             <?php } ?>
-                            <h1>Detalle de factura: <?php echo isset($bills[0]) ? $bills[0]->Numero_Factura : ''?></h1>
+                            <h1>Detalle de factura: <?php echo isset($bills[0]) ? $bills[0]->Numero_Factura : '' ?></h1>
                             <input type="hidden" name="Numero_Factura" value="<?php echo isset($bills) ? $bills[0]->Numero_Factura : '' ?>">
                             <input type="hidden" name="Empleado" value="<?php echo $_SESSION['user']->nombre ?>">
                             <div class="row clearfix">
@@ -52,7 +53,7 @@ $td = $total_data + 0001;
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Numero Garantia</label>
-                                            <input type="text" class="form-control" name="No_garantia" value="<?php echo "G-".$td; ?>" readonly required>
+                                            <input type="text" class="form-control" name="No_garantia" value="<?php echo "G-" . $td; ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -130,45 +131,45 @@ $td = $total_data + 0001;
                                     </div>
                                 </div>
                             </div>
-                                    <hr>
-                                    <div class="table-responsive">
-                                        <h3>Productos</h3>
-                                        <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
-                                            <thead>
-                                                <tr>
-                                                    <th>Codigo</th>
-                                                    <th>Descripcion</th>
-                                                    <th>Referencia</th>
-                                                    <th>Sello</th>
-                                                    <th>Marca</th>
-                                                    <th>Observacion del cliente</th>
-                                                    <th>¿Se aprueba la garantia?</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if (isset($bills)) {
-                                                    $i = 0;
-                                                    $productos = [];
-                                                    foreach ($bills as $key => $bif) {
-                                                        $productos = [
-                                                            'Codigo' => $bif->Codigo_Producto,
-                                                            'Descripcion' => $bif->Descripcion_Producto,
-                                                            'Referencia' => $bif->Referencia_Producto,
-                                                            'Sello' => $bif->Sello_Producto,
-                                                            'Marca' => $bif->Marca_Producto
-                                                        ];
-                                                       
-                                                ?>
+                            <hr>
+                            <div class="table-responsive">
+                                <h3>Productos</h3>
+                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Descripcion</th>
+                                            <th>Referencia</th>
+                                            <th>Sello</th>
+                                            <th>Marca</th>
+                                            <th>Observacion del cliente</th>
+                                            <th>¿Se aprueba la garantia?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (isset($bills)) {
+                                            $i = 0;
+                                            $productos = [];
+                                            foreach ($bills as $key => $bif) {
+                                                $productos = [
+                                                    'Codigo' => $bif->Codigo_Producto,
+                                                    'Descripcion' => $bif->Descripcion_Producto,
+                                                    'Referencia' => $bif->Referencia_Producto,
+                                                    'Sello' => $bif->Sello_Producto,
+                                                    'Marca' => $bif->Marca_Producto
+                                                ];
+
+                                        ?>
                                                 <tr>
                                                     <td>
                                                         <small style="visibility: hidden"><?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?></small>
-                                                        <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>" >
+                                                        <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
                                                     </td>
                                                     <td>
                                                         <small style="visibility: hidden">
                                                             <?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
                                                         </small>
-                                                        <input size="10" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly  value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
+                                                        <input size="10" type="text" class="form-control no-resize" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly value="<?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>">
                                                     </td>
                                                     <td>
                                                         <small style="visibility: hidden">
@@ -190,33 +191,33 @@ $td = $total_data + 0001;
                                                         <input type="hidden" name="fecha_factura" value="<?php echo $bills[0]->fecha_factura ?>">
                                                     </td>
                                                     <td>
-                                                       <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
-                                                       <input type="hidden" name="Estado[]" value="Tramite">
-                                                   </td>
+                                                        <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
+                                                        <input type="hidden" name="Estado[]" value="Tramite">
+                                                    </td>
                                                     <td>
                                                         <div class="demo-checkbox form-line">
-                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key+1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
-                                                            <label for="md_checkbox_<?php echo $key+1; ?>">SI</label>
-                                                            <input type="checkbox" id="md_checkbox_<?php echo $key+10; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
-                                                            <label for="md_checkbox_<?php echo $key+10; ?>">NO</label>
+                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key + 1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
+                                                            <label for="md_checkbox_<?php echo $key + 1; ?>">SI</label>
+                                                            <input type="checkbox" id="md_checkbox_<?php echo $key + 10; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
+                                                            <label for="md_checkbox_<?php echo $key + 10; ?>">NO</label>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <?php }
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                            
+                                        <?php }
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Flete(S/N)</label>
                                         <div class="demo-checkbox">
-                                            <input type="radio" name="Flete" id="md_checkbox_21" class="radio-col-red" value="SI" onchange="javascript:ocultContent()"  />
+                                            <input type="radio" name="Flete" id="md_checkbox_21" class="radio-col-red" value="SI" onchange="javascript:ocultContent()" />
                                             <label for="md_checkbox_21">SI</label>
-                                            <input type="radio" name="Flete" id="md_checkbox_22" class="radio-col-red" value="NO"  onchange="javascript:showContent()" checked/>
+                                            <input type="radio" name="Flete" id="md_checkbox_22" class="radio-col-red" value="NO" onchange="javascript:showContent()" checked />
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
 
@@ -229,11 +230,12 @@ $td = $total_data + 0001;
                                         <p>
                                             <b>Proveedor</b>
                                         </p>
-                                        <?php //var_dump($providers) ?>
+                                        <?php //var_dump($providers) 
+                                        ?>
                                         <select name="Proveedor" class="form-control show-tick">
                                             <option value="">Seleccione..</option>
                                             <?php foreach ($providers as $provider) { ?>
-                                                <option value="<?php echo $provider->id?>"><?php echo $provider->id?></option>
+                                                <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -244,12 +246,12 @@ $td = $total_data + 0001;
                                         <select name="Departamento" class="form-control show-tick" id="lista1">
                                             <option value="0">Seleccione..</option>
                                             <?php foreach ($departaments as $departament) { ?>
-                                                <option value="<?php echo $departament->Departamento?>"><?php echo $departament->Departamento?></option>
+                                                <option value="<?php echo $departament->Departamento ?>"><?php echo $departament->Departamento ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div id="select2lista" class="col-sm-4">
-                                        
+
                                     </div>
                                     <!--<div class="col-sm-4">
                                         <p>
@@ -270,7 +272,7 @@ $td = $total_data + 0001;
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label>Valor Flete </label>
-                                                <input type="number" class="form-control" name="Valor_Flete" >
+                                                <input type="number" class="form-control" name="Valor_Flete">
                                             </div>
                                         </div>
                                     </div>
@@ -278,7 +280,7 @@ $td = $total_data + 0001;
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label>Numero Guia </label>
-                                                <input type="number" class="form-control" name="No_Guia" >
+                                                <input type="number" class="form-control" name="No_Guia">
                                             </div>
                                         </div>
                                     </div>
@@ -286,7 +288,7 @@ $td = $total_data + 0001;
                                         <p>
                                             <b>Transportadora</b>
                                         </p>
-                                        <select name="Transportadora" class="form-control show-tick" >
+                                        <select name="Transportadora" class="form-control show-tick">
                                             <option value="">Seleccione..</option>
                                             <option value="Envia">Envia</option>
                                             <option value="Servientrega">Servientrega</option>
@@ -319,6 +321,164 @@ $td = $total_data + 0001;
             <!-- Textarea -->
             <!--#END# Switch Button -->
         </div>
+        <?php if (isset($details)) {
+            foreach ($details as $detail) { ?>
+                 
+                 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="largeModalLabel">Numero Garantia<?php echo $detail->No_garantia?></h4>
+                        </div>
+                        <div class="modal-body">
+                        <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="largeModalLabel">Fecha ingreso</h4>
+                                        <p><?php echo $detail->Fecha_ingreso ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Hora ingreso</h4>
+                                        <p><?php echo $detail->Hora_ingreso ?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Numero Factura</h4>
+                                        <p><?php echo $detail->Numero_Factura ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Punto Venta</h4>
+                                        <p><?php echo $detail->Punto_Venta ?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Fecha Compra</h4>
+                                        <p><?php echo $detail->Fecha_Compra ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Nombre Cliente</h4>
+                                        <p><?php echo $detail->Nombre_Cliente?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Nombre Cliente</h4>
+                                        <p><?php echo $detail->Fecha_Compra ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Identificacion Cliente</h4>
+                                        <p><?php echo $detail->Nombre_Cliente?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Correo Cliente</h4>
+                                        <p><?php echo $detail->Correo_Cliente ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Direccion Cliente</h4>
+                                        <p><?php echo $detail->Direccion_Cliente?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
+                                        <p><?php echo $detail->Proveedor ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Flete</h4>
+                                        <p><?php echo $detail->Flete?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
+                                        <p><?php echo $detail->Proveedor ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Valor Flete</h4>
+                                        <p><?php echo $detail->Flete?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">No_Guia</h4>
+                                        <p><?php echo $detail->Proveedor ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Transportadora</h4>
+                                        <p><?php echo $detail->Flete?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Empleado</h4>
+                                        <p><?php echo $detail->Observacion_Empleado ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Empleado</h4>
+                                        <p><?php echo $detail->Empleado?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Codigo Producto</h4>
+                                        <p><?php echo $detail->Codigo_Producto ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Descripcion Producto</h4>
+                                        <p><?php echo $detail->Descripcion_Producto?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Marca Producto</h4>
+                                        <p><?php echo $detail->Marca_Producto ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Sello Producto</h4>
+                                        <p><?php echo $detail->Sello_Producto?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Referencia Producto</h4>
+                                        <p><?php echo $detail->Referencia ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Cliente</h4>
+                                        <p><?php echo $detail->Observacion_Cliente?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Aprobacion Garantia</h4>
+                                        <p><?php echo $detail->Aprobacion_Garantia ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Cliente</h4>
+                                        <p><?php echo $detail->Observacion_Cliente?></p>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Estado</h4>
+                                        <p><?php echo $detail->Estado ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="modal-title" id="defaultModalLabel">Observacion Final</h4>
+                                        <p><?php echo $detail->Observacion_Final?></p>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php }
+        } ?>
 </section>
 <!-- <script type="text/javascript">
     $(function() {
@@ -434,22 +594,22 @@ $td = $total_data + 0001;
 </script>
 <script src="Assets/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#lista1').val(0);
         recargarLista();
 
-        $('#lista1').change(function(){
+        $('#lista1').change(function() {
             recargarLista();
         });
-    }) 
+    })
 </script>
 <script type="text/javascript">
-    function recargarLista(){
+    function recargarLista() {
         $.ajax({
-            type:"POST",
-            url:"Views/Garanty/datos.php",
-            data:"Municipio=" + $('#lista1').val(),
-            success:function(r){
+            type: "POST",
+            url: "Views/Garanty/datos.php",
+            data: "Municipio=" + $('#lista1').val(),
+            success: function(r) {
                 $('#select2lista').html(r);
             }
             //console.log(data);
