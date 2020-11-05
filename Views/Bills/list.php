@@ -31,6 +31,7 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Numero_Factura </th>
                                         <th>fecha_factura</th>
                                         <th>nit</th>
@@ -41,8 +42,10 @@
                                         <th>Direccion_Cliente</th>
                                         <th>Centro_costo</th>
                                         <th>Codigo_Producto</th>
+                                        <th>Codigo_proveedor</th>
                                         <th>Descripcion_Producto</th>
                                         <th>Referencia_Producto</th>
+                                        <th>Cantidad</th>
                                         <th>Sello_Producto</th>
                                         <th>Marca_Producto</th>
                                     </tr>
@@ -50,6 +53,7 @@
                                 <tbody>
                                     <?php foreach ($bills as $bill) { ?>
                                         <tr>
+                                            <td><?php echo $bill->id ?></td>
                                             <td><?php echo $bill->Numero_Factura ?></td>
                                             <td><?php echo $bill->fecha_factura ?></td>
                                             <td><?php echo $bill->nit ?></td>
@@ -60,8 +64,10 @@
                                             <td><?php echo $bill->Direccion_Cliente ?></td>
                                             <td><?php echo $bill->Centro_costo ?></td>
                                             <td><?php echo $bill->Codigo_Producto ?></td>
+                                            <td><?php echo $bill->Codigo_Proveedor ?></td>
                                             <td><?php echo $bill->Descripcion_Producto ?></td>
                                             <td><?php echo $bill->Referencia_Producto ?></td>
+                                            <td><?php echo $bill->Cantidad ?></td>
                                             <td><?php echo $bill->Sello_Producto ?></td>
                                             <td><?php echo $bill->Marca_Producto ?></td>
                                         </tr>

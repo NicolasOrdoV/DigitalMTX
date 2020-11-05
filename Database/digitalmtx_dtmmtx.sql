@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2020 a las 02:05:19
+-- Tiempo de generación: 05-11-2020 a las 04:57:36
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -3490,6 +3490,8 @@ CREATE TABLE `mg_detalle_garantia` (
   `Marca_Producto` varchar(50) DEFAULT NULL,
   `Sello_Producto` varchar(50) DEFAULT NULL,
   `Referencia` varchar(50) DEFAULT NULL,
+  `Cantidad_Producto` int(11) DEFAULT NULL,
+  `Codigo_Proveedor` varchar(20) DEFAULT NULL,
   `Id_Garantia` int(11) DEFAULT NULL,
   `Observacion_Cliente` text DEFAULT NULL,
   `Aprobacion_Garantia` varchar(5) DEFAULT NULL,
@@ -3515,20 +3517,23 @@ CREATE TABLE `mg_estados_garantia` (
 --
 
 CREATE TABLE `mg_facturas` (
-  `Numero_Factura` int(11) NOT NULL,
-  `fecha_factura` date NOT NULL,
-  `nit` varchar(50) NOT NULL,
-  `hora_factura` varchar(50) NOT NULL,
-  `Nombre_Cliente` varchar(50) NOT NULL,
-  `Identificacion_Cliente` varchar(50) NOT NULL,
-  `Correo_Cliente` varchar(50) NOT NULL,
-  `Direccion_Cliente` varchar(50) NOT NULL,
-  `Centro_costo` varchar(50) NOT NULL,
-  `Codigo_Producto` varchar(50) NOT NULL,
-  `Descripcion_Producto` text NOT NULL,
-  `Referencia_Producto` varchar(50) NOT NULL,
-  `Sello_Producto` varchar(50) NOT NULL,
-  `Marca_Producto` varchar(50) NOT NULL
+  `id` int(11) NOT NULL,
+  `Numero_Factura` varchar(20) DEFAULT NULL,
+  `fecha_factura` date DEFAULT NULL,
+  `nit` varchar(50) DEFAULT NULL,
+  `hora_factura` varchar(50) DEFAULT NULL,
+  `Nombre_Cliente` varchar(50) DEFAULT NULL,
+  `Identificacion_Cliente` varchar(50) DEFAULT NULL,
+  `Correo_Cliente` varchar(50) DEFAULT NULL,
+  `Direccion_Cliente` varchar(50) DEFAULT NULL,
+  `Centro_costo` varchar(50) DEFAULT NULL,
+  `Codigo_Producto` varchar(50) DEFAULT NULL,
+  `Codigo_Proveedor` varchar(20) DEFAULT NULL,
+  `Descripcion_Producto` text DEFAULT NULL,
+  `Referencia_Producto` varchar(50) DEFAULT NULL,
+  `Cantidad` varchar(11) DEFAULT NULL,
+  `Sello_Producto` varchar(50) DEFAULT NULL,
+  `Marca_Producto` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -3549,7 +3554,6 @@ CREATE TABLE `mg_garantia` (
   `Identificacion_Cliente` varchar(50) NOT NULL,
   `Correo_Cliente` varchar(50) NOT NULL,
   `Direccion_Cliente` varchar(50) NOT NULL,
-  `Proveedor` varchar(50) NOT NULL,
   `Flete` varchar(5) NOT NULL,
   `Departamento` varchar(50) DEFAULT NULL,
   `Municipio` varchar(50) DEFAULT NULL,
@@ -4964,6 +4968,12 @@ ALTER TABLE `mg_estados_garantia`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `mg_facturas`
+--
+ALTER TABLE `mg_facturas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `mg_garantia`
 --
 ALTER TABLE `mg_garantia`
@@ -5049,6 +5059,12 @@ ALTER TABLE `mg_detalle_garantia`
 -- AUTO_INCREMENT de la tabla `mg_estados_garantia`
 --
 ALTER TABLE `mg_estados_garantia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `mg_facturas`
+--
+ALTER TABLE `mg_facturas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

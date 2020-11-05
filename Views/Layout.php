@@ -310,8 +310,12 @@
                             <li>
                                 <a href="?controller=garanty&method=solutionTechnical" class="menu-toggle">
                                     <span>Solución del tecnico a garantias pendientes</span>
-                                </a>
-                                
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="?controller=garanty&method=solutionPre" class="menu-toggle">
+                                    <span>Pendientes de entrega a garantias prefinalizadas</span>
+                                </a> 
                             </li>
                         </ul>
                     </li>

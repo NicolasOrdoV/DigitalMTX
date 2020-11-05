@@ -26,7 +26,7 @@ $td = $total_data + 0001;
                                 <div class="col-sm-10">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <label>Numero_Factura</label>
+                                            <label>Numero_Factura o sello del producto</label>
                                             <input type="number" class="form-control" name="NumFactura" required autofocus value="<?php echo isset($_POST['NumFactura']) ? $_POST['NumFactura'] : '' ?>">
                                         </div>
                                     </div>
@@ -141,6 +141,8 @@ $td = $total_data + 0001;
                                             <th>Referencia</th>
                                             <th>Sello</th>
                                             <th>Marca</th>
+                                            <th>Cantidad</th>
+                                            <th>Codigo del proveedor</th>
                                             <th>Observacion del cliente</th>
                                             <th>¿Se aprueba la garantia?</th>
                                         </tr>
@@ -155,7 +157,9 @@ $td = $total_data + 0001;
                                                     'Descripcion' => $bif->Descripcion_Producto,
                                                     'Referencia' => $bif->Referencia_Producto,
                                                     'Sello' => $bif->Sello_Producto,
-                                                    'Marca' => $bif->Marca_Producto
+                                                    'Marca' => $bif->Marca_Producto,
+                                                    'Codigo_Proveedor' => $bif->Codigo_Proveedor,
+                                                    'Cantidad' => $bif->Cantidad
                                                 ];
 
                                         ?>
@@ -188,6 +192,18 @@ $td = $total_data + 0001;
                                                         </small>
                                                         <input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
                                                         <input type="hidden" name="fecha_factura" value="<?php echo $bills[0]->fecha_factura ?>">
+                                                    </td>
+                                                    <td>
+                                                        <small style="visibility: hidden">
+                                                            <?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>
+                                                        </small>
+                                                        <input size="5" type="text" class="form-control" name="Cantidad_Producto[]" readonly value="<?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>">
+                                                    </td>
+                                                    <td>
+                                                        <small style="visibility: hidden">
+                                                            <?php echo isset($productos['Codigo_Proveedor']) ? $productos['Codigo_Proveedor'] : '' ?>
+                                                        </small>
+                                                        <input size="5" type="text" class="form-control" name="Codigo_Proveedor[]" readonly value="<?php echo isset($productos['Codigo_Proveedor']) ? $productos['Codigo_Proveedor'] : '' ?>">
                                                     </td>
                                                     <td>
                                                         <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
@@ -225,20 +241,7 @@ $td = $total_data + 0001;
                             </div>
                             <div id="content" style="display:none">
                                 <div class="row clearfix">
-                                    <div class="col-sm-4">
-                                        <p>
-                                            <b>Proveedor</b>
-                                        </p>
-                                        <?php //var_dump($providers) 
-                                        ?>
-                                        <select name="Proveedor" class="form-control show-tick">
-                                            <option value="">Seleccione..</option>
-                                            <?php foreach ($providers as $provider) { ?>
-                                                <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <p>
                                             <b>Departamento</b>
                                         </p>
@@ -249,7 +252,7 @@ $td = $total_data + 0001;
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <div id="select2lista" class="col-sm-4">
+                                    <div id="select2lista" class="col-sm-6">
 
                                     </div>
                                     <!--<div class="col-sm-4">
@@ -381,21 +384,13 @@ $td = $total_data + 0001;
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
-                                    <p><?php echo $detail->Proveedor ?></p>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <h4 class="modal-title" id="defaultModalLabel">Flete</h4>
                                     <p><?php echo $detail->Flete?></p>
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <h4 class="modal-title" id="defaultModalLabel">Proveedor</h4>
-                                    <p><?php echo $detail->Proveedor ?></p>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <h4 class="modal-title" id="defaultModalLabel">Valor Flete</h4>
                                     <p><?php echo $detail->Flete?></p>
                                 </div>
@@ -403,7 +398,7 @@ $td = $total_data + 0001;
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">No_Guia</h4>
-                                    <p><?php echo $detail->Proveedor ?></p>
+                                    <p><?php echo $detail->No_Guia ?></p>
                                 </div>
                                 <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">Transportadora</h4>

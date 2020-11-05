@@ -17,34 +17,6 @@ $hora_actual = date("h:i a"); ?>
                             <h2>Detalle de la garantia</h2>
                         </div>
                         <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-sm-3">
-                                    <h5>No garantia</h5>
-                                    <p><?php echo $data[0]->No_garantia?></p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <h5>Fecha de garantia</h5>
-                                    <p><?php echo $data[0]->Fecha_ingreso?></p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <h5>hora de garantia</h5>
-                                    <p><?php echo $data[0]->Hora_ingreso?></p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <h5>Numero de factura</h5>
-                                    <p><?php echo $data[0]->Numero_Factura?></p>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                    <h5>Punto de venta</h5>
-                                    <p><?php echo $data[0]->Punto_Venta?></p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h5>Fecha compra</h5>
-                                    <p><?php echo $data[0]->Fecha_Compra?></p>
-                                </div>
-                            </div>
                             <h2>Producto</h2>
                             <div class="row clearfix">
                                 <div class="col-sm-3">
@@ -60,8 +32,8 @@ $hora_actual = date("h:i a"); ?>
                                     <p><?php echo $data[0]->Sello_Producto?></p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h5>Proveedor</h5>
-                                    <p><?php echo $data[0]->Proveedor?></p>
+                                    <h5>Cantidad</h5>
+                                    <p><?php echo $data[0]->Cantidad_Producto?></p>
                                 </div>
                             </div>
                             <div class="row clearfix">

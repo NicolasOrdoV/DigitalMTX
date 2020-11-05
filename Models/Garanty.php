@@ -158,7 +158,18 @@ class Garanty
     public function getBill($bill)
     {
         try {
-            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura LIKE '%$bill'";
+            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura LIKE '%$bill' OR Sello_Producto LIKE '%$bill'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getByNumBill($numFac)
+    {
+        try {
+            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura = '".$numFac."'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -221,5 +232,28 @@ class Garanty
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function getAllSolutionPre()
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }    
+    }
+
+    public function getFinalyStatus($id)
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.id = :id";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql , $array);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }   
     }
 }

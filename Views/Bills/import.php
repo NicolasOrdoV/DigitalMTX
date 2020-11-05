@@ -14,36 +14,39 @@ if(isset($_POST['import_data'])){
                 //var_dump($emp_record);
                 //echo '</pre>';
                 // Check if employee already exists with same email
-                $sql_query = "SELECT Numero_Factura, fecha_factura, nit, hora_factura,
+                $sql_query = "SELECT id,Numero_Factura, fecha_factura, nit, hora_factura,
                 Nombre_Cliente, Identificacion_Cliente, Correo_Cliente, Direccion_Cliente, Centro_costo,
-                Codigo_Producto, Descripcion_Producto, Referencia_Producto, Sello_Producto, Marca_Producto
-                FROM mg_facturas WHERE Numero_Factura = '.$emp_record[0].'";
+                Codigo_Producto,Codigo_Proveedor, Descripcion_Producto, Referencia_Producto,Cantidad, Sello_Producto, Marca_Producto
+                FROM mg_facturas WHERE Sello_Producto = '".$emp_record[14]."'";
                 $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 				// if employee already exist then update details otherwise insert new record
                 if(mysqli_num_rows($resultset)) {                     
-					$sql_update = "UPDATE mg_facturas set fecha_factura='".$emp_record[1]."',
-                    nit='".$emp_record[2]."',
-                    hora_factura='".$emp_record[3]."'
-                    Nombre_Cliente='".$emp_record[4]."'
-                    Identificacion_Cliente='".$emp_record[5]."'
-                    Correo_Cliente='".$emp_record[6]."'
-                    Direccion_Cliente='".$emp_record[7]."'
-                    Centro_costo='".$emp_record[8]."'
-                    Codigo_Producto='".$emp_record[9]."'
-                    Descripcion_Producto='".$emp_record[10]."'
-                    Referencia_Producto='".$emp_record[11]."'
-                    Sello_Producto='".$emp_record[12]."'
-                    Marca_Producto='".$emp_record[13]."' 
-                    WHERE Numero_Factura = '.$emp_record[0].'";
+					$sql_update = "UPDATE mg_facturas set id = '".$emp_record[0]."',
+                    Numero_Factura = '".$emp_record[1]."',
+                    fecha_factura='".$emp_record[2]."',
+                    nit='".$emp_record[3]."',
+                    hora_factura='".$emp_record[4]."',
+                    Nombre_Cliente='".$emp_record[5]."',
+                    Identificacion_Cliente='".$emp_record[6]."',
+                    Correo_Cliente='".$emp_record[7]."',
+                    Direccion_Cliente='".$emp_record[8]."',
+                    Centro_costo='".$emp_record[9]."',
+                    Codigo_Producto='".$emp_record[10]."',
+                    Codigo_Proveedor='".$emp_record[11]."',
+                    Descripcion_Producto='".$emp_record[12]."',
+                    Referencia_Producto='".$emp_record[13]."',
+                    Cantidad='".$emp_record[14]."',
+                    Marca_Producto='".$emp_record[16]."' 
+                    WHERE Sello_Producto = '".$emp_record[15]."'";
                     mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
                 } else{
-					$mysql_insert = "INSERT INTO mg_facturas (Numero_Factura, fecha_factura, nit, hora_factura,
+					$mysql_insert = "INSERT INTO mg_facturas (id,Numero_Factura, fecha_factura, nit, hora_factura,
                     Nombre_Cliente, Identificacion_Cliente, Correo_Cliente, Direccion_Cliente, Centro_costo,
-                    Codigo_Producto, Descripcion_Producto, Referencia_Producto, Sello_Producto, Marca_Producto )
-                    VALUES('.$emp_record[0].', '".$emp_record[1]."', '".$emp_record[2]."', '".$emp_record[3]."',
+                    Codigo_Producto,Codigo_Proveedor, Descripcion_Producto, Referencia_Producto, Cantidad, Sello_Producto, Marca_Producto )
+                    VALUES('".$emp_record[0]."', '".$emp_record[1]."', '".$emp_record[2]."', '".$emp_record[3]."',
                     '".$emp_record[4]."', '".$emp_record[5]."', '".$emp_record[6]."', '".$emp_record[7]."',
                     '".$emp_record[8]."', '".$emp_record[9]."', '".$emp_record[10]."', '".$emp_record[11]."',
-                    '".$emp_record[12]."', '".$emp_record[13]."')";
+                    '".$emp_record[12]."', '".$emp_record[13]."', '".$emp_record[14]."', '".$emp_record[15]."','".$emp_record[16]."')";
 					mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
                 }
             }            

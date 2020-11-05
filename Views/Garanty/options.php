@@ -26,22 +26,22 @@
                                     <div class="form-group">
                                         <label>Nota Credito</label>
                                         <div class="demo-checkbox">
-                                            <input type="radio" name="Estado" id="md_checkbox_21" class="radio-col-red" value="Solucionado Nota Credito" onchange="javascript:ocultContent()"/>
+                                            <input type="radio" name="Estado" id="md_checkbox_21" class="radio-col-red" value="Pendiente para Nota Credito" onchange="javascript:ocultContent()"/>
                                             <label for="md_checkbox_21">SI</label>
                                         </div>
                                         <label>Cambio Producto</label>
                                         <div class="demo-checkbox">
-                                            <input type="radio" name="Estado" id="md_checkbox_22" class="radio-col-red" value="Solucionado a cambio de producto" onchange="javascript:showContent()" />
+                                            <input type="radio" name="Estado" id="md_checkbox_22" class="radio-col-red" value="Pendiente para cambio de producto" onchange="javascript:showContent()" />
                                             <label for="md_checkbox_22">SI</label>
                                         </div>
                                         <label>Devolucion Dinero</label>
                                         <div class="demo-checkbox">
-                                            <input type="radio" name="Estado" id="md_checkbox_23" class="radio-col-red" value="Solucionado a Devolucion de Dinero" onchange="javascript:ocultContent2()" />
+                                            <input type="radio" name="Estado" id="md_checkbox_23" class="radio-col-red" value="Pendiente para Devolucion de Dinero" onchange="javascript:ocultContent2()" />
                                             <label for="md_checkbox_23">SI</label>
                                         </div>
                                         <label>No tiene garantia</label>
                                         <div class="demo-checkbox">
-                                            <input type="radio" name="Estado" id="md_checkbox_24" class="radio-col-red" value="Solucionado a No tiene garantia" onchange="javascript:ocultContent3()"  />
+                                            <input type="radio" name="Estado" id="md_checkbox_24" class="radio-col-red" value="Pendiente para No tiene garantia" onchange="javascript:ocultContent3()"  />
                                             <label for="md_checkbox_24">SI</label>
                                         </div>
                                     </div>

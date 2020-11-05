@@ -1,0 +1,73 @@
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2>
+                LISTA DE GARANTÍAS SOLUCIONADAS POR TECNICO
+                <small>Consulta las garantías</small>
+            </h2>
+        </div>
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header row">
+                        <div class="col-sm-6">
+                            <h2>Garantías</h2>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable <?php echo $_SESSION['user']->cargo == "Administrador" ? 'js-exportable' : 'js-basic-example' ?>">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Fecha garantia</th>
+                                        <th>Hora garantia</th>
+                                        <th>Numero de factura</th>
+                                        <th>Cliente</th>
+                                        <th>Correo</th>
+                                        <th>Aprobacion Garantia</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($garanties as $key => $garanty) {
+                                        //  if ($garant) { ?>
+                                            <tr>
+                                                <td><?php echo $garanty->No_garantia ?></td>
+                                                <td><?php echo $garanty->Fecha_ingreso ?></td>
+                                                <td><?php echo $garanty->Hora_ingreso ?></td>
+                                                <td><?php echo $garanty->Numero_Factura ?></td>
+                                                <td><?php echo $garanty->Nombre_Cliente ?></td>
+                                                <td><?php echo $garanty->Correo_Cliente ?></td>
+                                                <td><?php echo $garanty->Aprobacion_Garantia ?></td>
+                                                <td><?php echo $garanty->Estado ?></td>
+                                                <td>
+                                                    <?php if ($garanty->Estado == 'Pendiente para Nota Credito' ||
+            $garanty->Estado == 'Pendiente para cambio de producto'|| 
+            $garanty->Estado == 'Pendiente para Devolucion de Dinero' ||
+            $garanty->Estado == 'Pendiente para No tiene garantia') {  ?>                                                            <div class="row clearfix">
+                                                            <div class="col-sm-6">
+                                                                <form action="?controller=garanty&method=optionsEnds" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $garanty->id ?>">
+                                                                    <button type="submit" class="btn bg-black"><i class="material-icons">done</i></button>
+                                                                </form>
+                                                            </div>
+                                                        </div>                             
+                                                <?php } ?>
+                                            </td>
+                                         </tr>
+                                <?php //}
+                            } ?>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Exportable Table -->
+    </div>
+</section>

@@ -6,6 +6,7 @@ require 'Models/Product.php';
 require 'Models/Provider.php';
 require 'Models/Departament.php';
 require 'Models/Municipality.php';
+require 'Models/Technical.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -26,6 +27,7 @@ class GarantyController
   private $provider;
   private $departament;
   private $municipality;
+  private $technical;
 
   public function __construct()
   {
@@ -35,6 +37,7 @@ class GarantyController
     $this->provider = new Provider;
     $this->departament = new Departament;
     $this->municipality = new Municipality;
+    $this->technical = new Technical;
   }
 
   public function listGaranty()
@@ -71,7 +74,8 @@ class GarantyController
     if (isset($_SESSION['user'])) {
       if (isset($_POST['NumFactura'])) {
         $bill = $_POST['NumFactura'];
-        $bills = $this->model->getBill($bill);
+        $search = $this->model->getBill($bill);
+        $bills = $this->model->getByNumBill($search[0]->Numero_Factura);
         $dataF = $this->model->getAllF($bill);
         $fac1 = isset($dataF[0]->Numero_Factura) ? $dataF[0]->Numero_Factura : 'null';
         $fac2 = $bills[0]->Numero_Factura;
@@ -121,7 +125,6 @@ class GarantyController
         'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
         'Correo_Cliente' => $_POST['Correo_Cliente'],
         'Direccion_Cliente' => $_POST['Direccion_Cliente'],
-        'Proveedor' => $_POST['Proveedor'],
         'Flete' => $_POST['Flete'],
         'Departamento' => $_POST['Departamento'],
         'Municipio' => $_POST['Municipio'],
@@ -139,6 +142,8 @@ class GarantyController
       $Descripcion_Producto = $_POST['Descripcion_Producto'];
       $Marca_Producto = $_POST['Marca_Producto'];
       $Sello_Producto = $_POST['Sello_Producto'];
+      $Cantidad_Producto = $_POST['Cantidad_Producto'];
+      $Codigo_Proveedor = $_POST['Codigo_Proveedor'];
       $Referencia = $_POST['Referencia'];
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
       $Aprobacion_Garantia = isset($_POST['Aprobacion_Garantia']) ? $_POST['Aprobacion_Garantia'] : '';
@@ -162,25 +167,29 @@ class GarantyController
         $item2 = current($Descripcion_Producto);
         $item3 = current($Marca_Producto);
         $item4 = current($Sello_Producto);
-        $item5 = current($Referencia);
-        $item6 = current($Observacion_Cliente);
+        $item5 = current($Codigo_Proveedor);
+        $item6 = current($Cantidad_Producto);
+        $item7 = current($Referencia);
+        $item8 = current($Observacion_Cliente);
         if (!empty($Aprobacion_Garantia)) {
-          $item7 = current($Aprobacion_Garantia);
+          $item9 = current($Aprobacion_Garantia);
         }
         if (!empty($Aprobacion_GarantiaN)) {
-          $item8 = current($Aprobacion_GarantiaN);
+          $item10 = current($Aprobacion_GarantiaN);
         }
-        $item9 = current($Estado);
+        $item11 = current($Estado);
 
         $cp = (($item1 !== false) ? $item1 : '');
         $dp = (($item2 !== false) ? $item2 : '');
         $mp = (($item3 !== false) ? $item3 : '');
         $sp = (($item4 !== false) ? $item4 : '');
-        $rp = (($item5 !== false) ? $item5 : '');
-        $op = (($item6 !== false) ? $item6 : '');
-        $ag = (($item7 !== false) ? $item7 : '');
-        $agN = (($item8 !== false) ? $item8 : '');
-        $es = (($item9 !== false) ? $item9 : '');
+        $cpro = (($item5 !== false) ? $item5 : '');
+        $canPro = (($item6 !== false) ? $item6 : '');
+        $rp = (($item7 !== false) ? $item7: '');
+        $op = (($item8 !== false) ? $item8 : '');
+        $ag = (($item9 !== false) ? $item9 : '');
+        $agN = (($item10 !== false) ? $item10 : '');
+        $es = (($item11 !== false) ? $item11 : '');
 
         $detaills = [
           'Codigo_Producto' => $cp,
@@ -188,6 +197,8 @@ class GarantyController
           'Marca_Producto' => $mp,
           'Sello_Producto' => $sp,
           'Referencia' => $rp,
+          'Cantidad_Producto' => $canPro,
+          'Codigo_Proveedor' => $cpro,
           'Id_Garantia' => $lastId[0]->id,
           'Observacion_Cliente' => $op,
           'Aprobacion_Garantia' => $ag,
@@ -222,17 +233,19 @@ class GarantyController
         $item2 = next($Descripcion_Producto);
         $item3 = next($Marca_Producto);
         $item4 = next($Sello_Producto);
-        $item5 = next($Referencia);
-        $item6 = next($Observacion_Cliente);
+        $item5 = next($Codigo_Proveedor);
+        $item6 = next($Cantidad_Producto);
+        $item7 = next($Referencia);
+        $item8 = next($Observacion_Cliente);
         if (!empty($Aprobacion_Garantia)) {
-          $item7 = next($Aprobacion_Garantia);
+          $item9 = next($Aprobacion_Garantia);
         }
         if (!empty($Aprobacion_GarantiaN)) {
-          $item8 = next($Aprobacion_GarantiaN);
+          $item10 = next($Aprobacion_GarantiaN);
         }
-        $item9 = next($Estado);
+        $item11 = next($Estado);
         // Check terminator
-        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item9 === false) break;
+        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false) break;
       }
 
       $dates = $this->model->getAlDetails($lastId[0]->id);
@@ -293,7 +306,6 @@ class GarantyController
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
                     <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
                     <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
-                    <p><b>Proveedor:</b> '.$data['Proveedor'].'</p>
                     <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
                     <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
                   </td>
@@ -499,7 +511,6 @@ class GarantyController
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
                     <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
                     <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
-                    <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
                     <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
                     <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
                     <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
@@ -562,7 +573,6 @@ class GarantyController
               <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
                 <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
                 <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
-                <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
                 <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
                 <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
                 <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
@@ -941,4 +951,44 @@ class GarantyController
       header('Location: ?controller=login');
     }
   }
+
+  public function solutionPre()
+  {
+    if (isset($_SESSION['user'])) {
+      require 'Views/Layout.php';
+      $garanties = $this->model->getAllSolutionPre();
+      require 'Views/Garanty/solutionPre.php';
+      require 'Views/Scripts.php';
+    }else{
+      header('Location: ?controller=login');
+    }
+  }
+
+  public function optionsEnds()
+  {
+    if (isset($_SESSION['user'])) {
+      if (isset($_REQUEST['id'])) {
+        $id = $_REQUEST['id'];
+        $data = $this->model->getFinalyStatus($id);
+         require 'Views/Layout.php';
+         require 'Views/Garanty/solutionEndNew.php';
+         require 'Views/Scripts.php';
+      }
+    }else{
+      header('Location: ?controller=login');
+    }
+  }
+
+  public function saveEndDelivery()
+  {
+    if (isset($_SESSION['user'])) {
+      if ($_POST) {
+        $this->technical->editStatus($_POST);
+        header('Location: ?controller=garanty&method=solutionPre');
+      }
+    }else{
+      header('Location: ?controller=login');
+    }
+  }
+
 }
