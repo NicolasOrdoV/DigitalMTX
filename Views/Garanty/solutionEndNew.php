@@ -17,7 +17,7 @@
                         </h2>
                     </div>
                     <div class="body">
-                        <form action="?controller=garanty&method=saveEndDelivery" method="POST">
+                        <form action="?controller=garanty&method=saveEndDelivery" method="POST" id="form_validation">
                             <input  type = "hidden" name="id" value="<?php echo $data[0]->id ?>">
                             <div class="row clearfix">
                                 <div class="alert alert-warning">
@@ -29,7 +29,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Estado final</label>
-                                            <select name="Estado" class="form-control">
+                                            <select name="Estado" class="form-control" required>
                                                 <option value="">Seleccione</option>
                                                 <option value="Entregado para Nota Credito">Entregado para Nota Credito</option>
                                                 <option value="Entregado para cambio de producto">Entregado para cambio de producto</option>

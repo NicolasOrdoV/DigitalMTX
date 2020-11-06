@@ -17,7 +17,7 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-12">
-                                    <form action="?controller=person&method=save" method="POST" id="form-validation">
+                                    <form action="?controller=person&method=save" method="POST" id="form_validation">
                                         <div class="row clearfix">
                                             <div class="col-sm-12">
                                                 <div class="form-group">

@@ -101,7 +101,7 @@ $hora_actual = date("h:i a"); ?>
                                <?php } ?>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
-                                    <form action="?controller=technical&method=save" method="POST">
+                                    <form action="?controller=technical&method=save" method="POST" id="form_validation">
                                         <input type="hidden" name="Id_Garantia" value="<?php echo $data[0]->id?>">
                                         <input type="hidden" name="Id_Empleado" value="<?php echo $_SESSION['user']->id?>">
                                         <input type="hidden" name="nombre" value="<?php echo $data[0]->Descripcion_Producto?>">
@@ -125,14 +125,14 @@ $hora_actual = date("h:i a"); ?>
                                         </div>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <textarea rows="4" class="form-control no-resize" name="Observacion_tecnico" ></textarea>
+                                                <textarea rows="4" class="form-control no-resize" name="Observacion_tecnico" required></textarea>
                                                 <label class="form-label">Observacion tecnico</label>
                                             </div>
                                         </div>
                                         <div class="row clearfix">
                                             <div class="col-sm-6">
                                                 <label>Estado del tecnico*</label>
-                                                <select name="Estado_tecnico" class="form-control show-tick" >
+                                                <select name="Estado_tecnico" class="form-control show-tick" required>
                                                     <option value="">Seleccione..</option>
                                                     <option value="Pendiente por servicio tecnico">Pendiente por servicio tecnico</option>
                                                     <option value="Solucionado por servicio tecnico">Solucionado por servicio tecnico</option>

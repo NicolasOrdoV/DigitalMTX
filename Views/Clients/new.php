@@ -8,7 +8,7 @@
                         <h2>Registrar Nuevo Cliente</h2>
                     </div>
                     <div class="body">
-                        <form action="?controller=client&method=save" method="POST">
+                        <form action="?controller=client&method=save" method="POST" id="form_validation">
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">

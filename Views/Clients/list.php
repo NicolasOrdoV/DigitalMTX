@@ -30,11 +30,11 @@
                                     <?php foreach ($clients as $client) { ?>
                                         <tr>
                                             <td><?php echo $client->id ?></td>
-                                            <td><?php echo $client->Identificacion ?></td>
-                                            <td><?php echo $client->Nombres ?></td>
-                                            <td><?php echo $client->Direccion ?></td>
-                                            <td><?php echo $client->Telefono ?></td>
-                                            <td><?php echo $client->Correo ?></td>
+                                            <td><?php echo $client->identificacion ?></td>
+                                            <td><?php echo $client->nombre ?></td>
+                                            <td><?php echo $client->direccion ?></td>
+                                            <td><?php echo $client->telefono ?></td>
+                                            <td><?php echo $client->correo ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

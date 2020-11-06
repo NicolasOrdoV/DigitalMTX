@@ -19,7 +19,7 @@
                         <?php echo $data[0]->Observacion_tecnico?>
                     </div>
                     <div class="body">
-                        <form action="?controller=garanty&method=saveEndGaranty" method="POST">
+                        <form action="?controller=garanty&method=saveEndGaranty" method="POST" id="form_validation">
                             <input  type = "hidden" name="id" value="<?php echo $data[0]->id ?>">
                             <div class="row clearfix">
                                 <div class="col-sm-3">
@@ -52,7 +52,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Observacion Empleado</label>
-                                            <textarea rows="4" class="form-control no-resize" name="Observacion_Final"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" name="Observacion_Final" required></textarea>
                                         </div>
                                     </div>
                                     <div id="content" style="display:none">
