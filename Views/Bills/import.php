@@ -17,7 +17,7 @@ if(isset($_POST['import_data'])){
                 $sql_query = "SELECT id,Numero_Factura, fecha_factura, nit, hora_factura,
                 Nombre_Cliente, Identificacion_Cliente, Correo_Cliente, Direccion_Cliente, Centro_costo,
                 Codigo_Producto,Codigo_Proveedor, Descripcion_Producto, Referencia_Producto,Cantidad, Sello_Producto, Marca_Producto
-                FROM mg_facturas WHERE Sello_Producto = '".$emp_record[14]."'";
+                FROM mg_facturas WHERE Sello_Producto = '".$emp_record[15]."'";
                 $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 				// if employee already exist then update details otherwise insert new record
                 if(mysqli_num_rows($resultset)) {                     

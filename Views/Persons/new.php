@@ -17,7 +17,7 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-12">
-                                    <form action="?controller=person&method=save" method="POST">
+                                    <form action="?controller=person&method=save" method="POST" id="form-validation">
                                         <div class="row clearfix">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
@@ -31,14 +31,14 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="nombre" class="form-control" placeholder="Nombres" />
+                                                        <input type="text" name="nombre" class="form-control" placeholder="Nombres" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" />
+                                                        <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -47,7 +47,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <select name="tipodoc" class="form-control">
+                                                        <select name="tipodoc" class="form-control" required>
                                                             <option value="">Tipo de documento...</option>
                                                             <option value="AS"> Adulto sin identidad</option>
                                                             <option value="CC"> Cédula de ciudadanía</option>
@@ -63,7 +63,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="number" name="identificacion" class="form-control" placeholder="Identificación" />
+                                                        <input type="number" name="identificacion" class="form-control" placeholder="Identificación" required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,21 +72,21 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="email" name="correo" class="form-control" placeholder="Correo" />
+                                                        <input type="email" name="correo" class="form-control" placeholder="Correo" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="number" name="telefono" class="form-control" placeholder="Telefono" />
+                                                        <input type="number" name="telefono" class="form-control" placeholder="Telefono" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <select name="genero" class="form-control">
+                                                        <select name="genero" class="form-control" required>
                                                             <option value="">Genero...</option>
                                                             <option value="Masculino">Masculino</option>
                                                             <option value="Femenino">Femenino</option>
@@ -97,14 +97,14 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="sucursal" class="form-control" placeholder="Sucursal" />
+                                                        <input type="text" name="sucursal" class="form-control" placeholder="Sucursal" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">    
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <select name="cargo" class="form-control">
+                                                        <select name="cargo" class="form-control" required>
                                                             <option value="">Cargo...</option>
                                                             <?php foreach ($roles as $rol) { ?>
                                                                 <option value="<?php echo $rol->cargo ?>"><?php echo $rol->cargo ?></option>
@@ -119,7 +119,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <label>Fecha de nacimiento</label>
-                                                        <input type="date" name="fechanac" class="form-control" />
+                                                        <input type="date" name="fechanac" class="form-control" required />
                                                     </div>
                                                 </div>
                                             </div>

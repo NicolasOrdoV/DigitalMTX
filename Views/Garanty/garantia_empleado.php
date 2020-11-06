@@ -200,10 +200,12 @@ $td = $total_data + 0001;
                                                         <input size="5" type="text" class="form-control" name="Cantidad_Producto[]" readonly value="<?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>">
                                                     </td>
                                                     <td>
-                                                        <small style="visibility: hidden">
-                                                            <?php echo isset($productos['Codigo_Proveedor']) ? $productos['Codigo_Proveedor'] : '' ?>
-                                                        </small>
-                                                        <input size="5" type="text" class="form-control" name="Codigo_Proveedor[]" readonly value="<?php echo isset($productos['Codigo_Proveedor']) ? $productos['Codigo_Proveedor'] : '' ?>">
+                                                        <select size="5" name="Codigo_Proveedor[]" class="form-control">
+                                                            <option>Seleccione...</option>
+                                                            <?php foreach ($providers as $provider) { ?>
+                                                                <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
+                                                            <?php } ?>
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>

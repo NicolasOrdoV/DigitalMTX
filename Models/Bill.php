@@ -17,7 +17,7 @@ class Bill
     public function getAll()
     {
         try {
-            $strSql = "SELECT * FROM mg_facturas WHERE id > 0";
+            $strSql = "SELECT * FROM mg_facturas";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

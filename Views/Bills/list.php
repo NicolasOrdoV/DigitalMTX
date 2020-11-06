@@ -20,9 +20,9 @@
                             <h2>Importar</h2>
                         </div>
                         <div class="col-sm-12">
-                            <form action="Views/Bills/import.php" method="post" enctype="multipart/form-data" id="import_form">				
+                            <form action="Views/Bills/import.php" method="post" enctype="multipart/form-data" id="form-validation">				
                                 <input type="file" name="file" class="form-control"/>
-                                <input type="submit" class="btn btn-danger" name="import_data" value="IMPORTAR">		
+                                <input type="submit" class="btn btn-danger" name="import_data" value="IMPORTAR" required>		
                            </form>
                         </div>
                     </div>
