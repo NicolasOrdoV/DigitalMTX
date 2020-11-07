@@ -6,7 +6,6 @@ require 'Models/Product.php';
 require 'Models/Provider.php';
 require 'Models/Departament.php';
 require 'Models/Municipality.php';
-require 'Models/Technical.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -27,7 +26,6 @@ class GarantyController
   private $provider;
   private $departament;
   private $municipality;
-  private $technical;
 
   public function __construct()
   {
@@ -37,7 +35,6 @@ class GarantyController
     $this->provider = new Provider;
     $this->departament = new Departament;
     $this->municipality = new Municipality;
-    $this->technical = new Technical;
   }
 
   public function listGaranty()
@@ -146,8 +143,7 @@ class GarantyController
       $Codigo_Proveedor = $_POST['Codigo_Proveedor'];
       $Referencia = $_POST['Referencia'];
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
-      $Aprobacion_Garantia = isset($_POST['Aprobacion_Garantia']) ? $_POST['Aprobacion_Garantia'] : '';
-      $Aprobacion_GarantiaN = isset($_POST['Aprobacion_GarantiaN']) ? $_POST['Aprobacion_GarantiaN'] : '';
+      $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
       $Estado = ($_POST['Estado']);
 
       //-------------------------//
@@ -171,13 +167,10 @@ class GarantyController
         $item6 = current($Cantidad_Producto);
         $item7 = current($Referencia);
         $item8 = current($Observacion_Cliente);
-        if (!empty($Aprobacion_Garantia)) {
+        
           $item9 = current($Aprobacion_Garantia);
-        }
-        if (!empty($Aprobacion_GarantiaN)) {
-          $item10 = current($Aprobacion_GarantiaN);
-        }
-        $item11 = current($Estado);
+        
+        $item10 = current($Estado);
 
         $cp = (($item1 !== false) ? $item1 : '');
         $dp = (($item2 !== false) ? $item2 : '');
@@ -187,10 +180,12 @@ class GarantyController
         $canPro = (($item6 !== false) ? $item6 : '');
         $rp = (($item7 !== false) ? $item7: '');
         $op = (($item8 !== false) ? $item8 : '');
-        $ag = (($item9 !== false) ? $item9 : '');
-        $agN = (($item10 !== false) ? $item10 : '');
-        $es = (($item11 !== false) ? $item11 : '');
+        
+          $ag = (($item9 !== false) ? $item9 : '');
+        
+        $es = (($item10 !== false) ? $item10 : '');
 
+        
         $detaills = [
           'Codigo_Producto' => $cp,
           'Descripcion_Producto' => $dp,
@@ -201,24 +196,28 @@ class GarantyController
           'Codigo_Proveedor' => $cpro,
           'Id_Garantia' => $lastId[0]->id,
           'Observacion_Cliente' => $op,
-          'Aprobacion_Garantia' => $ag,
-          'Estado' => $es
+          'Estado' => $es,
+          'Aprobacion_Garantia' => $ag
         ];
+        
+        
+
+        //var_dump($detaillsN);
+        //$detaills['Aprobacion_Garantia'] = $agN;
+        //echo '<hr>';
+        //var_dump($detaills);
 
         //----Aqui va la validacion de rango de fechas
         if ($fecha_actual >= $fecha_factura && $fecha_actual <= $fecha_proxima) {
-          if (isset($lastId[0]->id) && $answerNewGaranty == true && $ag === 'SI') {
-            $this->model->saveDetail($detaills);
-            if(isset($lastId[0]->id) && $answerNewGaranty == true && $agN === 'NO') {
-              $detaills['Estado'] = "Cerrado";
-              $detaills['Aprobacion_Garantia'] = 'NO';
+          if (isset($lastId[0]->id) && $answerNewGaranty == true) {
+            if ($ag == 'SI') {
+              $detaills['Aprobacion_Garantia'] = $ag;
               $this->model->saveDetail($detaills);
             }
-          }else{
-            echo '<script>
-            alert("La garantia se registro, pero no se selecciono un producto");
-            window.location = "?controller=garanty&method=listGaranty";
-            </script>';
+            if ($ag == 'NO') {
+              $detaills['Estado'] = "Cerrado";
+              $this->model->saveDetail($detaills);
+            }  
           }
         }else{
           echo '<script>
@@ -237,15 +236,12 @@ class GarantyController
         $item6 = next($Cantidad_Producto);
         $item7 = next($Referencia);
         $item8 = next($Observacion_Cliente);
-        if (!empty($Aprobacion_Garantia)) {
+       
           $item9 = next($Aprobacion_Garantia);
-        }
-        if (!empty($Aprobacion_GarantiaN)) {
-          $item10 = next($Aprobacion_GarantiaN);
-        }
-        $item11 = next($Estado);
+        
+        $item10 = next($Estado);
         // Check terminator
-        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false) break;
+        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false) break;
       }
 
       $dates = $this->model->getAlDetails($lastId[0]->id);
@@ -370,142 +366,77 @@ class GarantyController
           // Content
           $mail->isHTML(true);                                  // Set email format to HTML
           $mail->Subject = 'Solicitud de garantia';
-          $mail->Body    = '
-          <!DOCTYPE html>
-          <html lang="en" >
-          <head>
-            <meta charset="UTF-8">
-            <title>CodePen - Responsive Email Template</title>
-            <style type="text/css">
-          @media only screen and (max-width: 600px) {
-              .main {
-                  width: 320px !important;
-              }
-              .top-image {
-                  width: 100% !important;
-              }
-              .inside-footer {
-                  width: 320px !important;
-              }
-              table[class="contenttable"] {
-                  width: 320px !important;
-                  text-align: left !important;
-              }
-              td[class="force-col"] {
-                  display: block !important;
-              }
-              td[class="rm-col"] {
-                  display: none !important;
-              }
-              .mt {
-                  margin-top: 15px !important;
-              }
-              *[class].width300 {
-                  width: 255px !important;
-              }
-              *[class].block {
-                  display: block !important;
-              }
-              *[class].blockcol {
-                  display: none !important;
-              }
-              .emailButton {
-                  width: 100% !important;
-              }
-              .emailButton a {
-                  display: block !important;
-                  font-size: 18px !important;
-              }
-          }
-          </style>
-          
-          </head>
-          <body>
-          <!-- partial:index.partial.html -->
-          <body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
-          
-          <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
-              <tr>
-                <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                  <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                    <tr>
-                      <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
-                        <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Tenable Network Security"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td valign="top" class="side title" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;vertical-align: top;background-color: white;border-top: none;">
-                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                          <tr>
-                            <td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
-                              <div class="mktEditable" id="main_title">
-                                Proceso de la Garantia 
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
-                            <div class="mktEditable" id="intro_title">
-                              Estimado Usuario:'.$data['Nombre_Cliente'].'
-                            </div></td>
-                          </tr>
-                          <tr>
-                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;"></td>
-                          </tr>
-                          
-                          <tr>
-                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 15px 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 21px;">
-                              <hr size="1" color="#eeeff0">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                            <div class="mktEditable" id="main_text">
-            
-          
-                              Su actual estado de la garantia se encuentra en '.$dates[0]->Estado .'<br><br>
-                              y en la cual se evidencia por que no se aprobo la garantia '.$data['Observacion_Empleado'] .'<br><br>
-                              
+          $mail->Body    = '<!DOCTYPE html>
+                  <html lang="en" >
+                  <head>
+                    <meta charset="UTF-8">
+                    <title>CodePen - Avisado Prototipo</title>
+                    <link rel="stylesheet" href="./style.css">
+                  
+                  </head>
+                  <body>
+                  <!-- partial:index.partial.html -->
+                  <html>
+                    <head>
+                      <meta charset="utf-8" />
+                      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                      <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
+                      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+                      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                    </head>
+                    <body>
+                      <header>
+                        <div class="container">
+                          <section class="banner_row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <figure class="animated fadeInLeft">
+                                  <a href="index.html">
+                                    <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
+                                  </a>
+                                </figure>
                             </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
-                             &nbsp;<br>
-                            </td>
-                          </tr>
-                          
-          
-                        </table>
-                      </td>
-                    </tr>
-                
-                                        
-                    <tr bgcolor="#fff" style="border-top: 4px solid  #F44336;">
-                      <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
-                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                          <tr>
-                            <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
-          <div id="address" class="mktEditable">
-                              <b>Digital MTX</b><br>
-                                                      2020<br> 
-                                      <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
-          </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-            </body>
-          <!-- partial -->
-            
-          </body>
-          </html>
-          ';
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                              <h1 class="animated fadeInLeft">>>AVISADO!</h1>
+                            </div>
+                          </section>
+                        </div>
+                      </header>
+                      <section class="formulario-princ">
+                        <div class="container">
+                          <form class="form-inline">
+                            <div class="form-group">
+                              <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
+                            </div>
+                            <div class="form-group">
+                            <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
+                            <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
+                            </div>
+                          </form>
+                        </div>
+                      </section>
+                      </div>
+                      <br />
+                      <br />
+                      <div class="footer-container">
+                      <footer class="wrapper">
+                        <div class="container">
+                          <h3>Trabajamos para ti, ¡Espéranos!</h3>
+                          <p>Para más información, <strong>puedes escribirnos a:</strong> 
+                            <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
+                          </p>
+                        </div>
+                      </footer>
+                      </div>
+                    </body>
+                  </html>
+                  <!-- partial -->
+                    
+                  </body>
+                  </html>
+                  ';
 
           $mail->send();
           header('Location: ?controller=garanty&method=sucessfull');
@@ -562,7 +493,6 @@ class GarantyController
                       <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p>
                     </div>
                     <hr>
-                    <p Estim
                     <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
                   </td>
                 </tr>
@@ -577,6 +507,7 @@ class GarantyController
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
                     <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
                     <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
+                    <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
                     <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
                     <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
                     <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
@@ -639,6 +570,7 @@ class GarantyController
               <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
                 <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
                 <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
+                <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
                 <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
                 <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
                 <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
@@ -728,144 +660,79 @@ class GarantyController
   	      // Content
   	      $mail->isHTML(true);                                  // Set email format to HTML
   	      $mail->Subject = 'Solicitud de garantia';
-  	      $mail->Body    = '
-          <!DOCTYPE html>
-          <html lang="en" >
-          <head>
-            <meta charset="UTF-8">
-            <title>CodePen - Responsive Email Template</title>
-            <style type="text/css">
-          @media only screen and (max-width: 600px) {
-              .main {
-                  width: 320px !important;
-              }
-              .top-image {
-                  width: 100% !important;
-              }
-              .inside-footer {
-                  width: 320px !important;
-              }
-              table[class="contenttable"] {
-                  width: 320px !important;
-                  text-align: left !important;
-              }
-              td[class="force-col"] {
-                  display: block !important;
-              }
-              td[class="rm-col"] {
-                  display: none !important;
-              }
-              .mt {
-                  margin-top: 15px !important;
-              }
-              *[class].width300 {
-                  width: 255px !important;
-              }
-              *[class].block {
-                  display: block !important;
-              }
-              *[class].blockcol {
-                  display: none !important;
-              }
-              .emailButton {
-                  width: 100% !important;
-              }
-              .emailButton a {
-                  display: block !important;
-                  font-size: 18px !important;
-              }
-          }
-          </style>
-          
-          </head>
-          <body>
-          <!-- partial:index.partial.html -->
-          <body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
-          
-          <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
-              <tr>
-                <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                  <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                    <tr>
-                      <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
-                        <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Tenable Network Security"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td valign="top" class="side title" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;vertical-align: top;background-color: white;border-top: none;">
-                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                          <tr>
-                            <td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
-                              <div class="mktEditable" id="main_title">
-                                Proceso de la Garantia 
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
-                            <div class="mktEditable" id="intro_title">
-                              Estimado Usuario:'.$data[0]->Nombre_Cliente.'
-                            </div></td>
-                          </tr>
-                          <tr>
-                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;"></td>
-                          </tr>
-                          
-                          <tr>
-                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 15px 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 21px;">
-                              <hr size="1" color="#eeeff0">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                            <div class="mktEditable" id="main_text">
-            
-          
-                              El estado de su garantia se encuentra en '.$data[0]->Estado.'.<br><br>
-                              
-                            </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
-                             &nbsp;<br>
-                            </td>
-                          </tr>
-                          
-          
-                        </table>
-                      </td>
-                    </tr>
-                
-                                        
-                    <tr bgcolor="#fff" style="border-top: 4px solid  #F44336;">
-                      <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
-                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                          <tr>
-                            <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
-          <div id="address" class="mktEditable">
-                              <b>Digital MTX</b><br>
-                                                      2020<br> 
-                                      <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
-          </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-            </body>
-          <!-- partial -->
-            
-          </body>
-          </html>
-          ';
+  	      $mail->Body    = '<!DOCTYPE html>
+  	            <html lang="en" >
+  	            <head>
+  	              <meta charset="UTF-8">
+  	              <title>CodePen - Avisado Prototipo</title>
+  	              <link rel="stylesheet" href="./style.css">
+  	            
+  	            </head>
+  	            <body>
+  	            <!-- partial:index.partial.html -->
+  	            <html>
+  	              <head>
+  	                <meta charset="utf-8" />
+  	                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	                <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  	                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  	                <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
+  	                <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  	                <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  	                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  	              </head>
+  	              <body>
+  	                <header>
+  	                  <div class="container">
+  	                    <section class="banner_row">
+  	                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+  	                          <figure class="animated fadeInLeft">
+  	                            <a href="index.html">
+  	                              <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
+  	                            </a>
+  	                          </figure>
+  	                      </div>
+  	                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+  	                        <h1 class="animated fadeInLeft">>>AVISADO!</h1>
+  	                      </div>
+  	                    </section>
+  	                  </div>
+  	                </header>
+  	                <section class="formulario-princ">
+  	                  <div class="container">
+  	                    <form class="form-inline">
+  	                      <div class="form-group">
+  	                        <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
+  	                      </div>
+  	                      <div class="form-group">
+  	                      <p>Hola que tal: Su proceso de garantia fue: ' . $data[0]->Estado . '</p><br>
+  	                      <p>Por favor este pendiente de su correo para alguna novedad.</p>
+  	                      </div>
+  	                    </form>
+  	                  </div>
+  	                </section>
+  	                </div>
+  	                <br />
+  	                <br />
+  	                <div class="footer-container">
+  	                <footer class="wrapper">
+  	                  <div class="container">
+  	                    <h3>Trabajamos para ti, ¡Espéranos!</h3>
+  	                    <p>Para más información, <strong>puedes escribirnos a:</strong> 
+  	                      <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
+  	                    </p>
+  	                  </div>
+  	                </footer>
+  	                </div>
+  	              </body>
+  	            </html>
+  	            <!-- partial -->
+  	            </body>
+  	            </html>
+  	            ';
 
   	      $mail->send();
-  	      header('Location: ?controller=garanty&method=solutionTechnical');
+  	      header('Location: ?controller=garanty&method=listGaranty');
   	    } catch (Exception $e) {
   	      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   	    }
@@ -1070,56 +937,4 @@ class GarantyController
       header('Location: ?controller=login');
     }
   }
-
-  public function solutionTechnical()
-  {
-    if (isset($_SESSION['user'])) {
-      require 'Views/Layout.php';
-      $garanties = $this->model->getAllSolution();
-      require 'Views/Garanty/solution.php';
-      require 'Views/Scripts.php';
-    }else{
-      header('Location: ?controller=login');
-    }
-  }
-
-  public function solutionPre()
-  {
-    if (isset($_SESSION['user'])) {
-      require 'Views/Layout.php';
-      $garanties = $this->model->getAllSolutionPre();
-      require 'Views/Garanty/solutionPre.php';
-      require 'Views/Scripts.php';
-    }else{
-      header('Location: ?controller=login');
-    }
-  }
-
-  public function optionsEnds()
-  {
-    if (isset($_SESSION['user'])) {
-      if (isset($_REQUEST['id'])) {
-        $id = $_REQUEST['id'];
-        $data = $this->model->getFinalyStatus($id);
-         require 'Views/Layout.php';
-         require 'Views/Garanty/solutionEndNew.php';
-         require 'Views/Scripts.php';
-      }
-    }else{
-      header('Location: ?controller=login');
-    }
-  }
-
-  public function saveEndDelivery()
-  {
-    if (isset($_SESSION['user'])) {
-      if ($_POST) {
-        $this->technical->editStatus($_POST);
-        header('Location: ?controller=garanty&method=solutionPre');
-      }
-    }else{
-      header('Location: ?controller=login');
-    }
-  }
-
 }

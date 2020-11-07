@@ -201,7 +201,7 @@ $td = $total_data + 0001;
                                                     </td>
                                                     <td>
                                                         <select size="5" name="Codigo_Proveedor[]" class="form-control">
-                                                            <option>Seleccione...</option>
+                                                            <option value="">Seleccione...</option>
                                                             <?php foreach ($providers as $provider) { ?>
                                                                 <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
                                                             <?php } ?>
@@ -215,7 +215,7 @@ $td = $total_data + 0001;
                                                         <div class="demo-checkbox form-line">
                                                             <input size="5" type="checkbox" id="md_checkbox_<?php echo $key + 1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
                                                             <label for="md_checkbox_<?php echo $key + 1; ?>">SI</label>
-                                                            <input type="checkbox" id="md_checkbox_<?php echo $key + 10; ?>" class="chk-col-red" name="Aprobacion_GarantiaN[]" value="NO" />
+                                                            <input type="checkbox" id="md_checkbox_<?php echo $key + 10; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="NO" />
                                                             <label for="md_checkbox_<?php echo $key + 10; ?>">NO</label>
                                                         </div>
                                                     </td>
