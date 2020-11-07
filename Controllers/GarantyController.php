@@ -370,77 +370,142 @@ class GarantyController
           // Content
           $mail->isHTML(true);                                  // Set email format to HTML
           $mail->Subject = 'Solicitud de garantia';
-          $mail->Body    = '<!DOCTYPE html>
-                  <html lang="en" >
-                  <head>
-                    <meta charset="UTF-8">
-                    <title>CodePen - Avisado Prototipo</title>
-                    <link rel="stylesheet" href="./style.css">
-                  
-                  </head>
-                  <body>
-                  <!-- partial:index.partial.html -->
-                  <html>
-                    <head>
-                      <meta charset="utf-8" />
-                      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-                      <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-                      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-                      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-                    </head>
-                    <body>
-                      <header>
-                        <div class="container">
-                          <section class="banner_row">
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <figure class="animated fadeInLeft">
-                                  <a href="index.html">
-                                    <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-                                  </a>
-                                </figure>
+          $mail->Body    = '
+          <!DOCTYPE html>
+          <html lang="en" >
+          <head>
+            <meta charset="UTF-8">
+            <title>CodePen - Responsive Email Template</title>
+            <style type="text/css">
+          @media only screen and (max-width: 600px) {
+              .main {
+                  width: 320px !important;
+              }
+              .top-image {
+                  width: 100% !important;
+              }
+              .inside-footer {
+                  width: 320px !important;
+              }
+              table[class="contenttable"] {
+                  width: 320px !important;
+                  text-align: left !important;
+              }
+              td[class="force-col"] {
+                  display: block !important;
+              }
+              td[class="rm-col"] {
+                  display: none !important;
+              }
+              .mt {
+                  margin-top: 15px !important;
+              }
+              *[class].width300 {
+                  width: 255px !important;
+              }
+              *[class].block {
+                  display: block !important;
+              }
+              *[class].blockcol {
+                  display: none !important;
+              }
+              .emailButton {
+                  width: 100% !important;
+              }
+              .emailButton a {
+                  display: block !important;
+                  font-size: 18px !important;
+              }
+          }
+          </style>
+          
+          </head>
+          <body>
+          <!-- partial:index.partial.html -->
+          <body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
+          
+          <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
+              <tr>
+                <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+                  <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                    <tr>
+                      <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
+                        <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Tenable Network Security"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="side title" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;vertical-align: top;background-color: white;border-top: none;">
+                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                          <tr>
+                            <td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
+                              <div class="mktEditable" id="main_title">
+                                Proceso de la Garantia 
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
+                            <div class="mktEditable" id="intro_title">
+                              Estimado Usuario:'.$data['Nombre_Cliente'].'
+                            </div></td>
+                          </tr>
+                          <tr>
+                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;"></td>
+                          </tr>
+                          
+                          <tr>
+                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 15px 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 21px;">
+                              <hr size="1" color="#eeeff0">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+                            <div class="mktEditable" id="main_text">
+            
+          
+                              Su actual estado de la garantia se encuentra en '.$dates[0]->Estado .'<br><br>
+                              y en la cual se evidencia por que no se aprobo la garantia '.$data['Observacion_Empleado'] .'<br><br>
+                              
                             </div>
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                              <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-                            </div>
-                          </section>
-                        </div>
-                      </header>
-                      <section class="formulario-princ">
-                        <div class="container">
-                          <form class="form-inline">
-                            <div class="form-group">
-                              <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-                            </div>
-                            <div class="form-group">
-                            <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
-                            <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
-                            </div>
-                          </form>
-                        </div>
-                      </section>
-                      </div>
-                      <br />
-                      <br />
-                      <div class="footer-container">
-                      <footer class="wrapper">
-                        <div class="container">
-                          <h3>Trabajamos para ti, ¡Espéranos!</h3>
-                          <p>Para más información, <strong>puedes escribirnos a:</strong> 
-                            <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-                          </p>
-                        </div>
-                      </footer>
-                      </div>
-                    </body>
-                  </html>
-                  <!-- partial -->
-                    
-                  </body>
-                  </html>
-                  ';
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
+                             &nbsp;<br>
+                            </td>
+                          </tr>
+                          
+          
+                        </table>
+                      </td>
+                    </tr>
+                
+                                        
+                    <tr bgcolor="#fff" style="border-top: 4px solid  #F44336;">
+                      <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
+                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                          <tr>
+                            <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
+          <div id="address" class="mktEditable">
+                              <b>Digital MTX</b><br>
+                                                      2020<br> 
+                                      <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
+          </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            </body>
+          <!-- partial -->
+            
+          </body>
+          </html>
+          ';
 
           $mail->send();
           header('Location: ?controller=garanty&method=sucessfull');
@@ -497,6 +562,7 @@ class GarantyController
                       <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p>
                     </div>
                     <hr>
+                    <p Estim
                     <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
                   </td>
                 </tr>
@@ -662,76 +728,141 @@ class GarantyController
   	      // Content
   	      $mail->isHTML(true);                                  // Set email format to HTML
   	      $mail->Subject = 'Solicitud de garantia';
-  	      $mail->Body    = '<!DOCTYPE html>
-  	            <html lang="en" >
-  	            <head>
-  	              <meta charset="UTF-8">
-  	              <title>CodePen - Avisado Prototipo</title>
-  	              <link rel="stylesheet" href="./style.css">
-  	            
-  	            </head>
-  	            <body>
-  	            <!-- partial:index.partial.html -->
-  	            <html>
-  	              <head>
-  	                <meta charset="utf-8" />
-  	                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	                <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  	                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  	                <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-  	                <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-  	                <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  	                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  	              </head>
-  	              <body>
-  	                <header>
-  	                  <div class="container">
-  	                    <section class="banner_row">
-  	                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-  	                          <figure class="animated fadeInLeft">
-  	                            <a href="index.html">
-  	                              <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-  	                            </a>
-  	                          </figure>
-  	                      </div>
-  	                      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-  	                        <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-  	                      </div>
-  	                    </section>
-  	                  </div>
-  	                </header>
-  	                <section class="formulario-princ">
-  	                  <div class="container">
-  	                    <form class="form-inline">
-  	                      <div class="form-group">
-  	                        <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-  	                      </div>
-  	                      <div class="form-group">
-  	                      <p>Hola que tal: Su proceso de garantia fue: ' . $data[0]->Estado . '</p><br>
-  	                      <p>Por favor este pendiente de su correo para alguna novedad.</p>
-  	                      </div>
-  	                    </form>
-  	                  </div>
-  	                </section>
-  	                </div>
-  	                <br />
-  	                <br />
-  	                <div class="footer-container">
-  	                <footer class="wrapper">
-  	                  <div class="container">
-  	                    <h3>Trabajamos para ti, ¡Espéranos!</h3>
-  	                    <p>Para más información, <strong>puedes escribirnos a:</strong> 
-  	                      <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-  	                    </p>
-  	                  </div>
-  	                </footer>
-  	                </div>
-  	              </body>
-  	            </html>
-  	            <!-- partial -->
-  	            </body>
-  	            </html>
-  	            ';
+  	      $mail->Body    = '
+          <!DOCTYPE html>
+          <html lang="en" >
+          <head>
+            <meta charset="UTF-8">
+            <title>CodePen - Responsive Email Template</title>
+            <style type="text/css">
+          @media only screen and (max-width: 600px) {
+              .main {
+                  width: 320px !important;
+              }
+              .top-image {
+                  width: 100% !important;
+              }
+              .inside-footer {
+                  width: 320px !important;
+              }
+              table[class="contenttable"] {
+                  width: 320px !important;
+                  text-align: left !important;
+              }
+              td[class="force-col"] {
+                  display: block !important;
+              }
+              td[class="rm-col"] {
+                  display: none !important;
+              }
+              .mt {
+                  margin-top: 15px !important;
+              }
+              *[class].width300 {
+                  width: 255px !important;
+              }
+              *[class].block {
+                  display: block !important;
+              }
+              *[class].blockcol {
+                  display: none !important;
+              }
+              .emailButton {
+                  width: 100% !important;
+              }
+              .emailButton a {
+                  display: block !important;
+                  font-size: 18px !important;
+              }
+          }
+          </style>
+          
+          </head>
+          <body>
+          <!-- partial:index.partial.html -->
+          <body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
+          
+          <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
+              <tr>
+                <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+                  <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                    <tr>
+                      <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
+                        <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Tenable Network Security"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top" class="side title" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;vertical-align: top;background-color: white;border-top: none;">
+                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                          <tr>
+                            <td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
+                              <div class="mktEditable" id="main_title">
+                                Proceso de la Garantia 
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
+                            <div class="mktEditable" id="intro_title">
+                              Estimado Usuario:'.$data[0]->Nombre_Cliente.'
+                            </div></td>
+                          </tr>
+                          <tr>
+                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;"></td>
+                          </tr>
+                          
+                          <tr>
+                            <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 15px 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 21px;">
+                              <hr size="1" color="#eeeff0">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+                            <div class="mktEditable" id="main_text">
+            
+          
+                              El estado de su garantia se encuentra en '.$data[0]->Estado.'.<br><br>
+                              
+                            </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
+                             &nbsp;<br>
+                            </td>
+                          </tr>
+                          
+          
+                        </table>
+                      </td>
+                    </tr>
+                
+                                        
+                    <tr bgcolor="#fff" style="border-top: 4px solid  #F44336;">
+                      <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
+                        <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                          <tr>
+                            <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
+          <div id="address" class="mktEditable">
+                              <b>Digital MTX</b><br>
+                                                      2020<br> 
+                                      <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
+          </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            </body>
+          <!-- partial -->
+            
+          </body>
+          </html>
+          ';
 
   	      $mail->send();
   	      header('Location: ?controller=garanty&method=solutionTechnical');
