@@ -146,7 +146,7 @@
                         </a>
                     </li>
                     <?php if ($_SESSION['user']->cargo == 'Administrador') { ?>
-                        <li>
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">people</i>
                             <span>Personal</span>
@@ -155,6 +155,20 @@
                             <li>
                                 <a href="?controller=person&method=list" class="menu-toggle">
                                     <span>Registro personal</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">account_circle</i>
+                            <span>Clientes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=client" class="menu-toggle">
+                                    <span>Lista de clientes actuales</span>
                                 </a>
                                 
                             </li>
@@ -200,12 +214,12 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">person_outline</i>
-                            <span>Clientes</span>
+                            <span>Usuarios</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?controller=client&method=list" class="menu-toggle">
-                                    <span>Lista de clientes actuales</span>
+                                <a href="?controller=user&method=list" class="menu-toggle">
+                                    <span>Lista de usuarios actuales</span>
                                 </a>
                                 
                             </li>
@@ -227,7 +241,7 @@
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">local_mall</i>
+                            <i class="material-icons">content_paste</i>
                             <span>Facturas</span>
                         </a>
                         <ul class="ml-menu">

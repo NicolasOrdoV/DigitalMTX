@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2020 a las 04:57:36
+-- Tiempo de generación: 08-11-2020 a las 19:38:53
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -3431,6 +3431,88 @@ CREATE TABLE `mg_centro_costos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mg_clientes`
+--
+
+CREATE TABLE `mg_clientes` (
+  `IDENTIFICACION` int(11) NOT NULL,
+  `SUCURSAL` int(11) DEFAULT NULL,
+  `DIGITO_DE_VERIFICACIÓN` int(11) DEFAULT NULL,
+  `NOMBRE` varchar(50) DEFAULT NULL,
+  `RAZÓN_SOCIAL` varchar(50) DEFAULT NULL,
+  `PRIMER_NOMBRE` varchar(50) DEFAULT NULL,
+  `SEGUNDO_NOMBRE` varchar(50) DEFAULT NULL,
+  `PRIMER_APELLIDO` varchar(50) DEFAULT NULL,
+  `SEGUNDO_APELLIDO` varchar(50) DEFAULT NULL,
+  `NÚMERO_DE_IDENTIFICACIÓN_DEL_EXTRANJERO` int(11) DEFAULT NULL,
+  `CÓDIGO_IDENTIFICACIÓN_FISCAL` int(11) DEFAULT NULL,
+  `NOMBRE_DEL_CONTACTO` varchar(50) DEFAULT NULL,
+  `DIRECCIÓN` varchar(50) DEFAULT NULL,
+  `PAÍS` int(11) DEFAULT NULL,
+  `CIUDAD` int(11) DEFAULT NULL,
+  `ACTIVO` varchar(50) DEFAULT NULL,
+  `TELÉFONO_1` varchar(50) DEFAULT NULL,
+  `TELÉFONO_2` varchar(50) DEFAULT NULL,
+  `TELÉFONO_3` varchar(50) DEFAULT NULL,
+  `TELÉFONO_4` varchar(50) DEFAULT NULL,
+  `TELÉFONO_CELULAR` varchar(50) DEFAULT NULL,
+  `FAX` varchar(50) DEFAULT NULL,
+  `APARTADO_AÉREO` varchar(50) DEFAULT NULL,
+  `SEXO` varchar(10) DEFAULT NULL,
+  `AÑO_DE_CUMPLEAÑOS` int(11) DEFAULT NULL,
+  `MES_DE_CUMPLEAÑOS` int(11) DEFAULT NULL,
+  `DÍA_DE_CUMPLEAÑOS` int(11) DEFAULT NULL,
+  `TIPO_DE_PERSONA` int(11) DEFAULT NULL,
+  `CORREO_ELECTRÓNICO` varchar(50) DEFAULT NULL,
+  `CONTACTO_DE_FACTURACIÓN` varchar(50) DEFAULT NULL,
+  `CORREO_ELECT_CONTACTO_DE_FACTURACIÓN` varchar(80) DEFAULT NULL,
+  `TIPO_DE_IDENTIFICACIÓN` varchar(10) DEFAULT NULL,
+  `CLASIFICACIÓN_CLASE_DE_TERCERO` varchar(50) DEFAULT NULL,
+  `BENEFICIO_DIAN_RETEIVA_COMPRAS` varchar(50) DEFAULT NULL,
+  `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS` varchar(50) DEFAULT NULL,
+  `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS` int(11) DEFAULT NULL,
+  `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS` varchar(50) DEFAULT NULL,
+  `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS` int(11) DEFAULT NULL,
+  `CUPO_DE_CRÉDITO` int(11) DEFAULT NULL,
+  `LISTA_DE_PRECIO` int(11) DEFAULT NULL,
+  `FORMA_DE_PAGO` int(11) DEFAULT NULL,
+  `CALIFICACIÓN` int(11) DEFAULT NULL,
+  `TIPO_CONTRIBUYENTE` int(11) DEFAULT NULL,
+  `CÓDIGO_ACTIVIDAD_ECONÓMICA` int(11) DEFAULT NULL,
+  `VENDEDOR` int(11) DEFAULT NULL,
+  `COBRADOR` int(11) DEFAULT NULL,
+  `PORCENTAJE_DESCUENTO_EN_VENTAS` int(11) DEFAULT NULL,
+  `PERÍODO_DE_PAGO` int(11) DEFAULT NULL,
+  `OBSERVACIÓN` text DEFAULT NULL,
+  `DÍAS_OPTIMISTA` varchar(50) DEFAULT NULL,
+  `DÍAS_PESIMISTA` varchar(50) DEFAULT NULL,
+  `CÓDIGO` varchar(50) DEFAULT NULL,
+  `TIPO_DE_EMPRESA` varchar(50) DEFAULT NULL,
+  `CÓDIGO_DE_BANCO` varchar(50) DEFAULT NULL,
+  `CÓDIGO_INTERNO` varchar(50) DEFAULT NULL,
+  `CÓDIGO_OFICINA` varchar(50) DEFAULT NULL,
+  `TIPO_DE_CUENTA` varchar(50) DEFAULT NULL,
+  `NÚMERO_DE_CUENTA` varchar(50) DEFAULT NULL,
+  `NIT_DEL_TITULAR_DE_LA_CUENTA` varchar(50) DEFAULT NULL,
+  `DÍGITO_DE_VERIFICACIÓN_TITULAR_DE_LA_CUENTA` varchar(50) DEFAULT NULL,
+  `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAÍS_DE_LA_CUENTA` varchar(50) DEFAULT NULL,
+  `CIUDAD_DE_LA_CUENTA` varchar(50) DEFAULT NULL,
+  `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA` varchar(50) DEFAULT NULL,
+  `APLICA_RETENCIÓN_ICA_FACTURA_DE_VENTA_DEVOLUCIÓN` varchar(50) DEFAULT NULL,
+  `APLICA_RETENCIÓN_ICA_FACTURA_DE_COMPRA_DEVOLUCIÓN` varchar(50) DEFAULT NULL,
+  `ACEPTA_ENVÍO_FACTURA_POR_MEDIO_ELECTRÓNICO` varchar(50) DEFAULT NULL,
+  `NOMBRE_COMERCIAL` varchar(50) DEFAULT NULL,
+  `CODIGO_POSTAL` varchar(50) DEFAULT NULL,
+  `RESPONSABILIDAD_FISCAL` varchar(50) DEFAULT NULL,
+  `AÑO_APERTURA` varchar(50) DEFAULT NULL,
+  `MES_APERTURA` varchar(50) DEFAULT NULL,
+  `DIA_APERTURA` varchar(50) DEFAULT NULL,
+  `TRIBUTOS` char(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mg_departamentos`
 --
 
@@ -3494,10 +3576,18 @@ CREATE TABLE `mg_detalle_garantia` (
   `Codigo_Proveedor` varchar(20) DEFAULT NULL,
   `Id_Garantia` int(11) DEFAULT NULL,
   `Observacion_Cliente` text DEFAULT NULL,
-  `Aprobacion_Garantia` varchar(5) DEFAULT NULL,
   `Estado` varchar(50) DEFAULT NULL,
-  `Observacion_Final` text DEFAULT NULL
+  `Observacion_Final` text DEFAULT NULL,
+  `Aprobacion_Garantia` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mg_detalle_garantia`
+--
+
+INSERT INTO `mg_detalle_garantia` (`id`, `Codigo_Producto`, `Descripcion_Producto`, `Marca_Producto`, `Sello_Producto`, `Referencia`, `Cantidad_Producto`, `Codigo_Proveedor`, `Id_Garantia`, `Observacion_Cliente`, `Estado`, `Observacion_Final`, `Aprobacion_Garantia`) VALUES
+(1, '1', 'sdsdasda-asdadas', 'Acer', '213214', '21312', 1, '5', 1, 'ewwedew', 'Tramite', NULL, 'SI'),
+(2, '123', 'Bateria', 'Samsung', '1234', '3232', 1, '4', 1, 'wefewffe', 'Cerrado', NULL, 'NO');
 
 -- --------------------------------------------------------
 
@@ -3536,6 +3626,14 @@ CREATE TABLE `mg_facturas` (
   `Marca_Producto` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `mg_facturas`
+--
+
+INSERT INTO `mg_facturas` (`id`, `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Centro_costo`, `Codigo_Producto`, `Codigo_Proveedor`, `Descripcion_Producto`, `Referencia_Producto`, `Cantidad`, `Sello_Producto`, `Marca_Producto`) VALUES
+(1, '123', '2020-10-21', '1234455', '13:00', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '1', '1', 'sdsdasda-asdadas', '21312', '1', '213214', 'Acer'),
+(2, '123', '2020-10-21', '2312312', '13:00', 'sdsa', '21312', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'UNILAGO', '123', '34', 'Bateria', '3232', '1', '1234', 'Samsung');
+
 -- --------------------------------------------------------
 
 --
@@ -3563,6 +3661,13 @@ CREATE TABLE `mg_garantia` (
   `Observacion_Empleado` text NOT NULL,
   `Empleado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mg_garantia`
+--
+
+INSERT INTO `mg_garantia` (`id`, `No_garantia`, `Fecha_ingreso`, `Hora_ingreso`, `Numero_Factura`, `Punto_Venta`, `Fecha_Compra`, `Nombre_Cliente`, `Identificacion_Cliente`, `Correo_Cliente`, `Direccion_Cliente`, `Flete`, `Departamento`, `Municipio`, `Valor_Flete`, `No_Guia`, `Transportadora`, `Observacion_Empleado`, `Empleado`) VALUES
+(1, 'G-1', '2020-11-08', '09:57 am', '123', 'UNILAGO', '2020-10-21', 'sadada', '123', 'jnordonez7@misena.edu.co', 'Calle 45-asiempre viva', 'NO', '0', '', '', '', '', 'efwfewfre', 'Juan');
 
 -- --------------------------------------------------------
 
@@ -4892,6 +4997,13 @@ CREATE TABLE `mg_servicio_tecnico` (
   `Id_Empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `mg_servicio_tecnico`
+--
+
+INSERT INTO `mg_servicio_tecnico` (`id`, `Observacion_tecnico`, `Fecha_anexo_Tecnico`, `Hora_Anexo_Tecnico`, `Id_Garantia`, `Id_Empleado`) VALUES
+(1, 'Esta solucionado', '2020-11-07', '06:28 pm', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -4948,6 +5060,12 @@ ALTER TABLE `dtm_productos`
 --
 ALTER TABLE `mg_centro_costos`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `mg_clientes`
+--
+ALTER TABLE `mg_clientes`
+  ADD PRIMARY KEY (`IDENTIFICACION`);
 
 --
 -- Indices de la tabla `mg_departamentos`
@@ -5053,7 +5171,7 @@ ALTER TABLE `mg_centro_costos`
 -- AUTO_INCREMENT de la tabla `mg_detalle_garantia`
 --
 ALTER TABLE `mg_detalle_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_estados_garantia`
@@ -5065,19 +5183,19 @@ ALTER TABLE `mg_estados_garantia`
 -- AUTO_INCREMENT de la tabla `mg_facturas`
 --
 ALTER TABLE `mg_facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_garantia`
 --
 ALTER TABLE `mg_garantia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_servicio_tecnico`
 --
 ALTER TABLE `mg_servicio_tecnico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mg_transportadora`

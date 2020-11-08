@@ -1,7 +1,7 @@
 <?php
 
 require 'Models/Person.php';
-require 'Models/Client.php';
+require 'Models/User.php';
 require 'Models/Garanty.php';
 require 'Models/Rol.php';
 
@@ -25,7 +25,7 @@ class PersonController
 	{
 		$this->model = new Person;
 		$this->rol = new Rol;
-		$this->client = new Client;
+		$this->client = new User;
 		$this->garanty = new Garanty;
 	}
 
