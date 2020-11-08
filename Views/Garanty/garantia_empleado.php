@@ -142,7 +142,7 @@ $td = $total_data + 0001;
                                             <th>Sello</th>
                                             <th>Marca</th>
                                             <th>Cantidad</th>
-                                            <th>Codigo del proveedor</th>
+                                            <th>Proveedor</th>
                                             <th>Observacion del cliente</th>
                                             <th>¿Se aprueba la garantia?</th>
                                         </tr>

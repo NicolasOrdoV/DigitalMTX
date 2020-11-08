@@ -71,7 +71,7 @@ class Garanty
     public function getAllDet()
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia GROUP BY g.No_garantia ORDER BY d.Id_Garantia ASC";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Aprobacion_Garantia = 'SI' GROUP BY g.No_garantia ORDER BY d.Id_Garantia ASC";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

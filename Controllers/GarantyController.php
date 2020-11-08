@@ -210,12 +210,12 @@ class GarantyController
         //----Aqui va la validacion de rango de fechas
         if ($fecha_actual >= $fecha_factura && $fecha_actual <= $fecha_proxima) {
           if (isset($lastId[0]->id) && $answerNewGaranty == true) {
-            if ($ag == 'SI') {
-              $detaills['Aprobacion_Garantia'] = $ag;
-              $this->model->saveDetail($detaills);
-            }
             if ($ag == 'NO') {
               $detaills['Estado'] = "Cerrado";
+              $this->model->saveDetail($detaills);
+            }
+            if ($ag == 'SI') {
+              $detaills['Aprobacion_Garantia'] = $ag;
               $this->model->saveDetail($detaills);
             }  
           }
@@ -476,7 +476,7 @@ class GarantyController
           <html lang="en" >
           <head>
             <meta charset="UTF-8">
-            <title>CodePen - PDF Factura Ecuador</title>
+            <title>Consecutivo</title>
             
 
           </head>
@@ -498,20 +498,20 @@ class GarantyController
                 </tr>
                 <tr>
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-                    <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p>
-                    <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p>
-                    <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p>
-                    <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p>
-                    <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p>
+                    <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p><br>
+                    <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p><br>
+                    <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p><br>
+                    <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p><br>
+                    <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p><br>
                   </td>
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-                    <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
-                    <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
-                    <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
-                    <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
-                    <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
-                    <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
-                    <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p>
+                    <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p><br>
+                    <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p><br>
+                    <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p><br>
+                    <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p><br>
+                    <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p><br>
+                    <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p><br>
+                    <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p><br>
                   </td>
                 </tr>
               </table>
@@ -527,11 +527,11 @@ class GarantyController
                 </tr>';
                 foreach ($dates as $producte){ 
                $html .= '<tr>
-                  <td>'.$producte->Codigo_Producto.'</td>
-                  <td>'.$producte->Descripcion_Producto.'</td>
-                  <td>'.$producte->Marca_Producto.'</td>
-                  <td>'.$producte->Sello_Producto.'</td>
-                  <td>'.$producte->Referencia.'</td>
+                  <td>'.$producte->Codigo_Producto.'</td><br>
+                  <td>'.$producte->Descripcion_Producto.'</td><br>
+                  <td>'.$producte->Marca_Producto.'</td><br>
+                  <td>'.$producte->Sello_Producto.'</td><br>
+                  <td>'.$producte->Referencia.'</td><br>
                 </tr>';
                 }
               $html .= '</table><br>
@@ -542,7 +542,7 @@ class GarantyController
               <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
                 <div>
                   <div style="display:table; margin:auto; text-align:left;">
-                    <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p>
+                    <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p><br>
                   </div>
             --------------------------------------------------------------------------------------------------------------------------------------------------
           <!-- partial -->
@@ -553,28 +553,28 @@ class GarantyController
                 <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
                 <div style="display: inline-block; margin-left: 320px;">
                   <p style="font-weight: bold;">Digital MTX</p>
-                  <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p>
+                  <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p><br>
                 </div>
                 <hr>
-                <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
+                <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p><br>
               </td>
             </tr>
             <tr>
               <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-                <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p>
-                <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p>
-                <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p>
-                <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p>
-                <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p>
+                <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p><br>
+                <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p><br>
+                <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p><br>
+                <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p><br>
+                <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p><br>
               </td>
               <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-                <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p>
-                <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p>
-                <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p>
-                <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p>
-                <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p>
-                <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p>
-                <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p>
+                <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p><br>
+                <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p><br>
+                <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p><br>
+                <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p><br>
+                <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p><br>
+                <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p><br>
+                <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p><br>
               </td>
             </tr>
           </table>
@@ -590,11 +590,11 @@ class GarantyController
             </tr>';
             foreach ($dates as $producte){ 
            $html .= '<tr>
-              <td>'.$producte->Codigo_Producto.'</td>
-              <td>'.$producte->Descripcion_Producto.'</td>
-              <td>'.$producte->Marca_Producto.'</td>
-              <td>'.$producte->Sello_Producto.'</td>
-              <td>'.$producte->Referencia.'</td>
+              <td>'.$producte->Codigo_Producto.'</td><br>
+              <td>'.$producte->Descripcion_Producto.'</td><br>
+              <td>'.$producte->Marca_Producto.'</td><br>
+              <td>'.$producte->Sello_Producto.'</td><br>
+              <td>'.$producte->Referencia.'</td><br>
             </tr>';
             }
           $html .= '</table><br>
