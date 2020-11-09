@@ -19,7 +19,7 @@ class Client
 	public function getAll()
 	{
 		try {
-			$strSql = "SELECT * FROM mg_clientes";
+			$strSql = "SELECT * FROM mg_clientes LIMIT 4000";
 			$query = $this->pdo->select($strSql);
 			return $query;
 		} catch (PDOException $e) {

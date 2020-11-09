@@ -44,10 +44,10 @@
                                         <tr>
                                             <td><?php echo $client->IDENTIFICACION ?></td>
                                             <td><?php echo $client->NOMBRE ?></td>
-                                            <td><?php echo $client->DIRECCIÓN ?></td>
+                                            <td><?php echo $client->DIRECCION ?></td>
                                             <td><?php echo $client->CIUDAD ?></td>
-                                            <td><?php echo $client->TELÉFONO_CELULAR ?></td>
-                                            <td><?php echo $client->CORREO_ELECTRÓNICO ?></td>
+                                            <td><?php echo $client->TELEFONO_CELULAR ?></td>
+                                            <td><?php echo $client->CORREO_ELECTRONICO ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
