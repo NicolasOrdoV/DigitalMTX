@@ -8,19 +8,26 @@ if(isset($_POST['import_data'])){
             $csv_file = fopen($_FILES['file']['tmp_name'], 'r');           
             //fgetcsv($csv_file);            
             // get data records from csv file
-            while(($emp_record = fgetcsv($csv_file)) !== FALSE){
+            while(($emp_record = fgetcsv($csv_file,10000,";")) !== FALSE ){
 
                 //echo '<pre>';
                 //var_dump($emp_record);
                 //echo '</pre>';
                 // Check if employee already exists with same email
-                $sql_query = "SELECT * FROM mg_clientes WHERE NOMBRE='".$emp_record[3]."'";
+                $sql_query = "SELECT * FROM mg_clientes WHERE IDENTIFICACION='".$emp_record[0]."'";
                 $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+
+                //var_dump($sql_query);
+                //exit();
 				// if employee already exist then update details otherwise insert new record
-                if(mysqli_num_rows($resultset)) {                     
+                $ppp = mysqli_num_rows($resultset);
+                
+                $numero_de_filas = $resultset->num_rows;
+                //echo $numero_de_filas;
+                if($numero_de_filas != 0) {           
 					$sql_update = "UPDATE mg_clientes SET 
                     IDENTIFICACION = '".$emp_record[0]."',
-                    SUCURSAL='".$emp_record[1]."',
+                    SUCURSAL = '".$emp_record[1]."',
                     DIGITO_DE_VERIFICACION='".$emp_record[2]."',
                     RAZON_SOCIAL='".$emp_record[4]."',
                     PRIMER_NOMBRE='".$emp_record[5]."',
@@ -28,7 +35,7 @@ if(isset($_POST['import_data'])){
                     PRIMER_APELLIDO='".$emp_record[7]."',
                     SEGUNDO_APELLIDO='".$emp_record[8]."',
                     NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO='".$emp_record[9]."',
-                    CÓDIGO_IDENTIFICACION_FISCAL='".$emp_record[10]."',
+                    CODIGO_IDENTIFICACION_FISCAL='".$emp_record[10]."',
                     NOMBRE_DEL_CONTACTO='".$emp_record[11]."',
                     DIRECCION='".$emp_record[12]."',
                     PAIS='".$emp_record[13]."',
@@ -44,7 +51,7 @@ if(isset($_POST['import_data'])){
                     SEXO='".$emp_record[23]."',
                     ANO_DE_CUMPLEANOS='".$emp_record[24]."',
                     MES_DE_CUMPLEANOS='".$emp_record[25]."',
-                    DÍA_DE_CUMPLEANOS='".$emp_record[26]."',
+                    DIA_DE_CUMPLEANOS='".$emp_record[26]."',
                     TIPO_DE_PERSONA='".$emp_record[27]."',
                     CORREO_ELECTRONICO='".$emp_record[28]."',
                     CONTACTO_DE_FACTURACION='".$emp_record[29]."',
@@ -94,7 +101,8 @@ if(isset($_POST['import_data'])){
                     WHERE NOMBRE='".$emp_record[3]."'";
                     mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
                 }else{
-					$mysql_insert = "INSERT INTO `mg_clientes`(`IDENTIFICACION`, `SUCURSAL`, `DIGITO_DE_VERIFICACION`, `NOMBRE`, `RAZON_SOCIAL`, `PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO`, `CODIGO_IDENTIFICACIÓN_FISCAL`, `NOMBRE_DEL_CONTACTO`, `DIRECCION`, `PAIS`, `CIUDAD`, `ACTIVO`, `TELEFONO_1`, `TELEFONO_2`, `TELEFONO_3`, `TELEFONO_4`, `TELEFONO_CELULAR`, `FAX`, `APARTADO_AEREO`, `SEXO`, `ANO_DE_CUMPLEANOS`, `MES_DE_CUMPLEANOS`, `DÍA_DE_CUMPLEANOS`, `TIPO_DE_PERSONA`, `CORREO_ELECTRONICO`, `CONTACTO_DE_FACTURACION`, `CORREO_ELECT_CONTACTO_DE_FACTURACION`, `TIPO_DE_IDENTIFICACION`, `CLASIFICACION_CLASE_DE_TERCERO`, `BENEFICIO_DIAN_RETEIVA_COMPRAS`, `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS`, `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS`, `CUPO_DE_CREDITO`, `LISTA_DE_PRECIO`, `FORMA_DE_PAGO`, `CALIFICACION`, `TIPO_CONTRIBUYENTE`, `CODIGO_ACTIVIDAD_ECONOMICA`, `VENDEDOR`, `COBRADOR`, `PORCENTAJE_DESCUENTO_EN_VENTAS`, `PERIODO_DE_PAGO`, `OBSERVACION`, `DIAS_OPTIMISTA`, `DIAS_PESIMISTA`, `CODIGO`, `TIPO_DE_EMPRESA`, `CODIGO_DE_BANCO`, `CODIGO_INTERNO`, `CODIGO_OFICINA`, `TIPO_DE_CUENTA`, `NUMERO_DE_CUENTA`, `NIT_DEL_TITULAR_DE_LA_CUENTA`, `DIGITO_DE_VERIFICACION_TITULAR_DE_LA_CUENTA`, `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAIS_DE_LA_CUENTA`, `CIUDAD_DE_LA_CUENTA`, `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA`, `APLICA_RETENCION_ICA_FACTURA_DE_VENTA_DEVOLUCION`, `APLICA_RETENCION_ICA_FACTURA_DE_COMPRA_DEVOLUCION`, `ACEPTA_ENVIO_FACTURA_POR_MEDIO_ELECTRONICO`, `NOMBRE_COMERCIAL`, `CODIGO_POSTAL`, `RESPONSABILIDAD_FISCAL`, `ANO_APERTURA`, `MES_APERTURA`, `DIA_APERTURA`, `TRIBUTOS`) VALUES
+                    //echo 'Entra insercion';
+					$mysql_insert = "INSERT INTO `mg_clientes`(`IDENTIFICACION`, `SUCURSAL`, `DIGITO_DE_VERIFICACION`, `NOMBRE`, `RAZON_SOCIAL`, `PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO`, `CODIGO_IDENTIFICACION_FISCAL`, `NOMBRE_DEL_CONTACTO`, `DIRECCION`, `PAIS`, `CIUDAD`, `ACTIVO`, `TELEFONO_1`, `TELEFONO_2`, `TELEFONO_3`, `TELEFONO_4`, `TELEFONO_CELULAR`, `FAX`, `APARTADO_AEREO`, `SEXO`, `ANO_DE_CUMPLEANOS`, `MES_DE_CUMPLEANOS`, `DIA_DE_CUMPLEANOS`, `TIPO_DE_PERSONA`, `CORREO_ELECTRONICO`, `CONTACTO_DE_FACTURACION`, `CORREO_ELECT_CONTACTO_DE_FACTURACION`, `TIPO_DE_IDENTIFICACION`, `CLASIFICACION_CLASE_DE_TERCERO`, `BENEFICIO_DIAN_RETEIVA_COMPRAS`, `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS`, `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS`, `CUPO_DE_CREDITO`, `LISTA_DE_PRECIO`, `FORMA_DE_PAGO`, `CALIFICACION`, `TIPO_CONTRIBUYENTE`, `CODIGO_ACTIVIDAD_ECONOMICA`, `VENDEDOR`, `COBRADOR`, `PORCENTAJE_DESCUENTO_EN_VENTAS`, `PERIODO_DE_PAGO`, `OBSERVACION`, `DIAS_OPTIMISTA`, `DIAS_PESIMISTA`, `CODIGO`, `TIPO_DE_EMPRESA`, `CODIGO_DE_BANCO`, `CODIGO_INTERNO`, `CODIGO_OFICINA`, `TIPO_DE_CUENTA`, `NUMERO_DE_CUENTA`, `NIT_DEL_TITULAR_DE_LA_CUENTA`, `DIGITO_DE_VERIFICACION_TITULAR_DE_LA_CUENTA`, `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAIS_DE_LA_CUENTA`, `CIUDAD_DE_LA_CUENTA`, `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA`, `APLICA_RETENCION_ICA_FACTURA_DE_VENTA_DEVOLUCION`, `APLICA_RETENCION_ICA_FACTURA_DE_COMPRA_DEVOLUCION`, `ACEPTA_ENVIO_FACTURA_POR_MEDIO_ELECTRONICO`, `NOMBRE_COMERCIAL`, `CODIGO_POSTAL`, `RESPONSABILIDAD_FISCAL`, `ANO_APERTURA`, `MES_APERTURA`, `DIA_APERTURA`, `TRIBUTOS`) VALUES
                         ('".$emp_record[0]."', 
                         '".$emp_record[1]."', 
                         '".$emp_record[2]."', 
@@ -170,7 +178,7 @@ if(isset($_POST['import_data'])){
                         '".$emp_record[72]."')";
 					mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
                 }
-            }            
+            }        
             fclose($csv_file);
             $import_status = '?import_status=success';
         } else {
