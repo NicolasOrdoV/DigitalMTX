@@ -6,6 +6,7 @@ require 'Models/Product.php';
 require 'Models/Provider.php';
 require 'Models/Departament.php';
 require 'Models/Municipality.php';
+require 'Models/Technical.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -26,6 +27,7 @@ class GarantyController
   private $provider;
   private $departament;
   private $municipality;
+  private $technical;
 
   public function __construct()
   {
@@ -35,6 +37,7 @@ class GarantyController
     $this->provider = new Provider;
     $this->departament = new Departament;
     $this->municipality = new Municipality;
+    $this->technical = new Technical;
   }
 
   public function listGaranty()
