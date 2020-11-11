@@ -9,12 +9,12 @@ if(isset($_POST['import_data'])){
             //fgetcsv($csv_file);            
             // get data records from csv file
             while(($emp_record = fgetcsv($csv_file,10000,";")) !== FALSE ){
-
+                setlocale(LC_ALL, 'ca_ES.UTF8');
                 //echo '<pre>';
                 //var_dump($emp_record);
                 //echo '</pre>';
                 // Check if employee already exists with same email
-                $sql_query = "SELECT * FROM mg_clientes WHERE IDENTIFICACION='".$emp_record[0]."'";
+                $sql_query = "SELECT `IDENTIFICACION`, `SUCURSAL`, `DIGITO_DE_VERIFICACION`, `NOMBRE`, `RAZON_SOCIAL`, `PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO`, `CODIGO_IDENTIFICACION_FISCAL`, `NOMBRE_DEL_CONTACTO`, `DIRECCION`, `PAIS`, `CIUDAD`, `ACTIVO`, `TELEFONO_1`, `TELEFONO_2`, `TELEFONO_3`, `TELEFONO_4`, `TELEFONO_CELULAR`, `FAX`, `APARTADO_AEREO`, `SEXO`, `ANO_DE_CUMPLEANOS`, `MES_DE_CUMPLEANOS`, `DIA_DE_CUMPLEANOS`, `TIPO_DE_PERSONA`, `CORREO_ELECTRONICO`, `CONTACTO_DE_FACTURACION`, `CORREO_ELECT_CONTACTO_DE_FACTURACION`, `TIPO_DE_IDENTIFICACION`, `CLASIFICACION_CLASE_DE_TERCERO`, `BENEFICIO_DIAN_RETEIVA_COMPRAS`, `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS`, `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS`, `CUPO_DE_CREDITO`, `LISTA_DE_PRECIO`, `FORMA_DE_PAGO`, `CALIFICACION`, `TIPO_CONTRIBUYENTE`, `CODIGO_ACTIVIDAD_ECONOMICA`, `VENDEDOR`, `COBRADOR`, `PORCENTAJE_DESCUENTO_EN_VENTAS`, `PERIODO_DE_PAGO`, `OBSERVACION`, `DIAS_OPTIMISTA`, `DIAS_PESIMISTA`, `CODIGO`, `TIPO_DE_EMPRESA`, `CODIGO_DE_BANCO`, `CODIGO_INTERNO`, `CODIGO_OFICINA`, `TIPO_DE_CUENTA`, `NUMERO_DE_CUENTA`, `NIT_DEL_TITULAR_DE_LA_CUENTA`, `DIGITO_DE_VERIFICACION_TITULAR_DE_LA_CUENTA`, `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAIS_DE_LA_CUENTA`, `CIUDAD_DE_LA_CUENTA`, `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA`, `APLICA_RETENCION_ICA_FACTURA_DE_VENTA_DEVOLUCION`, `APLICA_RETENCION_ICA_FACTURA_DE_COMPRA_DEVOLUCION`, `ACEPTA_ENVIO_FACTURA_POR_MEDIO_ELECTRONICO`, `NOMBRE_COMERCIAL`, `CODIGO_POSTAL`, `RESPONSABILIDAD_FISCAL`, `ANO_APERTURA`, `MES_APERTURA`, `DIA_APERTURA`, `TRIBUTOS` FROM `mg_clientes` WHERE IDENTIFICACION='".$emp_record[0]."'";
                 $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 
                 //var_dump($sql_query);
@@ -99,8 +99,9 @@ if(isset($_POST['import_data'])){
                     DIA_APERTURA='".$emp_record[71]."',
                     TRIBUTOS='".$emp_record[72]."'
                     WHERE NOMBRE='".$emp_record[3]."'";
-                    mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
-                }else{
+                    $sql = utf8_encode($sql_update);
+                    mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+                  }else{
                     //echo 'Entra insercion';
 					$mysql_insert = "INSERT INTO `mg_clientes`(`IDENTIFICACION`, `SUCURSAL`, `DIGITO_DE_VERIFICACION`, `NOMBRE`, `RAZON_SOCIAL`, `PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO`, `CODIGO_IDENTIFICACION_FISCAL`, `NOMBRE_DEL_CONTACTO`, `DIRECCION`, `PAIS`, `CIUDAD`, `ACTIVO`, `TELEFONO_1`, `TELEFONO_2`, `TELEFONO_3`, `TELEFONO_4`, `TELEFONO_CELULAR`, `FAX`, `APARTADO_AEREO`, `SEXO`, `ANO_DE_CUMPLEANOS`, `MES_DE_CUMPLEANOS`, `DIA_DE_CUMPLEANOS`, `TIPO_DE_PERSONA`, `CORREO_ELECTRONICO`, `CONTACTO_DE_FACTURACION`, `CORREO_ELECT_CONTACTO_DE_FACTURACION`, `TIPO_DE_IDENTIFICACION`, `CLASIFICACION_CLASE_DE_TERCERO`, `BENEFICIO_DIAN_RETEIVA_COMPRAS`, `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS`, `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS`, `CUPO_DE_CREDITO`, `LISTA_DE_PRECIO`, `FORMA_DE_PAGO`, `CALIFICACION`, `TIPO_CONTRIBUYENTE`, `CODIGO_ACTIVIDAD_ECONOMICA`, `VENDEDOR`, `COBRADOR`, `PORCENTAJE_DESCUENTO_EN_VENTAS`, `PERIODO_DE_PAGO`, `OBSERVACION`, `DIAS_OPTIMISTA`, `DIAS_PESIMISTA`, `CODIGO`, `TIPO_DE_EMPRESA`, `CODIGO_DE_BANCO`, `CODIGO_INTERNO`, `CODIGO_OFICINA`, `TIPO_DE_CUENTA`, `NUMERO_DE_CUENTA`, `NIT_DEL_TITULAR_DE_LA_CUENTA`, `DIGITO_DE_VERIFICACION_TITULAR_DE_LA_CUENTA`, `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAIS_DE_LA_CUENTA`, `CIUDAD_DE_LA_CUENTA`, `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA`, `APLICA_RETENCION_ICA_FACTURA_DE_VENTA_DEVOLUCION`, `APLICA_RETENCION_ICA_FACTURA_DE_COMPRA_DEVOLUCION`, `ACEPTA_ENVIO_FACTURA_POR_MEDIO_ELECTRONICO`, `NOMBRE_COMERCIAL`, `CODIGO_POSTAL`, `RESPONSABILIDAD_FISCAL`, `ANO_APERTURA`, `MES_APERTURA`, `DIA_APERTURA`, `TRIBUTOS`) VALUES
                         ('".$emp_record[0]."', 
@@ -176,7 +177,8 @@ if(isset($_POST['import_data'])){
                         '".$emp_record[70]."',
                         '".$emp_record[71]."',
                         '".$emp_record[72]."')";
-					mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
+                    $sqli = utf8_encode($mysql_insert);
+					mysqli_query($conn, $sqli) or die("database error:". mysqli_error($conn));
                 }
             }        
             fclose($csv_file);
