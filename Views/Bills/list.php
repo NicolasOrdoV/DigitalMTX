@@ -36,13 +36,8 @@
                                         <th>fecha_factura</th>
                                         <th>nit</th>
                                         <th>hora_factura</th>
-                                        <th>Nombre_Cliente</th>
-                                        <th>Identificacion_Cliente</th>
-                                        <th>Correo_Cliente</th>
-                                        <th>Direccion_Cliente</th>
                                         <th>Centro_costo</th>
                                         <th>Codigo_Producto</th>
-                                        <th>Codigo_proveedor</th>
                                         <th>Descripcion_Producto</th>
                                         <th>Referencia_Producto</th>
                                         <th>Cantidad</th>
@@ -58,13 +53,8 @@
                                             <td><?php echo $bill->fecha_factura ?></td>
                                             <td><?php echo $bill->nit ?></td>
                                             <td><?php echo $bill->hora_factura ?></td>
-                                            <td><?php echo $bill->Nombre_Cliente ?></td>
-                                            <td><?php echo $bill->Identificacion_Cliente ?></td>
-                                            <td><?php echo $bill->Correo_Cliente ?></td>
-                                            <td><?php echo $bill->Direccion_Cliente ?></td>
                                             <td><?php echo $bill->Centro_costo ?></td>
                                             <td><?php echo $bill->Codigo_Producto ?></td>
-                                            <td><?php echo $bill->Codigo_Proveedor ?></td>
                                             <td><?php echo $bill->Descripcion_Producto ?></td>
                                             <td><?php echo $bill->Referencia_Producto ?></td>
                                             <td><?php echo $bill->Cantidad ?></td>
