@@ -62,7 +62,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha</label>
-                                            <input type="text" class="form-control" name="Fecha_ingreso" value="<?php echo date('yy/m/d') ?>" readonly required>
+                                            <input type="text" class="form-control" name="Fecha_ingreso" value="<?php echo date('d/m/yy') ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,6 @@ $td = $total_data + 0001;
                                                     'Referencia' => $bif->Referencia_Producto,
                                                     'Sello' => $bif->Sello_Producto,
                                                     'Marca' => $bif->Marca_Producto,
-                                                    'Codigo_Proveedor' => $bif->Codigo_Proveedor,
                                                     'Cantidad' => $bif->Cantidad
                                                 ];
 

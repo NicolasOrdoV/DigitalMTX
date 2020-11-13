@@ -24,8 +24,10 @@ if(isset($_POST['import_data'])){
                 
                 $numero_de_filas = $resultset->num_rows;
                 //echo $numero_de_filas;
-                if($numero_de_filas != 0) {           
-					$sql_update = "UPDATE `mg_clientes` SET `IDENTIFICACION` = '".$emp_record[0]."',
+                if($numero_de_filas != 0) {
+                    $id = explode(".", $emp_record[0]);
+                    $ide = implode("", $id);           
+					$sql_update = "UPDATE `mg_clientes` SET `IDENTIFICACION` = '".$ide."',
                         `SUCURSAL`='".$emp_record[1]."',
                         `DIGITO_DE_VERIFICACION`='".$emp_record[2]."',
                         `RAZON_SOCIAL`='".$emp_record[4]."',
@@ -102,8 +104,10 @@ if(isset($_POST['import_data'])){
                     mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
                   }else{
                     //echo 'Entra insercion';
+                    $id = explode(".", $emp_record[0]);
+                    $ide = implode("", $id);
 					$mysql_insert = "INSERT INTO `mg_clientes`(`IDENTIFICACION`, `SUCURSAL`, `DIGITO_DE_VERIFICACION`, `NOMBRE`, `RAZON_SOCIAL`, `PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO`, `CODIGO_IDENTIFICACION_FISCAL`, `NOMBRE_DEL_CONTACTO`, `DIRECCION`, `PAIS`, `CIUDAD`, `ACTIVO`, `TELEFONO_1`, `TELEFONO_2`, `TELEFONO_3`, `TELEFONO_4`, `TELEFONO_CELULAR`, `FAX`, `APARTADO_AEREO`, `SEXO`, `ANO_DE_CUMPLEANOS`, `MES_DE_CUMPLEANOS`, `DIA_DE_CUMPLEANOS`, `TIPO_DE_PERSONA`, `CORREO_ELECTRONICO`, `CONTACTO_DE_FACTURACION`, `CORREO_ELECT_CONTACTO_DE_FACTURACION`, `TIPO_DE_IDENTIFICACION`, `CLASIFICACION_CLASE_DE_TERCERO`, `BENEFICIO_DIAN_RETEIVA_COMPRAS`, `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS`, `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS`, `CUPO_DE_CREDITO`, `LISTA_DE_PRECIO`, `FORMA_DE_PAGO`, `CALIFICACION`, `TIPO_CONTRIBUYENTE`, `CODIGO_ACTIVIDAD_ECONOMICA`, `VENDEDOR`, `COBRADOR`, `PORCENTAJE_DESCUENTO_EN_VENTAS`, `PERIODO_DE_PAGO`, `OBSERVACION`, `DIAS_OPTIMISTA`, `DIAS_PESIMISTA`, `CODIGO`, `TIPO_DE_EMPRESA`, `CODIGO_DE_BANCO`, `CODIGO_INTERNO`, `CODIGO_OFICINA`, `TIPO_DE_CUENTA`, `NUMERO_DE_CUENTA`, `NIT_DEL_TITULAR_DE_LA_CUENTA`, `DIGITO_DE_VERIFICACION_TITULAR_DE_LA_CUENTA`, `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAIS_DE_LA_CUENTA`, `CIUDAD_DE_LA_CUENTA`, `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA`, `APLICA_RETENCION_ICA_FACTURA_DE_VENTA_DEVOLUCION`, `APLICA_RETENCION_ICA_FACTURA_DE_COMPRA_DEVOLUCION`, `ACEPTA_ENVIO_FACTURA_POR_MEDIO_ELECTRONICO`, `NOMBRE_COMERCIAL`, `CODIGO_POSTAL`, `RESPONSABILIDAD_FISCAL`, `ANO_APERTURA`, `MES_APERTURA`, `DIA_APERTURA`, `TRIBUTOS`) VALUES
-                        ('".$emp_record[0]."', 
+                        ('".$ide."', 
                         '".$emp_record[1]."', 
                         '".$emp_record[2]."', 
                         '".$emp_record[3]."',

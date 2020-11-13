@@ -158,7 +158,7 @@ class Garanty
     public function getBill($bill)
     {
         try {
-            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura LIKE '%$bill' OR Sello_Producto LIKE '%$bill'";
+            $strSql = "SELECT f.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente FROM mg_facturas f INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit WHERE f.Numero_Factura lIKE '%$bill' OR f.Sello_Producto LIKE '%$bill'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -169,7 +169,7 @@ class Garanty
     public function getByNumBill($numFac)
     {
         try {
-            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura = '".$numFac."'";
+            $strSql = "SELECT f.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente FROM mg_facturas f INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit WHERE f.Numero_Factura = '".$numFac."'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

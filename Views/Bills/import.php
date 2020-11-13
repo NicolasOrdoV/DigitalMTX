@@ -17,10 +17,12 @@ if(isset($_POST['import_data'])){
                 $sql_query = "SELECT `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Cantidad`, `Sello_Producto`, `Marca_Producto` FROM `mg_facturas` WHERE Sello_Producto = '".$emp_record[9]."'";
                 $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 				// if employee already exist then update details otherwise insert new record
-                if(mysqli_num_rows($resultset)) {                     
+                if(mysqli_num_rows($resultset)) {
+                    $id = explode(".", $emp_record[2]);
+                    $ide = implode("", $id);                     
 					$sql_update = "UPDATE mg_facturas set Numero_Factura = '".$emp_record[0]."',
                     fecha_factura='".$emp_record[1]."',
-                    nit='".$emp_record[2]."',
+                    nit='".$ide."',
                     hora_factura='".$emp_record[3]."',
                     Centro_costo='".$emp_record[4]."',
                     Codigo_Producto='".$emp_record[5]."',
@@ -31,11 +33,13 @@ if(isset($_POST['import_data'])){
                     WHERE Sello_Producto = '".$emp_record[9]."'";
                     mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
                 } else{
+                    $id = explode(".", $emp_record[2]);
+                    $ide = implode("", $id);
 					$mysql_insert = "INSERT INTO mg_facturas (Numero_Factura, fecha_factura, nit, hora_factura,Centro_costo,
                     Codigo_Producto, Descripcion_Producto, Referencia_Producto, Cantidad, Sello_Producto, Marca_Producto )
                     VALUES('".$emp_record[0]."',
                     '".$emp_record[1]."',
-                    '".$emp_record[2]."',
+                    '".$ide."',
                     '".$emp_record[3]."',
                     '".$emp_record[4]."', 
                     '".$emp_record[5]."', 
