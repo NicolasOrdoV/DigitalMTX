@@ -9,13 +9,15 @@ if(isset($_POST['import_data'])){
             //fgetcsv($csv_file);            
             // get data records from csv file
             while(($emp_record = fgetcsv($csv_file,10000,";")) !== FALSE ){
-                //setlocale(LC_ALL, 'ca_ES.UTF8');
+                setlocale(LC_ALL, 'ca_ES.UTF8');
+                $idI = explode(".", $emp_record[0]);
+                $ideN = implode("", $idI);
                 //echo '<pre>';
                 //var_dump($emp_record);
                 //echo '</pre>';
                 // Check if employee already exists with same email
-                $sql_query = "SELECT NOMBRE FROM `mg_clientes` WHERE `NOMBRE`='".$emp_record[3]."'";
-                $sql_find = utf8_encode($sql_query),
+                $sql_query = "SELECT * FROM `mg_clientes` WHERE `IDENTIFICACION`='".$ideN."'";
+                $sql_find = utf8_encode($sql_query);
                 $resultset = mysqli_query($conn, $sql_find) or die("database error:". mysqli_error($conn));
                 //echo '<pre>';
                 //var_dump($resultset);
