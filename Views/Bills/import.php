@@ -13,41 +13,27 @@ if(isset($_POST['import_data'])){
                 //var_dump($emp_record);
                 //echo '</pre>';
                 // Check if employee already exists with same email
-                $sql_query = "SELECT `Numero_Factura`, `fecha_factura`, `nit`, `hora_factura`, `Centro_costo`, `Codigo_Producto`, `Descripcion_Producto`, `Referencia_Producto`, `Cantidad`, `Sello_Producto`, `Marca_Producto` FROM `mg_facturas` WHERE Sello_Producto = '".$emp_record[9]."'";
-                $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+                $sql_query = "SELECT * FROM `mg_facturas` WHERE nit = '".$emp_record[1]."'";
+                $sql_finn = utf8_encode($sql_query);
+                $resultset = mysqli_query($conn, $sql_finn) or die("database error:". mysqli_error($conn));
+                //echo '<pre>';
+                //var_dump($resultset);
+                //echo '</pre>';
 				// if employee already exist then update details otherwise insert new record
-                if(mysqli_num_rows($resultset)) {
-                    $id = explode(".", $emp_record[2]);
-                    $ide = implode("", $id);                     
-					$sql_update = "UPDATE mg_facturas set Numero_Factura = '".$emp_record[0]."',
-                    fecha_factura='".$emp_record[1]."',
-                    nit='".$ide."',
-                    hora_factura='".$emp_record[3]."',
-                    Centro_costo='".$emp_record[4]."',
-                    Codigo_Producto='".$emp_record[5]."',
-                    Descripcion_Producto='".$emp_record[6]."',
-                    Referencia_Producto='".$emp_record[7]."',
-                    Cantidad='".$emp_record[8]."',
-                    Marca_Producto='".$emp_record[10]."' 
-                    WHERE Sello_Producto = '".$emp_record[9]."'";
-                    mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
-                } else{
-                    $id = explode(".", $emp_record[2]);
-                    $ide = implode("", $id);
-					$mysql_insert = "INSERT INTO mg_facturas (Numero_Factura, fecha_factura, nit, hora_factura,Centro_costo,
-                    Codigo_Producto, Descripcion_Producto, Referencia_Producto, Cantidad, Sello_Producto, Marca_Producto )
-                    VALUES('".$emp_record[0]."',
+                if(!mysqli_num_rows($resultset)) {
+                    $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
+                    //echo $bill.'<br>';
+                    $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
+                    ('".$emp_record[0]."',
                     '".$emp_record[1]."',
-                    '".$ide."',
-                    '".$emp_record[3]."',
-                    '".$emp_record[4]."', 
-                    '".$emp_record[5]."', 
-                    '".$emp_record[6]."', 
+                    '".$emp_record[2]."',
+                    '".$bill."',
+                    '".$emp_record[6]."',
                     '".$emp_record[7]."',
-                    '".$emp_record[8]."', 
-                    '".$emp_record[9]."', 
-                    '".$emp_record[10]."')";
-					mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
+                    '".$emp_record[8]."',
+                    '".$emp_record[9]."')";
+                    $sql_insert = utf8_encode($mysql_insert);
+                    mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
                 }
             }            
             fclose($csv_file);

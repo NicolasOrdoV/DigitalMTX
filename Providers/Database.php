@@ -74,13 +74,4 @@ class Conexion extends PDO
 			die($e->getMessage());
 		}
 	}
-
-	public function delete($table, $where, $limit = 1)
-	{
-		try {
-			return $this->exec("DELETE FROM $table WHERE $where LIMIT $limit");
-		} catch (PDOException $e) {
-			die($e->getMessage());
-		}
-	}
 }
