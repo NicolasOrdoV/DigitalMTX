@@ -21,13 +21,20 @@ if(isset($_POST['import_data'])){
                 //echo '</pre>';
 				// if employee already exist then update details otherwise insert new record
                 if(!mysqli_num_rows($resultset)) {
+                    $date = explode("/", $emp_record[0]);
+                    //echo '<pre>';
+                    //var_dump($date);
+                    //echo '</pre>';
+                    $dateEnd = implode("-", $date);
+                    //echo $dateEnd.'<br>';
                     $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
                     //echo $bill.'<br>';
-                    $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
-                    ('".$emp_record[0]."',
+                    $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
+                    ('".$dateEnd."',
                     '".$emp_record[1]."',
                     '".$emp_record[2]."',
                     '".$bill."',
+                    '".$emp_record[4]."',
                     '".$emp_record[6]."',
                     '".$emp_record[7]."',
                     '".$emp_record[8]."',

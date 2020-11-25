@@ -36,6 +36,7 @@
                                         <th>nit</th>
                                         <th>vendedor</th>
                                         <th>Numero_factura</th>
+                                        <th>Centro_costo</th>
                                         <th>Referencia</th>
                                         <th>Cantidad</th>
                                         <th>neto</th>
@@ -50,6 +51,7 @@
                                             <td><?php echo $bill->nit ?></td>
                                             <td><?php echo $bill->vendedor ?></td>
                                             <td><?php echo $bill->Numero_Factura ?></td>
+                                            <td><?php echo $bill->Centro_costo ?></td>
                                             <td><?php echo $bill->Referencia ?></td>
                                             <td><?php echo $bill->Cantidad ?></td>
                                             <td><?php echo $bill->neto ?></td>

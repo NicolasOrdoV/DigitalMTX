@@ -158,9 +158,10 @@ class Garanty
     public function getBill($bill)
     {
         try {
-            $strSql = "SELECT f.*,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente FROM mg_facturas f 
+            $strSql = "SELECT f.*,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente, cc.Centro_costo as centro FROM mg_facturas f 
             INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit 
             INNER JOIN dtm_productos p ON p.codigo = f.Referencia
+            INNER JOIN mg_centro_costos cc ON cc.id = f.Centro_costo 
             WHERE f.Numero_Factura lIKE '%$bill'  OR f.Descripcion_Comentarios LIKE '%$bill%'";
             $query = $this->pdo->select($strSql);
             return $query;
@@ -172,9 +173,10 @@ class Garanty
     public function getByNumBill($numFac)
     {
         try {
-            $strSql = "SELECT f.*,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente FROM mg_facturas f 
+            $strSql = "SELECT f.*,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente, cc.Centro_costo as centro FROM mg_facturas f 
             INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit 
             INNER JOIN dtm_productos p ON p.codigo = f.Referencia
+            INNER JOIN mg_centro_costos cc ON cc.id = f.Centro_costo 
             WHERE f.Numero_Factura = '".$numFac."'";
             $query = $this->pdo->select($strSql);
             return $query;

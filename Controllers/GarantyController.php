@@ -116,25 +116,21 @@ class GarantyController
     if (isset($_SESSION['user'])) {
       //-------------------------//
       $fecha_factura = $_POST['fecha_factura'];
-      $parts = explode("/", $fecha_factura);
-      $p = array_reverse($parts);
-      $parts2 = implode("-", $p);
-      $parts3 = explode("-", $parts2);
-      //var_dump($parts3);
-      //echo $parts2.'<br>';
+      $parts = explode("-", $fecha_factura);
+      //var_dump($parts);
+      echo $fecha_factura.'<br>';
       $fecha_actual = $_POST['Fecha_ingreso'];
       $fecha1 = explode("/", $fecha_actual);
-      $pp = array_reverse($fecha1);
-      $fecha2 = implode("-", $pp);
-      //echo $fecha2.'<br>';
+      $fecha2 = implode("-", $fecha1);
+      echo $fecha2.'<br>';
       //echo $fecha_actual.'<br>';
       //var_dump($parts2);
-      $year = date($parts3[0]);
+      $year = date($parts[2]);
       //echo $year.'<br>';
       $afterYear = $year+1;
       //echo $afterYear.'<br>';
-      $fecha_proxima = date($afterYear.'-'.$parts3[1].'-'.$parts3[2]);
-      //echo $fecha_proxima;
+      $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+      echo $fecha_proxima;
       //-------------------------//
       $fecha_compra = $_POST['Fecha_Compra'];
       $f = explode("/", $fecha_compra);
@@ -225,7 +221,7 @@ class GarantyController
         //var_dump($detaills);
 
         //----Aqui va la validacion de rango de fechas
-        if ($fecha2 >= $parts2 && $fecha2 <= $fecha_proxima) {
+        if ($fecha_factura >= $fecha_actual && $fecha_factura <= $fecha_proxima) {
           if (isset($lastId[0]->id) && $answerNewGaranty == true) {
             if ($ag == 'NO') {
               $detaills['Estado'] = "Cerrado";

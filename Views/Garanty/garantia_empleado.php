@@ -81,7 +81,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Punto de Venta</label>
-                                            <input type="text" class="form-control" name="Punto_Venta" required readonly value="<?php echo isset($bills[0]) ? $bills[0]->Centro_costo : "" ?>">
+                                            <input type="text" class="form-control" name="Punto_Venta" required readonly value="<?php echo isset($bills[0]) ? $bills[0]->centro : "" ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@ $td = $total_data + 0001;
                                             foreach ($bills as $key => $bif) {
                                                 $productos = [
                                                     'Codigo' => $bif->codigo,
-                                                    'Descripcion' => $bif->tags,
+                                                    'Descripcion' => $bif->nombre,
                                                     'Referencia' => $bif->Referencia,
                                                     'Sello' => $bif->Descripcion_Comentarios,
                                                     'Marca' => $bif->marca,
@@ -171,7 +171,7 @@ $td = $total_data + 0001;
                                                         <!-- <small style="visibility: hidden">
                                                             <?php //echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
                                                         </small> -->
-                                                        <textarea rows="10" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea>
+                                                        <textarea rows="5" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea>
                                                     </td>
                                                     <td>
                                                         <small style="visibility: hidden">
@@ -183,7 +183,7 @@ $td = $total_data + 0001;
                                                         <!-- <small style="visibility: hidden">
                                                             <?php //echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>
                                                         </small> -->
-                                                        <textarea rows="10" type="text" class="form-control" name="Sello_Producto[]" readonly><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></textarea>
+                                                        <textarea rows="5" type="text" class="form-control" name="Sello_Producto[]" readonly><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></textarea>
                                                     </td>
                                                     <td>
                                                         <small style="visibility: hidden">
