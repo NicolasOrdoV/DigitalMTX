@@ -161,7 +161,7 @@ class Garanty
             $strSql = "SELECT f.*,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente FROM mg_facturas f 
             INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit 
             INNER JOIN dtm_productos p ON p.codigo = f.Referencia
-            WHERE f.Numero_Factura lIKE '%$bill'";
+            WHERE f.Numero_Factura lIKE '%$bill'  OR f.Descripcion_Comentarios LIKE '%$bill%'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
