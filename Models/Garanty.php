@@ -134,10 +134,10 @@ class Garanty
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE d.Descripcion_Producto = '$name' AND d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' AND d.id = $id ";
+            WHERE d.Descripcion_Producto = '$name' AND d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' AND d.id = $id";
             /*  $array = ['Descripcion_Producto' => $name,
                       'Id_Garantia' => $id]; */
-            $query = $this->pdo->select($strSql);
+            $query = $this->pdo->select($strSql); 
             return $query;
         } catch (PDOException $e) {
             die($e->getMessage());

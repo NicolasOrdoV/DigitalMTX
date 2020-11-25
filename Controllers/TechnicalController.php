@@ -1,6 +1,6 @@
 <?php
 
-require 'Models/Technical.php';
+require 'Models/Technical.php'; 
 require 'Models/Garanty.php';
 
 use PHPMailer\PHPMailer\PHPMailer;

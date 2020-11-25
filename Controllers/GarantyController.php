@@ -540,12 +540,12 @@ class GarantyController
                 </tr>';
                 foreach ($dates as $producte){ 
                $html .= '<tr>
-                  <td>'.$producte->Codigo_Producto.'</td><br>
-                  <td>'.$producte->Descripcion_Producto.'</td><br>
-                  <td>'.$producte->Marca_Producto.'</td><br>
-                  <td>'.$producte->Sello_Producto.'</td><br>
-                  <td>'.$producte->Referencia.'</td><br>
-                </tr>';
+                          <td>'.$producte->Codigo_Producto.'</td><br>
+                          <td>'.$producte->Descripcion_Producto.'</td><br>
+                          <td>'.$producte->Marca_Producto.'</td><br>
+                          <td>'.$producte->Sello_Producto.'</td><br>
+                          <td>'.$producte->Referencia.'</td><br>
+                        </tr>';
                 }
               $html .= '</table><br>
 

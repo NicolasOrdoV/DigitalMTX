@@ -16,7 +16,9 @@
                             <h2>Garantías</h2>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <a href="?controller=garanty&method=new" class="btn btn-danger float-right">+Agregar</a>
+                            <?php if ($_SESSION['user']->cargo != "Administrador") { ?>
+                                <a href="?controller=garanty&method=new" class="btn btn-danger float-right">+Agregar</a>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="body">
