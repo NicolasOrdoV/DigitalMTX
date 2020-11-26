@@ -162,7 +162,7 @@ class Garanty
             INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit 
             INNER JOIN dtm_productos p ON p.codigo = f.Referencia
             INNER JOIN mg_centro_costos cc ON cc.id = f.Centro_costo 
-            WHERE f.Numero_Factura lIKE '%$bill'  OR f.Descripcion_Comentarios LIKE '%$bill%'";
+            WHERE f.Numero_Factura lIKE '%$bill' OR f.Descripcion_Comentarios LIKE '%$bill%'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

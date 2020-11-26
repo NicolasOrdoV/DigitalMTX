@@ -69,7 +69,7 @@ class GarantyController
     }
   }
 
-  public function findBill()
+  public function findBill() 
   {
     if (isset($_SESSION['user'])) {
       if (isset($_POST['NumFactura'])) {
@@ -123,14 +123,8 @@ class GarantyController
       $fecha1 = explode("/", $fecha_actual);
       $fecha2 = implode("-", $fecha1);
       echo $fecha2.'<br>';
-      //echo $fecha_actual.'<br>';
-      //var_dump($parts2);
-      $year = date($parts[2]);
-      //echo $year.'<br>';
-      $afterYear = $year+1;
-      //echo $afterYear.'<br>';
-      $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-      echo $fecha_proxima;
+      $partsIngress = explode('-', $fecha2);
+      $fecha_proxima = null;
       //-------------------------//
       $fecha_compra = $_POST['Fecha_Compra'];
       $f = explode("/", $fecha_compra);
@@ -170,6 +164,7 @@ class GarantyController
       $Observacion_Cliente = ($_POST['Observacion_Cliente']);
       $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
       $Estado = ($_POST['Estado']);
+      $garantia = ($_POST['time']);
 
       while (true) {
         $item1 = current($Codigo_Producto);
@@ -184,6 +179,7 @@ class GarantyController
           $item9 = current($Aprobacion_Garantia);
         
         $item10 = current($Estado);
+        $item11 = current($garantia);
 
         $cp = (($item1 !== false) ? $item1 : '');
         $dp = (($item2 !== false) ? $item2 : '');
@@ -197,6 +193,7 @@ class GarantyController
           $ag = (($item9 !== false) ? $item9 : '');
         
         $es = (($item10 !== false) ? $item10 : '');
+        $g = (($item11 !== false) ? $item11 : '');
 
         
         $detaills = [
@@ -219,9 +216,76 @@ class GarantyController
         //$detaills['Aprobacion_Garantia'] = $agN;
         //echo '<hr>';
         //var_dump($detaills);
+        if ($ag == 'SI') {
+          echo $g.'<br>';
+          switch ($g) {
+            case '1 Año':
+              $year = date($parts[2]);
+              $afterYear = $year+1;
+              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              //echo $fecha_proxima;
+            break;
+            case '1 año':
+              $year = date($parts[2]);
+              $afterYear = $year+1;
+              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              //echo $fecha_proxima;
+            break;
+            case '2 Años':
+              $year = date($parts[2]);
+              $afterYear = $year+2;
+              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              //echo $fecha_proxima;
+            break;    
+            case '6 Meses':
+              $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+              //echo $fecha_proxima;
+            break;    
+            case '3 meses':
+              $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 3 months"));
+              //echo $fecha_proxima;
+            break;    
+            case '1 mes':
+              $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
+              //echo $fecha_proxima;
+            break;
+            case '1 meses':
+              $fecha_proxima =  date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
+              //echo $fecha_proxima;
+            break;
+            case "1 año freidora - 6 meses en panel táctil ":
+              $caseFryer = explode(' - ', $g);
+              //var_dump($caseFryer);
+              $year = date($parts[2]);
+              $afterYear = $year+1;
+              //$afterMonth = $month+6;
+              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              $fecha_proxima2 =  date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+
+              echo $fecha_proxima2.'<br>';
+              echo $fecha_proxima;
+              if ($fecha_factura < $fecha_proxima2 || $fecha_factura < $fecha_proxima)
+                echo '<br>El tiempo de garantia de uno de los productos esta vencida';
+            break;
+            case '1 año telefono - 6 meses de batería y cargador':
+              $caseFryer = explode(' - ', $g);
+              //var_dump($caseFryer);
+              $year = date($parts[2]);
+              $afterYear = $year+1;
+              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              $fecha_proxima2 = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+              if ($fecha_factura < $fecha_proxima2 || $fecha_factura < $fecha_proxima) {
+                echo 'El tiempo de garantia de uno de los productos esta vencida';
+              }
+            break;             
+            default:
+              echo 'No tiene garantia';
+            break;
+          }
+        }
 
         //----Aqui va la validacion de rango de fechas
-        if ($fecha_factura >= $fecha_actual && $fecha_factura <= $fecha_proxima) {
+        /*if ($fecha_factura >= $fecha_actual && $fecha_factura <= $fecha_proxima) {
           if (isset($lastId[0]->id) && $answerNewGaranty == true) {
             if ($ag == 'NO') {
               $detaills['Estado'] = "Cerrado";
@@ -237,7 +301,7 @@ class GarantyController
                   alert("La fecha de garantia expiro");
                   window.location = "?controller=garanty&method=listGaranty";
                 </script>';
-        }
+        }*/
         //---Aqui termina el proceso de rango de fechas
 
         // Up! Next Value
@@ -253,12 +317,13 @@ class GarantyController
           $item9 = next($Aprobacion_Garantia);
         
         $item10 = next($Estado);
+        $item11 = next($garantia);
         // Check terminator
-        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false) break;
+        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false) break;
       }
 
-      $dates = $this->model->getAlDetails($lastId[0]->id);
-      if ($dates[0]->Estado == 'Tramite') {
+      //$dates = $this->model->getAlDetails($lastId[0]->id);
+      /*if ($dates[0]->Estado == 'Tramite') {
         $datas = $this->model->getAlDetails($lastId[0]->id);
         $mail = new PHPMailer(true);
 
@@ -456,7 +521,7 @@ class GarantyController
         } catch (Exception $e) {
           echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-      }
+      }*/
     }else{
       header('Location: ?controller=login');
     }  

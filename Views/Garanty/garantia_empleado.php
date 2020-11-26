@@ -158,7 +158,8 @@ $td = $total_data + 0001;
                                                     'Referencia' => $bif->Referencia,
                                                     'Sello' => $bif->Descripcion_Comentarios,
                                                     'Marca' => $bif->marca,
-                                                    'Cantidad' => $bif->Cantidad
+                                                    'Cantidad' => $bif->Cantidad,
+                                                    'garantia' => $bif->garantia
                                                 ];
 
                                         ?>
@@ -166,6 +167,7 @@ $td = $total_data + 0001;
                                                     <td>
                                                         <small style="visibility: hidden"><?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?></small>
                                                         <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                                        <input type="hidden" name="time[]" value="<?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>">
                                                     </td>
                                                     <td>
                                                         <!-- <small style="visibility: hidden">

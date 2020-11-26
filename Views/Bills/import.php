@@ -13,14 +13,31 @@ if(isset($_POST['import_data'])){
                 //var_dump($emp_record);
                 //echo '</pre>';
                 // Check if employee already exists with same email
-                $sql_query = "SELECT * FROM `mg_facturas` WHERE nit = '".$emp_record[1]."'";
-                $sql_finn = utf8_encode($sql_query);
-                $resultset = mysqli_query($conn, $sql_finn) or die("database error:". mysqli_error($conn));
+                $date = explode("/", $emp_record[0]);
+                    //echo '<pre>';
+                    //var_dump($date);
+                    //echo '</pre>';
+                    $dateEnd = implode("-", $date);
+                    //echo $dateEnd.'<br>';
+                    $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
+                    //echo $bill.'<br>';
+                    $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
+                    ('".$dateEnd."',
+                    '".$emp_record[1]."',
+                    '".$emp_record[2]."',
+                    '".$bill."',
+                    '".$emp_record[4]."',
+                    '".$emp_record[6]."',
+                    '".$emp_record[7]."',
+                    '".$emp_record[8]."',
+                    '".$emp_record[9]."')";
+                    $sql_insert = utf8_encode($mysql_insert);
+                    mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
                 //echo '<pre>';
                 //var_dump($resultset);
                 //echo '</pre>';
 				// if employee already exist then update details otherwise insert new record
-                if(!mysqli_num_rows($resultset)) {
+                /*if(mysqli_num_rows($resultset) == 0) {
                     $date = explode("/", $emp_record[0]);
                     //echo '<pre>';
                     //var_dump($date);
@@ -41,7 +58,7 @@ if(isset($_POST['import_data'])){
                     '".$emp_record[9]."')";
                     $sql_insert = utf8_encode($mysql_insert);
                     mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
-                }
+                }*/
             }            
             fclose($csv_file);
             $import_status = '?import_status=success';
