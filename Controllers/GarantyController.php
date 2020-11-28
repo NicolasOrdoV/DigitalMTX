@@ -115,17 +115,23 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       //-------------------------//
-      $fff = $_POST['fecha_factura'];
-      $fecha_factura = date('d-m-Y' , strtotime($fff));
+      $fecha_factura = $_POST['fecha_factura'];
+      $fecha_factura = date('d-m-Y' , strtotime($fecha_factura));
       $parts = explode("-", $fecha_factura);
       //var_dump($parts);
       echo "Fecha de la factura: ".$fecha_factura.'<br>';
       $fecha_actual = $_POST['Fecha_ingreso'];
       $fecha1 = explode("/", $fecha_actual);
       $fecha2 = implode("-", $fecha1);
+      $fecha2 = date('d-m-Y', strtotime($fecha2));
       echo "Fecha del dia de hoy: ".$fecha2.'<br>';
-      $partsIngress = explode('-', $fecha2);
+
       $fecha_proxima = null;
+      $date_before = null;
+      $date_now = strtotime($fecha2);
+      //echo $date_now.'<br>';
+      $date_bill = strtotime($fecha_factura);
+      //echo $date_bill.'<br>';
       //-------------------------//
       $fecha_compra = $_POST['Fecha_Compra'];
       $data = [
@@ -214,82 +220,54 @@ class GarantyController
         //var_dump($detaills);
         if ($ag == 'SI') {
           echo "Garantia: ".$g.'<br>';
-          switch ($g) {
-            case '1 Año':
-              $year = date($parts[2]);
-              $afterYear = $year+1;
-              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              //echo $fecha_proxima;
-            break;
-            case '1 año':
-              $year = date($parts[2]);
-              $afterYear = $year+1;
-              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              //echo $fecha_proxima;
-            break;
-            case '2 Años':
+          if ($g == '1 Año' || $g =='1 año') {
+            $year = date($parts[2]);
+            $afterYear = $year+1;
+            $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+            $date_before = strtotime($fecha_proxima);
+            //echo $fecha_proxima;
+          }elseif($g == '2 Años'){
               $year = date($parts[2]);
               $afterYear = $year+2;
               $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              //echo $fecha_proxima;
-            break;    
-            case '6 Meses':
+              $date_before = strtotime($fecha_proxima);
+              //echo $fecha_proxima;    
+          }elseif($g == '6 Meses'){
               $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
-              //echo $fecha_proxima;
-            break;    
-            case '3 meses':
+              $date_before = strtotime($fecha_proxima);
+              //echo $fecha_proxima;   
+          }elseif($g == '3 meses'){
               $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 3 months"));
-              //echo $fecha_proxima;
-            break;    
-            case '1 mes':
+              $date_before = strtotime($fecha_proxima);
+              //echo $fecha_proxima;    
+          }elseif($g == '1 mes' || $g == '1 meses'){
               $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
+              $date_before = strtotime($fecha_proxima);
               //echo $fecha_proxima;
-            break;
-            case '1 meses':
-              $fecha_proxima =  date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
-              //echo $fecha_proxima;
-            break;
-            case "1 año freidora - 6 meses en panel táctil ":
-              $caseFryer = explode(' - ', $g);
-              //var_dump($caseFryer);
-              $year = date($parts[2]);
-              $afterYear = $year+1;
-              //$afterMonth = $month+6;
-              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              $fecha_proxima_mes =  date("d-m-Y", strtotime($fecha_factura.'+ 6 months'));
+          }elseif($g == "1 año freidora - 6 meses en panel táctil " || $g == '1 año telefono - 6 meses de batería y cargador'){
+            $year = date($parts[2]);
+            $afterYear = $year+1;
+            $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
 
-              echo "Fecha estimada para 6 meses despues de la fecha de factura: ".$fecha_proxima_mes.'<br>';
-              echo "Fecha estimada para un año despues de la fecha de factura: ".$fecha_proxima."<br>";
-              if ($fecha_proxima_mes > $fecha_factura){
-                /*if ($fecha_factura > $fecha_proxima_mes || $fecha_factura > $fecha_proxima) {
-                  echo '<br>El tiempo de garantia de uno de los productos esta vencida';
-                  exit();
-                }*/ 
-                echo '<br>El tiempo de garantia de uno de los productos esta vencida';
-                //exit();
-              }else{
-                echo "La condicion no se cumple";
-              }
-            break;
-            case '1 año telefono - 6 meses de batería y cargador':
-              $caseFryer = explode(' - ', $g);
-              //var_dump($caseFryer);
-              $year = date($parts[2]);
-              $afterYear = $year+1;
-              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              $fecha_proxima2 = date("d-m-Y", strtotime($fecha_factura."+ 6 months"));
-              if ($fecha_factura < $fecha_proxima2 || $fecha_factura < $fecha_proxima) {
-                echo 'El tiempo de garantia de uno de los productos esta vencida';
-              }
-            break;             
-            default:
-              echo 'No tiene garantia';
-            break;
+            $date_before = strtotime($fecha_proxima);
+            $fecha_proxima_mes =  date("d-m-Y", strtotime($fecha_factura.'+ 6 months'));
+            $date_month = strtotime($fecha_proxima_mes);
+
+            echo "Fecha estimada para 6 meses despues de la fecha de factura: ".$fecha_proxima_mes.'<br>';
+            echo "Fecha estimada para un año despues de la fecha de factura: ".$fecha_proxima."<br>";
+
+            if ($date_now >= $date_bill && $date_now <= $date_month){
+              echo '<script>alert("Esta a tiempo de aplicar garantia a uno de los productos");</script>';
+            }else{
+              echo '<script>alert("El tiempo de garantia de uno de los productos esta vencida");</script>';
+            }
+          }else{
+            echo '<script>alert("No tiene garantia");</script>';
           }
         }
 
         //----Aqui va la validacion de rango de fechas
-        /*if ($fecha_factura >= $fecha_actual && $fecha_factura <= $fecha_proxima) {
+        if ($date_now >= $date_bill && $date_now <= $date_before) {
           if (isset($lastId[0]->id) && $answerNewGaranty == true) {
             if ($ag == 'NO') {
               $detaills['Estado'] = "Cerrado";
@@ -301,11 +279,12 @@ class GarantyController
             }  
           }
         }else{
+          // echo 'La fecha de garantia expiro';
           echo '<script>
                   alert("La fecha de garantia expiro");
                   window.location = "?controller=garanty&method=listGaranty";
                 </script>';
-        }*/
+        }
         //---Aqui termina el proceso de rango de fechas
 
         // Up! Next Value
@@ -326,8 +305,8 @@ class GarantyController
         if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false) break;
       }
 
-      //$dates = $this->model->getAlDetails($lastId[0]->id);
-      /*if ($dates[0]->Estado == 'Tramite') {
+      $dates = $this->model->getAlDetails($lastId[0]->id);
+      if ($dates[0]->Estado == 'Tramite') {
         $datas = $this->model->getAlDetails($lastId[0]->id);
         $mail = new PHPMailer(true);
 
@@ -525,7 +504,7 @@ class GarantyController
         } catch (Exception $e) {
           echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-      }*/
+      }
     }else{
       header('Location: ?controller=login');
     }  
