@@ -14,25 +14,26 @@ if(isset($_POST['import_data'])){
                 //echo '</pre>';
                 // Check if employee already exists with same email
                 $date = explode("/", $emp_record[0]);
-                    //echo '<pre>';
-                    //var_dump($date);
-                    //echo '</pre>';
-                    $dateEnd = implode("-", $date);
-                    //echo $dateEnd.'<br>';
-                    $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
-                    //echo $bill.'<br>';
-                    $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
-                    ('".$dateEnd."',
-                    '".$emp_record[1]."',
-                    '".$emp_record[2]."',
-                    '".$bill."',
-                    '".$emp_record[4]."',
-                    '".$emp_record[6]."',
-                    '".$emp_record[7]."',
-                    '".$emp_record[8]."',
-                    '".$emp_record[9]."')";
-                    $sql_insert = utf8_encode($mysql_insert);
-                    mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
+                //echo '<pre>';
+                //var_dump($date);
+                //echo '</pre>';
+                $date2 = implode("-", $date);
+                $dateEnd = date('d-m-Y', strtotime($date2));
+                //echo $dateEnd.'<br>';
+                $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
+                //echo $bill.'<br>';
+                $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
+                ('".$dateEnd."',
+                '".$emp_record[1]."',
+                '".$emp_record[2]."',
+                '".$bill."',
+                '".$emp_record[4]."',
+                '".$emp_record[6]."',
+                '".$emp_record[7]."',
+                '".$emp_record[8]."',
+                '".$emp_record[9]."')";
+                $sql_insert = utf8_encode($mysql_insert);
+                mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
                 //echo '<pre>';
                 //var_dump($resultset);
                 //echo '</pre>';

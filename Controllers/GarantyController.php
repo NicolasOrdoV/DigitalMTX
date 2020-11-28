@@ -115,28 +115,26 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       //-------------------------//
-      $fecha_factura = $_POST['fecha_factura'];
+      $fff = $_POST['fecha_factura'];
+      $fecha_factura = date('d-m-Y' , strtotime($fff));
       $parts = explode("-", $fecha_factura);
       //var_dump($parts);
-      echo $fecha_factura.'<br>';
+      echo "Fecha de la factura: ".$fecha_factura.'<br>';
       $fecha_actual = $_POST['Fecha_ingreso'];
       $fecha1 = explode("/", $fecha_actual);
       $fecha2 = implode("-", $fecha1);
-      echo $fecha2.'<br>';
+      echo "Fecha del dia de hoy: ".$fecha2.'<br>';
       $partsIngress = explode('-', $fecha2);
       $fecha_proxima = null;
       //-------------------------//
       $fecha_compra = $_POST['Fecha_Compra'];
-      $f = explode("/", $fecha_compra);
-      $ff = array_reverse($f);
-      $fechaC = implode("-", $ff);
       $data = [
         'No_garantia' => $_POST['No_garantia'],
         'Fecha_ingreso' => $fecha2,
         'Hora_ingreso' => $_POST['Hora_ingreso'],
         'Numero_Factura' => $_POST['Numero_Factura'],
         'Punto_Venta' => $_POST['Punto_Venta'],
-        'Fecha_Compra' => $fechaC,
+        'Fecha_Compra' => $fecha_compra,
         'Nombre_Cliente' => $_POST['Nombre_Cliente'],
         'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
         'Correo_Cliente' => $_POST['Correo_Cliente'],
@@ -210,14 +208,12 @@ class GarantyController
           'Aprobacion_Garantia' => $ag
         ];
         
-        
-
         //var_dump($detaillsN);
         //$detaills['Aprobacion_Garantia'] = $agN;
         //echo '<hr>';
         //var_dump($detaills);
         if ($ag == 'SI') {
-          echo $g.'<br>';
+          echo "Garantia: ".$g.'<br>';
           switch ($g) {
             case '1 Año':
               $year = date($parts[2]);
@@ -260,12 +256,20 @@ class GarantyController
               $afterYear = $year+1;
               //$afterMonth = $month+6;
               $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              $fecha_proxima2 =  date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+              $fecha_proxima_mes =  date("d-m-Y", strtotime($fecha_factura.'+ 6 months'));
 
-              echo $fecha_proxima2.'<br>';
-              echo $fecha_proxima;
-              if ($fecha_factura < $fecha_proxima2 || $fecha_factura < $fecha_proxima)
+              echo "Fecha estimada para 6 meses despues de la fecha de factura: ".$fecha_proxima_mes.'<br>';
+              echo "Fecha estimada para un año despues de la fecha de factura: ".$fecha_proxima."<br>";
+              if ($fecha_proxima_mes > $fecha_factura){
+                /*if ($fecha_factura > $fecha_proxima_mes || $fecha_factura > $fecha_proxima) {
+                  echo '<br>El tiempo de garantia de uno de los productos esta vencida';
+                  exit();
+                }*/ 
                 echo '<br>El tiempo de garantia de uno de los productos esta vencida';
+                //exit();
+              }else{
+                echo "La condicion no se cumple";
+              }
             break;
             case '1 año telefono - 6 meses de batería y cargador':
               $caseFryer = explode(' - ', $g);
@@ -273,7 +277,7 @@ class GarantyController
               $year = date($parts[2]);
               $afterYear = $year+1;
               $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-              $fecha_proxima2 = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+              $fecha_proxima2 = date("d-m-Y", strtotime($fecha_factura."+ 6 months"));
               if ($fecha_factura < $fecha_proxima2 || $fecha_factura < $fecha_proxima) {
                 echo 'El tiempo de garantia de uno de los productos esta vencida';
               }
