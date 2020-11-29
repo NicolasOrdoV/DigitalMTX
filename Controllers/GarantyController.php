@@ -273,7 +273,7 @@ class GarantyController
             echo "Fecha estimada para un año despues de la fecha de factura: ".$fecha_proxima."<br>";
 
             if ($date_now >= $date_bill && $date_now <= $date_month){
-              echo '<script>alert("Esta a tiempo de aplicar garantia a uno de los productos");</script>';
+              echo "<script>alert('Esta a tiempo de aplicar garantia a uno de los productos');</script>";
             }else{
               echo '<script>alert("El tiempo de garantia de uno de los productos esta vencida");</script>';
             }
