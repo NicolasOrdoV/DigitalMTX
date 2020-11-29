@@ -73,27 +73,43 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_POST['NumFactura'])) {
-        $bill = $_POST['NumFactura'];
-        $search = $this->model->getBill($bill);
-        $bills = $this->model->getByNumBill($search[0]->Numero_Factura);
-        $dataF = $this->model->getAllF($bill);
-        $fac1 = isset($dataF[0]->Numero_Factura) ? $dataF[0]->Numero_Factura : 'null';
-        $fac2 = $bills[0]->Numero_Factura;
-        if ($bills == null) {
-          header('Location: ?controller=garanty&method=failed');
-        }elseif ($fac1 === $fac2) {
-          header('Location: ?controller=garanty&method=failed');
-        }elseif($fac1 !== $fac2){
-          $details = $this->model->getGaranty($bill);
-          require 'Views/Layout.php';
-          $data = $this->model->getAll();
-          $total_data = count($data);
-          $providers = $this->provider->getAll();
-          $departaments = $this->departament->getAll();
-          $municipalities = $this->municipality->getAll();
-          require 'Views/Garanty/garantia_empleado.php';
-          require 'Views/Scripts.php';
-        }
+        if (preg_match('/^[0-9a-zA-Z-]+$/', $_POST['NumFactura'])) {
+          $bill = $_POST['NumFactura'];
+          $search = $this->model->getBill($bill);
+          $bills = $this->model->getByNumBill($search[0]->Numero_Factura);
+          $dataF = $this->model->getAllF($bill);
+          $fac1 = isset($dataF[0]->Numero_Factura) ? $dataF[0]->Numero_Factura : 'null';
+          $fac2 = $bills[0]->Numero_Factura;
+          if ($bills == null) {
+            header('Location: ?controller=garanty&method=failed');
+          }elseif ($fac1 === $fac2) {
+            header('Location: ?controller=garanty&method=failed');
+          }elseif($fac1 !== $fac2){
+            $details = $this->model->getGaranty($bill);
+            require 'Views/Layout.php';
+            $data = $this->model->getAll();
+            $total_data = count($data);
+            $providers = $this->provider->getAll();
+            $departaments = $this->departament->getAll();
+            $municipalities = $this->municipality->getAll();
+            require 'Views/Garanty/garantia_empleado.php';
+            require 'Views/Scripts.php';
+          }
+        }else{
+            require 'Views/Layout.php';
+            $data = $this->model->getTotal();
+            $total_data = count($data);
+            $clients = $this->client->getAll();
+            $products = $this->product->getAll();
+            $providers = $this->provider->getAll();
+            $departaments = $this->departament->getAll();
+            $municipalities = $this->municipality->getAll();
+            $error = [
+              'error' => 'El formato de factura no es correcto, vuelvalo a intentar'
+            ];
+            require 'Views/Garanty/garantia_empleado.php';
+            require 'Views/Scripts.php';
+          }
       }
     }else{
       header('Location: ?controller=login');

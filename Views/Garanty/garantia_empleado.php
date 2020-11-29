@@ -29,6 +29,9 @@ $td = $total_data + 0001;
                                             <label>Numero_Factura o sello del producto</label>
                                             <input type="text" class="form-control" name="NumFactura" required autofocus value="<?php echo isset($_POST['NumFactura']) ? $_POST['NumFactura'] : '' ?>">
                                         </div>
+                                        <?php if(isset($error)){ ?>
+                                            <div class="text-danger"><?php echo $error['error']?></div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
