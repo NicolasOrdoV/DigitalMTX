@@ -31,7 +31,7 @@
                     <button type="submit" class="btn btn-danger float-right">Ingresar</button>
                 </form>
                 <a href="#">Recuperar contraseña?</a>
-                <a href="#">Consulta de garantias</a>
+                <a href="?controller=client&method=list">Consulta de garantias</a>
             </div>
         </div>
     </div>

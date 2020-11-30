@@ -144,6 +144,19 @@ class Garanty
         }
     }
 
+    public function getShowStatusGaranty($bill)
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
+            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
+            WHERE g.No_garantia = '".$bill."'";
+            $query = $this->pdo->select($strSql); 
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getAllFive()
     {
         try {

@@ -1,5 +1,5 @@
 <?php
-include_once("db_connect.php");
+include_once("db_connect.php"); 
 if(isset($_POST['import_data'])){    
     // validate to check uploaded file is a valid csv file
     $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
