@@ -98,19 +98,31 @@ class GarantyController
           }elseif ($fac1 === $fac2) {
             header('Location: ?controller=garanty&method=failed');
           }elseif($fac1 !== $fac2){
-            if ($date_now >= $date_bill && $date_now >= $date_month) {
-              $billFailed = [
-                'error' => 'El tiempo de garantia de los accesorios esta vencida'
-              ];
-              $details = $this->model->getGaranty($bill);
-              require 'Views/Layout.php';
-              $data = $this->model->getAll();
-              $total_data = count($data);
-              $providers = $this->provider->getAll();
-              $departaments = $this->departament->getAll();
-              $municipalities = $this->municipality->getAll();
-              require 'Views/Garanty/garantia_empleado.php';
-              require 'Views/Scripts.php';
+            if ($bills[0]->garantia == "1 año freidora - 6 meses en panel táctil " || $bills[0]->garantia == '1 año telefono - 6 meses de batería y cargador' ) {
+              if ($date_now >= $date_bill && $date_now >= $date_month) {
+                $billFailed = [
+                  'error' => 'El tiempo de garantia de los accesorios esta vencida'
+                ];
+                $details = $this->model->getGaranty($bill);
+                require 'Views/Layout.php';
+                $data = $this->model->getAll();
+                $total_data = count($data);
+                $providers = $this->provider->getAll();
+                $departaments = $this->departament->getAll();
+                $municipalities = $this->municipality->getAll();
+                require 'Views/Garanty/garantia_empleado.php';
+                require 'Views/Scripts.php';
+              }else{
+                $details = $this->model->getGaranty($bill);
+                require 'Views/Layout.php';
+                $data = $this->model->getAll();
+                $total_data = count($data);
+                $providers = $this->provider->getAll();
+                $departaments = $this->departament->getAll();
+                $municipalities = $this->municipality->getAll();
+                require 'Views/Garanty/garantia_empleado.php';
+                require 'Views/Scripts.php';
+              }
             }else{
               $details = $this->model->getGaranty($bill);
               require 'Views/Layout.php';
