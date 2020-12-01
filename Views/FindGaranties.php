@@ -75,8 +75,8 @@
 	                    </div>
 	                    <div class="row clearfix">
 	                    	<div class="col-sm-12">
-	                            <h5>ESTADO</h5>
-	                            <p><?php echo $data[0]->Estado?></p>
+	                            <h1>ESTADO</h1>
+	                            <h2><?php echo $data[0]->Estado?></h2>
 	                        </div>
 	                    </div>
 		            </div>
