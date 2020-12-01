@@ -14,6 +14,9 @@ $td = $total_data + 0001;
         <!-- Input -->
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <?php if(isset($billFailed)){ ?>
+                    <div class="alert alert-danger"><?php echo $billFailed['error']?></div>
+                <?php } ?>
                 <div class="card">
                     <div class="header">
                         <h2>
@@ -241,7 +244,6 @@ $td = $total_data + 0001;
                                             <input type="radio" name="Flete" id="md_checkbox_22" class="radio-col-red" value="NO" onchange="javascript:showContent()" checked />
                                             <label for="md_checkbox_22">NO</label>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

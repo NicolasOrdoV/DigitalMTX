@@ -80,20 +80,48 @@ class GarantyController
           $dataF = $this->model->getAllF($bill);
           $fac1 = isset($dataF[0]->Numero_Factura) ? $dataF[0]->Numero_Factura : 'null';
           $fac2 = $bills[0]->Numero_Factura;
+
+          $date_now = date('d-m-Y');
+          $date_bill = $bills[0]->fecha_factura;
+          $date_month = date('d-m-Y',strtotime($bills[0]->fecha_factura."+ 6 months"));
+          $date_now = strtotime($date_now)."<br>";
+          $date_bill = strtotime($date_bill)."<br>";
+          $date_month = strtotime($date_month);
+
+          //echo $date_now;
+          //echo $date_bill;
+          //echo $date_month;
+
+
           if ($bills == null) {
             header('Location: ?controller=garanty&method=failed');
           }elseif ($fac1 === $fac2) {
             header('Location: ?controller=garanty&method=failed');
           }elseif($fac1 !== $fac2){
-            $details = $this->model->getGaranty($bill);
-            require 'Views/Layout.php';
-            $data = $this->model->getAll();
-            $total_data = count($data);
-            $providers = $this->provider->getAll();
-            $departaments = $this->departament->getAll();
-            $municipalities = $this->municipality->getAll();
-            require 'Views/Garanty/garantia_empleado.php';
-            require 'Views/Scripts.php';
+            if ($date_now >= $date_bill && $date_now >= $date_month) {
+              $billFailed = [
+                'error' => 'El tiempo de garantia de los accesorios esta vencida'
+              ];
+              $details = $this->model->getGaranty($bill);
+              require 'Views/Layout.php';
+              $data = $this->model->getAll();
+              $total_data = count($data);
+              $providers = $this->provider->getAll();
+              $departaments = $this->departament->getAll();
+              $municipalities = $this->municipality->getAll();
+              require 'Views/Garanty/garantia_empleado.php';
+              require 'Views/Scripts.php';
+            }else{
+              $details = $this->model->getGaranty($bill);
+              require 'Views/Layout.php';
+              $data = $this->model->getAll();
+              $total_data = count($data);
+              $providers = $this->provider->getAll();
+              $departaments = $this->departament->getAll();
+              $municipalities = $this->municipality->getAll();
+              require 'Views/Garanty/garantia_empleado.php';
+              require 'Views/Scripts.php';
+            }
           }
         }else{
             require 'Views/Layout.php';
