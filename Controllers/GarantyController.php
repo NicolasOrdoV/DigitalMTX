@@ -88,11 +88,6 @@ class GarantyController
           $date_bill = strtotime($date_bill)."<br>";
           $date_month = strtotime($date_month);
 
-          //echo $date_now;
-          //echo $date_bill;
-          //echo $date_month;
-
-
           if ($bills == null) {
             header('Location: ?controller=garanty&method=failed');
           }elseif ($fac1 === $fac2) {
@@ -170,396 +165,411 @@ class GarantyController
   public function save()
   {
     if (isset($_SESSION['user'])) {
-      //-------------------------//
-      $fecha_factura = $_POST['fecha_factura'];
-      $fecha_factura = date('d-m-Y' , strtotime($fecha_factura));
-      $parts = explode("-", $fecha_factura);
-      //var_dump($parts);
-      echo "Fecha de la factura: ".$fecha_factura.'<br>';
-      $fecha_actual = $_POST['Fecha_ingreso'];
-      $fecha1 = explode("/", $fecha_actual);
-      $fecha2 = implode("-", $fecha1);
-      $fecha2 = date('d-m-Y', strtotime($fecha2));
-      echo "Fecha del dia de hoy: ".$fecha2.'<br>';
+      if (filter_var($_POST['Correo_Cliente'],FILTER_VALIDATE_EMAIL)) {
+        //-------------------------//
+        $fecha_factura = $_POST['fecha_factura'];
+        $fecha_factura = date('d-m-Y' , strtotime($fecha_factura));
+        $parts = explode("-", $fecha_factura);
+        //var_dump($parts);
+        echo "Fecha de la factura: ".$fecha_factura.'<br>';
+        $fecha_actual = $_POST['Fecha_ingreso'];
+        $fecha1 = explode("/", $fecha_actual);
+        $fecha2 = implode("-", $fecha1);
+        $fecha2 = date('d-m-Y', strtotime($fecha2));
+        echo "Fecha del dia de hoy: ".$fecha2.'<br>';
 
-      $fecha_proxima = null;
-      $date_before = null;
-      $date_now = strtotime($fecha2);
-      //echo $date_now.'<br>';
-      $date_bill = strtotime($fecha_factura);
-      //echo $date_bill.'<br>';
-      //-------------------------//
-      $fecha_compra = $_POST['Fecha_Compra'];
-      $data = [
-        'No_garantia' => $_POST['No_garantia'],
-        'Fecha_ingreso' => $fecha2,
-        'Hora_ingreso' => $_POST['Hora_ingreso'],
-        'Numero_Factura' => $_POST['Numero_Factura'],
-        'Punto_Venta' => $_POST['Punto_Venta'],
-        'Fecha_Compra' => $fecha_compra,
-        'Nombre_Cliente' => $_POST['Nombre_Cliente'],
-        'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
-        'Correo_Cliente' => $_POST['Correo_Cliente'],
-        'Direccion_Cliente' => $_POST['Direccion_Cliente'],
-        'Flete' => $_POST['Flete'],
-        'Departamento' => $_POST['Departamento'],
-        'Municipio' => $_POST['Municipio'],
-        'Valor_Flete' => $_POST['Valor_Flete'],
-        'No_Guia' => $_POST['No_Guia'],
-        'Transportadora' => $_POST['Transportadora'],
-        'Observacion_Empleado' => $_POST['Observacion_Empleado'],
-        'Empleado' => $_POST['Empleado']
-      ];
-
-      $answerNewGaranty = $this->model->newGaranty($data);
-      $lastId = $this->model->getLastId();
-
-      $Codigo_Producto = $_POST['Codigo_Producto'];
-      $Descripcion_Producto = $_POST['Descripcion_Producto'];
-      $Marca_Producto = $_POST['Marca_Producto'];
-      $Sello_Producto = $_POST['Sello_Producto'];
-      $Cantidad_Producto = $_POST['Cantidad_Producto'];
-      $Codigo_Proveedor = $_POST['Codigo_Proveedor'];
-      $Referencia = $_POST['Referencia'];
-      $Observacion_Cliente = ($_POST['Observacion_Cliente']);
-      $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
-      $Estado = ($_POST['Estado']);
-      $garantia = ($_POST['time']);
-
-      while (true) {
-        $item1 = current($Codigo_Producto);
-        $item2 = current($Descripcion_Producto);
-        $item3 = current($Marca_Producto);
-        $item4 = current($Sello_Producto);
-        $item5 = current($Codigo_Proveedor);
-        $item6 = current($Cantidad_Producto);
-        $item7 = current($Referencia);
-        $item8 = current($Observacion_Cliente);
-        
-          $item9 = current($Aprobacion_Garantia);
-        
-        $item10 = current($Estado);
-        $item11 = current($garantia);
-
-        $cp = (($item1 !== false) ? $item1 : '');
-        $dp = (($item2 !== false) ? $item2 : '');
-        $mp = (($item3 !== false) ? $item3 : '');
-        $sp = (($item4 !== false) ? $item4 : '');
-        $cpro = (($item5 !== false) ? $item5 : '');
-        $canPro = (($item6 !== false) ? $item6 : '');
-        $rp = (($item7 !== false) ? $item7: '');
-        $op = (($item8 !== false) ? $item8 : '');
-        
-          $ag = (($item9 !== false) ? $item9 : '');
-        
-        $es = (($item10 !== false) ? $item10 : '');
-        $g = (($item11 !== false) ? $item11 : '');
-
-        
-        $detaills = [
-          'Codigo_Producto' => $cp,
-          'Descripcion_Producto' => $dp,
-          'Marca_Producto' => $mp,
-          'Sello_Producto' => $sp,
-          'Referencia' => $rp,
-          'Cantidad_Producto' => $canPro,
-          'Codigo_Proveedor' => $cpro,
-          'Id_Garantia' => $lastId[0]->id,
-          'Observacion_Cliente' => $op,
-          'Estado' => $es,
-          'Aprobacion_Garantia' => $ag
+        $fecha_proxima = null;
+        $date_before = null;
+        $date_now = strtotime($fecha2);
+        //echo $date_now.'<br>';
+        $date_bill = strtotime($fecha_factura);
+        //echo $date_bill.'<br>';
+        //-------------------------//
+        $fecha_compra = $_POST['Fecha_Compra'];
+        $data = [
+          'No_garantia' => $_POST['No_garantia'],
+          'Fecha_ingreso' => $fecha2,
+          'Hora_ingreso' => $_POST['Hora_ingreso'],
+          'Numero_Factura' => $_POST['Numero_Factura'],
+          'Punto_Venta' => $_POST['Punto_Venta'],
+          'Fecha_Compra' => $fecha_compra,
+          'Nombre_Cliente' => $_POST['Nombre_Cliente'],
+          'Identificacion_Cliente' => $_POST['Identificacion_Cliente'],
+          'Correo_Cliente' => $_POST['Correo_Cliente'],
+          'Direccion_Cliente' => $_POST['Direccion_Cliente'],
+          'Flete' => $_POST['Flete'],
+          'Departamento' => $_POST['Departamento'],
+          'Municipio' => $_POST['Municipio'],
+          'Valor_Flete' => $_POST['Valor_Flete'],
+          'No_Guia' => $_POST['No_Guia'],
+          'Transportadora' => $_POST['Transportadora'],
+          'Observacion_Empleado' => $_POST['Observacion_Empleado'],
+          'Empleado' => $_POST['Empleado']
         ];
-        
-        //var_dump($detaillsN);
-        //$detaills['Aprobacion_Garantia'] = $agN;
-        //echo '<hr>';
-        //var_dump($detaills);
-        if ($ag == 'SI') {
-          echo "Garantia: ".$g.'<br>';
-          if ($g == '1 Año' || $g =='1 año') {
-            $year = date($parts[2]);
-            $afterYear = $year+1;
-            $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
-            $date_before = strtotime($fecha_proxima);
-            //echo $fecha_proxima;
-          }elseif($g == '2 Años'){
+
+        $answerNewGaranty = $this->model->newGaranty($data);
+        $lastId = $this->model->getLastId();
+
+        $Codigo_Producto = $_POST['Codigo_Producto'];
+        $Descripcion_Producto = $_POST['Descripcion_Producto'];
+        $Marca_Producto = $_POST['Marca_Producto'];
+        $Sello_Producto = $_POST['Sello_Producto'];
+        $Cantidad_Producto = $_POST['Cantidad_Producto'];
+        $Codigo_Proveedor = $_POST['Codigo_Proveedor'];
+        $Referencia = $_POST['Referencia'];
+        $Observacion_Cliente = ($_POST['Observacion_Cliente']);
+        $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
+        $Estado = ($_POST['Estado']);
+        $garantia = ($_POST['time']);
+
+        while (true) {
+          $item1 = current($Codigo_Producto);
+          $item2 = current($Descripcion_Producto);
+          $item3 = current($Marca_Producto);
+          $item4 = current($Sello_Producto);
+          $item5 = current($Codigo_Proveedor);
+          $item6 = current($Cantidad_Producto);
+          $item7 = current($Referencia);
+          $item8 = current($Observacion_Cliente);
+          
+            $item9 = current($Aprobacion_Garantia);
+          
+          $item10 = current($Estado);
+          $item11 = current($garantia);
+
+          $cp = (($item1 !== false) ? $item1 : '');
+          $dp = (($item2 !== false) ? $item2 : '');
+          $mp = (($item3 !== false) ? $item3 : '');
+          $sp = (($item4 !== false) ? $item4 : '');
+          $cpro = (($item5 !== false) ? $item5 : '');
+          $canPro = (($item6 !== false) ? $item6 : '');
+          $rp = (($item7 !== false) ? $item7: '');
+          $op = (($item8 !== false) ? $item8 : '');
+          
+            $ag = (($item9 !== false) ? $item9 : '');
+          
+          $es = (($item10 !== false) ? $item10 : '');
+          $g = (($item11 !== false) ? $item11 : '');
+
+          
+          $detaills = [
+            'Codigo_Producto' => $cp,
+            'Descripcion_Producto' => $dp,
+            'Marca_Producto' => $mp,
+            'Sello_Producto' => $sp,
+            'Referencia' => $rp,
+            'Cantidad_Producto' => $canPro,
+            'Codigo_Proveedor' => $cpro,
+            'Id_Garantia' => $lastId[0]->id,
+            'Observacion_Cliente' => $op,
+            'Estado' => $es,
+            'Aprobacion_Garantia' => $ag
+          ];
+          
+          //var_dump($detaillsN);
+          //$detaills['Aprobacion_Garantia'] = $agN;
+          //echo '<hr>';
+          //var_dump($detaills);
+          if ($ag == 'SI') {
+            echo "Garantia: ".$g.'<br>';
+            if ($g == '1 Año' || $g =='1 año') {
               $year = date($parts[2]);
-              $afterYear = $year+2;
+              $afterYear = $year+1;
               $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
               $date_before = strtotime($fecha_proxima);
-              //echo $fecha_proxima;    
-          }elseif($g == '6 Meses'){
-              $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
-              $date_before = strtotime($fecha_proxima);
-              //echo $fecha_proxima;   
-          }elseif($g == '3 meses'){
-              $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 3 months"));
-              $date_before = strtotime($fecha_proxima);
-              //echo $fecha_proxima;    
-          }elseif($g == '1 mes' || $g == '1 meses'){
-              $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
-              $date_before = strtotime($fecha_proxima);
               //echo $fecha_proxima;
-          }elseif($g == "1 año freidora - 6 meses en panel táctil " || $g == '1 año telefono - 6 meses de batería y cargador'){
-            $year = date($parts[2]);
-            $afterYear = $year+1;
-            $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+            }elseif($g == '2 Años'){
+                $year = date($parts[2]);
+                $afterYear = $year+2;
+                $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+                $date_before = strtotime($fecha_proxima);
+                //echo $fecha_proxima;    
+            }elseif($g == '6 Meses'){
+                $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+                $date_before = strtotime($fecha_proxima);
+                //echo $fecha_proxima;   
+            }elseif($g == '3 meses'){
+                $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 3 months"));
+                $date_before = strtotime($fecha_proxima);
+                //echo $fecha_proxima;    
+            }elseif($g == '1 mes' || $g == '1 meses'){
+                $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
+                $date_before = strtotime($fecha_proxima);
+                //echo $fecha_proxima;
+            }elseif($g == "1 año freidora - 6 meses en panel táctil " || $g == '1 año telefono - 6 meses de batería y cargador'){
+              $year = date($parts[2]);
+              $afterYear = $year+1;
+              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
 
-            $date_before = strtotime($fecha_proxima);
-            $fecha_proxima_mes =  date("d-m-Y", strtotime($fecha_factura.'+ 6 months'));
-            $date_month = strtotime($fecha_proxima_mes);
+              $date_before = strtotime($fecha_proxima);
+              $fecha_proxima_mes =  date("d-m-Y", strtotime($fecha_factura.'+ 6 months'));
+              $date_month = strtotime($fecha_proxima_mes);
 
-            echo "Fecha estimada para 6 meses despues de la fecha de factura: ".$fecha_proxima_mes.'<br>';
-            echo "Fecha estimada para un año despues de la fecha de factura: ".$fecha_proxima."<br>";
+              echo "Fecha estimada para 6 meses despues de la fecha de factura: ".$fecha_proxima_mes.'<br>';
+              echo "Fecha estimada para un año despues de la fecha de factura: ".$fecha_proxima."<br>";
 
-            if ($date_now >= $date_bill && $date_now <= $date_month){
-              echo "<script>alert('Esta a tiempo de aplicar garantia a uno de los productos');</script>";
+              if ($date_now >= $date_bill && $date_now <= $date_month){
+                echo "<script>alert('Esta a tiempo de aplicar garantia a uno de los productos');</script>";
+              }else{
+                echo '<script>alert("El tiempo de garantia de uno de los productos esta vencida");</script>';
+              }
             }else{
-              echo '<script>alert("El tiempo de garantia de uno de los productos esta vencida");</script>';
+              echo '<script>alert("No tiene garantia");</script>';
+            }
+          }
+
+          //----Aqui va la validacion de rango de fechas
+          if ($date_now >= $date_bill && $date_now <= $date_before) {
+            if (isset($lastId[0]->id) && $answerNewGaranty == true) {
+              if ($ag == 'NO') {
+                $detaills['Estado'] = "Cerrado";
+                $this->model->saveDetail($detaills);
+              }
+              if ($ag == 'SI') {
+                $detaills['Aprobacion_Garantia'] = $ag;
+                $this->model->saveDetail($detaills);
+              }  
             }
           }else{
-            echo '<script>alert("No tiene garantia");</script>';
+            // echo 'La fecha de garantia expiro';
+            echo '<script>
+                    alert("La fecha de garantia expiro");
+                    window.location = "?controller=garanty&method=listGaranty";
+                  </script>';
           }
+          //---Aqui termina el proceso de rango de fechas
+
+          // Up! Next Value
+          $item1 = next($Codigo_Producto);
+          $item2 = next($Descripcion_Producto);
+          $item3 = next($Marca_Producto);
+          $item4 = next($Sello_Producto);
+          $item5 = next($Codigo_Proveedor);
+          $item6 = next($Cantidad_Producto);
+          $item7 = next($Referencia);
+          $item8 = next($Observacion_Cliente);
+         
+            $item9 = next($Aprobacion_Garantia);
+          
+          $item10 = next($Estado);
+          $item11 = next($garantia);
+          // Check terminator
+          if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false) break;
         }
 
-        //----Aqui va la validacion de rango de fechas
-        if ($date_now >= $date_bill && $date_now <= $date_before) {
-          if (isset($lastId[0]->id) && $answerNewGaranty == true) {
-            if ($ag == 'NO') {
-              $detaills['Estado'] = "Cerrado";
-              $this->model->saveDetail($detaills);
-            }
-            if ($ag == 'SI') {
-              $detaills['Aprobacion_Garantia'] = $ag;
-              $this->model->saveDetail($detaills);
-            }  
-          }
-        }else{
-          // echo 'La fecha de garantia expiro';
-          echo '<script>
-                  alert("La fecha de garantia expiro");
-                  window.location = "?controller=garanty&method=listGaranty";
-                </script>';
-        }
-        //---Aqui termina el proceso de rango de fechas
+        $dates = $this->model->getAlDetails($lastId[0]->id);
+        if ($dates[0]->Estado == 'Tramite') {
+          $datas = $this->model->getAlDetails($lastId[0]->id);
+          $mail = new PHPMailer(true);
 
-        // Up! Next Value
-        $item1 = next($Codigo_Producto);
-        $item2 = next($Descripcion_Producto);
-        $item3 = next($Marca_Producto);
-        $item4 = next($Sello_Producto);
-        $item5 = next($Codigo_Proveedor);
-        $item6 = next($Cantidad_Producto);
-        $item7 = next($Referencia);
-        $item8 = next($Observacion_Cliente);
-       
-          $item9 = next($Aprobacion_Garantia);
-        
-        $item10 = next($Estado);
-        $item11 = next($garantia);
-        // Check terminator
-        if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false) break;
-      }
+          try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+            $mail->Password   = '1000464327bat';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-      $dates = $this->model->getAlDetails($lastId[0]->id);
-      if ($dates[0]->Estado == 'Tramite') {
-        $datas = $this->model->getAlDetails($lastId[0]->id);
-        $mail = new PHPMailer(true);
+            //Recipients
+            $mail->setFrom('nikomegathet666@gmail.com');
+            $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
 
-        try {
-          //Server settings
-          $mail->SMTPDebug = 0;                      // Enable verbose debug output
-          $mail->isSMTP();                                            // Send using SMTP
-          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-          $mail->Password   = '1000464327bat';                               // SMTP password
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Solicitud de garantia';
+            $html = '<!DOCTYPE html>
+            <html lang="en" >
+            <head>
+              <meta charset="UTF-8">
+              <title>CodePen - PDF Factura Ecuador</title>
+              
 
-          //Recipients
-          $mail->setFrom('nikomegathet666@gmail.com');
-          $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+            </head>
+            <body>
+            <!-- partial:index.partial.html -->
+            <center>
+              <div style="width: 580px;">
+                <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
+                  <tr>
+                    <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
+                      <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
+                      <div style="display: inline-block; margin-left: 320px;">
+                        <p style="font-weight: bold;">Digital MTX</p>
+                        <p>Fecha de impresion: '.$data['Fecha_ingreso'].'</p>
+                      </div>
+                      <hr>
+                      <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$data['No_garantia'].'</b></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
+                      <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
+                      <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
+                      <p><b>Nombre</b>'.$data['Nombre_Cliente'].'</p>
+                      <p><b>Identificacion</b> '.$data['Identificacion_Cliente'].'</p>
+                      <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
+                    </td>
+                    <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+                      <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
+                      <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
+                      <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
+                      <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
+                    </td>
+                  </tr>
+                </table>
 
-          // Content
-          $mail->isHTML(true);                                  // Set email format to HTML
-          $mail->Subject = 'Solicitud de garantia';
-          $html = '<!DOCTYPE html>
-          <html lang="en" >
-          <head>
-            <meta charset="UTF-8">
-            <title>CodePen - PDF Factura Ecuador</title>
-            
-
-          </head>
-          <body>
-          <!-- partial:index.partial.html -->
-          <center>
-            <div style="width: 580px;">
-              <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
-                <tr>
-                  <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
-                    <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
-                    <div style="display: inline-block; margin-left: 320px;">
-                      <p style="font-weight: bold;">Digital MTX</p>
-                      <p>Fecha de impresion: '.$data['Fecha_ingreso'].'</p>
+                <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
+                <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+                  <tr>
+                    <th>Codigo Producto</th>
+                    <th>Descripcion Producto</th>
+                    <th>Marca Producto</th>
+                    <th>Referencia Producto</th>
+                  </tr>';
+                  foreach ($datas as $product) {
+                  $html .= '<tr>
+                    <td>'.$product->Codigo_Producto.'</td>
+                    <td>'.$product->Descripcion_Producto.'</td>
+                    <td>'.$product->Marca_Producto.'</td>
+                    <td>'.$product->Referencia.'</td>
+                  </tr>';
+                }
+                $html .= '</table><br>
+                <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
+                  <div>
+                    <div style="display:table; margin:auto; text-align:left;">
+                      <p><b>Observacion Garantia:</b> '.$data['Observacion_Empleado'].'</p>
                     </div>
-                    <hr>
-                    <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$data['No_garantia'].'</b></p>
-                  </td>
-                </tr>
-                <tr>
-                  <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-                    <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
-                    <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
-                    <p><b>Nombre</b>'.$data['Nombre_Cliente'].'</p>
-                    <p><b>Identificacion</b> '.$data['Identificacion_Cliente'].'</p>
-                    <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
-                  </td>
-                  <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-                    <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
-                    <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
-                    <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
-                    <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
-                  </td>
-                </tr>
-              </table>
+                   
+              </div>
+            </center>
+            <!-- partial -->
+              
+            </body>
+            </html>
+            ';
+            $mail->Body = $html;
 
-              <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
-              <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
-                <tr>
-                  <th>Codigo Producto</th>
-                  <th>Descripcion Producto</th>
-                  <th>Marca Producto</th>
-                  <th>Referencia Producto</th>
-                </tr>';
-                foreach ($datas as $product) {
-                $html .= '<tr>
-                  <td>'.$product->Codigo_Producto.'</td>
-                  <td>'.$product->Descripcion_Producto.'</td>
-                  <td>'.$product->Marca_Producto.'</td>
-                  <td>'.$product->Referencia.'</td>
-                </tr>';
-              }
-              $html .= '</table><br>
-              <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
-                <div>
-                  <div style="display:table; margin:auto; text-align:left;">
-                    <p><b>Observacion Garantia:</b> '.$data['Observacion_Empleado'].'</p>
-                  </div>
-                 
-            </div>
-          </center>
-          <!-- partial -->
-            
-          </body>
-          </html>
-          ';
-          $mail->Body = $html;
+            $mail->send();
+            header('Location: ?controller=garanty&method=sucessfull');
+          } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          }
+        } elseif ($dates[0]->Estado == 'Cerrado') {
+          $mail = new PHPMailer(true);
 
-          $mail->send();
-          header('Location: ?controller=garanty&method=sucessfull');
-        } catch (Exception $e) {
-          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-      } elseif ($dates[0]->Estado == 'Cerrado') {
-        $mail = new PHPMailer(true);
+          try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+            $mail->Password   = '1000464327bat';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-        try {
-          //Server settings
-          $mail->SMTPDebug = 0;                      // Enable verbose debug output
-          $mail->isSMTP();                                            // Send using SMTP
-          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-          $mail->Password   = '1000464327bat';                               // SMTP password
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            //Recipients
+            $mail->setFrom('nikomegathet666@gmail.com');
+            $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
 
-          //Recipients
-          $mail->setFrom('nikomegathet666@gmail.com');
-          $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
-
-          // Content
-          $mail->isHTML(true);                                  // Set email format to HTML
-          $mail->Subject = 'Solicitud de garantia';
-          $mail->Body    = '<!DOCTYPE html>
-                  <html lang="en" >
-                  <head>
-                    <meta charset="UTF-8">
-                    <title>CodePen - Avisado Prototipo</title>
-                    <link rel="stylesheet" href="./style.css">
-                  
-                  </head>
-                  <body>
-                  <!-- partial:index.partial.html -->
-                  <html>
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Solicitud de garantia';
+            $mail->Body    = '<!DOCTYPE html>
+                    <html lang="en" >
                     <head>
-                      <meta charset="utf-8" />
-                      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-                      <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-                      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-                      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                      <meta charset="UTF-8">
+                      <title>CodePen - Avisado Prototipo</title>
+                      <link rel="stylesheet" href="./style.css">
+                    
                     </head>
                     <body>
-                      <header>
-                        <div class="container">
-                          <section class="banner_row">
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <figure class="animated fadeInLeft">
-                                  <a href="index.html">
-                                    <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-                                  </a>
-                                </figure>
-                            </div>
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                              <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-                            </div>
-                          </section>
+                    <!-- partial:index.partial.html -->
+                    <html>
+                      <head>
+                        <meta charset="utf-8" />
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
+                        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+                        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                      </head>
+                      <body>
+                        <header>
+                          <div class="container">
+                            <section class="banner_row">
+                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                  <figure class="animated fadeInLeft">
+                                    <a href="index.html">
+                                      <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
+                                    </a>
+                                  </figure>
+                              </div>
+                              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                <h1 class="animated fadeInLeft">>>AVISADO!</h1>
+                              </div>
+                            </section>
+                          </div>
+                        </header>
+                        <section class="formulario-princ">
+                          <div class="container">
+                            <form class="form-inline">
+                              <div class="form-group">
+                                <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
+                              </div>
+                              <div class="form-group">
+                              <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
+                              <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
+                              </div>
+                            </form>
+                          </div>
+                        </section>
                         </div>
-                      </header>
-                      <section class="formulario-princ">
-                        <div class="container">
-                          <form class="form-inline">
-                            <div class="form-group">
-                              <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-                            </div>
-                            <div class="form-group">
-                            <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
-                            <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
-                            </div>
-                          </form>
+                        <br />
+                        <br />
+                        <div class="footer-container">
+                        <footer class="wrapper">
+                          <div class="container">
+                            <h3>Trabajamos para ti, ¡Espéranos!</h3>
+                            <p>Para más información, <strong>puedes escribirnos a:</strong> 
+                              <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
+                            </p>
+                          </div>
+                        </footer>
                         </div>
-                      </section>
-                      </div>
-                      <br />
-                      <br />
-                      <div class="footer-container">
-                      <footer class="wrapper">
-                        <div class="container">
-                          <h3>Trabajamos para ti, ¡Espéranos!</h3>
-                          <p>Para más información, <strong>puedes escribirnos a:</strong> 
-                            <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-                          </p>
-                        </div>
-                      </footer>
-                      </div>
+                      </body>
+                    </html>
+                    <!-- partial -->
+                      
                     </body>
-                  </html>
-                  <!-- partial -->
-                    
-                  </body>
-                  </html>
-                  ';
+                    </html>
+                    ';
 
-          $mail->send();
-          header('Location: ?controller=garanty&method=sucessfull');
-        } catch (Exception $e) {
-          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $mail->send();
+            header('Location: ?controller=garanty&method=sucessfull');
+          } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          }
         }
+      }else{
+        $failedError = [
+          'error' => 'Hay campos que no son validos, por favor verificar que esten correctos todos los campos'
+        ];
+        $details = $this->model->getGaranty($bill);
+        require 'Views/Layout.php';
+        $data = $this->model->getAll();
+        $total_data = count($data);
+        $providers = $this->provider->getAll();
+        $departaments = $this->departament->getAll();
+        $municipalities = $this->municipality->getAll();
+        require 'Views/Garanty/garantia_empleado.php';
+        require 'Views/Scripts.php';
       }
     }else{
       header('Location: ?controller=login');

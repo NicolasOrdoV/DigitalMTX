@@ -11,12 +11,12 @@
 </head>
 
 <body>
-    <main class="container">
+    <main class="container-fluid">
 	    <section class="row mt-5">
 	        <div class="card w-100 m-auto">
-	            <div class="card-header bg-danger container">
+	            <div class="card-header bg-danger container-fluid">
 	                <h2 class="m-auto">
-	                	<a href="?controller=login" class="btn btn-danger"><<</a>Consultar pelicula
+	                	<a href="?controller=login" class="btn btn-danger"><<</a>Consultar garantia
 	                </h2>
 	            </div>
 	            <div class="card-body w-100">
@@ -33,55 +33,62 @@
 	            	</form>
 	            </div>
 	        </div>
-	        <?php if(isset($bill)){ ?>
-		        <div class="card w-100 m-auto">
-		        	<div class="card-body w-100">
-		            	<h2>Producto</h2>
-	                    <div class="row clearfix">
-	                        <div class="col-sm-3">
-	                            <h5>Codigo del producto</h5>
-	                            <p><?php echo $data[0]->Codigo_Producto?></p>
-	                        </div>
-	                        <div class="col-sm-3">
-	                            <h5>Descripcion producto</h5>
-	                            <p><?php echo $data[0]->Descripcion_Producto?></p>
-	                        </div>
-	                        <div class="col-sm-3">
-	                            <h5>Serial</h5>
-	                            <p><?php echo $data[0]->Sello_Producto?></p>
-	                        </div>
-	                        <div class="col-sm-3">
-	                            <h5>Cantidad</h5>
-	                            <p><?php echo $data[0]->Cantidad_Producto?></p>
-	                        </div>
-	                    </div>
-	                    <div class="row clearfix">
-	                        <div class="col-sm-3">
-	                            <h5>Flete</h5>
-	                            <p><?php echo $data[0]->Flete?></p>
-	                        </div>
-	                        <div class="col-sm-3">
-	                            <h5>Ciudad</h5>
-	                            <p><?php echo $data[0]->Departamento?></p>
-	                        </div>
-	                        <div class="col-sm-3">
-	                            <h5>Municipio</h5>
-	                            <p><?php echo $data[0]->Municipio?></p>
-	                        </div>
-	                        <div class="col-sm-3">
-	                            <h5>Valor del producto</h5>
-	                            <p><?php echo $data[0]->Valor_Flete?></p>
-	                        </div>
-	                    </div>
-	                    <div class="row clearfix">
-	                    	<div class="col-sm-12">
-	                            <h1>ESTADO</h1>
-	                            <h2><?php echo $data[0]->Estado?></h2>
-	                        </div>
-	                    </div>
-		            </div>
-		        </div>
-	        <?php } ?>
+	        <?php
+	         	if(isset($data)){ 
+	        		if(!empty($data)){?>
+				        <div class="card w-100 m-auto">
+				        	<div class="card-body w-100">
+				            	<h2>Producto</h2>
+			                    <div class="row clearfix">
+			                        <div class="col-sm-3">
+			                            <h5>Codigo del producto</h5>
+			                            <p><?php echo $data[0]->Codigo_Producto?></p>
+			                        </div>
+			                        <div class="col-sm-3">
+			                            <h5>Descripcion producto</h5>
+			                            <p><?php echo $data[0]->Descripcion_Producto?></p>
+			                        </div>
+			                        <div class="col-sm-3">
+			                            <h5>Serial</h5>
+			                            <p><?php echo $data[0]->Sello_Producto?></p>
+			                        </div>
+			                        <div class="col-sm-3">
+			                            <h5>Cantidad</h5>
+			                            <p><?php echo $data[0]->Cantidad_Producto?></p>
+			                        </div>
+			                    </div>
+			                    <div class="row clearfix">
+			                        <div class="col-sm-3">
+			                            <h5>Flete</h5>
+			                            <p><?php echo $data[0]->Flete?></p>
+			                        </div>
+			                        <div class="col-sm-3">
+			                            <h5>Ciudad</h5>
+			                            <p><?php echo $data[0]->Departamento?></p>
+			                        </div>
+			                        <div class="col-sm-3">
+			                            <h5>Municipio</h5>
+			                            <p><?php echo $data[0]->Municipio?></p>
+			                        </div>
+			                        <div class="col-sm-3">
+			                            <h5>Valor del producto</h5>
+			                            <p><?php echo $data[0]->Valor_Flete?></p>
+			                        </div>
+			                    </div>
+			                    <div class="row clearfix">
+			                    	<div class="col-sm-12">
+			                            <h1>ESTADO:<?php echo $data[0]->Estado?></h1>
+			                        </div>
+			                    </div>
+				            </div>
+				        </div>
+	        <?php
+	            }else{ ?>
+	        	<div class="alert alert-danger">
+	        		<p>No se encontro ningun registro con ese consecutivo</p>
+	        	</div>
+	        <?php } 
+	    	}?>	
 	    </section>
 	</main>
     <script src="Assets/js/jquery-2.2.4.min.js"></script>

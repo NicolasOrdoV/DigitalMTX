@@ -99,6 +99,7 @@ $hora_actual = date("h:i a"); ?>
                                         </div>
                                     </div>
                                <?php } ?>
+                            <?php if($data[0]->Estado != "Solucionado por servicio tecnico"){?>   
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <form action="?controller=technical&method=save" method="POST" id="form_validation">
@@ -151,6 +152,7 @@ $hora_actual = date("h:i a"); ?>
                                     </form>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ class Technical
 			$strSql = "SELECT g.*,d.id as idDetalle ,d.Codigo_Producto as idProducto,d.Descripcion_Producto as DescripcionP ,d.Marca_Producto as Marca ,d.Sello_Producto as Serie ,d.Referencia as ReferenciaProducto , d.Id_Garantia as N_garantia , d.Observacion_Cliente as ObsCliente , d.Aprobacion_Garantia as Aprobo, d.Estado as EstadoG   FROM  mg_garantia g 
 			INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
 			WHERE d.Estado = 'Tramite' OR d.Estado = 'Solucionado por servicio tecnico' 
-			OR d.Estado = 'Pendiente por servicio tecnico'";
+			OR d.Estado = 'Pendiente por servicio tecnico' OR d.Estado = 'Pendiente para cambio de producto' OR d.Estado = 'Pendiente para Nota Credito' OR d.Estado = 'Pendiente para Devolucion de Dinero' OR d.Estado = 'Pendiente para No tiene garantia' OR d.Estado = 'Entregado para Nota Credito' OR d.Estado = 'Entregado para cambio de producto' OR d.Estado = 'Entregado para Devolucion de Dinero'";
 			$query = $this->pdo->select($strSql);
 			return $query;
 		} catch (PDOException $e) {
@@ -35,7 +35,7 @@ class Technical
 		try {
 			$strSql = "SELECT t.*,d.* FROM mg_servicio_tecnico t
 			INNER JOIN mg_detalle_garantia d ON d.id = t.Id_Garantia 
-			WHERE d.id = :id AND d.Estado = 'Pendiente por servicio tecnico'";
+			WHERE d.id = :id AND d.Estado = 'Pendiente por servicio tecnico' OR d.Estado = 'Solucionado por servicio tecnico'";
 			$array = ['id' => $id];
 			$query = $this->pdo->select($strSql, $array);
 			return $query;
