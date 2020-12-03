@@ -47,22 +47,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row clearfix">
+                            <div class="row clearfix"> 
                                 <div class="col-sm-9">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Observacion Empleado</label>
                                             <textarea rows="4" class="form-control no-resize" name="Observacion_Final" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div id="content" style="display:none">
-                                        <div class="col-sm-3">
-                                            <div class="form-group ">
-                                                <div class="form-line">
-                                                    <label>Sello Producto</label>
-                                                    <input type="text" class="form-control" name="Sello_Producto">
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +160,7 @@
     }
 </script>-->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function ocultContent() {
         //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
         element = document.getElementById("content");
@@ -217,4 +207,4 @@
             element.style.display = 'none';
         }
     }
-</script>
+</script> -->

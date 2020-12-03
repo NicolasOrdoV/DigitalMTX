@@ -307,6 +307,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">content_paste</i>
+                            <span>Facturas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="?controller=bill" class="menu-toggle">
+                                    <span>Carga masiva de facturas</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
                     <?php } ?>
                 </ul>
             </div>

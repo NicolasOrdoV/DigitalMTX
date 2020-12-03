@@ -26,19 +26,45 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <p>Estado actual: <?php echo $data[0]->Estado?></p>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label>Estado final</label>
-                                            <select name="Estado" class="form-control" required>
-                                                <option value="">Seleccione</option>
-                                                <option value="Entregado para Nota Credito">Entregado para Nota Credito</option>
-                                                <option value="Entregado para cambio de producto">Entregado para cambio de producto</option>
-                                                <option value="Entregado para Devolucion de Dinero">Entregado para Devolucion de Dinero</option>
-                                            </select>
+                                    <div class="form-group form-float my-2">
+                                        
+                                            <div class="col-sm-3">
+                                                <label>Nota Credito</label>
+                                                <div class="demo-checkbox">
+                                                    <input type="radio" name="Estado" id="md_checkbox_21" class="radio-col-red" value="Entregado para Nota Credito" onchange="javascript:ocultContent()"/>
+                                                    <label for="md_checkbox_21">SI</label>
+                                                </div>
+                                                <label>Cambio Producto</label>
+                                                <div class="demo-checkbox">
+                                                    <input type="radio" name="Estado" id="md_checkbox_22" class="radio-col-red" value="Entregado para cambio de producto" onchange="javascript:showContent()" />
+                                                    <label for="md_checkbox_22">SI</label>
+                                                </div>
+                                                <label>Devolucion Dinero</label>
+                                                <div class="demo-checkbox">
+                                                    <input type="radio" name="Estado" id="md_checkbox_23" class="radio-col-red" value="Entregado para Devolucion de Dinero" onchange="javascript:ocultContent2()" />
+                                                    <label for="md_checkbox_23">SI</label>
+                                                </div>
+                                                <label>No tiene garantia</label>
+                                                <div class="demo-checkbox">
+                                                    <input type="radio" name="Estado" id="md_checkbox_24" class="radio-col-red" value="Entregado para No tiene garantia" onchange="javascript:ocultContent3()"  />
+                                                    <label for="md_checkbox_24">SI</label>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div id="content" style="display:none">
+                                        <div class="col-sm-3">
+                                            <div class="form-group ">
+                                                <div class="form-line">
+                                                    <label>Sello Producto</label>
+                                                    <input type="text" class="form-control" name="Sello_Producto" value="<?php echo rand('1234567','10')?>">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class ="row clearfix">
                             <div class="col-sm-12">
                                     <div class="form-group">
@@ -51,6 +77,53 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
+<script type="text/javascript">
+    function ocultContent() {
+        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
+        element = document.getElementById("content");
+        check = document.getElementById("md_checkbox_21");
+        if (check.checked) {
+            element.style.display = 'none';
+        } else {
+            element.style.display = 'block';
+        }
+    }
+</script>
+<script type="text/javascript">
+    function ocultContent2() {
+        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
+        element = document.getElementById("content");
+        check = document.getElementById("md_checkbox_23");
+        if (check.checked) {
+            element.style.display = 'none';
+        } else {
+            element.style.display = 'block';
+        }
+    }
+</script>
+<script type="text/javascript">
+    function ocultContent3() {
+        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
+        element = document.getElementById("content");
+        check = document.getElementById("md_checkbox_24");
+        if (check.checked) {
+            element.style.display = 'none';
+        } else {
+            element.style.display = 'block';
+        }
+    }
+</script>
+<script type="text/javascript">
+    function showContent() {
+        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
+        element = document.getElementById("content");
+        check = document.getElementById("md_checkbox_22");
+        if (check.checked) {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>

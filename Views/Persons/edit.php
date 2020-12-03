@@ -20,7 +20,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Nombres" value="<?php echo $data[0]->Nombres ?>"></input>
+                                            <input type="text" class="form-control" name="Nombres" value="<?php echo $data[0]->nombre ?>"></input>
                                             <label class="form-label">Nombres</label>
                                         </div>
                                     </div>
@@ -28,7 +28,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control " name="Apellidos" value="<?php echo $data[0]->Apellidos ?>"></input>
+                                            <input type="text" class="form-control " name="Apellidos" value="<?php echo $data[0]->apellidos ?>"></input>
                                             <label class="form-label">Apellidos</label>
                                         </div>
                                     </div>
@@ -38,7 +38,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="email" class="form-control" name="Correo" value="<?php echo $data[0]->Correo ?>"></input>
+                                            <input type="email" class="form-control" name="Correo" value="<?php echo $data[0]->correo ?>"></input>
                                             <label class="form-label">Correo electronico</label>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" class="form-control " name="Telefono" value="<?php echo $data[0]->Telefono?>"></input>
+                                            <input type="number" class="form-control " name="Telefono" value="<?php echo $data[0]->telefono?>"></input>
                                             <label class="form-label">Telefono</label>
                                         </div>
                                     </div>

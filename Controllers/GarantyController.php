@@ -96,7 +96,7 @@ class GarantyController
             if ($bills[0]->garantia == "1 año freidora - 6 meses en panel táctil " || $bills[0]->garantia == '1 año telefono - 6 meses de batería y cargador' ) {
               if ($date_now >= $date_bill && $date_now >= $date_month) {
                 $billFailed = [
-                  'error' => 'El tiempo de garantia de los accesorios esta vencida'
+                  'error' => 'El tiempo de garantia de los productos esta vencida'
                 ];
                 $details = $this->model->getGaranty($bill);
                 require 'Views/Layout.php';
@@ -646,15 +646,13 @@ class GarantyController
               <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
               <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
                 <tr>
-                  <th>Codigo Producto</th>
-                  <th>Descripcion Producto</th>
-                  <th>Marca Producto</th>
-                  <th>Sello Producto</th>
-                  <th>Referencia Producto</th>
+                  <th>Descripcion</th>
+                  <th>Marca</th>
+                  <th>Sello</th>
+                  <th>Referencia</th>
                 </tr>';
                 foreach ($dates as $producte){ 
                $html .= '<tr>
-                          <td>'.$producte->Codigo_Producto.'</td><br>
                           <td>'.$producte->Descripcion_Producto.'</td><br>
                           <td>'.$producte->Marca_Producto.'</td><br>
                           <td>'.$producte->Sello_Producto.'</td><br>
@@ -709,15 +707,13 @@ class GarantyController
           <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
           <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
             <tr>
-              <th>Codigo Producto</th>
-              <th>Descripcion Producto</th>
-              <th>Marca Producto</th>
-              <th>Sello Producto</th>
-              <th>Referencia Producto</th>
+              <th>Descripcion</th>
+              <th>Marca</th>
+              <th>Sello</th>
+              <th>Referencia</th>
             </tr>';
             foreach ($dates as $producte){ 
            $html .= '<tr>
-              <td>'.$producte->Codigo_Producto.'</td><br>
               <td>'.$producte->Descripcion_Producto.'</td><br>
               <td>'.$producte->Marca_Producto.'</td><br>
               <td>'.$producte->Sello_Producto.'</td><br>

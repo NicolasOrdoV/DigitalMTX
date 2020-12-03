@@ -77,7 +77,12 @@
 			                    </div>
 			                    <div class="row clearfix">
 			                    	<div class="col-sm-12">
-			                            <h1>ESTADO:<?php echo $data[0]->Estado?></h1>
+			                            <h1>ESTADO: <?php echo $data[0]->Estado?></h1>
+			                        </div>
+			                    </div>
+			                    <div class="row clearfix">
+			                    	<div class="col-sm-12">
+			                            <h3>Fecha expedición: <?php echo $data[0]->Fecha_ingreso?></h3>
 			                        </div>
 			                    </div>
 				            </div>
