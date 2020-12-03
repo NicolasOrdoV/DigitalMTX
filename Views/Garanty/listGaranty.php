@@ -35,6 +35,9 @@
                                         <th>Aprobacion Garantia</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
+                                        <th>Observacion Tecnico</th>
+                                        <th>Fecha Anexo Tecnico</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +53,7 @@
                                                 <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                                 <td><?php echo $garanty->Estado ?></td>
                                                 <td>
-                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite' || $garanty ->Estado =='Pendiente por servicio tecnico' || $garanty ->Estado =='Solucionado por servicio tecnico' || $garanty ->Estado =='Pendiente para Nota Credito' || $garanty ->Estado =='Pendiente para cambio de producto' || $garanty ->Estado =='Pendiente para Devolucion de Dinero' 
+                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite' || $garanty ->Estado =='Pendiente por servicio tecnico' || $garanty ->Estado =='Solucionado por servicio tecnico' || $garanty ->Estado =='Pendiente para Nota Credito' || $garanty ->Estado =='Pendiente para cambio de producto' || $garanty ->Estado =='Pendiente para Devolucion de Dinero'
                                                         ) { ?>
                                                         <div class="row">
                                                             <div class="col-sm-6">
@@ -68,6 +71,8 @@
                                                         </div>
                                                 <?php } ?>
                                             </td>
+                                             <td><?php echo $garanty->Observacion_tecnico ?></td>
+                                              <td><?php echo $garanty->Fecha_anexo_Tecnico ?></td>
                                          </tr>
                                 <?php //}
                             } ?>
