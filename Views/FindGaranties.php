@@ -12,7 +12,7 @@
 
 <body>
     <main class="container-fluid">
-	    <section class="row mt-5">
+	    <section class="row mt-3">
 	        <div class="card w-100 m-auto">
 	            <div class="card-header bg-danger container-fluid">
 	                <h2 class="m-auto">
@@ -40,6 +40,10 @@
 				        	<div class="card-body w-100">
 				            	<h2>Producto</h2>
 			                    <div class="row clearfix">
+			                    	 <div class="col-sm-12">
+			                            <h3>Numero garantía</h3>
+			                            <h3><?php echo $data[0]->No_garantia?></h3>
+			                        </div>
 			                        <div class="col-sm-3">
 			                            <h5>Codigo del producto</h5>
 			                            <p><?php echo $data[0]->Codigo_Producto?></p>

@@ -50,7 +50,8 @@
                                                 <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                                 <td><?php echo $garanty->Estado ?></td>
                                                 <td>
-                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite') { ?>
+                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite' || $garanty ->Estado =='Pendiente por servicio tecnico' || $garanty ->Estado =='Solucionado por servicio tecnico' || $garanty ->Estado =='Pendiente para Nota Credito' || $garanty ->Estado =='Pendiente para cambio de producto' || $garanty ->Estado =='Pendiente para Devolucion de Dinero' 
+                                                        ) { ?>
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <form action="?controller=garanty&method=consecutive" method="POST">

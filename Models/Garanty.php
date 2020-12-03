@@ -82,7 +82,7 @@ class Garanty
     public function getAllSolution()
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia ORDER BY d.Id_Garantia ASC";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia  ORDER BY d.Id_Garantia ASC , d.Estado ASC";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -105,7 +105,7 @@ class Garanty
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE g.id = :id AND d.Estado = 'Tramite'";
+            WHERE d.Estado = 'Tramite' OR d.Estado='Pendiente por servicio tecnico' OR d.Estado ='Solucionado por servicio tecnico' OR d.Estado='Pendiente para Nota Credito' OR d.Estado = 'Pendiente para cambio de producto' OR d.Estado = 'Pendiente para Devolucion de Dinero'  AND  g.id = :id";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql, $array);
             return $query;

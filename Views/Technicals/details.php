@@ -19,6 +19,10 @@ $hora_actual = date("h:i a"); ?>
                         <div class="body">
                             <h2>Producto</h2>
                             <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <h5>Consecutivo garantia</h5>
+                                    <p><?php echo $data[0]->No_garantia?></p>
+                                </div>
                                 <div class="col-sm-3">
                                     <h5>Codigo del producto</h5>
                                     <p><?php echo $data[0]->Codigo_Producto?></p>
