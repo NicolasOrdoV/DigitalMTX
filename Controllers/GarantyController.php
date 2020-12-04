@@ -1103,7 +1103,7 @@ class GarantyController
                   ';
 
             $mail->send();
-            header('Location: ?controller=garanty&method=listGaranty');
+            header('Location: ?controller=garanty&method=solutionTechnical');
           } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
           }

@@ -17,6 +17,8 @@
                         </h2>
                         <p>Observacion del tecnico</p>
                         <?php echo $data[0]->Observacion_tecnico?>
+                        <p><b>Consecutivo Garantia</b></p>
+                        <h1><?php echo $data[0]->No_garantia?></h1>
                     </div>
                     <div class="body">
                         <form action="?controller=garanty&method=saveEndGaranty" method="POST" id="form_validation">

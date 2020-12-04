@@ -33,7 +33,7 @@
                                     <tbody>
                                         <?php foreach ($technicals as $key => $technical) { ?>
                                             <tr>
-                                                <td><?php echo $technical->N_garantia ?></td>
+                                                <td><?php echo $technical->No_garantia ?></td>
                                                 <td><?php echo $technical->Numero_Factura ?></td>
                                                 <td><?php echo $technical->Nombre_Cliente ?></td>
                                                 <td><?php echo $technical->idProducto ?></td>

@@ -35,9 +35,6 @@
                                         <th>Aprobacion Garantia</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
-                                        <th>Observacion Tecnico</th>
-                                        <th>Fecha Anexo Tecnico</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,8 +68,6 @@
                                                         </div>
                                                 <?php } ?>
                                             </td>
-                                             <td><?php echo $garanty->Observacion_tecnico ?></td>
-                                              <td><?php echo $garanty->Fecha_anexo_Tecnico ?></td>
                                          </tr>
                                 <?php //}
                             } ?>

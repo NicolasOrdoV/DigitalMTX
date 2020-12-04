@@ -15,6 +15,8 @@
                         <h2>
                             Ingresar Garantía final
                         </h2>
+                        <p><b>Consecutivo garantia:</b></p>
+                        <h1><?php echo $data[0]->No_garantia?></h1>
                     </div>
                     <div class="body">
                         <form action="?controller=garanty&method=saveEndDelivery" method="POST" id="form_validation">
