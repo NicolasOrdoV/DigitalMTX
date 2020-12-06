@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="Assets/img/logo-rojo.png">
-    <link rel="stylesheet" type="text/css" href="Assets/css/styleLogin.css">
 </head>
 
 <body>

@@ -33,7 +33,7 @@ if(isset($_POST['import_data'])){
                 '".$emp_record[8]."',
                 '".$emp_record[9]."')";
                 $sql_insert = utf8_encode($mysql_insert);
-                mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
+                $resultset = mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
                 //echo '<pre>';
                 //var_dump($resultset);
                 //echo '</pre>';

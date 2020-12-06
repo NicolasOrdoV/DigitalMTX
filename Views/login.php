@@ -30,7 +30,6 @@
                     <input type="password" name="password" placeholder="Contraseña">
                     <button type="submit" class="btn btn-danger float-right">Ingresar</button>
                 </form>
-                <a href="#">Recuperar contraseña?</a>
                 <a href="?controller=client&method=list">Consulta de garantias</a>
             </div>
         </div>

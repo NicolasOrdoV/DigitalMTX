@@ -16,6 +16,9 @@
                         </div>
                     </div>
                     <div class="header row">
+                        <div class="alert alert-warning">
+                            <p>RECUERDA: debes cargar tu archivo de facturas una vez, si los datos no cargan, por favor avisar a soporte tecnologico.</p>
+                        </div>
                         <div class="col-sm-12">
                             <h2>Importar</h2>
                         </div>

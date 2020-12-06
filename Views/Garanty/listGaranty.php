@@ -52,14 +52,14 @@
                                                 <td>
                                                     <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite' || $garanty ->Estado =='Pendiente por servicio tecnico' || $garanty ->Estado =='Solucionado por servicio tecnico' || $garanty ->Estado =='Pendiente para Nota Credito' || $garanty ->Estado =='Pendiente para cambio de producto' || $garanty ->Estado =='Pendiente para Devolucion de Dinero'
                                                         ) { ?>
-                                                        <div class="row">
+                                                        <div class="row clearfix">
                                                             <div class="col-sm-6">
                                                                 <form action="?controller=garanty&method=consecutive" method="POST">
                                                                     <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
                                                                     <button type="submit" class="btn btn-primary"><i class="material-icons">assignment</i></button>
                                                                 </form>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3">
                                                                 <form action="?controller=garanty&method=ticket" method="POST">
                                                                     <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
                                                                     <button type="submit" class="btn btn-success"><i class="material-icons">theaters</i></button>
@@ -67,10 +67,9 @@
                                                             </div>
                                                         </div>
                                                 <?php } ?>
-                                            </td>
-                                         </tr>
-                                <?php //}
-                            } ?>
+                                                </td>
+                                            </tr>
+                                <?php } ?>
                         </tbody>
                     </table>
                     </div>

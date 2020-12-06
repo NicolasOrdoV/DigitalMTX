@@ -51,6 +51,7 @@ class GarantyController
       header('Location: ?controller=login');
     }
   }
+  
   public function new()
   {
     if (isset($_SESSION['user'])) {
@@ -96,7 +97,7 @@ class GarantyController
             if ($bills[0]->garantia == "1 año freidora - 6 meses en panel táctil " || $bills[0]->garantia == '1 año telefono - 6 meses de batería y cargador' ) {
               if ($date_now >= $date_bill && $date_now >= $date_month) {
                 $billFailed = [
-                  'error' => 'El tiempo de garantia de los productos esta vencida'
+                  'error' => 'El tiempo de garantia de algunos de los productos esta vencida'
                 ];
                 $details = $this->model->getGaranty($bill);
                 require 'Views/Layout.php';
@@ -118,6 +119,19 @@ class GarantyController
                 require 'Views/Garanty/garantia_empleado.php';
                 require 'Views/Scripts.php';
               }
+            }elseif($bills[0]->garantia == "Probado" || $bills[0]->garantia == "0" || $bills[0]->garantia == "0 meses"){
+              $billFailed = [
+                  'error' => 'El producto no lleva garantia'
+                ];
+              $details = $this->model->getGaranty($bill);
+              require 'Views/Layout.php';
+              $data = $this->model->getAll();
+              $total_data = count($data);
+              $providers = $this->provider->getAll();
+              $departaments = $this->departament->getAll();
+              $municipalities = $this->municipality->getAll();
+              require 'Views/Garanty/garantia_empleado.php';
+              require 'Views/Scripts.php';
             }else{
               $details = $this->model->getGaranty($bill);
               require 'Views/Layout.php';
@@ -384,7 +398,7 @@ class GarantyController
             <html lang="en" >
             <head>
               <meta charset="UTF-8">
-              <title>CodePen - PDF Factura Ecuador</title>
+              <title>CodePen - PDF Factura</title>
               
 
             </head>
@@ -995,7 +1009,168 @@ class GarantyController
     if (isset($_SESSION['user'])) {
       if ($_POST) {
         $this->technical->editStatus($_POST);
-        header('Location: ?controller=garanty&method=solutionPre');
+        $data = $this->model->getByIdEnd($_POST['id']);
+        $mail = new PHPMailer(true);
+        try 
+        {
+          //Server settings
+          $mail->SMTPDebug = 0;                      // Enable verbose debug output
+          $mail->isSMTP();                                            // Send using SMTP
+          $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+          $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+          $mail->Password   = 'batman1000464327';                               // SMTP password
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+          //Recipients
+          $mail->setFrom('nikomegathet666@gmail.com');
+          $mail->addAddress($data[0]->Correo_Cliente);     // Add a recipient
+
+          // Content
+          $mail->isHTML(true);                                  // Set email format to HTML
+          $mail->Subject = 'Solicitud de garantia';
+          $mail->Body    = '
+          <!DOCTYPE html>
+          <html lang="en" >
+          <head>
+          <meta charset="UTF-8">
+          <title>Digital MTX Garantias</title>
+          <style type="text/css">
+          @media only screen and (max-width: 600px) {
+            .main {
+              width: 320px !important;
+            }
+            .top-image {
+              width: 100% !important;
+            }
+            .inside-footer {
+              width: 320px !important;
+            }
+            table[class="contenttable"] {
+              width: 320px !important;
+              text-align: left !important;
+            }
+            td[class="force-col"] {
+              display: block !important;
+            }
+            td[class="rm-col"] {
+              display: none !important;
+            }
+            .mt {
+              margin-top: 15px !important;
+            }
+            *[class].width300 {
+              width: 255px !important;
+            }
+            *[class].block {
+              display: block !important;
+            }
+            *[class].blockcol {
+              display: none !important;
+            }
+            .emailButton {
+              width: 100% !important;
+            }
+            .emailButton a {
+              display: block !important;
+              font-size: 18px !important;
+            }
+          }
+          </style>
+          
+          </head>
+          <body>
+          <!-- partial:index.partial.html -->
+          <body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
+          
+          <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
+            <tr>
+            <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+              <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+              <tr>
+                <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
+                <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Digital MTX"></a>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top" class="side title" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;vertical-align: top;background-color: white;border-top: none;">
+                <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                  <tr>
+                  <td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
+                    <div class="mktEditable" id="main_title">
+                    Proceso de la Garantia 
+                    </div>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
+                  <div class="mktEditable" id="intro_title">
+                    Estimado Usuario
+                  </div></td>
+                  </tr>
+                  <tr>
+                  <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;"></td>
+                  </tr>
+                  
+                  <tr>
+                  <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 15px 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 21px;">
+                    <hr size="1" color="#eeeff0">
+                  </td>
+                  </tr>
+                  <tr>
+                  <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+                  <div class="mktEditable" id="main_text">
+          
+          
+                    Su actual estado de la garantia se encuentra en '.$data[0]->Estado .'<br><br>
+                    
+                  </div>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
+                   &nbsp;<br>
+                  </td>
+                  </tr>
+                  
+          
+                </table>
+                </td>
+              </tr>
+            
+                        
+              <tr bgcolor="#fff" style="border-top: 4px solid  #F44336;">
+                <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
+                <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                  <tr>
+                  <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
+          <div id="address" class="mktEditable">
+                    <b>Digital MTX</b><br>
+                                2020<br> 
+                        <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
+          </div>
+                  </td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+          </table>
+          </body>
+          <!-- partial -->
+          
+          </body>
+          </html>
+          ';
+
+          $mail->send();
+          header('Location: ?controller=garanty&method=solutionPre');
+        } catch (Exception $e) {
+          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
       }
     }else{
       header('Location: ?controller=login');
