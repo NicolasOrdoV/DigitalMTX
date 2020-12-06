@@ -333,12 +333,11 @@ $td = $total_data + 0001;
             <!-- Textarea -->
             <!--#END# Switch Button -->
         </div>
-        <?php if (!empty($details)) {
-            foreach ($details as $detail) { ?>
-                 
-                 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+        <?php if (!empty($details)) {?>
+            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
+                    <?php foreach ($details as $detail) { ?>
                         <div class="modal-header bg-red">
                             <h4 class="modal-title" id="largeModalLabel">Numero Garantia: <?php echo $detail->No_garantia?></h4>
                         </div>
@@ -472,11 +471,11 @@ $td = $total_data + 0001;
                                 </div>
                             </div>
                         </div>
+                    <?php } ?>    
                     </div>
                 </div>
             </div>
-        <?php }
-        } ?>
+        <?php } ?>
 </section>
 <!-- <script type="text/javascript">
     $(function() {

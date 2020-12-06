@@ -587,13 +587,13 @@ class GarantyController
     } 
   }
 
-  public function consecutive()
+  public function consecutive() 
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A5']);
         $id = $_REQUEST['id'];
-        $dates = $this->model->getById($id);
+        $dates = $this->model->getByIdG($id);
         /*foreach ($dates as $product) {
           echo $product->Descripcion_Producto.'<br>';
         }*/
@@ -748,7 +748,7 @@ class GarantyController
       if (isset($_REQUEST['id'])) {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [100, 180]]);
         $id = $_REQUEST['id'];
-        $data = $this->model->getById($id);
+        $data = $this->model->getByIdG($id);
         $html = '';
         /*foreach ($data as $product) {
           echo $data[0]->No_garantia.'<br>';
@@ -1006,8 +1006,7 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_POST)) {
-        if (preg_match('/^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑ.,; ]+$/', $_POST['Observacion_Final']) ||
-            preg_match('/^[0-9]+$/', $_POST['Sello_Producto'])) {
+        if (preg_match('/^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑ.,; ]+$/', $_POST['Observacion_Final'])) {
 
           $this->model->saveGarantyEnd($_POST);
           $data = $this->model->getByIdEnd($_POST['id']);

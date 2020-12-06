@@ -14,15 +14,20 @@
                     <div class="header">
                         <h2>
                             Ingresar Garantía final
+                            <?php 
+                            //echo '<pre>';
+                            //var_dump($data);
+                            //echo '</pre>'; 
+                            ?>
                         </h2>
                         <p>Observacion del tecnico</p>
                         <?php echo $data[0]->Observacion_tecnico?>
                         <p><b>Consecutivo Garantia</b></p>
                         <h1><?php echo $data[0]->No_garantia?></h1>
                     </div>
-                    <div class="body">
+                    <div class="body"> 
                         <form action="?controller=garanty&method=saveEndGaranty" method="POST" id="form_validation">
-                            <input  type = "hidden" name="id" value="<?php echo $data[0]->id ?>">
+                            <input  type = "hidden" name="id" value="<?php echo $data[0]->idg ?>">
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <div class="form-group">

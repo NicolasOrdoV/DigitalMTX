@@ -116,6 +116,18 @@ class Garanty
         }
     }
 
+    public function getByIdG($id)
+    {
+        try {
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE g.id = :id";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql, $array);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
 
     public function getByIdEnd($id)
     {
@@ -136,7 +148,7 @@ class Garanty
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE d.Descripcion_Producto = '$name' AND d.Estado = 'Tramite' OR d.Estado = 'Pendiente por servicio tecnico' OR d.Estado = 'Solucionado por servicio tecnico' AND d.id = $id";
+            WHERE d.Descripcion_Producto = '$name' AND d.id = $id";
             /*  $array = ['Descripcion_Producto' => $name,
                       'Id_Garantia' => $id]; */
             $query = $this->pdo->select($strSql); 
@@ -226,7 +238,7 @@ class Garanty
     public function saveGarantyEnd($data)
     {
         try {
-            $strWhere = "id =" . $data['id'];
+            $strWhere = "id =".$data['id'];
             $this->pdo->update('mg_detalle_garantia', $data, $strWhere);
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -236,9 +248,8 @@ class Garanty
     public function getOptions($id)
     {
         try {
-            $strSql = "SELECT t.Observacion_tecnico as Observacion_tecnico, t.Id_Garantia as idg ,d.*,g.* FROM mg_detalle_garantia d INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia INNER JOIN mg_garantia g ON g.id = d.Id_Garantia WHERE d.id = :id ORDER BY t.id DESC LIMIT 1";
-            $array = ['id' => $id];
-            $query = $this->pdo->select($strSql, $array);
+            $strSql = "SELECT t.Observacion_tecnico as Observacion_tecnico, t.Id_Garantia as idg ,d.*,g.* FROM mg_detalle_garantia d INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia INNER JOIN mg_garantia g ON g.id = d.Id_Garantia WHERE d.id = $id ORDER BY t.id DESC LIMIT 1";
+            $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -248,7 +259,7 @@ class Garanty
     public function getGaranty($bill)
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE g.Numero_Factura LIKE '%$bill' OR d.Sello_Producto = '%$bill%' ";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE g.Numero_Factura LIKE '%$bill' OR d.Sello_Producto = '$bill' ";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {

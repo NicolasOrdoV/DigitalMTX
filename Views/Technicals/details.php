@@ -8,7 +8,7 @@ $hora_actual = date("h:i a"); ?>
                     DETALLES DE GARANTIA
                     <small>Aqui puedes visualisar el detalle de las garantias para empezar a reparar y dar tus conclusiones</small>
                 </h2>
-            </div>
+            </div> 
             <!-- Input -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -105,7 +105,7 @@ $hora_actual = date("h:i a"); ?>
                                <?php } ?>
                             <?php if($data[0]->Estado != "Solucionado por servicio tecnico"){?>   
                             <div class="row clearfix">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12"> 
                                     <form action="?controller=technical&method=save" method="POST" id="form_validation">
                                         <input type="hidden" name="Id_Garantia" value="<?php echo $data[0]->id?>">
                                         <input type="hidden" name="Id_Empleado" value="<?php echo $_SESSION['user']->id?>">

@@ -43,7 +43,7 @@ class TechnicalController
 				$name = $_REQUEST['name'];
 				$id = $_REQUEST['id'];
 				$data = $this->garanty->getByIdTec($name,$id);
-				$consecutives = $this->model->consecutives($id);
+				$consecutives = $this->model->consecutives($id); 
 				//$details = $this->garanty->getAlDetails($id);
 			    require 'Views/Layout.php';
 				require 'Views/Technicals/details.php';
@@ -75,11 +75,20 @@ class TechnicalController
 						'id' => $data['Id_Garantia'],
 						'Estado' => $_POST['Estado_tecnico']
 					];
+					$this->model->editStatus($dates);
+					echo '<pre>';
+					var_dump($dates);
+					echo '</pre>';
+
 				}else{
 					$dates = [
 						'id' => $data['Id_Garantia'],
 						'Estado' => $_POST['Estado_tecnico']
 					];
+					$this->model->editStatus($dates);
+					echo '<pre>';
+					var_dump($role);
+					echo '</pre>';
 				}
 				$this->model->editStatus($dates);
 				$dataTec = $this->model->getByIdDetM($_POST['Id_Garantia']);
