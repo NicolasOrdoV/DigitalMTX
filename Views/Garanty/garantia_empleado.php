@@ -7,6 +7,7 @@ $td = $total_data + 0001;
     <div class="container-fluid">
         <div class="block-header">
             <h2>
+                <a href="?controller=garanty&method=listGaranty" class="btn btn-danger"><<</a>
                 REGISTRO DE GARANTIAS
                 <small>Aqui puedes registrar la garantia y decides si la apruebas o no</small>
             </h2>

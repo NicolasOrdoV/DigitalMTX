@@ -1291,4 +1291,103 @@ class GarantyController
       header('Location: ?controller=login');
     }
   }
+
+  public function excelComplete()
+  {          
+    $timestamp = time();
+    $filename = 'Garantias_' . $timestamp . '.xls';
+    
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Content-type: application/x-msdownload");
+    header("Content-Disposition: attachment; filename=\"$filename\"");
+    header("Pragma: no-cache");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    
+    $isPrintHeader = false;
+    $productResult = $this->model->getComplete();
+    ksort($productResult);
+    foreach ($productResult as $garanty) {
+      if ( !$isPrintHeader ) {
+        echo '<table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>No_Garantia</th>
+                        <th>Fecha_ingreso</th>
+                        <th>Hora_ingreso</th>
+                        <th>Numero_Factura</th>
+                        <th>Punto_Venta</th>
+                        <th>Fecha_Compra</th>
+                        <th>Nombre_Cliente</th>
+                        <th>Identificacion_Cliente</th>
+                        <th>Correo_Cliente</th>
+                        <th>Direccion_Cliente</th>
+                        <th>Flete</th>
+                        <th>Departamento</th>
+                        <th>Municipio</th>
+                        <th>Valor_Flete</th>
+                        <th>No_Guia</th>
+                        <th>Transportadora</th>
+                        <th>Observacion_Empleado</th>
+                        <th>Empleado</th>
+                        <th>Codigo_Producto</th>
+                        <th>Descripcion_Producto</th>
+                        <th>Marca_Producto</th>
+                        <th>Sello_Producto</th>
+                        <th>Referencia</th>
+                        <th>Cantidad_Producto</th>
+                        <th>Codigo_Proveedor</th>
+                        <th>Observacion_Cliente</th>
+                        <th>Estado</th>
+                        <th>Observacion_Final</th>
+                        <th>Aprobacion_Garantia</th>
+                        <th>Observacion_Tecnico</th>
+                        <th>Fecha_anexo_Tecnico</th>
+                        <th>Hora_Anexo_Tecnico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>'.$garanty->id.'</td>
+                    <td>'.$garanty->No_garantia.'</td>
+                    <td>'.$garanty->Fecha_ingreso.'</td>
+                    <td>'.$garanty->Hora_ingreso.'</td>
+                    <td>'.$garanty->Numero_Factura.'</td>
+                    <td>'.$garanty->Punto_Venta.'</td>
+                    <td>'.$garanty->Fecha_Compra.'</td>
+                    <td>'.$garanty->Nombre_Cliente.'</td>
+                    <td>'.$garanty->Identificacion_Cliente.'</td>
+                    <td>'.$garanty->Correo_Cliente.'</td>
+                    <td>'.$garanty->Direccion_Cliente.'</td>
+                    <td>'.$garanty->Flete.'</td>
+                    <td>'.$garanty->Departamento.'</td>
+                    <td>'.$garanty->Municipio.'</td>
+                    <td>'.$garanty->Valor_Flete.'</td>
+                    <td>'.$garanty->No_Guia.'</td>
+                    <td>'.$garanty->Transportadora.'</td>
+                    <td>'.$garanty->Observacion_Empleado.'</td>
+                    <td>'.$garanty->Empleado.'</td>
+                    <td>'.$garanty->Codigo_Producto.'</td>
+                    <td>'.$garanty->Descripcion_Producto.'</td>
+                    <td>'.$garanty->Marca_Producto.'</td>
+                    <td>'.$garanty->Sello_Producto.'</td>
+                    <td>'.$garanty->Referencia.'</td>
+                    <td>'.$garanty->Cantidad_Producto.'</td>
+                    <td>'.$garanty->Codigo_Proveedor.'</td>
+                    <td>'.$garanty->Observacion_Cliente.'</td>
+                    <td>'.$garanty->Estado.'</td>
+                    <td>'.$garanty->Observacion_Final.'</td>
+                    <td>'.$garanty->Aprobacion_Garantia.'</td>
+                    <td>'.$garanty->Observacion_tecnico.'</td>
+                    <td>'.$garanty->Fecha_anexo_Tecnico.'</td>
+                    <td>'.$garanty->Hora_Anexo_Tecnico.'</td>
+                  </tr>
+                </tbody>
+            </table>';
+        $isPrintHeader = true;
+      }
+    }
+    exit();
+  }
 }
