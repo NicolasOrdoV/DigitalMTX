@@ -50,7 +50,7 @@
                                     <?php foreach ($bills as $bill) { ?>
                                         <tr>
                                             <td><?php echo $bill->id ?></td>
-                                            <td><?php echo $bill->fecha_factura ?></td>
+                                            <td><?php echo $bill->fecha_facturaG ?></td>
                                             <td><?php echo $bill->nit ?></td>
                                             <td><?php echo $bill->vendedor ?></td>
                                             <td><?php echo $bill->Numero_Factura ?></td>

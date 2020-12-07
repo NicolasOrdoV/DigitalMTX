@@ -7,6 +7,7 @@ require 'Models/Provider.php';
 require 'Models/Departament.php';
 require 'Models/Municipality.php';
 require 'Models/Technical.php';
+require 'Models/Bill.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -28,6 +29,7 @@ class GarantyController
   private $departament;
   private $municipality;
   private $technical;
+  private $bill;
 
   public function __construct()
   {
@@ -38,6 +40,7 @@ class GarantyController
     $this->departament = new Departament;
     $this->municipality = new Municipality;
     $this->technical = new Technical;
+    $this->bill = new Bill;
   }
 
   public function listGaranty()
@@ -977,7 +980,7 @@ class GarantyController
     }
   }
 
-  public function optionsEnds()
+  public function optionsEnds() 
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
@@ -1008,8 +1011,22 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if ($_POST) {
-        $this->technical->editStatus($_POST);
+        $data = [
+          'id' => $_POST['id'],
+          'Estado' => $_POST['Estado'],
+          'Sello_Producto' => $_POST['Sello_Producto']
+        ];
+        $this->technical->editStatus($data);
         $data = $this->model->getByIdEnd($_POST['id']);
+        //var_dump($data);
+        $consultId = $this->bill->getBill($data[0]->Numero_Factura);
+
+        $dateUpdate = [
+          'id' => $consultId[0]->id,
+          'fecha_factura' => $_POST['fecha_factura']
+        ];
+        //var_dump($dateUpdate);
+        $this->bill->updateBill($dateUpdate);
         $mail = new PHPMailer(true);
         try 
         {

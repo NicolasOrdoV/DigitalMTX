@@ -22,8 +22,9 @@ if(isset($_POST['import_data'])){
                 //echo $dateEnd.'<br>';
                 $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
                 //echo $bill.'<br>';
-                $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
+                $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`,`fecha_facturaG`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
                 ('".$dateEnd."',
+                '".$dateEnd."',
                 '".$emp_record[1]."',
                 '".$emp_record[2]."',
                 '".$bill."',

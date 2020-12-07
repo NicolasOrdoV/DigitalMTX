@@ -21,6 +21,7 @@
                     <div class="body">
                         <form action="?controller=garanty&method=saveEndDelivery" method="POST" id="form_validation">
                             <input  type = "hidden" name="id" value="<?php echo $data[0]->id ?>">
+                            <input  type = "hidden" name="fecha_factura" value="<?php echo date('d-m-Y')?>">
                             <div class="row clearfix">
                                 <div class="alert alert-warning">
                                     <b>NOTA:</b>

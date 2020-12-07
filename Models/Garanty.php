@@ -143,9 +143,7 @@ class Garanty
     public function getByIdEnd($id)
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
-            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE d.id = :id";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.id = :id";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql, $array);
             return $query;

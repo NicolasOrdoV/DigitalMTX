@@ -45,10 +45,21 @@ class Bill
         }
     }
 
+    public function getBill($data)
+    {
+        try {
+            $strSql = "SELECT * FROM mg_facturas WHERE Numero_Factura = '$data'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function updateBill($data)
     {
         try {
-            $strWhere = 'Numero_Factura='.$data[0];
+            $strWhere = 'id='.$data['id'];
             $this->pdo->update('mg_facturas', $data , $strWhere);
         } catch (PDOException $e) {
             die($e->getMessage());
