@@ -996,7 +996,7 @@ class GarantyController
     }
   }
 
-  public function solutionTechnical()
+  public function solutionTechnical() 
   {
     if (isset($_SESSION['user'])) {
       require 'Views/Layout.php';
@@ -1012,12 +1012,20 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if ($_POST) {
-        $data = [
+        if ($_POST['Estado'] == 'Entregado para cambio de producto') {
+          $data = [
+            'id' => $_POST['id'],
+            'Estado' => $_POST['Estado'],
+            'Sello_Producto' => $_POST['Sello_Producto']
+          ];
+          $this->technical->editStatus($data);
+        }else{
+          $data = [
           'id' => $_POST['id'],
-          'Estado' => $_POST['Estado'],
-          'Sello_Producto' => $_POST['Sello_Producto']
-        ];
-        $this->technical->editStatus($data);
+          'Estado' => $_POST['Estado']
+          ];
+          $this->technical->editStatus($data);
+        }
         $data = $this->model->getByIdEnd($_POST['id']);
         //var_dump($data);
         $consultId = $this->bill->getBill($data[0]->Numero_Factura);
