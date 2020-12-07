@@ -35,7 +35,7 @@ class Technical
 		try {
 			$strSql = "SELECT t.*,d.* FROM mg_servicio_tecnico t
 			INNER JOIN mg_detalle_garantia d ON d.id = t.Id_Garantia 
-			WHERE d.id = :id AND d.Estado = 'Pendiente por servicio tecnico' OR d.Estado = 'Solucionado por servicio tecnico'";
+			WHERE d.id = :id";
 			$array = ['id' => $id];
 			$query = $this->pdo->select($strSql, $array);
 			return $query;

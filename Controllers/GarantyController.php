@@ -1023,7 +1023,8 @@ class GarantyController
 
         $dateUpdate = [
           'id' => $consultId[0]->id,
-          'fecha_factura' => $_POST['fecha_factura']
+          'fecha_factura' => $_POST['fecha_factura'],
+          'Descripcion_Comentarios' => $_POST['Sello_Producto']
         ];
         //var_dump($dateUpdate);
         $this->bill->updateBill($dateUpdate);
@@ -1323,10 +1324,9 @@ class GarantyController
     
     $isPrintHeader = false;
     $productResult = $this->model->getComplete();
-    ksort($productResult);
-    foreach ($productResult as $garanty) {
+    
       if ( !$isPrintHeader ) {
-        echo '<table class="table">
+        $html = '<table class="table">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -1364,8 +1364,9 @@ class GarantyController
                         <th>Hora_Anexo_Tecnico</th>
                     </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody>';
+                foreach ($productResult as $garanty) {
+                  $html .= '<tr>
                     <td>'.$garanty->id.'</td>
                     <td>'.$garanty->No_garantia.'</td>
                     <td>'.$garanty->Fecha_ingreso.'</td>
@@ -1399,12 +1400,13 @@ class GarantyController
                     <td>'.$garanty->Observacion_tecnico.'</td>
                     <td>'.$garanty->Fecha_anexo_Tecnico.'</td>
                     <td>'.$garanty->Hora_Anexo_Tecnico.'</td>
-                  </tr>
-                </tbody>
+                  </tr>';
+                }  
+                $html .= '</tbody>
             </table>';
+        echo $html;    
         $isPrintHeader = true;
       }
-    }
     exit();
   }
 }

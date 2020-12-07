@@ -42,7 +42,7 @@
                                                 <td><?php echo $technical->EstadoG ?></td>
                                                 <td>
                                                     <div class="row clearfix">
-                                                        <?php if ($technical->EstadoG == "Tramite" || $technical->EstadoG == "Pendiente por servicio tecnico" || $technical->EstadoG == "Solucionado por servicio tecnico") { ?>
+                                                        <?php if ($technical->EstadoG == "Tramite" || $technical->EstadoG == "Pendiente por servicio tecnico" || $technical->EstadoG == "Solucionado por servicio tecnico" || $technical->EstadoG == "Pendiente para Nota Credito" || $technical->EstadoG == "Pendiente para cambio de producto" || $technical->EstadoG == "Pendiente para Devolucion de Dinero" || $technical->EstadoG == "Entregado para Devolucion de Dinero" || $technical->EstadoG == "Entregado para Nota Credito" || $technical->EstadoG == "Entregado para cambio de producto") { ?>
                                                             <div class="col-sm-6">
                                                                 <a href="?controller=technical&method=details&name=<?php echo $technical->DescripcionP ?>&id=<?php echo $technical->idDetalle ?>" class="btn btn-info"><i class="material-icons">add</i></a>
                                                             </div>
