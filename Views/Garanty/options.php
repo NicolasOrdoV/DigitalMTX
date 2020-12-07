@@ -3,6 +3,7 @@
     <div class="container-fluid">
         <div class="block-header">
             <h2>
+                <a href="?controller=garanty&method=solutionTechnical" class="btn btn-danger"><<</a>
                 OPCIONES DE GARANTIAS
                 <small>Aqui puedes registrar el registro final de la garantia</small>
             </h2>

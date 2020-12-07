@@ -5,6 +5,7 @@ $hora_actual = date("h:i a"); ?>
         <div class="container-fluid">
             <div class="block-header">
                 <h2>
+                    <a href="?controller=technical&method=list" class="btn btn-danger"><<</a>
                     DETALLES DE GARANTIA
                     <small>Aqui puedes visualisar el detalle de las garantias para empezar a reparar y dar tus conclusiones</small>
                 </h2>
