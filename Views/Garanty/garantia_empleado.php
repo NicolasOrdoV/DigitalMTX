@@ -152,6 +152,7 @@ $td = $total_data + 0001;
                                             <th>Marca</th>
                                             <th>Cantidad</th>
                                             <th>Proveedor</th>
+                                            <th>Fecha proveedor</th>
                                             <th>Observacion del cliente</th>
                                             <th>¿Se aprueba la garantia?</th>
                                         </tr>
@@ -216,6 +217,9 @@ $td = $total_data + 0001;
                                                                 <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
                                                             <?php } ?>
                                                         </select>
+                                                    </td>
+                                                    <td>
+                                                        <input size="5" type="date" name="Fecha_Proveedor[]" class="form-control">
                                                     </td>
                                                     <td>
                                                         <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>

@@ -238,6 +238,7 @@ class GarantyController
         $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
         $Estado = ($_POST['Estado']);
         $garantia = ($_POST['time']);
+        $dateProvider = ($_POST['Fecha_Proveedor']);
 
         while (true) {
           $item1 = current($Codigo_Producto);
@@ -248,11 +249,10 @@ class GarantyController
           $item6 = current($Cantidad_Producto);
           $item7 = current($Referencia);
           $item8 = current($Observacion_Cliente);
-          
-            $item9 = current($Aprobacion_Garantia);
-          
+          $item9 = current($Aprobacion_Garantia);
           $item10 = current($Estado);
           $item11 = current($garantia);
+          $item12 = current($dateProvider);
 
           $cp = (($item1 !== false) ? $item1 : '');
           $dp = (($item2 !== false) ? $item2 : '');
@@ -267,6 +267,7 @@ class GarantyController
           
           $es = (($item10 !== false) ? $item10 : '');
           $g = (($item11 !== false) ? $item11 : '');
+          $dP = (($item12 !== false) ? $item12 : '');
 
           
           $detaills = [
@@ -277,6 +278,7 @@ class GarantyController
             'Referencia' => $rp,
             'Cantidad_Producto' => $canPro,
             'Codigo_Proveedor' => $cpro,
+            'Fecha_Proveedor' => $dP,
             'Id_Garantia' => $lastId[0]->id,
             'Observacion_Cliente' => $op,
             'Estado' => $es,
@@ -365,13 +367,12 @@ class GarantyController
           $item6 = next($Cantidad_Producto);
           $item7 = next($Referencia);
           $item8 = next($Observacion_Cliente);
-         
-            $item9 = next($Aprobacion_Garantia);
-          
+          $item9 = next($Aprobacion_Garantia);
           $item10 = next($Estado);
           $item11 = next($garantia);
+          $item12 = next($dateProvider);
           // Check terminator
-          if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false) break;
+          if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false && $item12 === false) break;
         }
 
         $dates = $this->model->getAlDetails($lastId[0]->id);
