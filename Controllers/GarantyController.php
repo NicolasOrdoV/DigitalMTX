@@ -768,13 +768,6 @@ class GarantyController
         $id = $_REQUEST['id'];
         $data = $this->model->getByIdG($id);
         $html = '';
-        /*foreach ($data as $product) {
-          echo $data[0]->No_garantia.'<br>';
-          echo $data[0]->Nombre_Cliente.'<br>';
-          echo $product->Descripcion_Producto.'<br>';
-          echo $data[0]->Fecha_ingreso.'<br>';
-          echo '<hr>';
-        }*/
         foreach ($data as $product) {
           $html = '';
           $html .= '<!DOCTYPE html>
@@ -785,25 +778,22 @@ class GarantyController
             <style type="text/css">
 
             .cardWrap {
-            width: 290px;
-            margin: 3em auto;
+            width: 1090px;
             color: #fff;
             font-family: sans-serif;
           }
 
           .card {
             background: linear-gradient(to top, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
-            height: 11em;
             float: left;
-            position: top;
             padding: 1em;
-            margin-top: 90px;
           }
 
           .cardLeft {
             border-radius: 8px;
             border-bottom-radius: 8px;
-            width: 16em;
+            width: 200em;
+            height: 400em;
           }
 
           .cardRight {
@@ -1013,30 +1003,30 @@ class GarantyController
     if (isset($_SESSION['user'])) {
       if ($_POST) {
         if ($_POST['Estado'] == 'Entregado para cambio de producto') {
-          $data = [
+          $dataS = [
             'id' => $_POST['id'],
             'Estado' => $_POST['Estado'],
             'Sello_Producto' => $_POST['Sello_Producto']
           ];
-          $this->technical->editStatus($data);
         }else{
-          $data = [
+          $dataS = [
           'id' => $_POST['id'],
           'Estado' => $_POST['Estado']
           ];
-          $this->technical->editStatus($data);
         }
-        $data = $this->model->getByIdEnd($_POST['id']);
-        //var_dump($data);
-        $consultId = $this->bill->getBill($data[0]->Numero_Factura);
+        $this->technical->editStatus($dataS);
 
-        $dateUpdate = [
-          'id' => $consultId[0]->id,
-          'fecha_factura' => $_POST['fecha_factura'],
-          'Descripcion_Comentarios' => $_POST['Sello_Producto']
-        ];
-        //var_dump($dateUpdate);
-        $this->bill->updateBill($dateUpdate);
+        $data = $this->model->getByIdEnd($_POST['id']);
+        $consultId = $this->bill->getBill($data[0]->Numero_Factura);
+        
+        if ($_POST['Estado'] == 'Entregado para cambio de producto') {
+          $dateUpdate = [
+            'id' => $consultId[0]->id,
+            'fecha_factura' => $_POST['fecha_factura'],
+            'Descripcion_Comentarios' => $_POST['Sello_Producto']
+          ];
+          $this->bill->updateBill($dateUpdate);
+        }
         $mail = new PHPMailer(true);
         try 
         {
