@@ -61,7 +61,7 @@
                                             <div class="form-group ">
                                                 <div class="form-line">
                                                     <label>Sello Producto</label>
-                                                    <input type="text" class="form-control" name="Sello_Producto" value="<?php echo rand('1234567','10')?>">
+                                                    <input type="text" class="form-control" name="Sello_Producto">
                                                 </div>
                                             </div>
                                         </div>

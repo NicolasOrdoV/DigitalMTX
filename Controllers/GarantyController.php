@@ -424,17 +424,18 @@ class GarantyController
                   </tr>
                   <tr>
                     <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-                      <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
-                      <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
                       <p><b>Nombre</b>'.$data['Nombre_Cliente'].'</p>
                       <p><b>Identificacion</b> '.$data['Identificacion_Cliente'].'</p>
-                      <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
-                    </td>
-                    <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
                       <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
                       <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
+                      
+                    </td>
+                    <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+                      <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
+                      <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
                       <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
                       <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
+                      <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
                     </td>
                   </tr>
                 </table>
@@ -442,17 +443,15 @@ class GarantyController
                 <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
                 <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
                   <tr>
-                    <th>Codigo Producto</th>
-                    <th>Descripcion Producto</th>
-                    <th>Marca Producto</th>
-                    <th>Referencia Producto</th>
+                    <th>Referencia</th>
+                    <th>Descripcion</th>
+                    <th>Marca</th>
                   </tr>';
                   foreach ($datas as $product) {
                   $html .= '<tr>
-                    <td>'.$product->Codigo_Producto.'</td>
+                  <td>'.$product->Referencia.'</td>
                     <td>'.$product->Descripcion_Producto.'</td>
                     <td>'.$product->Marca_Producto.'</td>
-                    <td>'.$product->Referencia.'</td>
                   </tr>';
                 }
                 $html .= '</table><br>
@@ -609,9 +608,11 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A5']);
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
         $id = $_REQUEST['id'];
         $dates = $this->model->getByIdG($id);
+        date_default_timezone_set('America/Bogota');
+        $hora_actual = date("h:i a");
         /*foreach ($dates as $product) {
           echo $product->Descripcion_Producto.'<br>';
         }*/
@@ -628,14 +629,13 @@ class GarantyController
           <body>
           <!-- partial:index.partial.html -->
           <center>
-            <div style="width: 580px;">
+            <div style="width: 880px;">
               <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
                 <tr>
                   <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
                     <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
                     <div style="display: inline-block; margin-left: 320px;">
-                      <p style="font-weight: bold;">Digital MTX</p>
-                      <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p>
+                      <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'  Hora impresion: '.$hora_actual.'</p>
                     </div>
                     <hr>
                     <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
@@ -644,37 +644,37 @@ class GarantyController
                 <tr>
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
                     <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p><br>
-                    <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p><br>
-                    <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p><br>
-                    <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p><br>
-                    <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p><br>
+                    <p><b>Punto Venta:</b>'.$dates[0]->Punto_Venta.'</p><br>
+                    <p><b>Nombre:</b>'.$dates[0]->Nombre_Cliente.'</p><br>
+                    <p><b>Identificación:</b> '.$dates[0]->Identificacion_Cliente.'</p><br>
+                    
+                    <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p><br>
+                    <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p><br>
                   </td>
                   <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-                    <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p><br>
-                    <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p><br>
-                    <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p><br>
                     <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p><br>
                     <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p><br>
-                    <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p><br>
+                    <p><b>Numero Guia:</b> '.$dates[0]->No_Guia.'</p><br>
+                    <p><b>Valor del flete:</b> '.$dates[0]->Valor_Flete.'</p><br>
                     <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p><br>
                   </td>
                 </tr>
               </table>
-
+              
               <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
               <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
                 <tr>
+                <th>Referencia</th>
                   <th>Descripcion</th>
                   <th>Marca</th>
                   <th>Sello</th>
-                  <th>Referencia</th>
                 </tr>';
                 foreach ($dates as $producte){ 
                $html .= '<tr>
+                          <td>'.$producte->Referencia.'</td><br>
                           <td>'.$producte->Descripcion_Producto.'</td><br>
                           <td>'.$producte->Marca_Producto.'</td><br>
                           <td>'.$producte->Sello_Producto.'</td><br>
-                          <td>'.$producte->Referencia.'</td><br>
                         </tr>';
                 }
               $html .= '</table><br>
@@ -687,67 +687,64 @@ class GarantyController
                   <div style="display:table; margin:auto; text-align:left;">
                     <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p><br>
                   </div>
-            --------------------------------------------------------------------------------------------------------------------------------------------------
+               <small style="font-size: 6px; justify-content: center;">"Garantía: El horario de atención es de lunes a viernes de 09:00 a 13:00 en la calle 77 # 16A – 38 Oficina 303¤2)Para el ingreso del producto a garantía el cliente deberá entregar el documento de compra y el producto completo con sus empaques, accesorios, manuales, sin daños físicos que invaliden la garantía. 3)El periodo para dar¤solución a la garantía es de (8) ocho días hábiles, a partir de la fecha de radicado. 4)La Garantía no cubre en los siguientes casos: • Cuando el producto presenta daño físico, por mal uso, mala manipulación, transporte o¤descuido. • Cuando los sellos de garantía se encuentren removidos o sobre etiquetados remarcados. • Daños causados por descargas eléctricas o uso de voltaje incorrecto. • Daños generados por¤presencia de elementos nocivos que no forman parte del producto. • Si el cliente ha cambiado el software original de fábrica. 5)Toda garantía que no¤se reclame en (1) mes a partir de la fecha de ingreso, se hará un cobro de bodegaje, transcurrido los (6) meses será declarada en abandono y se procederá a su destrucción. 6)Si el cliente no presenta el documento de compra del¤producto, deberá presentar un documento relacionando el producto, NIT, fecha de compra, la copia del documento de compra se entregara en un plazo de (5) días hábiles. 7)Para la entrega de la garantía, el cliente presentara el¤formato de garantía original, no se entregara el producto con fotocopia del formato o sin el formato de garantía. 8)El periodo de garantía que cubre Digital MTX a los clientes en los productos son: cargadores de caja roja (2)años, cargadores para Mac y universal (1)año, baterías para portátil (1)año, pantallas para computador (6)meses, teclados (6)meses, baterías para celular (3)meses, pantallas para celular (3)meses. Importante: Al firmar y/o recibir el documento de compra que certifique el despacho correspondiente queda entendido que el cliente acepta incondicionalmente la¤presente política y condiciones de garantía, renuncia a cualquier tipo de reclamo que no esté considerado en el presente documento. Más información de políticas de garantías en nuestro sitio web https://www.digitalmtx.com o realice sus consultas y/o reclamos en el correo electrónico centrodeservicio@digitalmtx.com"</small> <br><br><br><br>  
+            ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
           <!-- partial -->
-          <div style="width: 580px;">
+          <div style="width: 880px;">
           <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
-            <tr>
-              <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
-                <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
-                <div style="display: inline-block; margin-left: 320px;">
-                  <p style="font-weight: bold;">Digital MTX</p>
-                  <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'</p><br>
-                </div>
-                <hr>
-                <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p><br>
-              </td>
-            </tr>
-            <tr>
-              <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-                <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p><br>
-                <p><b>Punto Venta</b>'.$dates[0]->Punto_Venta.'</p><br>
-                <p><b>Nombre</b>'.$dates[0]->Nombre_Cliente.'</p><br>
-                <p><b>Identificacion</b> '.$dates[0]->Identificacion_Cliente.'</p><br>
-                <p><b>Numero Guia</b> '.$dates[0]->No_Guia.'</p><br>
-              </td>
-              <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-                <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p><br>
-                <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p><br>
-                <p><b>Proveedor:</b> '.$dates[0]->Proveedor.'</p><br>
-                <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p><br>
-                <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p><br>
-                <p><b>Valor_Flete:</b> '.$dates[0]->Valor_Flete.'</p><br>
-                <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p><br>
-              </td>
-            </tr>
-          </table>
-
-          <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
-          <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
-            <tr>
-              <th>Descripcion</th>
-              <th>Marca</th>
-              <th>Sello</th>
-              <th>Referencia</th>
-            </tr>';
-            foreach ($dates as $producte){ 
-           $html .= '<tr>
-              <td>'.$producte->Descripcion_Producto.'</td><br>
-              <td>'.$producte->Marca_Producto.'</td><br>
-              <td>'.$producte->Sello_Producto.'</td><br>
-              <td>'.$producte->Referencia.'</td><br>
-            </tr>';
-            }
-          $html .= '</table><br>
-
-
-        
-
-          <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
-            <div>
-              <div style="display:table; margin:auto; text-align:left;">
-                <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p>
-              </div>
+                <tr>
+                  <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
+                    <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
+                    <div style="display: inline-block; margin-left: 320px;">
+                      <p>Fecha de impresion: '.$dates[0]->Fecha_ingreso.'  Hora impresion: '.$hora_actual.'</p>
+                    </div>
+                    <hr>
+                    <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$dates[0]->No_garantia.'</b></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
+                    <P><b>Numero Factura:</b>'.$dates[0]->Numero_Factura.'</p><br>
+                    <p><b>Punto Venta:</b>'.$dates[0]->Punto_Venta.'</p><br>
+                    <p><b>Nombre:</b>'.$dates[0]->Nombre_Cliente.'</p><br>
+                    <p><b>Identificación:</b> '.$dates[0]->Identificacion_Cliente.'</p><br>
+                    
+                    <p><b>Direccion:</b> '.$dates[0]->Direccion_Cliente.'</p><br>
+                    <p><b>Correo:</b> '.$dates[0]->Correo_Cliente.'</p><br>
+                  </td>
+                  <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+                    <p><b>Departamento:</b> '.$dates[0]->Departamento.'</p><br>
+                    <p><b>Municipio:</b> '.$dates[0]->Municipio.'</p><br>
+                    <p><b>Numero Guia:</b> '.$dates[0]->No_Guia.'</p><br>
+                    <p><b>Valor del flete:</b> '.$dates[0]->Valor_Flete.'</p><br>
+                    <p><b>Transportadora:</b> '.$dates[0]->Transportadora.'</p><br>
+                  </td>
+                </tr>
+              </table>
+              
+              <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
+              <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+                <tr>
+                <th>Referencia</th>
+                  <th>Descripcion</th>
+                  <th>Marca</th>
+                  <th>Sello</th>
+                </tr>';
+                foreach ($dates as $producte){ 
+               $html .= '<tr>
+                          <td>'.$producte->Referencia.'</td><br>
+                          <td>'.$producte->Descripcion_Producto.'</td><br>
+                          <td>'.$producte->Marca_Producto.'</td><br>
+                          <td>'.$producte->Sello_Producto.'</td><br>
+                        </tr>';
+                }
+              $html .= '</table><br>
+              <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
+                <div>
+                  <div style="display:table; margin:auto; text-align:left;">
+                    <p><b>Observacion Garantia:</b> '.$dates[0]->Observacion_Empleado.'</p><br>
+                  </div>
+               <small style="font-size: 6px; justify-content: center;">"Garantía: El horario de atención es de lunes a viernes de 09:00 a 13:00 en la calle 77 # 16A – 38 Oficina 303¤2)Para el ingreso del producto a garantía el cliente deberá entregar el documento de compra y el producto completo con sus empaques, accesorios, manuales, sin daños físicos que invaliden la garantía. 3)El periodo para dar¤solución a la garantía es de (8) ocho días hábiles, a partir de la fecha de radicado. 4)La Garantía no cubre en los siguientes casos: • Cuando el producto presenta daño físico, por mal uso, mala manipulación, transporte o¤descuido. • Cuando los sellos de garantía se encuentren removidos o sobre etiquetados remarcados. • Daños causados por descargas eléctricas o uso de voltaje incorrecto. • Daños generados por¤presencia de elementos nocivos que no forman parte del producto. • Si el cliente ha cambiado el software original de fábrica. 5)Toda garantía que no¤se reclame en (1) mes a partir de la fecha de ingreso, se hará un cobro de bodegaje, transcurrido los (6) meses será declarada en abandono y se procederá a su destrucción. 6)Si el cliente no presenta el documento de compra del¤producto, deberá presentar un documento relacionando el producto, NIT, fecha de compra, la copia del documento de compra se entregara en un plazo de (5) días hábiles. 7)Para la entrega de la garantía, el cliente presentara el¤formato de garantía original, no se entregara el producto con fotocopia del formato o sin el formato de garantía. 8)El periodo de garantía que cubre Digital MTX a los clientes en los productos son: cargadores de caja roja (2)años, cargadores para Mac y universal (1)año, baterías para portátil (1)año, pantallas para computador (6)meses, teclados (6)meses, baterías para celular (3)meses, pantallas para celular (3)meses. Importante: Al firmar y/o recibir el documento de compra que certifique el despacho correspondiente queda entendido que el cliente acepta incondicionalmente la¤presente política y condiciones de garantía, renuncia a cualquier tipo de reclamo que no esté considerado en el presente documento. Más información de políticas de garantías en nuestro sitio web https://www.digitalmtx.com o realice sus consultas y/o reclamos en el correo electrónico centrodeservicio@digitalmtx.com"</small> <br>   
           </body>
           </html>
           ';
@@ -764,173 +761,28 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [100, 180]]);
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [100, 140]]);
         $id = $_REQUEST['id'];
         $data = $this->model->getByIdG($id);
         $html = '';
         foreach ($data as $product) {
           $html = '';
           $html .= '<!DOCTYPE html>
-          <html lang="en" >
+          <html lang="es" >
           <head>
             <meta charset="UTF-8">
             <title>Ticket</title>
-            <style type="text/css">
-
-            .cardWrap {
-            width: 1090px;
-            color: #fff;
-            font-family: sans-serif;
-          }
-
-          .card {
-            background: linear-gradient(to top, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);
-            float: left;
-            padding: 1em;
-          }
-
-          .cardLeft {
-            border-radius: 8px;
-            border-bottom-radius: 8px;
-            width: 200em;
-            height: 400em;
-          }
-
-          .cardRight {
-            width: 6.5em;
-            border-left: .18em dashed #fff;
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-          }
-          .cardRight:before, .cardRight:after {
-            content: "";
-            position: absolute;
-            display: block;
-            width: .9em;
-            height: .9em;
-            background: #fff;
-            border-radius: 50%;
-            left: -.5em;
-          }
-          .cardRight:before {
-            top: -.4em;
-          }
-          .cardRight:after {
-            bottom: -.4em;
-          }
-
-          h1 {
-            font-size: 1.1em;
-            margin-top: 0;
-          }
-          h1 span {
-            font-weight: normal;
-          }
-
-          .title, .name, .seat, .time {
-            text-transform: uppercase;
-            font-weight: normal;
-          }
-          .title h2, .name h2, .seat h2, .time h2 {
-            font-size: .9em;
-            color: #525252;
-            margin: 0;
-          }
-          .title span, .name span, .seat span, .time span {
-            font-size: .7em;
-            color: #a2aeae;
-          }
-
-          .title {
-            margin: 2em 0 0 0;
-          }
-
-          .name, .seat {
-            margin: .7em 0 0 0;
-          }
-
-          .time {
-            margin: .7em 0 0 1em;
-          }
-
-          .seat, .time {
-            float: left;
-          }
-
-          .eye {
-            position: relative;
-            width: 2em;
-            height: 1.5em;
-            background: #fff;
-            margin: 0 auto;
-            border-radius: 1em/0.6em;
-            z-index: 1;
-          }
-          .eye:before, .eye:after {
-            content: "";
-            display: block;
-            position: absolute;
-            border-radius: 50%;
-          }
-          .eye:before {
-            width: 1em;
-            height: 1em;
-            background: #e84c3d;
-            z-index: 2;
-            left: 8px;
-            top: 4px;
-          }
-          .eye:after {
-            width: .5em;
-            height: .5em;
-            background: #fff;
-            z-index: 3;
-            left: 12px;
-            top: 8px;
-          }
-
-          .number {
-            text-align: center;
-            text-transform: uppercase;
-          }
-          .number h3 {
-            color: #e84c3d;
-            margin: .9em 0 0 0;
-            font-size: 2.5em;
-          }
-          .number span {
-            display: block;
-            color: #a2aeae;
-          }
-            </style>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
+            <meta name="viewport" content="width-device=width , initial-scale=1.0">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
           </head>
           <body>
-          <!-- partial:index.partial.html -->
-          <div class="cardWrap">
-            <div class="card cardLeft">
-              <h1>Sticker <span>garantia</span></h1>
-              <div class="title">
-                <h2>' . $product->Descripcion_Producto . '</h2>
-                <span>Descripcion producto</span>
-              </div>
-              <div class="name">
-                <h2>' . $product->Observacion_Cliente . '</h2>
-                <span>observacion del cliente</span>
-              </div>
-              <div class="seat">
-                <h2>' . $data[0]->No_garantia . '</h2>
-                <span>Numero garantia</span>
-              </div>
-              <div class="seat">
-                <h2>' . $data[0]->Referencia . '</h2>
-                <span>Referencia</span>
-              </div>
+            <div class="container-fluid">
+              <h1 class="font-weight-bold" style="font-size: 80px; font-weight: bold;">'.$product->No_garantia.'           '.$product->Referencia.'</h1>
+              <p class="font-weight-bold" style="font-weight: bold; font-size: 40px;">'.$product->Fecha_ingreso.'</p>
             </div>
-          </div>
-          <!-- partial -->
-            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
           </body>
           </html>
           ';
@@ -1354,6 +1206,7 @@ class GarantyController
                         <th>Referencia</th>
                         <th>Cantidad_Producto</th>
                         <th>Codigo_Proveedor</th>
+                        <th>Nombre del proveedor</th>
                         <th>Observacion_Cliente</th>
                         <th>Estado</th>
                         <th>Observacion_Final</th>
@@ -1392,6 +1245,7 @@ class GarantyController
                     <td>'.$garanty->Referencia.'</td>
                     <td>'.$garanty->Cantidad_Producto.'</td>
                     <td>'.$garanty->Codigo_Proveedor.'</td>
+                    <td>'.$garanty->Nombre_Proveedor.'</td>
                     <td>'.$garanty->Observacion_Cliente.'</td>
                     <td>'.$garanty->Estado.'</td>
                     <td>'.$garanty->Observacion_Final.'</td>
@@ -1407,5 +1261,17 @@ class GarantyController
         $isPrintHeader = true;
       }
     exit();
+  }
+
+  public function storyGaranties()
+  {
+    if (isset($_SESSION['user'])) {
+      require 'Views/Layout.php';
+      $garanties = $this->model->getAllSolutionPre();
+      require 'Views/Garanty/storyGaranty.php';
+      require 'Views/Scripts.php';
+    }else{
+      header('Location: ?controller=login');
+    }
   }
 }

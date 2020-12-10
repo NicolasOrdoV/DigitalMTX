@@ -33,7 +33,7 @@ $hora_actual = date("h:i a"); ?>
                                     <p><?php echo $data[0]->Descripcion_Producto?></p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <h5>Serial</h5>
+                                    <h5>Sello</h5>
                                     <p><?php echo $data[0]->Sello_Producto?></p>
                                 </div>
                                 <div class="col-sm-3">

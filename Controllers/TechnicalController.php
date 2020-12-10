@@ -65,6 +65,8 @@ class TechnicalController
 		           'Id_Garantia' => $_POST['Id_Garantia'],
 		           'Id_Empleado' => $_POST['Id_Empleado']
 				];
+				date_default_timezone_set('America/Bogota');
+                $hora_actual = date("h:i a");
 				//$id = $_REQUEST['Id_Garantia'];
 				$name = $_POST['nombre'];
 				$this->model->newTechnical($data);
@@ -172,6 +174,7 @@ class TechnicalController
 							<tr>
 							  <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
 								<a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Digital MTX"></a>
+								<p style="float: right;">Hora modificado: '.$hora_actual.'</p>
 							  </td>
 							</tr>
 							<tr>
@@ -180,7 +183,7 @@ class TechnicalController
 								  <tr>
 									<td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
 									  <div class="mktEditable" id="main_title">
-										Proceso de la Garantia 
+										Proceso de la Garantia:'.$dataTec[0]->No_garantia.'
 									  </div>
 									</td>
 								  </tr>
@@ -227,9 +230,9 @@ class TechnicalController
 								  <tr>
 									<td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
 				  <div id="address" class="mktEditable">
-									  <b>Digital MTX</b><br>
-															  2020<br> 
-											  <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
+			        <b>Digital MTX</b><br>
+	                    2020<br> 
+				    Para mas informacion consulte <a style="color: #F44336;" href="http://localhost/Digitalmtx/?controller=client&method=list">aqui</a> su estado de garantia
 				  </div>
 									</td>
 								  </tr>
@@ -305,6 +308,18 @@ class TechnicalController
 		if (isset($_SESSION['user'])) {
 			require 'Views/Layout.php';
 			require 'Views/Technicals/editSuccesfull.php';
+			require 'Views/Scripts.php';
+		}else{
+			header('Location: ?controller=login');
+		}
+	}
+
+	public function storyTechnical()
+	{
+		if (isset($_SESSION['user'])) {
+			require 'Views/Layout.php';
+			$technicals = $this->model->getAllTechnicals();
+			require 'Views/Technicals/storyTechnical.php';
 			require 'Views/Scripts.php';
 		}else{
 			header('Location: ?controller=login');

@@ -79,9 +79,6 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="?controller=person&method=template">
-                    <img src="Assets/img/logo.png" width="50"></img>
-                </a>
             </div>
             
         </div>
@@ -184,6 +181,11 @@
                                     <span>Pendientes de entrega a garantias prefinalizadas</span>
                                 </a> 
                             </li>
+                            <li>
+                                <a href="?controller=garanty&method=storyGaranties" class="menu-toggle">
+                                    <span>Historico de garantias finalizadas</span>
+                                </a> 
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -253,7 +255,11 @@
                                 <a href="?controller=technical&method=list" class="menu-toggle">
                                     <span>Gestion de garantias pendientes</span>
                                 </a>
-                                
+                            </li>
+                            <li>
+                                <a href="?controller=technical&method=storyTechnical" class="menu-toggle">
+                                    <span>Historicos de productos revisados por garantia</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -292,6 +298,11 @@
                             <li>
                                 <a href="?controller=garanty&method=solutionPre" class="menu-toggle">
                                     <span>Pendientes de entrega a garantias prefinalizadas</span>
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="?controller=garanty&method=storyGaranties" class="menu-toggle">
+                                    <span>Historico de garantias finalizadas</span>
                                 </a> 
                             </li>
                         </ul>
