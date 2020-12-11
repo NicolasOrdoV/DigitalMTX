@@ -847,7 +847,7 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       require 'Views/Layout.php';
-      $garanties = $this->model->getAllSolution();
+      $garanties = $this->model->getAllSolution(); 
       require 'Views/Garanty/solution.php';
       require 'Views/Scripts.php'; 
     }else{

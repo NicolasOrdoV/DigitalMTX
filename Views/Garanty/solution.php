@@ -27,14 +27,13 @@
                                         <th>Numero de factura</th>
                                         <th>Cliente</th>
                                         <th>Correo</th>
-                                        <th>Aprobacion Garantia</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($garanties as $key => $garanty) {
-                                        //  if ($garant) { ?>
+                                        if ($garanty->Estado == 'Solucionado por servicio tecnico') { ?>
                                             <tr>
                                                 <td><?php echo $garanty->No_garantia ?></td>
                                                 <td><?php echo $garanty->Fecha_ingreso ?></td>
@@ -42,7 +41,6 @@
                                                 <td><?php echo $garanty->Numero_Factura ?></td>
                                                 <td><?php echo $garanty->Nombre_Cliente ?></td>
                                                 <td><?php echo $garanty->Correo_Cliente ?></td>
-                                                <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                                 <td><?php echo $garanty->Estado ?></td>
                                                 <td>
                                                     <?php if ($garanty->Estado == 'Solucionado por servicio tecnico' && $garanty->Aprobacion_Garantia == 'SI' ) {  ?>                                                      
@@ -57,7 +55,7 @@
                                                 <?php } ?>
                                             </td>
                                          </tr>
-                                <?php //}
+                                <?php }
                             } ?>
                         </tbody>
                     </table>

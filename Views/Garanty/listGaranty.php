@@ -42,7 +42,12 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($garanties as $key => $garanty) {
-                                        //  if ($garant) { ?>
+                                        if ($garanty->Estado == 'Tramite' || 
+                                            $garanty->Estado =='Pendiente por servicio tecnico' ||
+                                            $garanty->Estado =='Solucionado por servicio tecnico' ||
+                                            $garanty->Estado =='Pendiente para Nota Credito' || 
+                                            $garanty->Estado =='Pendiente para cambio de producto' ||
+                                            $garanty->Estado =='Pendiente para Devolucion de Dinero' ) { ?>
                                             <tr>
                                                 <td>
                                                     <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite' || $garanty ->Estado =='Pendiente por servicio tecnico' || $garanty ->Estado =='Solucionado por servicio tecnico' || $garanty->Estado =='Pendiente para Nota Credito' || $garanty ->Estado =='Pendiente para cambio de producto' || $garanty ->Estado =='Pendiente para Devolucion de Dinero'
@@ -71,7 +76,8 @@
                                                 <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                                 <td><?php echo $garanty->Estado ?></td>
                                             </tr>
-                                <?php } ?>
+                                   <?php } 
+                                   }?>
                                 </tbody>
                             </table>
                     </div>
