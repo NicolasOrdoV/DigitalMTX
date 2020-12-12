@@ -87,7 +87,7 @@ class GarantyController
 
           $date_now = date('d-m-Y');
           $date_bill = $bills[0]->fecha_factura;
-          $date_month = date('d-m-Y',strtotime($bills[0]->fecha_factura."+ 6 months"));
+          $date_month = date('Y-m-d',strtotime($bills[0]->fecha_factura."+ 6 months"));
           $date_now = strtotime($date_now)."<br>";
           $date_bill = strtotime($date_bill)."<br>";
           $date_month = strtotime($date_month);
@@ -185,14 +185,14 @@ class GarantyController
       if (filter_var($_POST['Correo_Cliente'],FILTER_VALIDATE_EMAIL)) {
         //-------------------------//
         $fecha_factura = $_POST['fecha_factura'];
-        $fecha_factura = date('d-m-Y' , strtotime($fecha_factura));
+        $fecha_factura = date('Y-m-d' , strtotime($fecha_factura));
         $parts = explode("-", $fecha_factura);
         //var_dump($parts);
         echo "Fecha de la factura: ".$fecha_factura.'<br>';
         $fecha_actual = $_POST['Fecha_ingreso'];
         $fecha1 = explode("/", $fecha_actual);
         $fecha2 = implode("-", $fecha1);
-        $fecha2 = date('d-m-Y', strtotime($fecha2));
+        $fecha2 = date('Y-m-d', strtotime($fecha2));
         echo "Fecha del dia de hoy: ".$fecha2.'<br>';
 
         $fecha_proxima = null;
@@ -292,36 +292,36 @@ class GarantyController
           if ($ag == 'SI') {
             echo "Garantia: ".$g.'<br>';
             if ($g == '1 Año' || $g =='1 año') {
-              $year = date($parts[2]);
+              $year = date($parts[0]);
               $afterYear = $year+1;
-              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              $fecha_proxima = date($afterYear.'-'.$parts[1].'-'.$parts[2]);
               $date_before = strtotime($fecha_proxima);
               //echo $fecha_proxima;
             }elseif($g == '2 Años'){
-                $year = date($parts[2]);
-                $afterYear = $year+2;
-                $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+                $year = date($parts[0]);
+                $afterYear = $year+1;
+                $fecha_proxima = date($afterYear.'-'.$parts[1].'-'.$parts[2]);
                 $date_before = strtotime($fecha_proxima);
                 //echo $fecha_proxima;    
             }elseif($g == '6 Meses'){
-                $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 6 months"));
+                $fecha_proxima = date("Y-m-d",strtotime($fecha_factura."+ 6 months"));
                 $date_before = strtotime($fecha_proxima);
                 //echo $fecha_proxima;   
             }elseif($g == '3 meses'){
-                $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 3 months"));
+                $fecha_proxima = date("Y-m-d",strtotime($fecha_factura."+ 3 months"));
                 $date_before = strtotime($fecha_proxima);
                 //echo $fecha_proxima;    
             }elseif($g == '1 mes' || $g == '1 meses'){
-                $fecha_proxima = date("d-m-Y",strtotime($fecha_factura."+ 1 month"));
+                $fecha_proxima = date("Y-m-d",strtotime($fecha_factura."+ 1 month"));
                 $date_before = strtotime($fecha_proxima);
                 //echo $fecha_proxima;
             }elseif($g == "1 año freidora - 6 meses en panel táctil " || $g == '1 año telefono - 6 meses de batería y cargador'){
-              $year = date($parts[2]);
+              $year = date($parts[0]);
               $afterYear = $year+1;
-              $fecha_proxima = date($parts[0].'-'.$parts[1].'-'.$afterYear);
+              $fecha_proxima = date($afterYear.'-'.$parts[1].'-'.$parts[2]);
 
               $date_before = strtotime($fecha_proxima);
-              $fecha_proxima_mes =  date("d-m-Y", strtotime($fecha_factura.'+ 6 months'));
+              $fecha_proxima_mes =  date("Y-m-d", strtotime($fecha_factura.'+ 6 months'));
               $date_month = strtotime($fecha_proxima_mes);
 
               echo "Fecha estimada para 6 meses despues de la fecha de factura: ".$fecha_proxima_mes.'<br>';
