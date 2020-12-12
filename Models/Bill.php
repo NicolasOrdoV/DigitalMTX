@@ -65,4 +65,18 @@ class Bill
             die($e->getMessage());
         }
     }
+
+    public function Deletebills()
+    {
+        try {
+            $strSql = " fecha_factura <= date_sub(curdate(), interval 765 DAY)" ;
+            $this->pdo->delete('mg_facturas',$strSql);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+    
+
 }

@@ -21,6 +21,9 @@
                         </div>
                         <div class="col-sm-12">
                             <h2>Importar</h2>
+                            <?php echo $dn .'</br>'?>
+                            <?php echo $da .'</br>'?>
+                            <?php echo $db ?>
                         </div>
                         <div class="col-sm-12">
                             <form action="Views/Bills/import.php" method="post" enctype="multipart/form-data" id="form_validation">				

@@ -18,7 +18,7 @@ if(isset($_POST['import_data'])){
                 //var_dump($date);
                 //echo '</pre>';
                 $date2 = implode("-", $date);
-                $dateEnd = date('d-m-Y', strtotime($date2));
+                $dateEnd = date('Y-m-d', strtotime($date2));
                 //echo $dateEnd.'<br>';
                 $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
                 //echo $bill.'<br>';

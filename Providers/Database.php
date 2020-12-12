@@ -74,4 +74,14 @@ class Conexion extends PDO
 			die($e->getMessage());
 		}
 	}
+
+	public function delete($table, $where)
+	{
+		try {
+			return $this->prepare("DELETE FROM $table WHERE $where ");
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
 }
