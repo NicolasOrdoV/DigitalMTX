@@ -78,7 +78,7 @@ class Conexion extends PDO
 	public function delete($table, $where)
 	{
 		try {
-			return $this->prepare("DELETE FROM $table WHERE $where ");
+			return $this->exec("DELETE FROM $table WHERE $where");
 		} catch (PDOException $e) {
 			die($e->getMessage());
 		}

@@ -766,7 +766,7 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [100, 140]]);
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [50, 90]]);
         $id = $_REQUEST['id'];
         $data = $this->model->getByIdG($id);
         $html = '';
@@ -775,19 +775,35 @@ class GarantyController
           $html .= '<!DOCTYPE html>
           <html lang="es" >
           <head>
-            <meta charset="UTF-8">
             <title>Ticket</title>
-            <meta name="viewport" content="width-device=width , initial-scale=1.0">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <style type="text/css">
+              html, body{
+                height:100%;
+                width:100%;
+                margin:0;
+                display: flex;
+                flex-direction: column;
+              }
+              #div1{
+                height: 80px;
+                width: 100%;
+                background-color: red;
+                justify-content: center;
+                align-content: center;
+              }
+
+              .div2{
+                height:100%;
+                width: 100%;
+                /*background-color: green;
+              }
+            </style>
           </head>
           <body>
-            <div class="container-fluid">
-              <h1 class="font-weight-bold" style="font-size: 80px; font-weight: bold;">'.$product->No_garantia.'           '.$product->Referencia.'</h1>
-              <p class="font-weight-bold" style="font-weight: bold; font-size: 40px;">'.$product->Fecha_ingreso.'</p>
+            <div class="div2">
+              <h1 style="font-size: 20px; font-weight: bold;">'.$product->No_garantia.'           '.$product->Referencia.'</h1>
+              <p style="font-weight: bold; font-size: 5px;">'.$product->Fecha_ingreso.'</p>
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
           </body>
           </html>
           ';

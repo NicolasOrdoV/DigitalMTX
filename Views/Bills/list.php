@@ -17,13 +17,13 @@
                     </div>
                     <div class="header row">
                         <div class="alert alert-warning">
-                            <p>RECUERDA: debes cargar tu archivo de facturas una vez, si los datos no cargan, por favor avisar a soporte tecnologico.</p>
+                            <p>RECUERDA: debes cargar tu archivo de facturas una vez, si los datos no cargan, por favor avisar a soporte tecnologico. El archivo a cargar debe ser .csv</p>
                         </div>
                         <div class="col-sm-12">
                             <h2>Importar</h2>
-                            <?php echo $dn .'</br>'?>
-                            <?php echo $da .'</br>'?>
-                            <?php echo $db ?>
+                            <?php //echo 'Dia de hoy: '.$day_now .'</br>'; 
+                            //echo 'Mes de hoy: '.$month_now .'</br>';
+                            ?>
                         </div>
                         <div class="col-sm-12">
                             <form action="Views/Bills/import.php" method="post" enctype="multipart/form-data" id="form_validation">				
