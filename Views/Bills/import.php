@@ -8,7 +8,7 @@ if(isset($_POST['import_data'])){
             $csv_file = fopen($_FILES['file']['tmp_name'], 'r');           
             //fgetcsv($csv_file);            
             // get data records from csv file
-            while(($emp_record = fgetcsv($csv_file,10000,";")) !== FALSE){
+            while(($emp_record = fgetcsv($csv_file,10000,",")) !== FALSE){
                 //echo '<pre>';
                 //var_dump($emp_record);
                 //echo '</pre>';
@@ -21,6 +21,7 @@ if(isset($_POST['import_data'])){
                 $dateEnd = date('Y-m-d', strtotime($date2));
                 //echo $dateEnd.'<br>';
                 $bill = $emp_record[3]."-".$emp_record[4]."-".$emp_record[5];
+                $description = str_replace("'", "", $emp_record[9]);
                 //echo $bill.'<br>';
                 $mysql_insert = "INSERT INTO `mg_facturas`(`fecha_factura`,`fecha_facturaG`, `nit`, `vendedor`, `Numero_Factura`,`Centro_costo`, `Referencia`, `Cantidad`, `neto`, `Descripcion_Comentarios`) VALUES 
                 ('".$dateEnd."',
@@ -32,7 +33,7 @@ if(isset($_POST['import_data'])){
                 '".$emp_record[6]."',
                 '".$emp_record[7]."',
                 '".$emp_record[8]."',
-                '".$emp_record[9]."')";
+                '".$description."')";
                 $sql_insert = utf8_encode($mysql_insert);
                 $resultset = mysqli_query($conn, $sql_insert) or die("database error:". mysqli_error($conn));
                 //echo '<pre>';
