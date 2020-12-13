@@ -30,7 +30,8 @@ if(isset($_POST['import_data'])){
                 //echo $numero_de_filas;
                 if(mysqli_num_rows($resultset)) {
                     $id = explode(".", $emp_record[0]);
-                    $ide = implode("", $id);           
+                    $ide = implode("", $id); 
+                    $tribute = str_replace("'", "", $emp_record[72]);          
 					$sql_update = "UPDATE `mg_clientes` SET
                         `SUCURSAL`='".$emp_record[1]."',
                         `DIGITO_DE_VERIFICACION`='".$emp_record[2]."',
@@ -102,7 +103,7 @@ if(isset($_POST['import_data'])){
                         `ANO_APERTURA`='".$emp_record[69]."',
                         `MES_APERTURA`='".$emp_record[70]."',
                         `DIA_APERTURA`='".$emp_record[71]."',
-                        `TRIBUTOS`='".$emp_record[72]."'
+                        `TRIBUTOS`='". $tribute."'
                         WHERE `IDENTIFICACION` = '".$ide."'";
                     $sql = utf8_encode($sql_update);
                     mysqli_query($conn, $sql) or die("Database error:". mysqli_error($conn));
@@ -110,6 +111,7 @@ if(isset($_POST['import_data'])){
                     //echo 'Entra insercion';
                     $id = explode(".", $emp_record[0]);
                     $ide = implode("", $id);
+                    $tribute = str_replace("'", "", $emp_record[72]);
 					$mysql_insert = "INSERT INTO `mg_clientes`(`IDENTIFICACION`, `SUCURSAL`, `DIGITO_DE_VERIFICACION`, `NOMBRE`, `RAZON_SOCIAL`, `PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `NUMERO_DE_IDENTIFICACION_DEL_EXTRANJERO`, `CODIGO_IDENTIFICACION_FISCAL`, `NOMBRE_DEL_CONTACTO`, `DIRECCION`, `PAIS`, `CIUDAD`, `ACTIVO`, `TELEFONO_1`, `TELEFONO_2`, `TELEFONO_3`, `TELEFONO_4`, `TELEFONO_CELULAR`, `FAX`, `APARTADO_AEREO`, `SEXO`, `ANO_DE_CUMPLEANOS`, `MES_DE_CUMPLEANOS`, `DIA_DE_CUMPLEANOS`, `TIPO_DE_PERSONA`, `CORREO_ELECTRONICO`, `CONTACTO_DE_FACTURACION`, `CORREO_ELECT_CONTACTO_DE_FACTURACION`, `TIPO_DE_IDENTIFICACION`, `CLASIFICACION_CLASE_DE_TERCERO`, `BENEFICIO_DIAN_RETEIVA_COMPRAS`, `TARIFA_DIFERENCIAL_RETE_IVA_VENTAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_VENTAS`, `TARIFA_DIFERENCIAL_RETE_IVA_COMPRAS`, `PORCENTAJE_DIFERENCIAL_RETE_IVA_COMPRAS`, `CUPO_DE_CREDITO`, `LISTA_DE_PRECIO`, `FORMA_DE_PAGO`, `CALIFICACION`, `TIPO_CONTRIBUYENTE`, `CODIGO_ACTIVIDAD_ECONOMICA`, `VENDEDOR`, `COBRADOR`, `PORCENTAJE_DESCUENTO_EN_VENTAS`, `PERIODO_DE_PAGO`, `OBSERVACION`, `DIAS_OPTIMISTA`, `DIAS_PESIMISTA`, `CODIGO`, `TIPO_DE_EMPRESA`, `CODIGO_DE_BANCO`, `CODIGO_INTERNO`, `CODIGO_OFICINA`, `TIPO_DE_CUENTA`, `NUMERO_DE_CUENTA`, `NIT_DEL_TITULAR_DE_LA_CUENTA`, `DIGITO_DE_VERIFICACION_TITULAR_DE_LA_CUENTA`, `NOMBRE_DEL_TITULAR_DE_LA_CUENTA_PAIS_DE_LA_CUENTA`, `CIUDAD_DE_LA_CUENTA`, `SIGLAS_DEPARTAMENTO_DE_LA_CUENTA`, `APLICA_RETENCION_ICA_FACTURA_DE_VENTA_DEVOLUCION`, `APLICA_RETENCION_ICA_FACTURA_DE_COMPRA_DEVOLUCION`, `ACEPTA_ENVIO_FACTURA_POR_MEDIO_ELECTRONICO`, `NOMBRE_COMERCIAL`, `CODIGO_POSTAL`, `RESPONSABILIDAD_FISCAL`, `ANO_APERTURA`, `MES_APERTURA`, `DIA_APERTURA`, `TRIBUTOS`) VALUES
                         ('".$ide."', 
                         '".$emp_record[1]."', 
@@ -183,7 +185,7 @@ if(isset($_POST['import_data'])){
                         '".$emp_record[69]."',
                         '".$emp_record[70]."',
                         '".$emp_record[71]."',
-                        '".$emp_record[72]."')";
+                        '".$tribute."')";
                     $sqli = utf8_encode($mysql_insert);
 					mysqli_query($conn, $sqli) or die("DDatabase error:". mysqli_error($conn));
                 }
