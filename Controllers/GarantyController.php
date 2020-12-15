@@ -766,43 +766,21 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [50, 90]]);
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [54, 70]]);
         $id = $_REQUEST['id'];
         $data = $this->model->getByIdG($id);
         $html = '';
         foreach ($data as $product) {
           $html = '';
           $html .= '<!DOCTYPE html>
-          <html lang="es" >
+          <html lang="es">
           <head>
             <title>Ticket</title>
-            <style type="text/css">
-              html, body{
-                height:100%;
-                width:100%;
-                margin:0;
-                display: flex;
-                flex-direction: column;
-              }
-              #div1{
-                height: 80px;
-                width: 100%;
-                background-color: red;
-                justify-content: center;
-                align-content: center;
-              }
-
-              .div2{
-                height:100%;
-                width: 100%;
-                /*background-color: green;
-              }
-            </style>
           </head>
           <body>
-            <div class="div2">
-              <h1 style="font-size: 20px; font-weight: bold;">'.$product->No_garantia.'           '.$product->Referencia.'</h1>
-              <p style="font-weight: bold; font-size: 5px;">'.$product->Fecha_ingreso.'</p>
+            <div>
+              <h1 style="font-size: 6mm; font-weight: bold;">'.$product->No_garantia.'           '.$product->Referencia.'</h1>
+              <p style="font-weight: bold; font-size: 5mm;">'.$product->Fecha_ingreso.'</p>
             </div>
           </body>
           </html>

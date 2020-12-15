@@ -15,6 +15,11 @@
                         <div class="col-sm-6">
                             <h2>Garantías</h2>
                         </div>
+                        <div class="col-sm-6 text-right">
+                            <?php if($_SESSION['user']->cargo == "Administrador"){ ?>
+                                <a href="?controller=garanty&method=excelComplete" class="btn btn-danger float-right">Generar Excel de todo el proceso</a>
+                            <?php } ?>    
+                        </div>
                     </div>
                     <div class="body">
                         <div class="table-responsive">

@@ -8,7 +8,7 @@ if(isset($_POST['import_data'])){
             $csv_file = fopen($_FILES['file']['tmp_name'], 'r');           
             //fgetcsv($csv_file);            
             // get data records from csv file
-            while(($emp_record = fgetcsv($csv_file,10000,",")) !== FALSE){
+            while(($emp_record = fgetcsv($csv_file,10000,";")) !== FALSE){
                 //echo '<pre>';
                 //var_dump($emp_record);
                 //echo '</pre>';
