@@ -42,11 +42,12 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($garanties as $key => $garanty) {
-                                        if ($garanty->Estado == 'Tramite' ) { ?>
+                                        if ($garanty->Estado == 'Tramite' ||
+                                        $garanty->Estado == 'Pendiente por servicio tecnico' ||
+                                        $garanty->Estado == 'Solucionado por servicio tecnico') { ?>
                                             <tr>
                                                 <td>
-                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite' || $garanty ->Estado =='Pendiente por servicio tecnico' || $garanty ->Estado =='Solucionado por servicio tecnico' || $garanty->Estado =='Pendiente para Nota Credito' || $garanty ->Estado =='Pendiente para cambio de producto' || $garanty ->Estado =='Pendiente para Devolucion de Dinero'
-                                                        ) { ?>
+                                                    <?php if ($garanty->Aprobacion_Garantia == 'SI' && $garanty->Estado == 'Tramite') { ?>
                                                             <div class="row clearfix">
                                                                 <div class="col-xs-12">
                                                                     <form action="?controller=garanty&method=consecutive" method="POST">
@@ -60,14 +61,23 @@
                                                                     </form>
                                                                 </div>
                                                             </div>
-                                                <?php } ?>
+                                                <?php }else{ ?>
+                                                    <div class="row clearfix">
+                                                        <div class="col-xs-12">
+                                                            <form action="?controller=garanty&method=details" method="POST">
+                                                                <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
+                                                                <button type="submit" class="btn btn-warning"><i class="material-icons">+</i></button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>    
                                                 </td>
                                                 <td><?php echo $garanty->No_garantia ?></td>
                                                 <td><?php echo $garanty->Fecha_ingreso ?></td>
                                                 <td><?php echo $garanty->Hora_ingreso ?></td>
                                                 <td><?php echo $garanty->Numero_Factura ?></td>
                                                 <td><?php echo $garanty->Nombre_Cliente ?></td>
-                                                <td><?php echo $garanty->Correo_Cliente ?></td>
+                                                <td style="font-size: 10px"><?php echo $garanty->Correo_Cliente ?></td>
                                                 <td><?php echo $garanty->Aprobacion_Garantia ?></td>
                                                 <td><?php echo $garanty->Estado ?></td>
                                             </tr>

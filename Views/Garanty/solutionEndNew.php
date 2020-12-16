@@ -66,11 +66,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group ">
+                                                <div class="form-line">
+                                                    <label>Nota credito</label>
+                                                    <p>Este campo solo es para garantia por nota credito</p>
+                                                    <textarea rows="4" class="form-control" name="Observacion_Final"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class ="row clearfix">
-                            <div class="col-sm-12">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-danger">Guardar</button>
                                     </div>

@@ -130,7 +130,7 @@ class Garanty
     public function getByIdG($id)
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE g.id = :id AND d.Aprobacion_Garantia = 'SI'";
+            $strSql = "SELECT g.*,d.*,f.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia INNER JOIN mg_facturas f ON g.Numero_Factura = f.Numero_Factura WHERE g.id = :id AND d.Aprobacion_Garantia = 'SI'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql, $array);
             return $query;
@@ -210,6 +210,21 @@ class Garanty
     {
         try {
             $strSql = "SELECT f.*,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente, cc.Centro_costo as centro FROM mg_facturas f 
+            INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit 
+            INNER JOIN dtm_productos p ON p.codigo = f.Referencia
+            INNER JOIN mg_centro_costos cc ON cc.id = f.Centro_costo 
+            WHERE f.Numero_Factura = '".$numFac."'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getChanges($numFac)
+    {
+        try {
+            $strSql = "SELECT f.id as idF,f.nit as nit ,f.Descripcion_Comentarios,p.*,c.IDENTIFICACION as Identificacion_Cliente, c.NOMBRE as Nombre_Cliente,c.DIRECCION as Direccion_Cliente, c.CORREO_ELECTRONICO as Correo_Cliente, cc.Centro_costo as centro FROM mg_facturas f 
             INNER JOIN mg_clientes c ON c.IDENTIFICACION = f.nit 
             INNER JOIN dtm_productos p ON p.codigo = f.Referencia
             INNER JOIN mg_centro_costos cc ON cc.id = f.Centro_costo 

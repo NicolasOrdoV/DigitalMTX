@@ -10,12 +10,16 @@ require 'Models/Technical.php';
 require 'Models/Bill.php';
 
 
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
 require 'vendor/autoload.php';
+require 'Assets/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 
 /**
  * controlador personal
@@ -665,6 +669,7 @@ class GarantyController
               <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
                 <tr>
                 <th>Referencia</th>
+                <th>Cantidad</th>
                   <th>Descripcion</th>
                   <th>Marca</th>
                   <th>Sello</th>
@@ -672,6 +677,7 @@ class GarantyController
                 foreach ($dates as $producte){ 
                $html .= '<tr>
                           <td>'.$producte->Referencia.'</td><br>
+                          <td>'.$producte->Cantidad.'</td><br>
                           <td>'.$producte->Descripcion_Producto.'</td><br>
                           <td>'.$producte->Marca_Producto.'</td><br>
                           <td>'.$producte->Sello_Producto.'</td><br>
@@ -728,6 +734,7 @@ class GarantyController
               <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
                 <tr>
                 <th>Referencia</th>
+                <th>Cantidad</th>
                   <th>Descripcion</th>
                   <th>Marca</th>
                   <th>Sello</th>
@@ -735,6 +742,7 @@ class GarantyController
                 foreach ($dates as $producte){ 
                $html .= '<tr>
                           <td>'.$producte->Referencia.'</td><br>
+                          <td>'.$producte->Cantidad.'</td><br>
                           <td>'.$producte->Descripcion_Producto.'</td><br>
                           <td>'.$producte->Marca_Producto.'</td><br>
                           <td>'.$producte->Sello_Producto.'</td><br>
@@ -766,29 +774,88 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [54, 70]]);
+        // $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [44, 60]]);
         $id = $_REQUEST['id'];
         $data = $this->model->getByIdG($id);
-        $html = '';
+
+        $nombre_impresora = "POS"; 
+        $connector = new WindowsPrintConnector($nombre_impresora);
+        $printer = new Printer($connector);
+        #Mando un numero de respuesta para saber que se conecto correctamente.
+        echo 1;
+        /*
+          Ahora vamos a imprimir un encabezado
+        */
+          $html = '';
         foreach ($data as $product) {
           $html = '';
           $html .= '<!DOCTYPE html>
           <html lang="es">
           <head>
             <title>Ticket</title>
+            <style>
+              div.a {
+                line-height: normal;
+              }
+            </style>
           </head>
           <body>
-            <div>
-              <h1 style="font-size: 6mm; font-weight: bold;">'.$product->No_garantia.'           '.$product->Referencia.'</h1>
-              <p style="font-weight: bold; font-size: 5mm;">'.$product->Fecha_ingreso.'</p>
-            </div>
+            <div class="a">
+              <p style="font-size: 12px; font-weight: bold;">'.$product->No_garantia.'</p>  
+              <p style="font-size: 4px;">'.$product->Fecha_ingreso.'&nbsp;&nbsp;&nbsp;'.$product->Referencia.'</p>
+            </div>    
           </body>
           </html>
           ';
-          $mpdf->AddPage('L');
-          $mpdf->WriteHTML($html);
+          $printer->text($html);
+           /*Alimentamos el papel 3 veces*/
+          $printer->feed(3);
+
+          /*
+            Cortamos el papel. Si nuestra impresora
+            no tiene soporte para ello, no generará
+            ningún error
+          */
+          $printer->cut();
+
+          /*
+            Por medio de la impresora mandamos un pulso.
+            Esto es útil cuando la tenemos conectada
+            por ejemplo a un cajón
+          */
+          $printer->pulse();
         }
-        $mpdf->Output();
+
+        /*
+          Para imprimir realmente, tenemos que "cerrar"
+          la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
+        */
+        $printer->close();
+        // $html = '';
+        // foreach ($data as $product) {
+        //   $html = '';
+        //   $html .= '<!DOCTYPE html>
+        //   <html lang="es">
+        //   <head>
+        //     <title>Ticket</title>
+        //     <style>
+        //       div.a {
+        //         line-height: normal;
+        //       }
+        //     </style>
+        //   </head>
+        //   <body>
+        //     <div class="a">
+        //       <p style="font-size: 12px; font-weight: bold;">'.$product->No_garantia.'</p>  
+        //       <p style="font-size: 4px;">'.$product->Fecha_ingreso.'&nbsp;&nbsp;&nbsp;'.$product->Referencia.'</p>
+        //     </div>    
+        //   </body>
+        //   </html>
+        //   ';
+        //   $mpdf->AddPage('L');
+        //   $mpdf->WriteHTML($html);
+        // }
+        // $mpdf->Output();
       }
     }else{
       header('Location: ?controller=login');
@@ -853,11 +920,19 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if ($_POST) {
+        date_default_timezone_set('America/Bogota');
+        $hora_actual = date("h:i a");
         if ($_POST['Estado'] == 'Entregado para cambio de producto') {
           $dataS = [
             'id' => $_POST['id'],
             'Estado' => $_POST['Estado'],
             'Sello_Producto' => $_POST['Sello_Producto']
+          ];
+        }elseif($_POST['Estado'] == 'Entregado para nota credito'){
+          $dataS = [
+            'id' => $_POST['id'],
+            'Estado' => $_POST['Estado'],
+            'Observacion_Final' => $_POST['Observacion_Final']
           ];
         }else{
           $dataS = [
@@ -959,6 +1034,7 @@ class GarantyController
               <tr>
                 <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
                 <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Digital MTX"></a>
+                <p style="float: right;">Hora modificado: '.$hora_actual.'</p>
                 </td>
               </tr>
               <tr>
@@ -971,7 +1047,7 @@ class GarantyController
                     </div>
                   </td>
                   </tr>
-                  <tr>
+                  <tr> 
                   <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
                   <div class="mktEditable" id="intro_title">
                     Estimado Usuario
@@ -1016,7 +1092,7 @@ class GarantyController
           <div id="address" class="mktEditable">
                     <b>Digital MTX</b><br>
                                 2020<br> 
-                        <a style="color:  #F44336;" href="#">DigitalMTX@email.com</a>
+                        Para mas informacion consulte <a style="color: #F44336;" href="http://localhost/Digitalmtx/?controller=client&method=list">aqui</a> su estado de garantia
           </div>
                   </td>
                   </tr>
@@ -1269,6 +1345,22 @@ class GarantyController
       $garanties = $this->model->getAllSolutionPre();
       require 'Views/Garanty/storyGaranty.php';
       require 'Views/Scripts.php';
+    }else{
+      header('Location: ?controller=login');
+    }
+  }
+
+  public function details()
+  {
+    if (isset($_SESSION['user'])) {
+      if ($_POST['id']) {
+        $id = $_REQUEST['id'];
+        $data = $this->model->getByIdEnd($id);
+        $consecutives = $this->technical->consecutives($id); 
+        require 'Views/Layout.php';
+        require 'Views/Garanty/detailsGaranty.php';
+        require 'Views/Scripts.php';
+      }
     }else{
       header('Location: ?controller=login');
     }
