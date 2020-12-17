@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="block-header">
             <h2>
-                <a href="?controller=garanty&method=listGaranty" class="btn btn-danger"><<</a>
+                <a href="?controller=handtohand" class="btn btn-danger"><<</a>
                 CAMBIO DE SELLOS DE FACTURA
                 <small>Aqui puedes cambiar el sello de un producto cuando este no aplica a garantia</small>
             </h2>

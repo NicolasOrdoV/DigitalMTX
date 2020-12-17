@@ -21,6 +21,18 @@ class HandtohandController{
 	{
 		if (isset($_SESSION['user'])) {
 			require 'Views/Layout.php';
+			$bills = $this->bill->getAll();
+			require 'Views/Hands/list.php';
+			require 'Views/Scripts.php';
+		}else{
+	      header('Location: ?controller=login');
+	    }
+	}
+
+	public function new()
+	{
+		if (isset($_SESSION['user'])) {
+			require 'Views/Layout.php';
 			require 'Views/Hands/change.php';
 			require 'Views/Scripts.php';
 		}else{

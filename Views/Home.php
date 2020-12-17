@@ -31,7 +31,7 @@
                             <i class="material-icons">assignment</i>
                         </div>
                         <div class="content">
-                            <div class="text">Garantias pendientes</div>
+                            <div class="text">Garantias totales</div>
                             <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"><?php echo $totalGaranties;  ?></div>
                         </div>
                     </div>

@@ -464,6 +464,7 @@ class GarantyController
                     <div style="display:table; margin:auto; text-align:left;">
                       <p><b>Observacion Garantia:</b> '.$data['Observacion_Empleado'].'</p>
                     </div>
+                    <small style="font-size: 6px; justify-content: center;">"Garantía: El horario de atención es de lunes a viernes de 09:00 a 13:00 en la calle 77 # 16A – 38 Oficina 303¤2)Para el ingreso del producto a garantía el cliente deberá entregar el documento de compra y el producto completo con sus empaques, accesorios, manuales, sin daños físicos que invaliden la garantía. 3)El periodo para dar¤solución a la garantía es de (8) ocho días hábiles, a partir de la fecha de radicado. 4)La Garantía no cubre en los siguientes casos: • Cuando el producto presenta daño físico, por mal uso, mala manipulación, transporte o¤descuido. • Cuando los sellos de garantía se encuentren removidos o sobre etiquetados remarcados. • Daños causados por descargas eléctricas o uso de voltaje incorrecto. • Daños generados por¤presencia de elementos nocivos que no forman parte del producto. • Si el cliente ha cambiado el software original de fábrica. 5)Toda garantía que no¤se reclame en (1) mes a partir de la fecha de ingreso, se hará un cobro de bodegaje, transcurrido los (6) meses será declarada en abandono y se procederá a su destrucción. 6)Si el cliente no presenta el documento de compra del¤producto, deberá presentar un documento relacionando el producto, NIT, fecha de compra, la copia del documento de compra se entregara en un plazo de (5) días hábiles. 7)Para la entrega de la garantía, el cliente presentara el¤formato de garantía original, no se entregara el producto con fotocopia del formato o sin el formato de garantía. 8)El periodo de garantía que cubre Digital MTX a los clientes en los productos son: cargadores de caja roja (2)años, cargadores para Mac y universal (1)año, baterías para portátil (1)año, pantallas para computador (6)meses, teclados (6)meses, baterías para celular (3)meses, pantallas para celular (3)meses. Importante: Al firmar y/o recibir el documento de compra que certifique el despacho correspondiente queda entendido que el cliente acepta incondicionalmente la¤presente política y condiciones de garantía, renuncia a cualquier tipo de reclamo que no esté considerado en el presente documento. Más información de políticas de garantías en nuestro sitio web https://www.digitalmtx.com o realice sus consultas y/o reclamos en el correo electrónico centrodeservicio@digitalmtx.com"</small>
                    
               </div>
             </center>
@@ -774,88 +775,26 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_REQUEST['id'])) {
-        // $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [44, 60]]);
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8' , 'format' => [44, 60]]);
         $id = $_REQUEST['id'];
-        $data = $this->model->getByIdG($id);
-
-        $nombre_impresora = "POS"; 
-        $connector = new WindowsPrintConnector($nombre_impresora);
-        $printer = new Printer($connector);
-        #Mando un numero de respuesta para saber que se conecto correctamente.
-        echo 1;
-        /*
-          Ahora vamos a imprimir un encabezado
-        */
-          $html = '';
+        $data = $this->model->getByIdG1($id);
         foreach ($data as $product) {
-          $html = '';
-          $html .= '<!DOCTYPE html>
-          <html lang="es">
-          <head>
-            <title>Ticket</title>
-            <style>
-              div.a {
-                line-height: normal;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="a">
-              <p style="font-size: 12px; font-weight: bold;">'.$product->No_garantia.'</p>  
-              <p style="font-size: 4px;">'.$product->Fecha_ingreso.'&nbsp;&nbsp;&nbsp;'.$product->Referencia.'</p>
-            </div>    
-          </body>
-          </html>
-          ';
-          $printer->text($html);
-           /*Alimentamos el papel 3 veces*/
-          $printer->feed(3);
-
-          /*
-            Cortamos el papel. Si nuestra impresora
-            no tiene soporte para ello, no generará
-            ningún error
-          */
-          $printer->cut();
-
-          /*
-            Por medio de la impresora mandamos un pulso.
-            Esto es útil cuando la tenemos conectada
-            por ejemplo a un cajón
-          */
-          $printer->pulse();
+          $html = '<div style="width: 1880px;">
+                    <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 68px; line-height: .75; font-family: sans-serif; position: relative;">
+                          <tr>
+                            <td WIDTH="100%" VALIGN="TOP" HEIGHT=66>
+                              <P><b>Consecutivo: </b>'.$product->No_garantia.'</p><br>
+                              <P><b>Fecha de ingreso: </b>'.$product->Fecha_ingreso.'</p><br>
+                              <P><b>Referencia: </b>'.$product->Referencia.'</p><br>
+                              <P><b>Numero_Factura: </b>'.$product->Numero_Factura.'</p><br>
+                            </td>
+                          </tr>
+                        </table>
+                  </div>';
+          $mpdf->AddPage('L');
+          $mpdf->WriteHTML($html);
         }
-
-        /*
-          Para imprimir realmente, tenemos que "cerrar"
-          la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
-        */
-        $printer->close();
-        // $html = '';
-        // foreach ($data as $product) {
-        //   $html = '';
-        //   $html .= '<!DOCTYPE html>
-        //   <html lang="es">
-        //   <head>
-        //     <title>Ticket</title>
-        //     <style>
-        //       div.a {
-        //         line-height: normal;
-        //       }
-        //     </style>
-        //   </head>
-        //   <body>
-        //     <div class="a">
-        //       <p style="font-size: 12px; font-weight: bold;">'.$product->No_garantia.'</p>  
-        //       <p style="font-size: 4px;">'.$product->Fecha_ingreso.'&nbsp;&nbsp;&nbsp;'.$product->Referencia.'</p>
-        //     </div>    
-        //   </body>
-        //   </html>
-        //   ';
-        //   $mpdf->AddPage('L');
-        //   $mpdf->WriteHTML($html);
-        // }
-        // $mpdf->Output();
+        $mpdf->Output();
       }
     }else{
       header('Location: ?controller=login');
@@ -928,7 +867,7 @@ class GarantyController
             'Estado' => $_POST['Estado'],
             'Sello_Producto' => $_POST['Sello_Producto']
           ];
-        }elseif($_POST['Estado'] == 'Entregado para nota credito'){
+        }elseif($_POST['Estado'] == 'Entregado para Nota Credito'){
           $dataS = [
             'id' => $_POST['id'],
             'Estado' => $_POST['Estado'],
@@ -1126,7 +1065,8 @@ class GarantyController
     if (isset($_SESSION['user'])) {
       if (isset($_POST)) {
         if (preg_match('/^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑ.,; ]+$/', $_POST['Observacion_Final'])) {
-
+          date_default_timezone_set('America/Bogota');
+          $hora_actual = date("h:i a");
           $this->model->saveGarantyEnd($_POST);
           $data = $this->model->getByIdEnd($_POST['id']);
           $mail = new PHPMailer(true);
@@ -1150,75 +1090,140 @@ class GarantyController
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Solicitud de garantia';
             $mail->Body    = '<!DOCTYPE html>
-                  <html lang="en" >
-                  <head>
-                    <meta charset="UTF-8">
-                    <title>CodePen - Avisado Prototipo</title>
-                    <link rel="stylesheet" href="./style.css">
+          <html lang="en" >
+          <head>
+          <meta charset="UTF-8">
+          <title>Digital MTX Garantias</title>
+          <style type="text/css">
+          @media only screen and (max-width: 600px) {
+            .main {
+              width: 320px !important;
+            }
+            .top-image {
+              width: 100% !important;
+            }
+            .inside-footer {
+              width: 320px !important;
+            }
+            table[class="contenttable"] {
+              width: 320px !important;
+              text-align: left !important;
+            }
+            td[class="force-col"] {
+              display: block !important;
+            }
+            td[class="rm-col"] {
+              display: none !important;
+            }
+            .mt {
+              margin-top: 15px !important;
+            }
+            *[class].width300 {
+              width: 255px !important;
+            }
+            *[class].block {
+              display: block !important;
+            }
+            *[class].blockcol {
+              display: none !important;
+            }
+            .emailButton {
+              width: 100% !important;
+            }
+            .emailButton a {
+              display: block !important;
+              font-size: 18px !important;
+            }
+          }
+          </style>
+          
+          </head>
+          <body>
+          <!-- partial:index.partial.html -->
+          <body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
+          
+          <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
+            <tr>
+            <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+              <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+              <tr>
+                <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid  #F44336">
+                <a href="https://www.digitalmtx.com/"><img class="top-image" src="http://imgfz.com/i/I1qms2R.png" style="line-height:100;width: 100px;" alt="Digital MTX"></a>
+                <p style="float: right;">Hora modificado: '.$hora_actual.'</p>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top" class="side title" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;vertical-align: top;background-color: white;border-top: none;">
+                <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                  <tr>
+                  <td class="head-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 28px;line-height: 34px;font-weight: bold; text-align: center;">
+                    <div class="mktEditable" id="main_title">
+                    Proceso de la Garantia 
+                    </div>
+                  </td>
+                  </tr>
+                  <tr> 
+                  <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
+                  <div class="mktEditable" id="intro_title">
+                    Estimado Usuario
+                  </div></td>
+                  </tr>
+                  <tr>
+                  <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;"></td>
+                  </tr>
                   
-                  </head>
-                  <body>
-                  <!-- partial:index.partial.html -->
-                  <html>
-                    <head>
-                      <meta charset="utf-8" />
-                      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-                      <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-                      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-                      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-                    </head>
-                    <body>
-                      <header>
-                        <div class="container">
-                          <section class="banner_row">
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <figure class="animated fadeInLeft">
-                                  <a href="index.html">
-                                    <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-                                  </a>
-                                </figure>
-                            </div>
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                              <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-                            </div>
-                          </section>
-                        </div>
-                      </header>
-                      <section class="formulario-princ">
-                        <div class="container">
-                          <form class="form-inline">
-                            <div class="form-group">
-                              <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-                            </div>
-                            <div class="form-group">
-                            <p>Hola que tal: Su proceso de garantia fue: ' . $data[0]->Estado . '</p><br>
-                            <p>Por favor este pendiente de su correo para alguna novedad.</p>
-                            </div>
-                          </form>
-                        </div>
-                      </section>
-                      </div>
-                      <br />
-                      <br />
-                      <div class="footer-container">
-                      <footer class="wrapper">
-                        <div class="container">
-                          <h3>Trabajamos para ti, ¡Espéranos!</h3>
-                          <p>Para más información, <strong>puedes escribirnos a:</strong> 
-                            <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-                          </p>
-                        </div>
-                      </footer>
-                      </div>
-                    </body>
-                  </html>
-                  <!-- partial -->
-                  </body>
-                  </html>
-                  ';
+                  <tr>
+                  <td class="top-padding" style="border-collapse: collapse;border: 0;margin: 0;padding: 15px 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 21px;">
+                    <hr size="1" color="#eeeff0">
+                  </td>
+                  </tr>
+                  <tr>
+                  <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
+                  <div class="mktEditable" id="main_text">
+          
+          
+                    Su actual estado de la garantia se encuentra en '.$data[0]->Estado .'<br><br>
+                    
+                  </div>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
+                   &nbsp;<br>
+                  </td>
+                  </tr>
+                  
+          
+                </table>
+                </td>
+              </tr>
+            
+                        
+              <tr bgcolor="#fff" style="border-top: 4px solid  #F44336;">
+                <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
+                <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
+                  <tr>
+                  <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
+          <div id="address" class="mktEditable">
+                    <b>Digital MTX</b><br>
+                                2020<br> 
+                        Para mas informacion consulte <a style="color: #F44336;" href="http://localhost/Digitalmtx/?controller=client&method=list">aqui</a> su estado de garantia
+          </div>
+                  </td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              </table>
+            </td>
+            </tr>
+          </table>
+          </body>
+          <!-- partial -->
+          
+          </body>
+          </html>
+          ';
 
             $mail->send();
             header('Location: ?controller=garanty&method=solutionTechnical');
