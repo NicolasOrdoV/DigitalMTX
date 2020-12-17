@@ -37,55 +37,59 @@
 	        		if(!empty($data)){?>
 				        <div class="card w-100 m-auto">
 				        	<div class="card-body w-100">
-				            	<h2>Producto</h2>
-			                    <div class="row clearfix">
-			                    	 <div class="col-sm-12">
-			                            <h3>Numero garantía</h3>
-			                            <h3><?php echo $data[0]->No_garantia?></h3>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Codigo del producto</h5>
-			                            <p><?php echo $data[0]->Codigo_Producto?></p>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Descripcion producto</h5>
-			                            <p><?php echo $data[0]->Descripcion_Producto?></p>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Serial</h5>
-			                            <p><?php echo $data[0]->Sello_Producto?></p>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Cantidad</h5>
-			                            <p><?php echo $data[0]->Cantidad_Producto?></p>
-			                        </div>
-			                    </div>
-			                    <div class="row clearfix">
-			                        <div class="col-sm-3">
-			                            <h5>Flete</h5>
-			                            <p><?php echo $data[0]->Flete?></p>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Ciudad</h5>
-			                            <p><?php echo $data[0]->Departamento?></p>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Municipio</h5>
-			                            <p><?php echo $data[0]->Municipio?></p>
-			                        </div>
-			                        <div class="col-sm-3">
-			                            <h5>Valor del producto</h5>
-			                            <p><?php echo $data[0]->Valor_Flete?></p>
-			                        </div>
-			                    </div>
+				            	<h2><b>Producto</b></h2>
+				            	<br>
+				            	<?php foreach($data as $show){?>
+				                    <div class="row clearfix">
+				                    	<div class="col-sm-12">
+				                            <h3>Numero garantía</h3>
+				                            <h3><?php echo $show->No_garantia?></h3>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Codigo del producto</h5>
+				                            <p><?php echo $show->Codigo_Producto?></p>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Descripcion producto</h5>
+				                            <p><?php echo $show->Descripcion_Producto?></p>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Serial</h5>
+				                            <p><?php echo $show->Sello_Producto?></p>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Cantidad</h5>
+				                            <p><?php echo $show->Cantidad_Producto?></p>
+				                        </div>
+				                    </div>
+				                    <div class="row clearfix">
+				                        <div class="col-sm-3">
+				                            <h5>Flete</h5>
+				                            <p><?php echo $show->Flete?></p>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Ciudad</h5>
+				                            <p><?php echo $show->Departamento?></p>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Municipio</h5>
+				                            <p><?php echo $show->Municipio?></p>
+				                        </div>
+				                        <div class="col-sm-3">
+				                            <h5>Valor del producto</h5>
+				                            <p><?php echo $show->Valor_Flete?></p>
+				                        </div>
+				                    </div>
+				                    <div class="row clearfix">
+				                    	<div class="col-sm-12">
+				                            <h1>ESTADO: <?php echo $show->Estado?></h1>
+				                        </div>
+				                    </div>
+				                    <hr>
+			                    <?php } ?>
 			                    <div class="row clearfix">
 			                    	<div class="col-sm-12">
-			                            <h1>ESTADO: <?php echo $data[0]->Estado?></h1>
-			                        </div>
-			                    </div>
-			                    <div class="row clearfix">
-			                    	<div class="col-sm-12">
-			                            <h3>Fecha expedición: <?php echo $data[0]->Fecha_ingreso?></h3>
+			                            <h3 class="text-center">Fecha expedición: <?php echo $data[0]->Fecha_ingreso?></h3>
 			                        </div>
 			                    </div>
 				            </div>
