@@ -158,6 +158,11 @@ $td = $total_data + 0001;
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if(isset($failedError)){ ?>
+                                        <div class="alert alert-danger">
+                                            <?php echo $failedError['errorGaranty']?>
+                                        </div>
+                                        <?php } ?>
                                         <?php if (isset($bills)) {
                                             $i = 0;
                                             $productos = [];
@@ -307,8 +312,9 @@ $td = $total_data + 0001;
                                         </p>
                                         <select name="Transportadora" class="form-control show-tick">
                                             <option value="">Seleccione..</option>
-                                            <option value="Envia">Envia</option>
-                                            <option value="Servientrega">Servientrega</option>
+                                            <?php foreach ($conveyors as $conveyor) { ?>
+                                                <option value="<?php echo $conveyor->Transportadora ?>"><?php echo $conveyor->Transportadora ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>

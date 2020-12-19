@@ -64,12 +64,21 @@ if(isset($_POST['import_data'])){
                 }*/
             }            
             fclose($csv_file);
-            $import_status = '?import_status=success';
         } else {
-            $import_status = '?import_status=error';
+            $error = [
+                'errorStatus' => 'Ya existen los datos'
+            ];
+            echo '<script>
+            window.location = "../../?controller=bill";
+            </script>';
         }
     } else {
-        $import_status = '?import_status=invalid_file';
+        $error = [
+            'errorFile' => 'Archivo no permitido'
+        ];
+        echo '<script>
+        window.location = "../../?controller=bill";
+        </script>';
     }
 }
 echo '<script>

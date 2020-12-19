@@ -19,6 +19,9 @@
                         <div class="alert alert-warning">
                             <p>RECUERDA: debes cargar tu archivo de facturas una vez, si los datos no cargan, por favor avisar a soporte tecnologico. El archivo a cargar debe ser .csv</p>
                         </div>
+                        <div class="alert alert-danger">
+                            <p>RECUERDA: Si tu archivo no es .csv, entonces este no se registrara en la base de datos </p>
+                        </div>
                         <div class="col-sm-12">
                             <h2>Importar</h2>
                             <?php //echo 'Dia de hoy: '.$day_now .'</br>'; 

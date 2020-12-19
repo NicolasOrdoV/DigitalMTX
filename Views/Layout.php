@@ -182,6 +182,12 @@
                                 </a> 
                             </li>
                             <li>
+                                <a href="?controller=handtohand" class="menu-toggle">
+                                    <span><b>Cambio de sellos</b></span>
+                                </a>
+                                
+                            </li>
+                            <li>
                                 <a href="?controller=garanty&method=storyGaranties" class="menu-toggle">
                                     <span>Historico de garantias finalizadas</span>
                                 </a> 

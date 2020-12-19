@@ -8,18 +8,15 @@ require 'Models/Departament.php';
 require 'Models/Municipality.php';
 require 'Models/Technical.php';
 require 'Models/Bill.php';
+require 'Models/Conveyor.php';
 
 
-use Mike42\Escpos\Printer;
-use Mike42\Escpos\EscposImage;
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
 require 'vendor/autoload.php';
-require 'Assets/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 
 /**
  * controlador personal
@@ -34,6 +31,7 @@ class GarantyController
   private $municipality;
   private $technical;
   private $bill;
+  private $conveyor;
 
   public function __construct()
   {
@@ -45,6 +43,7 @@ class GarantyController
     $this->municipality = new Municipality;
     $this->technical = new Technical;
     $this->bill = new Bill;
+    $this->conveyor = new Conveyor;
   }
 
   public function listGaranty()
@@ -70,6 +69,7 @@ class GarantyController
       $providers = $this->provider->getAll();
       $departaments = $this->departament->getAll();
       $municipalities = $this->municipality->getAll();
+      $conveyors = $this->conveyor->getAll();
       require 'Views/Garanty/garantia_empleado.php';
       require 'Views/Scripts.php';
     }else{
@@ -113,6 +113,7 @@ class GarantyController
                 $providers = $this->provider->getAll();
                 $departaments = $this->departament->getAll();
                 $municipalities = $this->municipality->getAll();
+                $conveyors = $this->conveyor->getAll();
                 require 'Views/Garanty/garantia_empleado.php';
                 require 'Views/Scripts.php';
               }else{
@@ -123,6 +124,7 @@ class GarantyController
                 $providers = $this->provider->getAll();
                 $departaments = $this->departament->getAll();
                 $municipalities = $this->municipality->getAll();
+                $conveyors = $this->conveyor->getAll();
                 require 'Views/Garanty/garantia_empleado.php';
                 require 'Views/Scripts.php';
               }
@@ -137,6 +139,7 @@ class GarantyController
               $providers = $this->provider->getAll();
               $departaments = $this->departament->getAll();
               $municipalities = $this->municipality->getAll();
+              $conveyors = $this->conveyor->getAll();
               require 'Views/Garanty/garantia_empleado.php';
               require 'Views/Scripts.php';
             }else{
@@ -147,6 +150,7 @@ class GarantyController
               $providers = $this->provider->getAll();
               $departaments = $this->departament->getAll();
               $municipalities = $this->municipality->getAll();
+              $conveyors = $this->conveyor->getAll();
               require 'Views/Garanty/garantia_empleado.php';
               require 'Views/Scripts.php';
             }
@@ -160,6 +164,7 @@ class GarantyController
             $providers = $this->provider->getAll();
             $departaments = $this->departament->getAll();
             $municipalities = $this->municipality->getAll();
+            $conveyors = $this->conveyor->getAll();
             $error = [
               'error' => 'El formato de factura no es correcto, vuelvalo a intentar'
             ];
@@ -186,18 +191,18 @@ class GarantyController
   public function save()
   {
     if (isset($_SESSION['user'])) {
-      if (filter_var($_POST['Correo_Cliente'],FILTER_VALIDATE_EMAIL)) {
+      if (filter_var($_POST['Correo_Cliente'],FILTER_VALIDATE_EMAIL) && isset($_POST['Aprobacion_Garantia'])) {
         //-------------------------//
         $fecha_factura = $_POST['fecha_factura'];
         $fecha_factura = date('Y-m-d' , strtotime($fecha_factura));
         $parts = explode("-", $fecha_factura);
         //var_dump($parts);
-        echo "Fecha de la factura: ".$fecha_factura.'<br>';
+        //echo "Fecha de la factura: ".$fecha_factura.'<br>';
         $fecha_actual = $_POST['Fecha_ingreso'];
         $fecha1 = explode("/", $fecha_actual);
         $fecha2 = implode("-", $fecha1);
         $fecha2 = date('Y-m-d', strtotime($fecha2));
-        echo "Fecha del dia de hoy: ".$fecha2.'<br>';
+        //echo "Fecha del dia de hoy: ".$fecha2.'<br>';
 
         $fecha_proxima = null;
         $date_before = null;
@@ -581,15 +586,16 @@ class GarantyController
         }
       }else{
         $failedError = [
-          'error' => 'Hay campos que no son validos, por favor verificar que esten correctos todos los campos'
+          'error' => 'Hay campos que no son validos, por favor verificar que esten correctos todos los campos',
+          'errorGaranty' => 'El formulario no puede ser ingresado porque no hay alguna garantia por realizar. Debe marcar uno de ellos sea una aprobación de garantia o no'
         ];
-        $details = $this->model->getGaranty($bill);
         require 'Views/Layout.php';
         $data = $this->model->getAll();
         $total_data = count($data);
         $providers = $this->provider->getAll();
         $departaments = $this->departament->getAll();
         $municipalities = $this->municipality->getAll();
+        $conveyors = $this->conveyor->getAll();
         require 'Views/Garanty/garantia_empleado.php';
         require 'Views/Scripts.php';
       }
@@ -698,7 +704,7 @@ class GarantyController
                <p style="text-align:center;">Original</p>  
             <img src="http://imgfz.com/i/pCPXAou.jpeg" width="10"> __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
           <!-- partial -->
-          <br><br>
+          <br><br><br><br>
           <div style="width: 880px;">
           <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
                 <tr>

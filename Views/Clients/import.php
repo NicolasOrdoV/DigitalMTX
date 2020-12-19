@@ -191,12 +191,15 @@ if(isset($_POST['import_data'])){
                 }
             }        
             fclose($csv_file);
-            $import_status = '?import_status=success';
         } else {
-            $import_status = '?import_status=error';
+            echo '<script>
+            window.location = "../../?controller=client";
+            </script>';
         }
     } else {
-        $import_status = '?import_status=invalid_file';
+        echo '<script>
+            window.location = "../../?controller=client";
+            </script>';
     }
 }
 echo '<script>
