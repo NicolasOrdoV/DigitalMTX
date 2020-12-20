@@ -85,8 +85,9 @@ class GarantyController
           $bill = $_POST['NumFactura'];
           $search = $this->model->getBill($bill);
           $bills = $this->model->getByNumBill($search[0]->Numero_Factura);
+          //var_dump($bills);
           $dataF = $this->model->getAllF($bill);
-          $fac1 = isset($dataF[0]->Numero_Factura) ? $dataF[0]->Numero_Factura : 'null';
+          $fac1 = isset($dataF[0]->Numero_Factura) ? $dataF[0]->Numero_Factura : '';
           $fac2 = $bills[0]->Numero_Factura;
 
           $date_now = date('d-m-Y');
@@ -683,7 +684,7 @@ class GarantyController
                 </tr>';
                 foreach ($dates as $producte){ 
                $html .= '<tr>
-                          <td>'.$producte->Referencia.'</td><br>
+                          <td>'.$producte->codigo.'</td><br>
                           <td>'.$producte->Cantidad.'</td><br>
                           <td>'.$producte->Descripcion_Producto.'</td><br>
                           <td>'.$producte->Marca_Producto.'</td><br>
@@ -748,7 +749,7 @@ class GarantyController
                 </tr>';
                 foreach ($dates as $producte){ 
                $html .= '<tr>
-                          <td>'.$producte->Referencia.'</td><br>
+                          <td>'.$producte->codigo.'</td><br>
                           <td>'.$producte->Cantidad.'</td><br>
                           <td>'.$producte->Descripcion_Producto.'</td><br>
                           <td>'.$producte->Marca_Producto.'</td><br>
@@ -895,6 +896,12 @@ class GarantyController
             'id' => $consultId[0]->id,
             'fecha_factura' => $_POST['fecha_factura'],
             'Descripcion_Comentarios' => $_POST['Sello_Producto']
+          ];
+          $this->bill->updateBill($dateUpdate);
+        }else{
+          $dateUpdate = [
+            'id' => $consultId[0]->id,
+            'fecha_factura' => $_POST['fecha_factura']
           ];
           $this->bill->updateBill($dateUpdate);
         }
@@ -1255,6 +1262,7 @@ class GarantyController
     header("Pragma: public");
     header("Expires: 0");
     header("Content-type: application/x-msdownload");
+    header("Content-Type: text/csv; charset-utf8");
     header("Content-Disposition: attachment; filename=\"$filename\"");
     header("Pragma: no-cache");
     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -1263,10 +1271,9 @@ class GarantyController
     $productResult = $this->model->getComplete();
     
       if ( !$isPrintHeader ) {
-        $html = '<table class="table">
+        $html = '<table>
                 <thead>
                     <tr>
-                        <th>id</th>
                         <th>No_Garantia</th>
                         <th>Fecha_ingreso</th>
                         <th>Hora_ingreso</th>
@@ -1305,7 +1312,6 @@ class GarantyController
                 <tbody>';
                 foreach ($productResult as $garanty) {
                   $html .= '<tr>
-                    <td>'.$garanty->id.'</td>
                     <td>'.$garanty->No_garantia.'</td>
                     <td>'.$garanty->Fecha_ingreso.'</td>
                     <td>'.$garanty->Hora_ingreso.'</td>

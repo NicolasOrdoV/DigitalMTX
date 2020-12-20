@@ -69,4 +69,5 @@
     <script src="Assets/js/pages/forms/basic-form-elements.js"></script>
     <script src="Assets/js/pages/tables/jquery-datatable.js"></script>
     <script src="Assets/js/pages/forms/form-validation.js"></script>
-    <script src="Aseets/js/pages/ui/modals.js"></script>
+   <!--  <script src="Aseets/js/pages/ui/modals.js"></script>
+ -->

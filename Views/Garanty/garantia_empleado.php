@@ -390,7 +390,7 @@ $td = $total_data + 0001;
                                 </div>
                                 <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">Identificacion Cliente</h4>
-                                    <p><?php echo $detail->Nombre_Cliente?></p>
+                                    <p><?php echo $detail->Identificacion_Cliente?></p>
                                 </div>
                             </div>
                             <div class="row clearfix">

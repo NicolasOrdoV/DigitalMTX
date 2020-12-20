@@ -44,7 +44,7 @@
                                                 <td><?php echo $garanty->Estado ?></td>
                                                 <td>
                                                     <?php if ($garanty->Estado == 'Solucionado por servicio tecnico' && $garanty->Aprobacion_Garantia == 'SI' ) {  ?>                                                      
-                                                        <div class="row clearfix">
+                                                        <div class="row clearfix"> 
                                                             <div class="col-sm-6">
                                                                 <form action="?controller=garanty&method=options" method="POST">
                                                                     <input type="hidden" name="id" value="<?php echo $garanty->id ?>">

@@ -81,10 +81,14 @@ class Garanty
         }
     }
 
-    public function getComplete()
+    public function getComplete() 
     {
         try {
-            $strSql = "SELECT g.*,d.*,t.*,p.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia INNER JOIN mg_servicio_tecnico t ON g.id = t.Id_Garantia INNER JOIN mg_proveedores p ON d.Codigo_Proveedor = p.id WHERE d.Aprobacion_Garantia = 'SI' GROUP BY g.No_garantia ORDER BY d.Id_Garantia ASC";
+            $strSql = "SELECT g.*,d.*,t.*,p.* FROM mg_garantia g 
+            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia
+            INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia
+            INNER JOIN mg_proveedores p ON d.Codigo_Proveedor = p.id
+            WHERE d.Aprobacion_Garantia = 'SI' GROUP BY g.No_garantia ORDER BY d.Id_Garantia ASC";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -130,7 +134,10 @@ class Garanty
     public function getByIdG($id)
     {
         try {
-            $strSql = "SELECT g.*,d.*,f.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia INNER JOIN mg_facturas f ON g.Numero_Factura = f.Numero_Factura WHERE g.id = :id AND d.Aprobacion_Garantia = 'SI'";
+            $strSql = "SELECT g.id as idG, g.No_garantia, g.Fecha_ingreso, g.Hora_ingreso, g.Numero_Factura, g.Punto_Venta, g.Fecha_Compra, g.Nombre_Cliente, g.Identificacion_Cliente, g.Correo_Cliente, g.Direccion_Cliente, g.Flete, g.Departamento, g.Municipio, g.Valor_Flete, g.No_Guia, g.Transportadora, g.Observacion_Empleado, g.Empleado ,d.Codigo_Producto as codigo, d.Descripcion_Producto, d.Marca_Producto, d.Sello_Producto, d.Referencia , d.Cantidad_Producto, d.Codigo_Proveedor, d.Fecha_Proveedor, d.Id_Garantia, d.Observacion_Cliente, d.Estado, d.Observacion_Final, d.Aprobacion_Garantia,f.* FROM mg_garantia g 
+                INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
+                INNER JOIN mg_facturas f ON g.Numero_Factura = f.Numero_Factura 
+                WHERE g.id = :id AND d.Aprobacion_Garantia = 'SI' GROUP BY d.id";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql, $array);
             return $query;

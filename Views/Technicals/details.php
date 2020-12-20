@@ -132,7 +132,7 @@ $hora_actual = date("h:i a"); ?>
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <textarea rows="4" class="form-control no-resize" name="Observacion_tecnico" required></textarea>
-                                                <label class="form-label">Observacion tecnico<small class="text-danger">*</small></label>
+                                                <label class="form-label">Observacion tecnico</label>
                                             </div>
                                         </div>
                                         <div class="row clearfix">

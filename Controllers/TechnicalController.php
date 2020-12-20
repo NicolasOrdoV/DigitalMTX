@@ -57,7 +57,7 @@ class TechnicalController
 	public function save()
 	{
 		if (isset($_SESSION['user'])) {
-			if (preg_match('/^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑ.,; ]+$/', $_POST['Observacion_tecnico'])) {
+			if (preg_match('/^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST['Observacion_tecnico'])) {
 				$data = [
 		           'Observacion_tecnico' => $_POST['Observacion_tecnico'],
 		           'Fecha_anexo_Tecnico' => $_POST['Fecha_anexo_Tecnico'],
