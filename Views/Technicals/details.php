@@ -132,12 +132,12 @@ $hora_actual = date("h:i a"); ?>
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <textarea rows="4" class="form-control no-resize" name="Observacion_tecnico" required></textarea>
-                                                <label class="form-label">Observacion tecnico</label>
+                                                <label class="form-label">Observacion tecnico<small class="text-danger">*</small></label>
                                             </div>
                                         </div>
                                         <div class="row clearfix">
                                             <div class="col-sm-6">
-                                                <label>Estado del tecnico*</label>
+                                                <label>Estado del tecnico<small class="text-danger">*</small></label>
                                                 <select name="Estado_tecnico" class="form-control show-tick" required>
                                                     <option value="">Seleccione..</option>
                                                     <option value="Pendiente por servicio tecnico">Pendiente por servicio tecnico</option>

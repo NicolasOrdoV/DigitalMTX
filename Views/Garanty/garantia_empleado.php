@@ -125,7 +125,7 @@ $td = $total_data + 0001;
                                 <div class="col-sm-3">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <label>Correo </label>
+                                            <label>Correo<small class="text-danger">*</small></label>
                                             <input type="email" class="form-control" name="Correo_Cliente" id="Correo_Cliente" value="<?php echo isset($bills[0]) ? $bills[0]->Correo_Cliente : '' ?>" required>
                                         </div>
                                     </div>
@@ -323,7 +323,7 @@ $td = $total_data + 0001;
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <label>Observacion Empleado</label>
+                                            <label>Observacion Empleado<small class="text-danger">*</small></label>
                                             <textarea rows="4" class="form-control no-resize" name="Observacion_Empleado" required></textarea>
                                         </div>
                                     </div>
@@ -404,13 +404,11 @@ $td = $total_data + 0001;
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">Flete</h4>
                                     <p><?php echo $detail->Flete?></p>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">Valor Flete</h4>
                                     <p><?php echo $detail->Flete?></p>
                                 </div>
@@ -456,12 +454,6 @@ $td = $total_data + 0001;
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-sm-12">
-                                    <h4 class="modal-title" id="defaultModalLabel">Referencia Producto</h4>
-                                    <p><?php echo $detail->Referencia ?></p>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">Aprobacion Garantia</h4>
                                     <p><?php echo $detail->Aprobacion_Garantia ?></p>
@@ -473,12 +465,18 @@ $td = $total_data + 0001;
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <h4 class="modal-title" id="defaultModalLabel">Estado</h4>
-                                    <p><?php echo $detail->Estado ?></p>
+                                    <h4 class="modal-title" id="defaultModalLabel">Referencia Producto</h4>
+                                    <p><?php echo $detail->Referencia ?></p>
                                 </div>
                                 <div class="col-sm-6">
                                     <h4 class="modal-title" id="defaultModalLabel">Observacion Final</h4>
                                     <p><?php echo $detail->Observacion_Final?></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <h1 class="modal-title" id="defaultModalLabel"><b>Estado</b></h1>
+                                    <p><b><?php echo $detail->Estado ?></b></p>
                                 </div>
                             </div>
                         </div>
