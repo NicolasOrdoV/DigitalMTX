@@ -299,7 +299,7 @@ class GarantyController
           //$detaills['Aprobacion_Garantia'] = $agN;
           //echo '<hr>';
           //var_dump($detaills);
-          if ($ag == 'SI') {
+          if ($ag == 'SI' || $ag == 'NO') {
             echo "Garantia: ".$g.'<br>';
             if ($g == '1 Año' || $g =='1 año') {
               $year = date($parts[0]);
@@ -313,7 +313,7 @@ class GarantyController
                 $fecha_proxima = date($afterYear.'-'.$parts[1].'-'.$parts[2]);
                 $date_before = strtotime($fecha_proxima);
                 //echo $fecha_proxima;    
-            }elseif($g == '6 Meses'){
+            }elseif($g == '6 Meses' || $g == '6 meses' ){
                 $fecha_proxima = date("Y-m-d",strtotime($fecha_factura."+ 6 months"));
                 $date_before = strtotime($fecha_proxima);
                 //echo $fecha_proxima;   
@@ -348,6 +348,10 @@ class GarantyController
           }
 
           //----Aqui va la validacion de rango de fechas
+          echo "-------------------------------<br>";
+          echo $date_now.'<br>';
+          echo $date_bill.'<br>';
+          echo $date_before.'<br>';
           if ($date_now >= $date_bill && $date_now <= $date_before) {
             if (isset($lastId[0]->id) && $answerNewGaranty == true) {
               if ($ag == 'NO') {
