@@ -84,11 +84,10 @@ class Garanty
     public function getComplete() 
     {
         try {
-            $strSql = "SELECT g.*,d.*,t.*,p.* FROM mg_garantia g 
-            INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia
-            INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia
-            INNER JOIN mg_proveedores p ON d.Codigo_Proveedor = p.id
-            WHERE d.Aprobacion_Garantia = 'SI' GROUP BY g.No_garantia ORDER BY d.Id_Garantia ASC";
+            $strSql = "SELECT g.*,d.*,t.*,p.* FROM mg_detalle_garantia d
+            INNER JOIN  mg_garantia g  ON d.Id_Garantia = g.id
+            INNER JOIN mg_servicio_tecnico t ON d.Id_Garantia = t.Id_Garantia
+            INNER JOIN mg_proveedores p ON d.Codigo_Proveedor = p.id";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
