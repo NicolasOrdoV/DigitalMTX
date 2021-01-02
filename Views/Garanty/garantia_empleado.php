@@ -71,7 +71,7 @@ $td = $total_data + 0001;
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label>Fecha</label>
-                                            <input type="text" class="form-control" name="Fecha_ingreso" value="<?php echo date('d/m/yy') ?>" readonly required>
+                                            <input type="text" class="form-control" name="Fecha_ingreso" value="<?php echo date('d/m/Y') ?>" readonly required>
                                         </div>
                                     </div>
                                 </div>

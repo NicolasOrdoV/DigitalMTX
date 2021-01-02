@@ -44,7 +44,7 @@
                                                             <div class="col-sm-6">
                                                                 <a href="?controller=technical&method=details&name=<?php echo $technical->DescripcionP ?>&id=<?php echo $technical->idDetalle ?>" class="btn btn-info"><i class="material-icons">add</i></a>
                                                             </div>
-                                                        <?php } ?>
+                                                        <?php } ?> 
                                                     </div>
                                                 </td>
                                             </tr>

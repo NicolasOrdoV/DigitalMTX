@@ -22,7 +22,7 @@ class Technical
 			$strSql = "SELECT g.*,d.id as idDetalle ,d.Codigo_Producto as idProducto,d.Descripcion_Producto as DescripcionP ,d.Marca_Producto as Marca ,d.Sello_Producto as Serie ,d.Referencia as ReferenciaProducto , d.Id_Garantia as N_garantia , d.Observacion_Cliente as ObsCliente , d.Aprobacion_Garantia as Aprobo, d.Estado as EstadoG   FROM  mg_garantia g 
 			INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
 			WHERE d.Estado = 'Tramite' 
-			OR d.Estado = 'Pendiente por servicio tecnico'";
+			OR d.Estado = 'Pendiente por servicio tecnico' AND d.Aprobacion_Garantia = 'SI'";
 			$query = $this->pdo->select($strSql);
 			return $query;
 		} catch (PDOException $e) {
@@ -47,7 +47,7 @@ class Technical
 		try {
 			$strSql = "SELECT t.*,d.* FROM mg_servicio_tecnico t
 			INNER JOIN mg_detalle_garantia d ON d.id = t.Id_Garantia 
-			WHERE d.id = :id";
+			WHERE  t.Id_Garantia = :id AND d.Aprobacion_Garantia = 'SI'";
 			$array = ['id' => $id];
 			$query = $this->pdo->select($strSql, $array);
 			return $query;

@@ -71,7 +71,7 @@ class Garanty
     public function getAllDet()
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g 
+            $strSql = "SELECT g.*,d.id as idD, d.Codigo_Producto, d.Descripcion_Producto as DescripcionP, d.Marca_Producto, d.Sello_Producto, d.Referencia, d.Cantidad_Producto, d.Codigo_Proveedor, d.Fecha_Proveedor, d.Id_Garantia, d.Observacion_Cliente, d.Estado, d.Observacion_Final, d.Aprobacion_Garantia FROM mg_garantia g 
                         INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia
                         WHERE d.Aprobacion_Garantia = 'SI' GROUP BY g.No_garantia ORDER BY d.Id_Garantia ASC";
             $query = $this->pdo->select($strSql);
@@ -84,10 +84,10 @@ class Garanty
     public function getComplete() 
     {
         try {
-            $strSql = "SELECT g.*,d.*,t.*,p.* FROM mg_detalle_garantia d
-            INNER JOIN  mg_garantia g  ON d.Id_Garantia = g.id
-            INNER JOIN mg_servicio_tecnico t ON d.Id_Garantia = t.Id_Garantia
-            INNER JOIN mg_proveedores p ON d.Codigo_Proveedor = p.id";
+            $strSql = "SELECT g.*,d.*,t.*,p.* FROM mg_detalle_garantia d,mg_garantia g,mg_servicio_tecnico t,mg_proveedores p
+            WHERE g.id = d.Id_Garantia
+            AND d.id = t.Id_Garantia
+            AND d.Codigo_Proveedor = p.id";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -98,7 +98,7 @@ class Garanty
     public function getAllSolution()
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia  ORDER BY d.Id_Garantia ASC , d.Estado ASC";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Aprobacion_Garantia = 'SI'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -175,7 +175,7 @@ class Garanty
         try {
             $strSql = "SELECT g.*,d.* FROM  mg_garantia g 
             INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia 
-            WHERE d.Descripcion_Producto = '$name' AND d.id = $id";
+            WHERE d.Descripcion_Producto = '$name' AND d.id = $id AND d.Aprobacion_Garantia = 'SI'";
             /*  $array = ['Descripcion_Producto' => $name,
                       'Id_Garantia' => $id]; */
             $query = $this->pdo->select($strSql); 
@@ -280,7 +280,7 @@ class Garanty
     public function saveGarantyEnd($data)
     {
         try {
-            $strWhere = "id =".$data['id'];
+            $strWhere = "id=".$data['id'];
             $this->pdo->update('mg_detalle_garantia', $data, $strWhere);
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -290,7 +290,10 @@ class Garanty
     public function getOptions($id)
     {
         try {
-            $strSql = "SELECT t.Observacion_tecnico as Observacion_tecnico, t.Id_Garantia as idg ,d.*,g.* FROM mg_detalle_garantia d INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia INNER JOIN mg_garantia g ON g.id = d.Id_Garantia WHERE d.id = $id ORDER BY t.id DESC LIMIT 1";
+            $strSql = "SELECT t.Observacion_tecnico as Observacion_tecnico, t.Id_Garantia as idg ,d.id as idD, d.Codigo_Producto, d.Descripcion_Producto, d.Marca_Producto, d.Sello_Producto, d.Referencia, d.Cantidad_Producto, d.Codigo_Proveedor, d.Fecha_Proveedor, d.Id_Garantia, d.Observacion_Cliente, d.Estado, d.Observacion_Final, d.Aprobacion_Garantia ,g.* FROM mg_detalle_garantia d 
+            INNER JOIN mg_servicio_tecnico t ON d.id = t.Id_Garantia 
+            INNER JOIN mg_garantia g ON g.id = d.Id_Garantia 
+            WHERE d.id = $id AND d.Aprobacion_Garantia = 'SI' ORDER BY t.id DESC LIMIT 1";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -312,7 +315,7 @@ class Garanty
     public function getAllSolutionPre()
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.Aprobacion_Garantia = 'SI'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch (PDOException $e) {
@@ -323,7 +326,7 @@ class Garanty
     public function getFinalyStatus($id)
     {
         try {
-            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.id = :id";
+            $strSql = "SELECT g.*,d.* FROM mg_garantia g INNER JOIN mg_detalle_garantia d ON g.id = d.Id_Garantia WHERE d.id = :id AND d.Aprobacion_Garantia = 'SI'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql , $array);
             return $query;

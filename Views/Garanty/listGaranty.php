@@ -63,9 +63,10 @@
                                                             </div>
                                                 <?php }else{ ?>
                                                     <div class="row clearfix">
-                                                        <div class="col-xs-12">
+                                                        <div class="col-xs-12"> 
                                                             <form action="?controller=garanty&method=details" method="POST">
-                                                                <input type="hidden" name="id" value="<?php echo $garanty->Id_Garantia ?>">
+                                                                <input type="hidden" name="id" value="<?php echo $garanty->idD ?>">
+                                                                <input type="hidden" name="name" value="<?php echo $garanty->DescripcionP?>">
                                                                 <button type="submit" class="btn btn-warning"><i class="material-icons">+</i></button>
                                                             </form>
                                                         </div>

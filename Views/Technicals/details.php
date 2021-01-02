@@ -18,11 +18,14 @@ $hora_actual = date("h:i a"); ?>
                             <h2>Detalle de la garantia</h2>
                         </div>
                         <div class="body">
+                            <h3>Observacion de recepción: </h3><?php echo $data[0]->Observacion_Empleado ?>
+                        </div>
+                        <div class="body">
                             <h2>Producto</h2>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
                                     <h5>Consecutivo garantia</h5>
-                                    <p><?php echo $data[0]->No_garantia?></p>
+                                    <h1><?php echo $data[0]->No_garantia?></h1>
                                 </div>
                                 <div class="col-sm-3">
                                     <h5>Codigo del producto</h5>
@@ -116,7 +119,7 @@ $hora_actual = date("h:i a"); ?>
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label>Fecha:</label>
-                                                        <input type="text" name="Fecha_anexo_Tecnico" class="form-control" value="<?php echo date('yy/m/d') ?>">
+                                                        <input type="text" name="Fecha_anexo_Tecnico" class="form-control" value="<?php echo date('Y/m/d') ?>">
                                                     </div>
                                                 </div>
                                             </div>

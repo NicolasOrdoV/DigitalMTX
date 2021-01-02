@@ -200,7 +200,7 @@ class GarantyController
         //var_dump($parts);
         //echo "Fecha de la factura: ".$fecha_factura.'<br>';
         $fecha_actual = $_POST['Fecha_ingreso'];
-        $fecha1 = explode("/", $fecha_actual);
+        $fecha1 = explode("/", $fecha_actual); 
         $fecha2 = implode("-", $fecha1);
         $fecha2 = date('Y-m-d', strtotime($fecha2));
         //echo "Fecha del dia de hoy: ".$fecha2.'<br>';
@@ -306,7 +306,7 @@ class GarantyController
               $afterYear = $year+1;
               $fecha_proxima = date($afterYear.'-'.$parts[1].'-'.$parts[2]);
               $date_before = strtotime($fecha_proxima);
-              //echo $fecha_proxima;
+              echo $fecha_proxima;
             }elseif($g == '2 Años'){
                 $year = date($parts[0]);
                 $afterYear = $year+1;
@@ -1081,7 +1081,7 @@ class GarantyController
   {
     if (isset($_SESSION['user'])) {
       if (isset($_POST)) {
-        
+        var_dump($_POST);
         date_default_timezone_set('America/Bogota');
         $hora_actual = date("h:i a");
         $this->model->saveGarantyEnd($_POST);
@@ -1371,9 +1371,10 @@ class GarantyController
   public function details()
   {
     if (isset($_SESSION['user'])) {
-      if ($_POST['id']) {
-        $id = $_REQUEST['id'];
-        $data = $this->model->getByIdEnd($id);
+      if (isset($_POST['id'])) {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $data = $this->model->getByIdTec($name,$id);
         $consecutives = $this->technical->consecutives($id); 
         require 'Views/Layout.php';
         require 'Views/Garanty/detailsGaranty.php';

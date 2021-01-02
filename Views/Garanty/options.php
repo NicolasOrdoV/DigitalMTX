@@ -15,11 +15,6 @@
                     <div class="header">
                         <h2>
                             Ingresar Garantía final
-                            <?php 
-                            //echo '<pre>';
-                            //var_dump($data);
-                            //echo '</pre>'; 
-                            ?>
                         </h2>
                         <p>Observacion del tecnico</p>
                         <?php echo $data[0]->Observacion_tecnico?>
@@ -28,7 +23,7 @@
                     </div>
                     <div class="body"> 
                         <form action="?controller=garanty&method=saveEndGaranty" method="POST" id="form_validation">
-                            <input  type = "hidden" name="id" value="<?php echo $data[0]->idg ?>">
+                            <input  type = "hidden" name="id" value="<?php echo $data[0]->idD ?>">
                             <div class="row clearfix">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -80,139 +75,3 @@
 
     </div>
 </section>
-<!-- <script type="text/javascript">
-    $(function() {
-        $("#Identificacion_Cliente").autocomplete({
-            source: "personal.php",
-            minLength: 2,
-            select: function(event, ui) {
-                event.preventDefault();
-                $('#Identificacion_Cliente').val(ui.item.Identificacion_Cliente);
-                $('#Correo_Cliente').val(ui.item.Correo_Cliente);
-                $('#Nombre_Cliente').val(ui.item.Nombre_Cliente);
-                $("#Identificacion_Cliente").focus();
-            }
-        });
-    });
-</script> -->
-<!--<script>
-    document.getElementById("Codigo_Producto").onchange = function() {
-        alerta2()
-    };
-
-    function alerta2() {
-        // Creando el objeto para hacer el request
-        var request = new XMLHttpRequest();
-
-        // Objeto PHP que consultaremos
-        request.open("POST", "Views/Garanty/services.php");
-
-        // Definiendo el listener
-        request.onreadystatechange = function() {
-            // Revision si fue completada la peticion y si fue exitosa
-            if (this.readyState === 4 && this.status === 200) {
-
-                var data = JSON.parse(this.responseText);
-                var data = data.toString().split(",");
-                // Ingresando la respuesta obtenida del PHP
-                document.getElementById("id_producto").value = data[0];
-                document.getElementById("Descripcion_Producto").value = data[1];
-
-            }
-        };
-
-        // Recogiendo la data del HTML
-        var myForm = document.getElementById("form_validation");
-        var formData = new FormData(myForm);
-
-        // Enviando la data al PHP
-        request.send(formData);
-    }
-</script>
-<script>
-    document.getElementById("Identificacion_Cliente").onchange = function() {
-        alerta()
-    };
-
-    function alerta() {
-        // Creando el objeto para hacer el request
-        var request = new XMLHttpRequest();
-        // Objeto PHP que consultaremos
-        request.open("POST", "Views/Garanty/servicesclients.php");
-
-        // Definiendo el listener
-        request.onreadystatechange = function() {
-
-            // Revision si fue completada la peticion y si fue exitosa
-            if (this.readyState === 4 && this.status === 200) {
-                // Ingresando la respuesta obtenida del PHP
-                var data = JSON.parse(this.responseText);
-                var data = data.toString().split(",");
-                //alert(data[0]);
-                //contenidosRecibidos = this.responseText.replace(contenidosRecibidos,'"]');
-
-                document.getElementById("id").value = data[0];
-                document.getElementById("Correo_Cliente").value = data[1];
-                document.getElementById("Nombre_Cliente").value = data[2];
-
-            }
-        };
-
-
-        // Recogiendo la data del HTML
-        var myForm = document.getElementById("form_validation");
-        var formData = new FormData(myForm);
-
-        // Enviando la data al PHP
-        request.send(formData);
-    }
-</script>-->
-
-<!-- <script type="text/javascript">
-    function ocultContent() {
-        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
-        element = document.getElementById("content");
-        check = document.getElementById("md_checkbox_21");
-        if (check.checked) {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-</script>
-<script type="text/javascript">
-    function ocultContent2() {
-        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
-        element = document.getElementById("content");
-        check = document.getElementById("md_checkbox_23");
-        if (check.checked) {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-</script>
-<script type="text/javascript">
-    function ocultContent3() {
-        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
-        element = document.getElementById("content");
-        check = document.getElementById("md_checkbox_24");
-        if (check.checked) {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-</script>
-<script type="text/javascript">
-    function showContent() {
-        //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
-        element = document.getElementById("content");
-        check = document.getElementById("md_checkbox_22");
-        if (check.checked) {
-            element.style.display = 'block';
-        } else {
-            element.style.display = 'none';
-        }
-    }
-</script> -->
