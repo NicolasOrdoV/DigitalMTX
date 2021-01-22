@@ -145,6 +145,7 @@ $td = $total_data + 0001;
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>Tiempo de garantia</th>
                                             <th>Codigo</th>
                                             <th>Descripcion</th>
                                             <th>Referencia</th>
@@ -178,10 +179,19 @@ $td = $total_data + 0001;
                                                 ];
                                         ?>
                                                 <tr>
+                                                    <td
+                                                    <?php
+                                                        if ($productos['garantia'] == "0" || $productos['garantia'] == "Probado" || $productos['garantia'] == "0 meses") { ?>
+                                                            style="background-color: red; color: white;"
+                                                        <?php } 
+                                                    ?>
+                                                    >
+                                                        <?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>
+                                                        <!-- <input type="text" name="time[]" value="<?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>"> -->
+                                                    </td>
                                                     <td>
                                                         <!-- <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>"> -->
                                                         <?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>
-                                                        <input type="hidden" name="time[]" value="<?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>">
                                                     </td>
                                                     <td>
                                                         <!-- <textarea rows="5" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea> -->
