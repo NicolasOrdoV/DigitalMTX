@@ -228,7 +228,6 @@ $td = $total_data + 0001;
                                                     </td>
                                                     <td>
                                                         <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]" disabled></textarea>
-                                                        <input type="hidden" name="Estado[]" value="Tramite">
                                                     </td>
                                                     <td>
                                                         <div class="demo-checkbox form-line">

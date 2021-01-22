@@ -246,7 +246,6 @@ class GarantyController
         $Referencia = ($_POST['Referencia']);
         $Observacion_Cliente = ($_POST['Observacion_Cliente']);
         $Aprobacion_Garantia = ($_POST['Aprobacion_Garantia']);
-        $Estado = ($_POST['Estado']);
         $garantia = ($_POST['time']);
         $dateProvider = ($_POST['Fecha_Proveedor']);
 
@@ -261,7 +260,6 @@ class GarantyController
           $item7 = current($Referencia);
           $item8 = current($Observacion_Cliente);
           $item9 = current($Aprobacion_Garantia);
-          $item10 = current($Estado);
           $item11 = current($garantia);
           $item12 = current($dateProvider);
           
@@ -275,7 +273,6 @@ class GarantyController
           $rp = (($item7 !== false) ? $item7: ', &nbsp;');
           $op = (($item8 !== false) ? $item8 : ', &nbsp;');
           $ag = (($item9 !== false) ? $item9 : ', &nbsp;');
-          $es = (($item10 !== false) ? $item10 : ', &nbsp;');
           $g = (($item11 !== false) ? $item11 : ', &nbsp;');
           $dP = (($item12 !== false) ? $item12 : ', &nbsp;');
 
@@ -370,11 +367,8 @@ class GarantyController
           echo $date_before.'<br>';
           // if ($date_now >= $date_bill && $date_now <= $date_before) {
           //   if (isset($lastId[0]->id) && $answerNewGaranty == true) {
-          //     if ($ag == 'NO') {
-          //       $detaills['Estado'] = "Cerrado";
-          //       $this->model->saveDetail($detaills);
-          //     }
           //     if ($ag == 'SI') {
+          //       $detaills['Estado'] = "Tramite";
           //       $detaills['Aprobacion_Garantia'] = $ag;
           //       $this->model->saveDetail($detaills);
           //     }  
@@ -398,11 +392,10 @@ class GarantyController
           $item7 = next($Referencia);
           $item8 = next($Observacion_Cliente);
           $item9 = next($Aprobacion_Garantia);
-          $item10 = next($Estado);
           $item11 = next($garantia);
           $item12 = next($dateProvider);
           // Check terminator
-          if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item10 === false && $item11 === false && $item12 === false) break;
+          if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item11 === false && $item12 === false) break;
         }
 
         //$dates = $this->model->getAlDetails($lastId[0]->id);
