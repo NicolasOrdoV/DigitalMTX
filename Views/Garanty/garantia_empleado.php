@@ -142,7 +142,7 @@ $td = $total_data + 0001;
                             <hr>
                             <div class="table-responsive">
                                 <h3>Productos</h3>
-                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Codigo</th>
@@ -159,9 +159,9 @@ $td = $total_data + 0001;
                                     </thead>
                                     <tbody>
                                         <?php if(isset($failedError)){ ?>
-                                        <div class="alert alert-danger">
-                                            <?php echo $failedError['errorGaranty']?>
-                                        </div>
+                                            <div class="alert alert-danger">
+                                                <?php echo $failedError['errorGaranty']?>
+                                            </div>
                                         <?php } ?>
                                         <?php if (isset($bills)) {
                                             $i = 0;
@@ -176,47 +176,37 @@ $td = $total_data + 0001;
                                                     'Cantidad' => $bif->Cantidad,
                                                     'garantia' => $bif->garantia
                                                 ];
-
                                         ?>
                                                 <tr>
                                                     <td>
-                                                        <small style="visibility: hidden"><?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?></small>
-                                                        <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>">
+                                                        <!-- <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>"> -->
+                                                        <?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>
                                                         <input type="hidden" name="time[]" value="<?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>">
                                                     </td>
                                                     <td>
-                                                        <!-- <small style="visibility: hidden">
-                                                            <?php //echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
-                                                        </small> -->
-                                                        <textarea rows="5" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea>
+                                                        <!-- <textarea rows="5" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea> -->
+                                                        <?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
                                                     </td>
                                                     <td>
-                                                        <small style="visibility: hidden">
-                                                            <?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>
-                                                        </small>
-                                                        <input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>">
+                                                        <!-- <input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>"> -->
+                                                        <?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>
                                                     </td>
                                                     <td>
-                                                        <!-- <small style="visibility: hidden">
-                                                            <?php //echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>
-                                                        </small> -->
-                                                        <textarea rows="5" type="text" class="form-control" name="Sello_Producto[]" readonly><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></textarea>
+                                                        <!-- <textarea rows="5" type="text" class="form-control" name="Sello_Producto[]" readonly><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></textarea> -->
+                                                        <?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>
                                                     </td>
                                                     <td>
-                                                        <small style="visibility: hidden">
-                                                            <?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>
-                                                        </small>
-                                                        <input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>">
+                                                        <!-- <input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>"> -->
+                                                        <?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>
                                                         <input type="hidden" name="fecha_factura" value="<?php echo $bills[0]->fecha_factura ?>">
                                                     </td>
                                                     <td>
-                                                        <small style="visibility: hidden">
-                                                            <?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>
-                                                        </small>
-                                                        <input size="5" type="text" class="form-control" name="Cantidad_Producto[]" readonly value="<?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>">
+                                                        <!-- <input size="5" type="text" class="form-control" name="Cantidad_Producto[]" readonly value="<?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>"> 
+                                                        -->
+                                                        <?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>
                                                     </td>
                                                     <td>
-                                                        <select size="5" name="Codigo_Proveedor[]" class="form-control">
+                                                        <select size="5" name="Codigo_Proveedor[]" class="form-control" disabled>
                                                             <option value="">Seleccione...</option>
                                                             <?php foreach ($providers as $provider) { ?>
                                                                 <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
@@ -224,18 +214,16 @@ $td = $total_data + 0001;
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input size="5" type="date" name="Fecha_Proveedor[]" class="form-control">
+                                                        <input size="5" type="date" name="Fecha_Proveedor[]" class="form-control" disabled>
                                                     </td>
                                                     <td>
-                                                        <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]"></textarea>
+                                                        <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]" disabled></textarea>
                                                         <input type="hidden" name="Estado[]" value="Tramite">
                                                     </td>
                                                     <td>
                                                         <div class="demo-checkbox form-line">
-                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key + 1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" />
-                                                            <label for="md_checkbox_<?php echo $key + 1; ?>">SI</label>
-                                                            <input type="checkbox" id="md_checkbox_<?php echo $key + 10; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="NO" />
-                                                            <label for="md_checkbox_<?php echo $key + 10; ?>">NO</label>
+                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key + 123; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI"/>
+                                                            <label for="md_checkbox_<?php echo $key + 123; ?>">SI</label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -574,6 +562,8 @@ $td = $total_data + 0001;
     }
 </script>-->
 
+
+
 <script type="text/javascript">
     function showContent() {
         //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
@@ -598,6 +588,8 @@ $td = $total_data + 0001;
         }
     }
 </script>
+
+<!------------------------------------------------------------------->
 <script src="Assets/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {

@@ -204,7 +204,11 @@
                                 <a href="?controller=technical&method=list" class="menu-toggle">
                                     <span>Gestion de garantias pendientes</span>
                                 </a>
-                                
+                            </li>
+                            <li>
+                                <a href="?controller=technical&method=storyTechnical" class="menu-toggle">
+                                    <span>Historicos de productos revisados por garantia</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
