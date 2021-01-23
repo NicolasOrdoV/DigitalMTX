@@ -287,7 +287,6 @@ class GarantyController
             'Fecha_Proveedor' => $dP,
             'Id_Garantia' => $lastId[0]->id,
             'Observacion_Cliente' => $op,
-            'Estado' => $es,
             'Aprobacion_Garantia' => $ag
           ];
           
@@ -295,22 +294,8 @@ class GarantyController
           //$detaills['Aprobacion_Garantia'] = $agN;
           //echo '<hr>';
           //var_dump($detaills);
-          if ($ag == "SI" || $ag == "NO") {
-            $detaillsEnds = [
-              'Codigo_Producto' => $detaills['Codigo_Producto'],
-              'Descripcion_Producto' => $detaills['Descripcion_Producto'],
-              'Marca_Producto' => $detaills['Marca_Producto'],
-              'Sello_Producto' => $detaills['Sello_Producto'],
-              'Referencia' => $detaills['Referencia'],
-              'Cantidad_Producto' => $detaills['Cantidad_Producto'],
-              'Codigo_Proveedor' => $detaills['Codigo_Proveedor'],
-              'Fecha_Proveedor' => $detaills['Fecha_Proveedor'],
-              'Id_Garantia' => $detaills['Id_Garantia'],
-              'Observacion_Cliente' => $detaills['Observacion_Cliente'],
-              'Estado' => $detaills['Estado'],
-              'Aprobacion_Garantia' => $detaills['Aprobacion_Garantia']
-            ];
-            var_dump($detaillsEnds);
+          if ($ag == "SI") {
+            var_dump($detaills);
             echo "Garantia: ".$g.'<br>';
             echo $dp."<br>";
             echo $ag."<br>";
@@ -355,8 +340,6 @@ class GarantyController
               }else{
                 echo '<script>alert("El tiempo de garantia de uno de los productos esta vencida");</script>';
               }
-            }else{
-              //echo '<script>alert("No tiene garantia");</script>';
             }
           }
 
@@ -365,21 +348,21 @@ class GarantyController
           echo $date_now.'<br>';
           echo $date_bill.'<br>';
           echo $date_before.'<br>';
-          // if ($date_now >= $date_bill && $date_now <= $date_before) {
-          //   if (isset($lastId[0]->id) && $answerNewGaranty == true) {
-          //     if ($ag == 'SI') {
-          //       $detaills['Estado'] = "Tramite";
-          //       $detaills['Aprobacion_Garantia'] = $ag;
-          //       $this->model->saveDetail($detaills);
-          //     }  
-          //   }
-          // }else{
-          //   // echo 'La fecha de garantia expiro';
-          //   echo '<script>
-          //           alert("La fecha de garantia expiro");
-          //           window.location = "?controller=garanty&method=listGaranty";
-          //         </script>';
-          // }
+          if ($date_now >= $date_bill && $date_now <= $date_before) {
+            if (isset($lastId[0]->id) && $answerNewGaranty == true) {
+              if ($ag == 'SI') {
+                $detaills['Estado'] = "Tramite";
+                $detaills['Aprobacion_Garantia'] = $ag;
+                $this->model->saveDetail($detaills);
+              }  
+            }
+          }else{
+            // echo 'La fecha de garantia expiro';
+            echo '<script>
+                    alert("La fecha de garantia expiro");
+                    window.location = "?controller=garanty&method=listGaranty";
+                  </script>';
+          }
           //---Aqui termina el proceso de rango de fechas
 
           // Up! Next Value
@@ -398,206 +381,206 @@ class GarantyController
           if ($item1 === false && $item2 === false && $item3 === false && $item4 === false && $item5 === false && $item6 === false && $item7 === false && $item8 === false && $item11 === false && $item12 === false) break;
         }
 
-        //$dates = $this->model->getAlDetails($lastId[0]->id);
-        // if ($dates[0]->Estado == 'Tramite') {
-        //   $datas = $this->model->getAlDetails($lastId[0]->id);
-        //   $mail = new PHPMailer(true);
+        $dates = $this->model->getAlDetails($lastId[0]->id);
+        if ($dates[0]->Estado == 'Tramite') {
+          $datas = $this->model->getAlDetails($lastId[0]->id);
+          $mail = new PHPMailer(true);
 
-        //   try {
-        //     //Server settings
-        //     $mail->SMTPDebug = 0;                      // Enable verbose debug output
-        //     $mail->isSMTP();                                            // Send using SMTP
-        //     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-        //     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        //     $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-        //     $mail->Password   = 'batman1000464327';                               // SMTP password
-        //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-        //     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+          try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+            $mail->Password   = 'batman1000464327$';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-        //     //Recipients
-        //     $mail->setFrom('nikomegathet666@gmail.com');
-        //     $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+            //Recipients
+            $mail->setFrom('nikomegathet666@gmail.com');
+            $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
 
-        //     // Content
-        //     $mail->isHTML(true);                                  // Set email format to HTML
-        //     $mail->Subject = 'Solicitud de garantia';
-        //     $html = '<!DOCTYPE html>
-        //     <html lang="en" >
-        //     <head>
-        //       <meta charset="UTF-8">
-        //       <title>CodePen - PDF Factura</title>
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Solicitud de garantia';
+            $html = '<!DOCTYPE html>
+            <html lang="en" >
+            <head>
+              <meta charset="UTF-8">
+              <title>CodePen - PDF Factura</title>
               
 
-        //     </head>
-        //     <body>
-        //     <!-- partial:index.partial.html -->
-        //     <center>
-        //       <div style="width: 580px;">
-        //         <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
-        //           <tr>
-        //             <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
-        //               <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
-        //               <div style="display: inline-block; margin-left: 320px;">
-        //                 <p style="font-weight: bold;">Digital MTX</p>
-        //                 <p>Fecha de impresion: '.$data['Fecha_ingreso'].'</p>
-        //               </div>
-        //               <hr>
-        //               <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$data['No_garantia'].'</b></p>
-        //             </td>
-        //           </tr>
-        //           <tr>
-        //             <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
-        //               <p><b>Nombre</b>'.$data['Nombre_Cliente'].'</p>
-        //               <p><b>Identificacion</b> '.$data['Identificacion_Cliente'].'</p>
-        //               <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
-        //               <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
+            </head>
+            <body>
+            <!-- partial:index.partial.html -->
+            <center>
+              <div style="width: 580px;">
+                <table CELLSPACING=1 CELLPADDING=4 style="border-collapse: collapse; font-size: 8px; line-height: .75; font-family: sans-serif; position: relative;">
+                  <tr>
+                    <td VALIGN="TOP" COLSPAN=4 HEIGHT=20>
+                      <img src="http://imgfz.com/i/I1qms2R.png" alt="" width="70px">
+                      <div style="display: inline-block; margin-left: 320px;">
+                        <p style="font-weight: bold;">Digital MTX</p>
+                        <p>Fecha de impresion: '.$data['Fecha_ingreso'].'</p>
+                      </div>
+                      <hr>
+                      <p style="font-size:12px; text-align: center; margin-top: 20px;"><b>Comprobante de Garantia:'.$data['No_garantia'].'</b></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td WIDTH="45%" VALIGN="TOP" HEIGHT=36>
+                      <p><b>Nombre</b>'.$data['Nombre_Cliente'].'</p>
+                      <p><b>Identificacion</b> '.$data['Identificacion_Cliente'].'</p>
+                      <p><b>Correo:</b> '.$data['Correo_Cliente'].'</p>
+                      <p><b>Direccion:</b> '.$data['Direccion_Cliente'].'</p>
                       
-        //             </td>
-        //             <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
-        //               <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
-        //               <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
-        //               <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
-        //               <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
-        //               <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
-        //             </td>
-        //           </tr>
-        //         </table>
+                    </td>
+                    <td WIDTH="45%" VALIGN="TOP" HEIGHT=36 style="padding-left: 60px;">
+                      <P><b>Numero Factura:</b>'.$data['Numero_Factura'].'</p>
+                      <p><b>Punto Venta</b>'.$data['Punto_Venta'].'</p>
+                      <p><b>Valor_Flete:</b> '.$data['Valor_Flete'].'</p>
+                      <p><b>Transportadora:</b> '.$data['Transportadora'].'</p>
+                      <p><b>Numero Guia</b> '.$data['No_Guia'].'</p>
+                    </td>
+                  </tr>
+                </table>
 
-        //         <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
-        //         <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
-        //           <tr>
-        //             <th>Referencia</th>
-        //             <th>Descripcion</th>
-        //             <th>Marca</th>
-        //           </tr>';
-        //           foreach ($datas as $product) {
-        //           $html .= '<tr>
-        //           <td>'.$product->Referencia.'</td>
-        //             <td>'.$product->Descripcion_Producto.'</td>
-        //             <td>'.$product->Marca_Producto.'</td>
-        //           </tr>';
-        //         }
-        //         $html .= '</table><br>
-        //         <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
-        //           <div>
-        //             <div style="display:table; margin:auto; text-align:left;">
-        //               <p><b>Observacion Garantia:</b> '.$data['Observacion_Empleado'].'</p>
-        //             </div>
-        //             <small style="font-size: 6px; justify-content: center;">"Garantía: El horario de atención es de lunes a viernes de 09:00 a 13:00 en la calle 77 # 16A – 38 Oficina 303¤2)Para el ingreso del producto a garantía el cliente deberá entregar el documento de compra y el producto completo con sus empaques, accesorios, manuales, sin daños físicos que invaliden la garantía. 3)El periodo para dar¤solución a la garantía es de (8) ocho días hábiles, a partir de la fecha de radicado. 4)La Garantía no cubre en los siguientes casos: • Cuando el producto presenta daño físico, por mal uso, mala manipulación, transporte o¤descuido. • Cuando los sellos de garantía se encuentren removidos o sobre etiquetados remarcados. • Daños causados por descargas eléctricas o uso de voltaje incorrecto. • Daños generados por¤presencia de elementos nocivos que no forman parte del producto. • Si el cliente ha cambiado el software original de fábrica. 5)Toda garantía que no¤se reclame en (1) mes a partir de la fecha de ingreso, se hará un cobro de bodegaje, transcurrido los (6) meses será declarada en abandono y se procederá a su destrucción. 6)Si el cliente no presenta el documento de compra del¤producto, deberá presentar un documento relacionando el producto, NIT, fecha de compra, la copia del documento de compra se entregara en un plazo de (5) días hábiles. 7)Para la entrega de la garantía, el cliente presentara el¤formato de garantía original, no se entregara el producto con fotocopia del formato o sin el formato de garantía. 8)El periodo de garantía que cubre Digital MTX a los clientes en los productos son: cargadores de caja roja (2)años, cargadores para Mac y universal (1)año, baterías para portátil (1)año, pantallas para computador (6)meses, teclados (6)meses, baterías para celular (3)meses, pantallas para celular (3)meses. Importante: Al firmar y/o recibir el documento de compra que certifique el despacho correspondiente queda entendido que el cliente acepta incondicionalmente la¤presente política y condiciones de garantía, renuncia a cualquier tipo de reclamo que no esté considerado en el presente documento. Más información de políticas de garantías en nuestro sitio web https://www.digitalmtx.com o realice sus consultas y/o reclamos en el correo electrónico centrodeservicio@digitalmtx.com"</small>
+                <p style="font-size: 12px; text-align: left;"><b><i><u>Productos</u></i></b></p>
+                <table border style="border: 1px solid black; font-family: arial, sans-serif; border-collapse: collapse; width: 100%; font-size: 8px;">
+                  <tr>
+                    <th>Referencia</th>
+                    <th>Descripcion</th>
+                    <th>Marca</th>
+                  </tr>';
+                  foreach ($datas as $product) {
+                  $html .= '<tr>
+                  <td>'.$product->Referencia.'</td>
+                    <td>'.$product->Descripcion_Producto.'</td>
+                    <td>'.$product->Marca_Producto.'</td>
+                  </tr>';
+                }
+                $html .= '</table><br>
+                <div style="display: flex; justify-content: space-between; text-align: left; font-size: 10px;">
+                  <div>
+                    <div style="display:table; margin:auto; text-align:left;">
+                      <p><b>Observacion Garantia:</b> '.$data['Observacion_Empleado'].'</p>
+                    </div>
+                    <small style="font-size: 6px; justify-content: center;">"Garantía: El horario de atención es de lunes a viernes de 09:00 a 13:00 en la calle 77 # 16A – 38 Oficina 303¤2)Para el ingreso del producto a garantía el cliente deberá entregar el documento de compra y el producto completo con sus empaques, accesorios, manuales, sin daños físicos que invaliden la garantía. 3)El periodo para dar¤solución a la garantía es de (8) ocho días hábiles, a partir de la fecha de radicado. 4)La Garantía no cubre en los siguientes casos: • Cuando el producto presenta daño físico, por mal uso, mala manipulación, transporte o¤descuido. • Cuando los sellos de garantía se encuentren removidos o sobre etiquetados remarcados. • Daños causados por descargas eléctricas o uso de voltaje incorrecto. • Daños generados por¤presencia de elementos nocivos que no forman parte del producto. • Si el cliente ha cambiado el software original de fábrica. 5)Toda garantía que no¤se reclame en (1) mes a partir de la fecha de ingreso, se hará un cobro de bodegaje, transcurrido los (6) meses será declarada en abandono y se procederá a su destrucción. 6)Si el cliente no presenta el documento de compra del¤producto, deberá presentar un documento relacionando el producto, NIT, fecha de compra, la copia del documento de compra se entregara en un plazo de (5) días hábiles. 7)Para la entrega de la garantía, el cliente presentara el¤formato de garantía original, no se entregara el producto con fotocopia del formato o sin el formato de garantía. 8)El periodo de garantía que cubre Digital MTX a los clientes en los productos son: cargadores de caja roja (2)años, cargadores para Mac y universal (1)año, baterías para portátil (1)año, pantallas para computador (6)meses, teclados (6)meses, baterías para celular (3)meses, pantallas para celular (3)meses. Importante: Al firmar y/o recibir el documento de compra que certifique el despacho correspondiente queda entendido que el cliente acepta incondicionalmente la¤presente política y condiciones de garantía, renuncia a cualquier tipo de reclamo que no esté considerado en el presente documento. Más información de políticas de garantías en nuestro sitio web https://www.digitalmtx.com o realice sus consultas y/o reclamos en el correo electrónico centrodeservicio@digitalmtx.com"</small>
                    
-        //       </div>
-        //     </center>
-        //     <!-- partial -->
+              </div>
+            </center>
+            <!-- partial -->
               
-        //     </body>
-        //     </html>
-        //     ';
-        //     $mail->Body = $html;
+            </body>
+            </html>
+            ';
+            $mail->Body = $html;
 
-        //     $mail->send();
-        //     header('Location: ?controller=garanty&method=sucessfull');
-        //   } catch (Exception $e) {
-        //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        //   }
-        // } elseif ($dates[0]->Estado == 'Cerrado') {
-        //   $mail = new PHPMailer(true);
+            $mail->send();
+            header('Location: ?controller=garanty&method=sucessfull');
+          } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          }
+        } elseif ($dates[0]->Estado == 'Cerrado') {
+          $mail = new PHPMailer(true);
 
-        //   try {
-        //     //Server settings
-        //     $mail->SMTPDebug = 0;                      // Enable verbose debug output
-        //     $mail->isSMTP();                                            // Send using SMTP
-        //     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-        //     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        //     $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
-        //     $mail->Password   = 'batman1000464327';                               // SMTP password
-        //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-        //     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+          try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'nikomegathet666@gmail.com';                     // SMTP username
+            $mail->Password   = 'batman1000464327$';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-        //     //Recipients
-        //     $mail->setFrom('nikomegathet666@gmail.com');
-        //     $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
+            //Recipients
+            $mail->setFrom('nikomegathet666@gmail.com');
+            $mail->addAddress($data['Correo_Cliente']);     // Add a recipient
 
-        //     // Content
-        //     $mail->isHTML(true);                                  // Set email format to HTML
-        //     $mail->Subject = 'Solicitud de garantia';
-        //     $mail->Body    = '<!DOCTYPE html>
-        //             <html lang="en" >
-        //             <head>
-        //               <meta charset="UTF-8">
-        //               <title>CodePen - Avisado Prototipo</title>
-        //               <link rel="stylesheet" href="./style.css">
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Solicitud de garantia';
+            $mail->Body    = '<!DOCTYPE html>
+                    <html lang="en" >
+                    <head>
+                      <meta charset="UTF-8">
+                      <title>CodePen - Avisado Prototipo</title>
+                      <link rel="stylesheet" href="./style.css">
                     
-        //             </head>
-        //             <body>
-        //             <!-- partial:index.partial.html -->
-        //             <html>
-        //               <head>
-        //                 <meta charset="utf-8" />
-        //                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        //                 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        //                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        //                 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
-        //                 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-        //                 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        //                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        //               </head>
-        //               <body>
-        //                 <header>
-        //                   <div class="container">
-        //                     <section class="banner_row">
-        //                       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        //                           <figure class="animated fadeInLeft">
-        //                             <a href="index.html">
-        //                               <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
-        //                             </a>
-        //                           </figure>
-        //                       </div>
-        //                       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-        //                         <h1 class="animated fadeInLeft">>>AVISADO!</h1>
-        //                       </div>
-        //                     </section>
-        //                   </div>
-        //                 </header>
-        //                 <section class="formulario-princ">
-        //                   <div class="container">
-        //                     <form class="form-inline">
-        //                       <div class="form-group">
-        //                         <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
-        //                       </div>
-        //                       <div class="form-group">
-        //                       <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
-        //                       <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
-        //                       </div>
-        //                     </form>
-        //                   </div>
-        //                 </section>
-        //                 </div>
-        //                 <br />
-        //                 <br />
-        //                 <div class="footer-container">
-        //                 <footer class="wrapper">
-        //                   <div class="container">
-        //                     <h3>Trabajamos para ti, ¡Espéranos!</h3>
-        //                     <p>Para más información, <strong>puedes escribirnos a:</strong> 
-        //                       <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
-        //                     </p>
-        //                   </div>
-        //                 </footer>
-        //                 </div>
-        //               </body>
-        //             </html>
-        //             <!-- partial -->
+                    </head>
+                    <body>
+                    <!-- partial:index.partial.html -->
+                    <html>
+                      <head>
+                        <meta charset="utf-8" />
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Sigmar+One|Pacifico|Architects+Daughter" rel="styleshee" type="text/css">
+                        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+                        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                      </head>
+                      <body>
+                        <header>
+                          <div class="container">
+                            <section class="banner_row">
+                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                  <figure class="animated fadeInLeft">
+                                    <a href="index.html">
+                                      <img src="http://imgfz.com/i/I1qms2R.png" class="responsive-image" alt="responsive-image" height="128" width="120"/>
+                                    </a>
+                                  </figure>
+                              </div>
+                              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                <h1 class="animated fadeInLeft">>>AVISADO!</h1>
+                              </div>
+                            </section>
+                          </div>
+                        </header>
+                        <section class="formulario-princ">
+                          <div class="container">
+                            <form class="form-inline">
+                              <div class="form-group">
+                                <img src="http://imgfz.com/i/I1qms2R.png" alt="" />
+                              </div>
+                              <div class="form-group">
+                              <p>Hola que tal: Su proceso de garantia fue: ' . $dates[0]->Estado . '</p><br>
+                              <p>Segun las observaciones de garantia: ' . $data['Observacion_Empleado'] . '.</p>
+                              </div>
+                            </form>
+                          </div>
+                        </section>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="footer-container">
+                        <footer class="wrapper">
+                          <div class="container">
+                            <h3>Trabajamos para ti, ¡Espéranos!</h3>
+                            <p>Para más información, <strong>puedes escribirnos a:</strong> 
+                              <a href="mailto:contacto@avisado.co.ve">contacto@avisado.co.ve</a>
+                            </p>
+                          </div>
+                        </footer>
+                        </div>
+                      </body>
+                    </html>
+                    <!-- partial -->
                       
-        //             </body>
-        //             </html>
-        //             ';
+                    </body>
+                    </html>
+                    ';
 
-        //     $mail->send();
-        //     header('Location: ?controller=garanty&method=sucessfull');
-        //   } catch (Exception $e) {
-        //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        //   }
-        // }
+            $mail->send();
+            header('Location: ?controller=garanty&method=sucessfull');
+          } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          }
+        }
       }else{
         $failedError = [
           'error' => 'Hay campos que no son validos, por favor verificar que esten correctos todos los campos',

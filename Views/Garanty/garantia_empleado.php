@@ -186,58 +186,58 @@ $td = $total_data + 0001;
                                                         <?php } 
                                                     ?>
                                                     >
-                                                        <?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>
-                                                        <!-- <input type="text" name="time[]" value="<?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>"> -->
+                                                        <span id="time1_<?php echo $key + 1?>" style="display: block;"><?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?></span>
+                                                        <input type="text" size="5" name="time[]" class="form-control"  value="<?php echo isset($productos['garantia']) ? $productos['garantia'] : '' ?>" disabled readonly id="time_<?php echo $key + 1 ?>" style="display: none;" >
                                                     </td>
                                                     <td>
-                                                        <!-- <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto" readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>"> -->
-                                                        <?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>
+                                                        <span id="Codigo_Producto1_<?php echo $key+1 ?>" style="display: block;"><?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?></span>
+                                                        
+                                                        <input size="5" type="text" class="form-control" name="Codigo_Producto[]" id="Codigo_Producto_<?php echo $key+1 ?>" disabled readonly value="<?php echo isset($productos['Codigo']) ? $productos['Codigo'] : '' ?>" style="display: none;">
+                                                        
                                                     </td>
                                                     <td>
-                                                        <!-- <textarea rows="5" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto" readonly><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea> -->
-                                                        <?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?>
+                                                        <span id="Descripcion_Producto1_<?php echo $key + 1 ?>" style="display: block;"><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></span>
+                                                        <textarea rows="5" type="text" class="form-control" name="Descripcion_Producto[]" id="Descripcion_Producto_<?php echo $key + 1 ?>" disabled readonly style="display: none;"><?php echo isset($productos['Descripcion']) ? $productos['Descripcion'] : '' ?></textarea>
+                                                        
                                                     </td>
                                                     <td>
-                                                        <!-- <input size="5" type="text" class="form-control" name="Referencia[]" readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>"> -->
-                                                        <?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>
+                                                        <span id="Referencia1_<?php echo $key + 1 ?>" style="display: block;"><?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?></span>
+                                                        <input size="5" type="text" class="form-control" name="Referencia[]" disabled readonly value="<?php echo isset($productos['Referencia']) ? $productos['Referencia'] : '' ?>" id="Referencia_<?php echo $key + 1 ?>" style="display: none;">
+                                                        
                                                     </td>
                                                     <td>
-                                                        <!-- <textarea rows="5" type="text" class="form-control" name="Sello_Producto[]" readonly><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></textarea> -->
-                                                        <?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?>
+                                                        <span id="Sello_Producto1_<?php echo $key + 1 ?>" style="display: block;"><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></span>
+                                                        <textarea rows="5" type="text" class="form-control" name="Sello_Producto[]" disabled readonly id="Sello_Producto_<?php echo $key + 1 ?>" style="display: none;"><?php echo isset($productos['Sello']) ? $productos['Sello'] : '' ?></textarea>
+                                                        
                                                     </td>
                                                     <td>
-                                                        <!-- <input size="5" type="text" class="form-control" name="Marca_Producto[]" readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>"> -->
-                                                        <?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>
+                                                        <span id="Marca_Producto1_<?php echo $key + 1?>" style="display: block;"><?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?></span>
+                                                        <input size="5" type="text" class="form-control" name="Marca_Producto[]" disabled readonly value="<?php echo isset($productos['Marca']) ? $productos['Marca'] : '' ?>" id="Marca_Producto_<?php echo $key + 1?>" style="display: none;">
+                                                        
                                                         <input type="hidden" name="fecha_factura" value="<?php echo $bills[0]->fecha_factura ?>">
                                                     </td>
                                                     <td>
-                                                        <!-- <input size="5" type="text" class="form-control" name="Cantidad_Producto[]" readonly value="<?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>"> 
-                                                        -->
-                                                        <?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>
+                                                        <span id="Cantidad_Producto1_<?php echo $key + 1 ?>" style="display: block;" ><?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?></span>
+                                                        <input size="5" type="text" class="form-control" name="Cantidad_Producto[]" id="Cantidad_Producto_<?php echo $key + 1 ?>" disabled readonly value="<?php echo isset($productos['Cantidad']) ? $productos['Cantidad'] : '' ?>" style="display: none;">
                                                     </td>
-                                                    <td>
-                                                        <select size="5" name="Codigo_Proveedor[]" class="form-control" disabled>
-                                                            <option value="">Seleccione...</option>
-                                                            <?php foreach ($providers as $provider) { ?>
-                                                                <option value="<?php echo $provider->id ?>"><?php echo $provider->id ?></option>
-                                                            <?php } ?>
-                                                        </select>
+                                                    <td id="content1_<?php echo $key + 1?>" style="visibility: hidden;">
+                                                        <input type="number" name="Codigo_Proveedor[]" class="form-control" id="Codigo_Proveedor_<?php echo $key + 1 ?>">
                                                     </td>
-                                                    <td>
-                                                        <input size="5" type="date" name="Fecha_Proveedor[]" class="form-control" disabled>
+                                                    <td id="content2_<?php echo $key + 1?>" style="visibility: hidden;">
+                                                        <input size="5" type="date" name="Fecha_Proveedor[]" class="form-control" disabled id="Fecha_Proveedor_<?php echo $key + 1 ?>">
                                                     </td>
-                                                    <td>
-                                                        <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]" disabled></textarea>
+                                                    <td id="content3_<?php echo $key + 1?>" style="visibility: hidden;">
+                                                        <textarea size="5" rows="4" class="form-control no-resize" name="Observacion_Cliente[]" disabled id="Observacion_Cliente_<?php echo $key + 1 ?>"></textarea>
                                                     </td>
                                                     <td>
                                                         <div class="demo-checkbox form-line">
-                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key + 123; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI"/>
-                                                            <label for="md_checkbox_<?php echo $key + 123; ?>">SI</label>
+                                                            <input size="5" type="checkbox" id="md_checkbox_<?php echo $key + 1; ?>" class="chk-col-red" name="Aprobacion_Garantia[]" value="SI" onchange="javascript:habilitarCampos(<?php echo $key + 1?>);" />
+                                                            <label for="md_checkbox_<?php echo $key + 1; ?>">SI</label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                         <?php }
-                                        }
+                                            }
                                         ?>
                                     </tbody>
                                 </table>
@@ -483,6 +483,146 @@ $td = $total_data + 0001;
             </div>
         <?php } ?>
 </section>
+<script type="text/javascript">
+    function habilitarCampos(key){
+
+        tiempo = document.getElementById("time_"+ key);
+        codigo = document.getElementById("Codigo_Producto_"+ key);
+        descripcion = document.getElementById("Descripcion_Producto_"+ key);
+        referencia = document.getElementById("Referencia_"+ key);
+        sello = document.getElementById("Sello_Producto_"+ key);
+        marca = document.getElementById("Marca_Producto_"+ key);
+        cantidad = document.getElementById("Cantidad_Producto_"+ key);
+
+        content1 = document.getElementById("content1_"+ key);
+        content2 = document.getElementById("content2_"+ key);
+        content3 = document.getElementById("content3_"+ key);
+        
+        codigoProveedor = document.getElementById("Codigo_Proveedor_"+ key);
+        fechaProveedor = document.getElementById("Fecha_Proveedor_"+ key);
+        observacion = document.getElementById("Observacion_Cliente_"+ key);
+        checkbox = document.getElementById("md_checkbox_"+ key);
+
+        /////////////////////////////////////////////////////////////
+        tiempo1 = document.getElementById("time1_"+ key);
+        codigo1 = document.getElementById("Codigo_Producto1_"+ key);
+        descripcion1 = document.getElementById("Descripcion_Producto1_"+ key);
+        referencia1 = document.getElementById("Referencia1_"+ key);
+        sello1 = document.getElementById("Sello_Producto1_"+ key);
+        marca1 = document.getElementById("Marca_Producto1_"+ key);
+        cantidad1 = document.getElementById("Cantidad_Producto1_"+ key);
+
+        if(checkbox.checked){
+          tiempo.style.display = 'block';
+          tiempo.disabled = false;
+          tiempo.readonly = true;
+          //------------------------//
+          tiempo1.style.display = 'none';
+
+          codigo.style.display = 'block';
+          codigo.disabled = false;
+          codigo.readonly = true;
+          //------------------------//
+          codigo1.style.display = 'none';
+
+          descripcion.style.display = 'block';
+          descripcion.disabled = false;
+          descripcion.readonly = true;
+          //----------------------------//
+          descripcion1.style.display = 'none';
+
+          referencia.style.display = 'block';
+          referencia.disabled = false;
+          referencia.readonly = true;
+          //---------------------------//
+          referencia1.style.display = 'none';
+
+          sello.style.display = 'block';
+          sello.disabled = false;
+          sello.readonly = true;
+          //--------------------------//
+          sello1.style.display = 'none';
+
+          marca.style.display = 'block';
+          marca.disabled = false;
+          marca.readonly = true;
+          //---------------------------//
+          marca1.style.display = 'none';
+
+          cantidad.style.display = 'block';
+          cantidad.disabled = false;
+          cantidad.readonly = true;
+          //-----------------------------//
+          cantidad1.style.display = 'none';
+
+          content1.style.visibility = 'visible';
+          content2.style.visibility = 'visible';
+          content3.style.visibility = 'visible';
+
+          //codigoProveedor.style.display = 'block';
+          codigoProveedor.disabled = false;
+          fechaProveedor.disabled = false;
+          observacion.disabled = false;
+          //alert(key);
+        }else{
+            tiempo.style.display = 'none';
+            tiempo.disabled = true;
+            tiempo.readonly = false;
+            //-----------------------//
+            tiempo1.style.display = 'block';
+
+            codigo.style.display = 'none';
+            codigo.disabled = true;
+            codigo.readonly = false;
+            //-----------------------//
+            codigo1.style.display = 'block';
+
+            descripcion.style.display = 'none';
+            descripcion.disabled = true;
+            descripcion.readonly = false;
+            //-------------------------//
+            descripcion1.style.display = 'block';
+
+            referencia.style.display = 'none';
+            referencia.disabled = true;
+            referencia.readonly = false;
+            //-------------------------//
+            referencia1.style.display = 'block';
+
+            sello.style.display = 'none';
+            sello.disabled = true;
+            sello.readonly = false;
+            //------------------------//
+            sello1.style.display = 'block';
+
+            marca.style.display = 'none';
+            marca.disabled = true;
+            marca.readonly = false;
+            //-------------------------//
+            marca1.style.display = 'block';
+
+            cantidad.style.display = 'none';
+            cantidad.disabled = true;
+            cantidad.readonly = false;
+            //----------------------------//
+            cantidad1.style.display = 'block';
+            
+            //codigoProveedor.disabled = true;
+            
+            content1.style.visibility = 'hidden';
+            content2.style.visibility = 'hidden';
+            content3.style.visibility = 'hidden';
+
+            fechaProveedor.value = "";
+            observacion.value = "";
+            codigoProveedor.value = "";
+            
+            codigoProveedor.disabled = true;
+            fechaProveedor.disabled = true;
+            observacion.disabled = true;
+        }
+    }
+</script>
 <!-- <script type="text/javascript">
     $(function() {
         $("#Identificacion_Cliente").autocomplete({
@@ -572,7 +712,7 @@ $td = $total_data + 0001;
 </script>-->
 
 
-
+<!----Funcionalidad de mostrar y ocultar la opcion de flete----->
 <script type="text/javascript">
     function showContent() {
         //Verificacion del la informacion que se mostrara en cuando el checkbox se igual a si
@@ -598,7 +738,7 @@ $td = $total_data + 0001;
     }
 </script>
 
-<!------------------------------------------------------------------->
+<!--Funcionalidad de filtracion de departamentos y municipios------------------>
 <script src="Assets/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
